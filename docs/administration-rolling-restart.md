@@ -7,6 +7,8 @@ description: Learn what happens when a broker is restarted, how to drain brokers
 
 A rolling restart of the brokers, whether for an [upgrade](administration-upgrade.md) or for a configuration change, is the largest reassignment of topics a cluster goes through. Every broker that stops hands all of its bundles to the others, and every broker that starts comes back empty. This page explains what happens at each step and how to keep the restart, and the rebalancing after it, under control. Bookies, the metadata store and proxies are covered by the [upgrade guide](administration-upgrade.md).
 
+The `pulsar-admin` commands below are shown for readability; each of them is a call to the admin [REST API](reference-rest-api-overview.md#automate-with-the-rest-api), which is what an operator or a restart script would use.
+
 ## What happens when a broker stops
 
 When a broker receives `SIGTERM`, or when you run `pulsar-admin brokers shutdown`, it goes through the following steps:

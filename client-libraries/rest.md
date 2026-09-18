@@ -7,6 +7,8 @@ description: Learn how to use Pulsar REST to interact with Pulsar without using 
 
 Pulsar not only provides REST endpoints to manage resources in Pulsar clusters, but also provides methods to query the state for those resources. In addition, Pulsar REST provides a simple way to interact with Pulsar **without using client libraries**, which is convenient for applications to use HTTP to interact with Pulsar.
 
+This page covers the endpoints for **producing messages** over HTTP. The endpoints for managing a Pulsar instance (clusters, tenants, namespaces, topics, schemas, functions, connectors and so on) are the admin REST API, described in [REST APIs and OpenAPI specifications](/docs/@pulsar:version_reference@/reference-rest-api-overview); since Pulsar 5.0 it comes with OpenAPI 3 specifications from which clients for other languages can be generated. The produce endpoints below are served by the brokers on the same web service port, but they are a data path rather than part of the admin API and are not included in those specifications.
+
 ## Connection
 
 To connect to Pulsar, you need to specify a URL.

@@ -26,7 +26,23 @@ Category|Method|If you want to manage functions...
 You can perform the following operations on [functions](functions-overview.md/#what-are-pulsar-functions).
 ## Create a function
 
-You can create a Pulsar function in cluster mode (deploy it on a Pulsar cluster) using Admin CLI, REST API or Java Admin API.
+You can create a Pulsar function in cluster mode (deploy it on a Pulsar cluster) using the Admin CLI, the REST API or the Java admin API. Every interface takes the same two inputs:
+
+- the **configuration**: the fields of [`FunctionConfig`](@pulsar:javadoc:admin@/org/apache/pulsar/common/functions/FunctionConfig.html) (`tenant`, `namespace`, `name`, `className`, `inputs`, `output`, `parallelism`, `userConfig`, `resources`, ...). Every field is available in every interface under the same name: as command-line options or the keys of the YAML file for the CLI, the keys of the JSON `functionConfig` part for the REST API, and the setters of the `FunctionConfig` object in Java, for both create and [update](#update-a-function);
+- the **package**, in one of three forms:
+
+| Package | How to pass it | Notes |
+| --- | --- | --- |
+| A file | CLI: `--jar`, `--py` or `--go`; REST: the `data` file part; Java: the file name argument | Uploaded to the function worker. |
+| A URL | CLI: `jar: <url>` in the configuration file; REST: the `url` form field; Java: `createFunctionWithUrl` | Fetched by the function worker; the URL must be allowed, see below. |
+| A [built-in function](functions-deploy-cluster-builtin.md) | `jar: builtin://<function name>` in the configuration, no package | The worker uses the function from its `functionsDirectory`. |
+
+A package URL is fetched by the function worker and must be allowed by its configuration in `conf/functions_worker.yml`; a URL that is not allowed fails with `400 Function Package url is not valid`:
+
+- `file:///path/on/the/worker`: the path must lie inside the worker's `functionsDirectory`, with `enableReferencingFunctionsDirectoryFiles: true` (the default).
+- `http://...` or `https://...`: the URL must match one of the regular expressions in `additionalEnabledFunctionsUrlPatterns` (empty by default). A `file://` path outside the functions directory can be allowed the same way.
+- `function://tenant/namespace/name@version`: a package uploaded to [package management](admin-api-packages.md); requires `functionsWorkerEnablePackageManagement: true`.
+- Sources and sinks use `connectorsDirectory`, `enableReferencingConnectorDirectoryFiles` and `additionalEnabledConnectorUrlPatterns` instead.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -34,25 +50,92 @@ You can create a Pulsar function in cluster mode (deploy it on a Pulsar cluster)
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
-Use the [`create`](/reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=create) subcommand.
-
-**Example**
+Use the [`create`](/reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=create) subcommand. The configuration can be given as command-line options:
 
 ```shell
 pulsar-admin functions create \
     --tenant public \
     --namespace default \
-    --name (the name of Pulsar Functions) \
-    --inputs test-input-topic \
-    --output persistent://public/default/test-output-topic \
+    --name exclamation \
     --classname org.apache.pulsar.functions.api.examples.ExclamationFunction \
+    --inputs persistent://public/default/test-input-topic \
+    --output persistent://public/default/test-output-topic \
+    --parallelism 1 \
     --jar $PWD/examples/api-examples.jar
 ```
+
+or kept in a YAML file passed with `--function-config-file`, which is easier to maintain: it can live in version control, and the same file serves [`update`](#update-a-function) later. Command-line options override the values in the file.
+
+```shell
+cat > exclamation.yaml <<EOF
+tenant: public
+namespace: default
+name: exclamation
+className: org.apache.pulsar.functions.api.examples.ExclamationFunction
+inputs:
+  - persistent://public/default/test-input-topic
+output: persistent://public/default/test-output-topic
+parallelism: 1
+EOF
+
+pulsar-admin functions create \
+    --function-config-file exclamation.yaml \
+    --jar $PWD/examples/api-examples.jar
+```
+
+For a package URL or a built-in function, put it in the `jar` key of the file (`jar: https://...` or `jar: builtin://<function name>`) and drop `--jar`.
 
 </TabItem>
 <TabItem value="REST API">
 
 [](swagger:/admin/v3/functions/registerFunction)
+
+The request is a `multipart/form-data` `POST` with the JSON configuration in the `functionConfig` part, which must be sent with the content type `application/json`, and the package as the `data` file part or the `url` form field (`-F "url=https://..."`). With `curl`:
+
+```shell
+cat > /tmp/functionconfig.json <<EOF
+{
+  "tenant": "public",
+  "namespace": "default",
+  "name": "exclamation",
+  "className": "org.apache.pulsar.functions.api.examples.ExclamationFunction",
+  "runtime": "JAVA",
+  "inputs": ["persistent://public/default/test-input-topic"],
+  "output": "persistent://public/default/test-output-topic",
+  "parallelism": 1
+}
+EOF
+
+curl -X POST \
+  -H "Authorization: Bearer $(cat token)" \
+  -F "functionConfig=@/tmp/functionconfig.json;type=application/json" \
+  -F "data=@$PWD/examples/api-examples.jar;type=application/octet-stream" \
+  http://localhost:8080/admin/v3/functions/public/default/exclamation
+```
+
+For a built-in function, send no package and set `jar` in the configuration:
+
+```shell
+cat > /tmp/functionconfig.json <<EOF
+{
+  "tenant": "public",
+  "namespace": "default",
+  "name": "myfunction",
+  "jar": "builtin://builtin-function-name",
+  "runtime": "JAVA",
+  "inputs": ["persistent://public/default/input-topic"],
+  "output": "persistent://public/default/output-topic",
+  "parallelism": 1
+}
+EOF
+
+curl -X POST \
+  -H "Authorization: Bearer $(cat token)" \
+  -F "functionConfig=@/tmp/functionconfig.json;type=application/json" \
+  http://localhost:8080/admin/v3/functions/public/default/myfunction
+```
+
+Send the request to the broker's web service port (8080) when the function worker [runs with the brokers](functions-worker-corun.md), or to the worker's own port (`workerPort`, 6750 by default) when it [runs separately](functions-worker-run-separately.md). Sources and sinks use the same shape with a `sourceConfig` or `sinkConfig` part.
 
 </TabItem>
 <TabItem value="Java">
@@ -68,7 +151,6 @@ functionConfig.setClassName("org.apache.pulsar.functions.api.examples.Exclamatio
 functionConfig.setProcessingGuarantees(FunctionConfig.ProcessingGuarantees.ATLEAST_ONCE);
 functionConfig.setTopicsPattern(sourceTopicPattern);
 functionConfig.setSubName(subscriptionName);
-functionConfig.setAutoAck(true);
 functionConfig.setOutput(sinkTopic);
 admin.functions().createFunction(functionConfig, fileName);
 ```
@@ -80,7 +162,13 @@ admin.functions().createFunction(functionConfig, fileName);
 
 ## Update a function
 
-You can update a Pulsar function that has been deployed to a Pulsar cluster using Admin CLI, REST API or Java Admin API.
+You can update a function that is already deployed using the Admin CLI, the REST API or the Java admin API. An update takes the same configuration and package as [create](#create-a-function) and uses the same requests, so the examples above apply; what differs is how the function worker treats them:
+
+- The configuration is **merged** into the deployed one: settings you leave out keep their current values, and the tenant, namespace and name must match the deployed function. You can therefore send either the complete configuration the function was created with, or only its identity (tenant, namespace, name) and the settings to change.
+- Some settings **cannot be changed** by an update: the input topics, the subscription name, the processing guarantees, the ordering guarantees and the runtime. To change those, delete the function and create it again.
+- The **package is optional**: leave it out to keep the deployed code, or provide it to roll out a new build.
+- An update that changes neither the configuration nor the package is rejected with `400 Update contains no change`.
+- The update-only option `--update-auth-data` (`updateOptions.updateAuthData` in the REST and Java APIs) makes the worker replace the authentication data stored for the function, for example the token the function uses to connect to Pulsar, with the credentials of the caller.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -88,17 +176,27 @@ You can update a Pulsar function that has been deployed to a Pulsar cluster usin
   values={[{"label":"Admin CLI","value":"Admin CLI"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="Admin CLI">
 
-Use the [`update`](/reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=update) subcommand.
+Use the [`update`](/reference/#/@pulsar:version_reference@/pulsar-admin/functions?id=update) subcommand. Update merges into the deployed configuration, so you can pass the same configuration file as in the create example, a file with only `tenant`, `namespace`, `name` and the settings to change, or just command-line options; either way, pass `--jar` (or `--py`, `--go`) to also roll out a new implementation, and leave it out to keep the deployed one.
 
 **Example**
 
 ```shell
+# roll out a new build of the function (with whatever the file contains, changed or not)
+pulsar-admin functions update \
+    --function-config-file exclamation.yaml \
+    --jar $PWD/examples/api-examples-2.jar
+
+# change only the configuration, for example after setting parallelism: 2 in the file;
+# the deployed implementation is kept
+pulsar-admin functions update \
+    --function-config-file exclamation.yaml
+
+# the same change with command-line options only: the function's identity and the settings to change
 pulsar-admin functions update \
     --tenant public \
     --namespace default \
-    --name (the name of Pulsar Functions) \
-    --output persistent://public/default/update-output-topic \
-    # other options
+    --name exclamation \
+    --parallelism 2
 ```
 
 </TabItem>
@@ -106,21 +204,56 @@ pulsar-admin functions update \
 
 [](swagger:/admin/v3/functions/updateFunction)
 
+The same `multipart/form-data` request as for create, sent as a `PUT`. Update merges into the deployed configuration, so the `functionConfig` part can be the complete configuration or only the function's identity and the settings to change; include the `data` part (or the `url` field) to also roll out a new implementation, leave it out to keep the deployed one, and add the optional `updateOptions` part to replace the stored authentication data:
+
+```shell
+# roll out a new build of the function (with whatever the file contains, changed or not)
+curl -X PUT \
+  -H "Authorization: Bearer $(cat token)" \
+  -F "functionConfig=@/tmp/functionconfig.json;type=application/json" \
+  -F "data=@$PWD/examples/api-examples-2.jar;type=application/octet-stream" \
+  http://localhost:8080/admin/v3/functions/public/default/exclamation
+
+# change only the configuration, for example after setting "parallelism": 2 in the file;
+# the deployed implementation is kept. Also replace the stored authentication data with the caller's
+curl -X PUT \
+  -H "Authorization: Bearer $(cat token)" \
+  -F "functionConfig=@/tmp/functionconfig.json;type=application/json" \
+  -F 'updateOptions={"updateAuthData":true};type=application/json' \
+  http://localhost:8080/admin/v3/functions/public/default/exclamation
+
+# the same change with a minimal configuration: the function's identity and the settings to change
+curl -X PUT \
+  -H "Authorization: Bearer $(cat token)" \
+  -F 'functionConfig={"tenant":"public","namespace":"default","name":"exclamation","parallelism":2};type=application/json' \
+  http://localhost:8080/admin/v3/functions/public/default/exclamation
+```
+
 </TabItem>
 <TabItem value="Java">
 
 ```java
-FunctionConfig functionConfig = new FunctionConfig();
-functionConfig.setTenant(tenant);
-functionConfig.setNamespace(namespace);
-functionConfig.setName(functionName);
-functionConfig.setRuntime(FunctionConfig.Runtime.JAVA);
-functionConfig.setParallelism(1);
-functionConfig.setClassName("org.apache.pulsar.functions.api.examples.ExclamationFunction");
-UpdateOptions updateOptions = new UpdateOptions();
-updateOptions.setUpdateAuthData(updateAuthData);
-admin.functions().updateFunction(functionConfig, userCodeFile, updateOptions);
+// Update merges into the deployed configuration, so the function's identity and the settings
+// to change are enough; the complete configuration from the create example works as well.
+FunctionConfig update = new FunctionConfig();
+update.setTenant(tenant);
+update.setNamespace(namespace);
+update.setName(functionName);
+
+// roll out a new build of the function, keeping the deployed configuration
+admin.functions().updateFunction(update, "/path/to/api-examples-2.jar", new UpdateOptionsImpl());
+
+// change only the configuration, here the parallelism; the deployed implementation is kept
+update.setParallelism(2);
+admin.functions().updateFunction(update, null, new UpdateOptionsImpl());
+
+// also replace the stored authentication data with the caller's credentials
+UpdateOptionsImpl updateOptions = new UpdateOptionsImpl();
+updateOptions.setUpdateAuthData(true);
+admin.functions().updateFunction(update, null, updateOptions);
 ```
+
+`UpdateOptionsImpl` (`org.apache.pulsar.common.functions`, in `pulsar-common`) implements the `UpdateOptions` interface that `updateFunction` takes.
 
 </TabItem>
 

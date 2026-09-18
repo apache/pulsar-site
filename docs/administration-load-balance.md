@@ -11,6 +11,8 @@ You can use multiple settings and tools to control the traffic distribution whic
 
 The following sections introduce how load-balanced assignments work across Pulsar brokers and how you can leverage the framework to adjust. Pulsar ships two load managers: the **modular** load manager (`loadManagerClassName=org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl`, the default) and the **extensible** load manager (`org.apache.pulsar.broker.loadbalance.extensions.ExtensibleLoadManagerImpl`). Unless a setting is marked otherwise, this page applies to both; the differences are explained in [Broker load balancing | Types](concepts-broker-load-balancing-types.md) and moving from one to the other in [Broker load balancing | Migration](concepts-broker-load-balancing-migration.md).
 
+The `pulsar-admin` commands on this page are thin wrappers around the admin [REST API](reference-rest-api-overview.md); every operation shown here can be called directly from your own automation, see [Automate with the REST API](reference-rest-api-overview.md#automate-with-the-rest-api).
+
 ## Dynamic assignments
 
 Topics are dynamically assigned to brokers based on the load conditions of all brokers in the cluster. The assignment of topics to brokers is not done at the topic level but the **bundle** level (a higher level). Instead of individual topic assignments, each broker takes ownership of a subset of the topics for a namespace. This subset is called a bundle and effectively this subset is a sharding mechanism.
