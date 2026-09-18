@@ -10,7 +10,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-Below are the most common tasks you may want to do. For the exhaustive lists of tasks and the method to perform these tasks, see [Tools](admin-api-tools.md).
+The admin interfaces cover three kinds of work:
+
+- **Administering** a Pulsar instance: creating, updating and deleting clusters, tenants, namespaces, topics, schemas, functions, connectors and packages, and setting their policies, with a single command or call.
+- **Monitoring and troubleshooting**: reading the status, statistics and internal state of brokers, bookies, topics, subscriptions, functions and transactions.
+- **Automating** all of the above from your own tooling, in any language, through the REST API and clients generated from its OpenAPI specification.
+
+Below are the most common tasks you may want to do. For the interfaces you can use to perform them, see [Get started](admin-get-started.md).
 
 ![Features of Pulsar admin APIs](/assets/admin-api-features.svg)
 
@@ -26,16 +32,10 @@ Others| - Proxy <br/><br/> - Resource groups <br/><br/> - Resource quotas | Oper
 
 ### Related topics
 
-- To understand the basics, see [Pulsar admin API - Overview](admin-api-overview.md)
-
-- To learn usage scenarios, see [Pulsar admin API - Use cases](admin-api-use-cases.md).
-
-- To perform administrative operations, see [Pulsar admin API - Tools](admin-api-tools.md).
-
 - To get up quickly, see [Pulsar admin API - Get started](admin-get-started.md).
 
 - To check the detailed usage, see the API references below.
 
   - [Java admin API](@pulsar:javadoc:admin@/)
 
-  - [REST API](reference-rest-api-overview.md)
+  - [REST API, OpenAPI specifications and generated clients](reference-rest-api-overview.md)

@@ -1315,7 +1315,7 @@ admin.topics().removeOffloadPolicies(topic)
 
 
 ## Manage non-partitioned topics
-You can use Pulsar [admin API](admin-api-overview.md) to create, delete and check the status of non-partitioned topics.
+You can use Pulsar [admin API](admin-get-started.md) to create, delete and check the status of non-partitioned topics.
 
 ### Create
 Non-partitioned topics must be explicitly created. When creating a new non-partitioned topic, you need to provide a name for the topic.
@@ -1574,7 +1574,7 @@ admin.topics().getInternalStats(topic);
 ````
 
 ## Manage partitioned topics
-You can use Pulsar [admin API](admin-api-overview.md) to create, update, delete and check the status of partitioned topics.
+You can use Pulsar [admin API](admin-get-started.md) to create, update, delete and check the status of partitioned topics.
 
 ### Create
 
@@ -1982,7 +1982,7 @@ admin.topics().getPartitionedInternalStats(topic);
 
 ## Manage subscriptions
 
-You can use [Pulsar admin API](admin-api-overview.md) to create, check, and delete subscriptions.
+You can use [Pulsar admin API](admin-get-started.md) to create, check, and delete subscriptions.
 
 ### Create subscription
 

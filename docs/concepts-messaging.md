@@ -1205,7 +1205,7 @@ Decisions about routing and subscription modes can be made separately in most ca
 
 There is no difference between partitioned topics and normal topics in terms of how subscription types work, as partitioning only determines what happens between when a message is published by a producer and processed and acknowledged by a consumer.
 
-Partitioned topics need to be explicitly created via the [admin API](admin-api-overview.md). The number of partitions can be specified when creating the topic.
+Partitioned topics need to be explicitly created via the [admin API](admin-get-started.md). The number of partitions can be specified when creating the topic.
 
 ### Routing modes
 

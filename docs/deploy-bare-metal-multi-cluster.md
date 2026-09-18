@@ -348,7 +348,7 @@ You can use your own service discovery system, and you only need to satisfy just
 
 ## Admin client and verification
 
-At this point, your Pulsar instance should be ready to use. You can now configure client machines that can serve as [administrative clients](admin-api-overview.md) for each cluster. You can use the [`conf/client.conf`](reference-configuration.md#client) configuration file to configure admin clients.
+At this point, your Pulsar instance should be ready to use. You can now configure client machines that can serve as [administrative clients](admin-get-started.md) for each cluster. You can use the [`conf/client.conf`](reference-configuration.md#client) configuration file to configure admin clients.
 
 The most important thing is that you point the [`serviceUrl`](reference-configuration.md#client-serviceUrl) parameter to the correct service URL for the cluster:
 

@@ -14,7 +14,7 @@ The Kubernetes runtime works when a function worker generates and applies Kubern
 
 :::tip
 
-For the rules of translating Pulsar object names into Kubernetes resource labels, see [instructions](admin-api-overview.md#how-to-define-pulsar-resource-names-when-running-pulsar-in-kubernetes).
+For the rules of translating Pulsar object names into Kubernetes resource labels, see [How to define Pulsar resource names when running Pulsar in Kubernetes](#how-to-define-pulsar-resource-names-when-running-pulsar-in-kubernetes) below.
 
 :::
 
