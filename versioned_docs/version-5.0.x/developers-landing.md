@@ -11,8 +11,8 @@ If you want to read top-viewed documents for developers, check out the following
 - [Pulsar concepts](concepts-messaging.md)
 - [Pulsar clients](/docs/client-libraries/)
 - [Pulsar APIs](pulsar-api-overview.md)
-    - [Pulsar admin APIs](admin-api-overview.md)
-    - [Pulsar REST APIs](reference-rest-api-overview.md)
+    - [Pulsar admin APIs](admin-get-started.md)
+    - [Pulsar REST APIs and OpenAPI specifications](reference-rest-api-overview.md)
 - [Pulsar contribution guide](/contribute)
 
 ## Advanced topics

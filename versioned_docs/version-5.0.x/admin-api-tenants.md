@@ -23,7 +23,7 @@ import TabItem from '@theme/TabItem';
 
 :::
 
-Tenants, like namespaces, can be managed using the [admin API](admin-api-overview.md). There are currently two configurable aspects of tenants:
+Tenants, like namespaces, can be managed using the [admin API](admin-get-started.md). There are currently two configurable aspects of tenants:
 
 * Admin roles
 * Allowed clusters

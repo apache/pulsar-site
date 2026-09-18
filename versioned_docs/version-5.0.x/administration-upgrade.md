@@ -55,7 +55,7 @@ To upgrade an Apache Pulsar cluster, follow the upgrade sequence.
 
 3. Upgrade brokers.
    - Canary test: test an upgraded version in one or a small set of brokers.
-   - Rolling upgrade: roll out the upgraded version to all brokers in the cluster after you determine that a version is safe after canary.
+   - Rolling upgrade: roll out the upgraded version to all brokers in the cluster after you determine that a version is safe after canary. Follow the procedure in [Rolling restarts](administration-rolling-restart.md) so that each broker hands over its bundles gracefully and the load balancer does not rebalance the cluster while brokers are still being restarted.
 4. Upgrade proxies.
    - Canary test: test an upgraded version in one or a small set of proxies.
    - Rolling upgrade: roll out the upgraded version to all proxies in the cluster after you determine that a version is safe after canary.
@@ -142,7 +142,7 @@ When you upgrade a large BookKeeper cluster in a rolling upgrade scenario, upgra
 
 ## Upgrade brokers and proxies
 
-The upgrade procedure for brokers and proxies is the same. Brokers and proxies are `stateless`, so upgrading the two services is easy.
+The upgrade procedure for brokers and proxies is the same. Brokers and proxies are `stateless`, so upgrading the two services is easy. A broker does own the bundles that are assigned to it, though, and hands them over to the other brokers when it stops; how that happens, how long it takes and how to keep the load balancer from reacting to every restart is described in [Rolling restarts](administration-rolling-restart.md).
 
 ### Canary test
 
@@ -150,9 +150,10 @@ You can test an upgraded version in one or a small set of nodes before upgrading
 
 To upgrade a broker (or proxy) to a new version, complete the following steps:
 
-1. Stop a broker (or proxy).
+1. Stop a broker (or proxy). Stop a broker with `pulsar-admin brokers shutdown` or `SIGTERM`, and wait for the process to exit: it releases its bundles first (see [What happens when a broker stops](administration-rolling-restart.md#what-happens-when-a-broker-stops)).
 2. Upgrade the binary and configuration file.
 3. Start a broker (or proxy).
+4. For a broker, wait until it is listed by `pulsar-admin brokers list <cluster-name>` and passes `pulsar-admin brokers healthcheck` before you continue with the next one.
 
 :::tip
 
@@ -166,15 +167,15 @@ After the canary test to upgrade some brokers or proxies in your cluster, you ca
 
 Before upgrading, you have to decide whether to upgrade the whole cluster at once, including downtime and rolling upgrade scenarios.
 
-In a rolling upgrade scenario, you can upgrade one broker or one proxy at a time if the size of the cluster is small. If your cluster is large, you can upgrade brokers or proxies in batches. When you upgrade a batch of brokers or proxies, make sure the remaining brokers and proxies in the cluster have enough capacity to handle the traffic during the upgrade.
+In a rolling upgrade scenario, you can upgrade one broker or one proxy at a time if the size of the cluster is small. If your cluster is large, you can upgrade brokers or proxies in batches. When you upgrade a batch of brokers or proxies, make sure the remaining brokers and proxies in the cluster have enough capacity to handle the traffic during the upgrade. Before you start rolling the brokers, [pause automatic load shedding and bundle splitting](administration-rolling-restart.md#pause-automatic-rebalancing-during-the-restart), and turn them back on when the last broker is up.
 
 In a downtime upgrade scenario, shut down the entire cluster, upgrade each broker or proxy, and then start the cluster.
 
 While you upgrade in both scenarios, the procedure is the same for each broker or proxy.
 
-1. Stop the broker (or proxy).
+1. Stop the broker (or proxy) and wait for the process to exit.
 2. Upgrade the software (either new binary or new configuration files).
-3. Start the broker (or proxy).
+3. Start the broker (or proxy) and, for a broker, wait until it is listed and healthy before stopping the next one.
 
 :::tip
 

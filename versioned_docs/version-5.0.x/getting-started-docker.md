@@ -200,7 +200,7 @@ client.close()
 
 ## Step 3: Get the topic statistics
 
-In Pulsar, you can use REST API, Java, or command-line tools to control every aspect of the system. For details on APIs, refer to [Admin API Overview](admin-api-overview.md).
+In Pulsar, you can use REST API, Java, or command-line tools to control every aspect of the system. For details on APIs, refer to [Admin API Overview](admin-get-started.md).
 
 In the simplest example, you can use curl to probe the stats for a particular topic:
 

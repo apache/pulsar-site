@@ -2,7 +2,7 @@
 id: admin-api-get-started
 title: Get started
 sidebar_label: "Get started"
-description: Learn how to manage topics in Pulsar using the Pulsar admin CLI or Pulsar admin APIs.
+description: The Pulsar admin interfaces (pulsar-admin CLI, REST API with OpenAPI specifications, Java and Go clients), how to set them up, and a first walk-through with each of them.
 ---
 
 ````mdx-code-block
@@ -10,7 +10,24 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
 
-This guide walks you through the quickest way to get started with the following methods to manage topics. 
+Pulsar admin interfaces let you administer clusters: create, update, delete and inspect every entity of a Pulsar instance (clusters, tenants, namespaces, topics, schemas, functions, connectors, packages, transactions) and set the policies for data, resources and security. Every way of administering Pulsar goes through the admin REST API that the brokers serve; the command-line tool and the client libraries are clients of it. Pick the interface that fits how you work:
+
+| Interface | Reference | Use it when |
+| --- | --- | --- |
+| **Command line**: `pulsar-admin` | [pulsar-admin CLI reference](/reference/#/@pulsar:version_reference@/pulsar-admin/) | You administer a cluster interactively or from shell scripts. It ships in the `bin` folder of the Pulsar installation and needs no extra setup, but each invocation starts a JVM. [Pulsar shell](administration-pulsar-shell.md) is an interactive shell around the same commands that starts the JVM once. |
+| **REST API** | [REST APIs and OpenAPI specifications](reference-rest-api-overview.md), [endpoint reference](pathname:///admin-rest-api/?version=@pulsar:rest_api_version@) | You automate from any language or tool that speaks HTTP, for example an operator, a controller or a `curl` call in a script. Since Pulsar 5.0 the API has [OpenAPI 3 specifications](reference-rest-api-overview.md#openapi-specifications) from which you can [generate a client](reference-rest-api-overview.md#generate-a-client-from-the-specification) for your language. |
+| **Java Library** | [Java admin API Javadoc](@pulsar:javadoc:admin@/) | You manage Pulsar from Java applications or tests. The client is the `org.apache.pulsar:pulsar-client-admin` artifact. |
+| **Go Library** | [`pulsaradmin` package](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsaradmin) of the Go client | You manage Pulsar from Go applications, for example a Kubernetes operator. |
+
+![Pulsar admin interfaces](/assets/admin-api-tools.svg)
+
+The REST API deserves a closer look, because it is what the other interfaces are built on and the right choice when the CLI or the Java client does not fit:
+
+- **Call it directly.** Every operation on the [feature pages](admin-api-features.md) has a REST API tab with the endpoint. Endpoints that upload a package (functions, sources, sinks) take a multipart request; see the [`curl` example for creating a function](admin-api-functions.md#create-a-function).
+- **Use the OpenAPI specifications.** Since Pulsar 5.0, the REST API is described by [OpenAPI 3 documents](reference-rest-api-overview.md#openapi-specifications) generated from the broker source for every release, one per API (admin, lookup, functions, sources, sinks, packages, transactions). They can be [downloaded per release line](reference-rest-api-overview.md#download-the-specifications), imported into tools such as Postman, and are what renders the [REST API reference](reference-rest-api-overview.md).
+- **Generate a client for your language.** With the specification and [OpenAPI Generator](https://openapi-generator.tech/), a client library for Go, Python, TypeScript, Rust, C# and many other languages is [generated instead of written](reference-rest-api-overview.md#generate-a-client-from-the-specification).
+
+The rest of this page walks you through the quickest way to get started with the command line, the REST API and the Java API by managing a topic with each of them, including the setup each interface needs when authentication is enabled.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -23,7 +40,7 @@ This guide walks you through the quickest way to get started with the following 
 </TabItem>
 <TabItem value="REST API">
 
-[REST API](pathname:///admin-rest-api/?version=@pulsar:rest_api_version@) belongs to HTTP calls, which are made against the admin APIs provided by brokers. In addition, both the Java admin API and pulsar-admin CLI use the REST API.
+[REST API](pathname:///admin-rest-api/?version=@pulsar:rest_api_version@) belongs to HTTP calls, which are made against the admin APIs provided by brokers. In addition, both the Java admin API and pulsar-admin CLI use the REST API. The API is described by [OpenAPI specifications](reference-rest-api-overview.md#openapi-specifications) that you can use to [generate a client](reference-rest-api-overview.md#generate-a-client-from-the-specification) for other languages.
 
 </TabItem>
 <TabItem value="Java">
@@ -69,6 +86,20 @@ To manage topics using pulsar-admin CLI, complte the following steps.
     webServiceUrl=http://localhost:8080/
     brokerServiceUrl=pulsar://localhost:6650/
     ```
+
+    If authentication is enabled in your cluster, configure the authentication plugin and its parameters in the same file, and the TLS settings when the web service uses TLS:
+
+    |Name|Description|Default|
+    |----|-----------|-------|
+    |webServiceUrl|The web URL for the cluster.|http://localhost:8080/|
+    |brokerServiceUrl|The Pulsar protocol URL for the cluster.|pulsar://localhost:6650/|
+    |authPlugin|The authentication plugin.| |
+    |authParams|The authentication parameters for the cluster, as a comma-separated string.| |
+    |useTls|Whether or not TLS authentication will be enforced in the cluster.|false|
+    |tlsAllowInsecureConnection|Accept untrusted TLS certificate from client.|false|
+    |tlsTrustCertsFilePath|Path for the trusted TLS certificate file.| |
+
+    See the [client configuration reference](/reference/#/@pulsar:version_reference@/config/reference-configuration-client) for all settings.
 
 **Step 2:** Create a persistent topic named _test-topic-1_ with 6 partitions.
 
@@ -280,6 +311,8 @@ To manage topics using REST API, complete the following steps.
     curl -X PUT http://localhost:8080/admin/v2/persistent/public/default/test-topic-2/partitions -H 'Content-Type: application/json' -d "4"
     ```
 
+    If authentication is enabled, add the credential of your authentication provider to every request, for example a token with `-H "Authorization: Bearer $(cat token)"`; with TLS, use the `https://` web service URL (8443 by default). The endpoints are documented in the [REST API reference](pathname:///admin-rest-api/?version=@pulsar:rest_api_version@), and the [REST APIs and OpenAPI specifications](reference-rest-api-overview.md) page explains the API layout and how to generate a client.
+
     **Output**
 
     There is no output. You can check the topic in Step 4.
@@ -444,6 +477,23 @@ To manage topics using Java admin API, complete following steps.
         .build();
     ```
 
+    The [PulsarAdmin](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/PulsarAdmin) object is created through a [PulsarAdminBuilder](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/PulsarAdminBuilder). If authentication is enabled, pass the authentication plugin and its parameters, and the TLS settings when the web service uses TLS. The service URL can list several brokers, separated by commas:
+
+    ```java
+    String url = "https://broker-1.example.com:8443,broker-2.example.com:8443,broker-3.example.com:8443";
+    // The fully qualified class name of the authentication plugin, and its parameters
+    String authPluginClassName = "org.apache.pulsar.client.impl.auth.AuthenticationToken";
+    String authParams = "file:///path/to/token";
+    boolean tlsAllowInsecureConnection = false;
+    String tlsTrustCertsFilePath = "/path/to/ca.cert.pem";
+    PulsarAdmin admin = PulsarAdmin.builder()
+        .serviceHttpUrl(url)
+        .authentication(authPluginClassName, authParams)
+        .tlsTrustCertsFilePath(tlsTrustCertsFilePath)
+        .allowTlsInsecureConnection(tlsAllowInsecureConnection)
+        .build();
+    ```
+
 **Step 2:** Create a partitioned topic _test-topic-1_ with 4 partitions.
 
     **Input**
@@ -511,13 +561,7 @@ To manage topics using Java admin API, complete following steps.
 
 ## Related topics
 
-- To understand basics, see [Pulsar admin API - Overview](admin-api-overview.md)
-
-- To learn usage scenarios, see [Pulsar admin API - Use cases](admin-api-use-cases.md).
-
 - To learn common administrative tasks, see [Pulsar admin API - Features](admin-api-features.md).
-
-- To perform administrative operations, see [Pulsar admin API - Tools](admin-api-tools.md).
 
 - To check the detailed usage, see the references below.
 
@@ -525,6 +569,6 @@ To manage topics using Java admin API, complete following steps.
 
   - Pulsar admin APIs
 
-    - [REST API](reference-rest-api-overview.md)
+    - [REST API, OpenAPI specifications and generated clients](reference-rest-api-overview.md)
 
     - [Java admin API](@pulsar:javadoc:admin@/)

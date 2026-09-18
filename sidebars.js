@@ -4,9 +4,11 @@ const { resolveTokens } = require("./src/config/pulsarVariables");
 // sidebars.json is plain JSON and cannot use the @pulsar:...@ tokens that the docs use for
 // version-dependent URLs (see src/server/markdownPreprocessors/pulsarVariables.ts). Resolve
 // the tokens in link hrefs here for the current docs version. `docusaurus docs:version`
-// serializes the loaded (resolved) sidebar into versioned_sidebars/, so a versioned snapshot
-// keeps the links that were current when the version was cut.
-const tokens = resolveTokens("current");
+// serializes the loaded (resolved) sidebar into versioned_sidebars/, so when cutting a
+// version, set PULSAR_SIDEBAR_VERSION to that version (e.g. 5.0.x) so that the snapshot
+// gets the links of the version instead of those of the current docs:
+//   PULSAR_SIDEBAR_VERSION=5.0.x yarn docusaurus docs:version 5.0.x
+const tokens = resolveTokens(process.env.PULSAR_SIDEBAR_VERSION || "current");
 const TOKEN_RE = /@pulsar:([^@\s]+)@/g;
 
 function resolveHref(href) {

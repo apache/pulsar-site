@@ -10,9 +10,9 @@ You can perform the following migrations.
 
 Migration|When to use
 |---|---
-[Migrate from simple to modular](#migrate-from-simple-to-modular-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of OverloadShedder, ThresholdShedder, or UniformLoadShedder.
+[Migrate from simple to modular](#migrate-from-simple-to-modular-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of AvgShedder, OverloadShedder, ThresholdShedder, or UniformLoadShedder.
 [Migrate from modular to extensible](#migrate-from-modular-to-extensible-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of TransferShedder.
-[Migrate from extensible to modular](#migrate-from-modular-to-extensible-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of OverloadShedder, ThresholdShedder, or UniformLoadShedder.
+[Migrate from extensible to modular](#migrate-from-modular-to-extensible-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of AvgShedder, OverloadShedder, ThresholdShedder, or UniformLoadShedder.
 
 :::note
 
@@ -36,6 +36,7 @@ This bundle unloading strategy|is available for this broker load balancer type|i
 OverloadShedder|Modular|1.18 and later
 ThresholdShedder|Modular|2.6 and later
 UniformLoadShedder|Modular|2.10 and later
+AvgShedder|Modular|3.0.6, 3.2.4, 3.3.1 and later (default since 5.0)
 TransferShedder|Extensible|3.0 and later
 
 ## Migrate from simple to modular broker load balancer
@@ -139,12 +140,13 @@ The pulsar-admin tool is not supported for this migration.
    
    - Update broker load balancer by setting [loadManagerClassName](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1309C20-L1309C20) to ModularLoadManagerImpl
     
-   - Update [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) to OverloadShedder, ThresholdShedder, or UniformLoadShedder based on your needs.
+   - Update [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) to AvgShedder (the default of the modular load balancer since Pulsar 5.0), OverloadShedder, ThresholdShedder, or UniformLoadShedder based on your needs.
 
     ```
     loadManagerClassName=org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl
 
-    loadBalancerLoadSheddingStrategy=org.apache.pulsar.broker.loadbalance.impl.ThresholdShedder
+    loadBalancerLoadSheddingStrategy=org.apache.pulsar.broker.loadbalance.impl.AvgShedder
+    loadBalancerLoadPlacementStrategy=org.apache.pulsar.broker.loadbalance.impl.AvgShedder
     ```
 
     :::note
