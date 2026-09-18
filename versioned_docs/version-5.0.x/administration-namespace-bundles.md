@@ -24,6 +24,12 @@ The number of bundles is fixed when the namespace is created and can afterwards 
 | `public/default` | `pulsar standalone` | `defaultNumberOfNamespaceBundles` |
 | The heartbeat namespaces of each broker | Broker | 1 (the full hash range) |
 
+:::note Pulsar 5.0 milestones
+
+The defaults in the table describe Pulsar 5.0.0 after the 5.0.0-M1/M2 milestones. Those milestone builds still use 4 bundles for broker-created namespaces and 16 for namespaces created during cluster metadata initialization. They do not provide `defaultNumberOfSystemNamespaceBundles` or `--system-namespace-bundle-number`; broker-created system namespaces use `defaultNumberOfNamespaceBundles`. Existing namespaces retain their bundle counts when upgraded.
+
+:::
+
 To see the bundles of a namespace:
 
 ```shell
@@ -68,4 +74,4 @@ Splits are permanent: there is no operation that merges bundles. For the split a
 
 ## Bundles and broker restarts
 
-When a broker shuts down, it releases every bundle it owns. With the modular load manager, the broker unloads its owned bundles one after another (the topics within a bundle are closed in parallel), so the graceful shutdown time of a broker grows with the number of bundles it owns; with the extensible load manager, the broker transfers the ownership of all its bundles to new owners concurrently. Because only owned bundles are unloaded, unused bundles do not add to the shutdown time. See [Rolling restarts](administration-rolling-restart.md) for how to keep restarts and the resulting rebalancing under control.
+When a broker shuts down, it releases every bundle it owns. With the modular load manager, the broker unloads its owned bundles one after another (the topics within a bundle are closed in parallel), so the graceful shutdown time of a broker grows with the number of bundles it owns; with the extensible load manager, the broker transfers ownership to new owners using concurrent batches of ownership overrides, controlled by the dynamic setting `loadBalancerServiceUnitStateMaxConcurrentOverrides` (64 by default). This bounds the override batch size, not the per-second transfer rate or all client reconnections. Because only owned bundles are unloaded, unused bundles do not add to the shutdown time. See [Rolling upgrade of brokers](administration-rolling-upgrade.md) for how to keep restarts and the resulting rebalancing under control.

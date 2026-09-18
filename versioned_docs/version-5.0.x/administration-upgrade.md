@@ -1,7 +1,7 @@
 ---
 id: administration-upgrade
 title: Upgrade Guide
-sidebar_label: "Upgrade"
+sidebar_label: "Cluster upgrade"
 description: Learn to upgrade a Pulsar cluster.
 ---
 
@@ -9,6 +9,16 @@ description: Learn to upgrade a Pulsar cluster.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ````
+
+:::info Using Kubernetes?
+
+This guide was originally written when servers were treated more like pets than cattle: individually named, carefully tended, and upgraded one at a time. Its manual, server-by-server procedures are not a practical runbook for Kubernetes and other modern orchestrated deployments. Updates to this guidance are pending.
+
+If brief periods of service unavailability are acceptable, the default Apache Pulsar Helm chart provides a straightforward way to upgrade a cluster. It does not guarantee uninterrupted service or a maximum outage duration. Start with [Upgrading Pulsar on Kubernetes](helm-upgrade.md). If you need to minimize disruption during broker upgrades, see [Rolling upgrade of brokers: Kubernetes deployments](administration-rolling-upgrade.md#kubernetes-deployments).
+
+:::
+
+This guide covers upgrades across the Pulsar cluster and the order in which to upgrade its components. For broker-specific rollout strategies, graceful shutdown, and load distribution, see [Rolling upgrade of brokers](administration-rolling-upgrade.md).
 
 ## Upgrade guidelines
 
@@ -27,6 +37,8 @@ Read the following guidelines before upgrading a Pulsar cluster.
 :::note
 
 Currently, Apache Pulsar is compatible between versions.
+
+For updating brokers in Kubernetes, please check [Kubernetes deployments](administration-rolling-upgrade.md#kubernetes-deployments).
 
 :::
 
@@ -55,7 +67,7 @@ To upgrade an Apache Pulsar cluster, follow the upgrade sequence.
 
 3. Upgrade brokers.
    - Canary test: test an upgraded version in one or a small set of brokers.
-   - Rolling upgrade: roll out the upgraded version to all brokers in the cluster after you determine that a version is safe after canary. Follow the procedure in [Rolling restarts](administration-rolling-restart.md) so that each broker hands over its bundles gracefully and the load balancer does not rebalance the cluster while brokers are still being restarted.
+   - Rolling upgrade: roll out the upgraded version to all brokers in the cluster after you determine that a version is safe after canary. Follow the procedure in [Rolling upgrade of brokers](administration-rolling-upgrade.md) so that each broker hands over its bundles gracefully and the load balancer does not rebalance the cluster while brokers are still being restarted. For Kubernetes, first configure the [deployment prerequisites](administration-rolling-upgrade.md#kubernetes-deployments); the default StatefulSet `RollingUpdate` strategy does not enforce the Pulsar restart checks.
 4. Upgrade proxies.
    - Canary test: test an upgraded version in one or a small set of proxies.
    - Rolling upgrade: roll out the upgraded version to all proxies in the cluster after you determine that a version is safe after canary.
@@ -142,7 +154,15 @@ When you upgrade a large BookKeeper cluster in a rolling upgrade scenario, upgra
 
 ## Upgrade brokers and proxies
 
-The upgrade procedure for brokers and proxies is the same. Brokers and proxies are `stateless`, so upgrading the two services is easy. A broker does own the bundles that are assigned to it, though, and hands them over to the other brokers when it stops; how that happens, how long it takes and how to keep the load balancer from reacting to every restart is described in [Rolling restarts](administration-rolling-restart.md).
+The upgrade procedure for brokers and proxies is the same. Brokers and proxies are `stateless`, so upgrading the two services is easy. A broker does own the bundles that are assigned to it, though, and hands them over to the other brokers when it stops; how that happens, how long it takes and how to keep the load balancer from reacting to every restart is described in [Rolling upgrade of brokers](administration-rolling-upgrade.md).
+
+:::note
+
+Follow the [rolling upgrade procedure for brokers](administration-rolling-upgrade.md) for broker upgrades, including canary upgrades. Before upgrading brokers in Kubernetes, configure the [Kubernetes deployment prerequisites](administration-rolling-upgrade.md#kubernetes-deployments), including controlled pod deletion with an API-calling `preStop` hook, a sufficient termination budget, and the required Service layout. These [shared prerequisites](administration-rolling-upgrade.md#prerequisites-for-both-controlled-strategies) apply to both in-place replacement and replacement with a new broker StatefulSet.
+
+The Apache Pulsar Helm chart does **not** automate this procedure by default; the Pulsar-aware rollout automation is currently missing, and contributions are welcome. Some parts of full automation require Kubernetes operator logic or an equivalent custom controller. **The Apache Pulsar project does not provide a Kubernetes operator for Pulsar.** Arrange the required orchestration yourself; a Helm upgrade alone does not perform these checks.
+
+:::
 
 ### Canary test
 
@@ -150,10 +170,10 @@ You can test an upgraded version in one or a small set of nodes before upgrading
 
 To upgrade a broker (or proxy) to a new version, complete the following steps:
 
-1. Stop a broker (or proxy). Stop a broker with `pulsar-admin brokers shutdown` or `SIGTERM`, and wait for the process to exit: it releases its bundles first (see [What happens when a broker stops](administration-rolling-restart.md#what-happens-when-a-broker-stops)).
+1. Stop a broker (or proxy). Stop a broker with `pulsar-admin --admin-url <broker-admin-url> brokers shutdown` or `SIGTERM`, and wait for the process to exit: it releases its bundles first (see [What happens when a broker stops](administration-rolling-upgrade.md#what-happens-when-a-broker-stops)). Use the individual broker's admin URL so the command reaches the intended broker.
 2. Upgrade the binary and configuration file.
 3. Start a broker (or proxy).
-4. For a broker, wait until it is listed by `pulsar-admin brokers list <cluster-name>` and passes `pulsar-admin brokers healthcheck` before you continue with the next one.
+4. For a broker, verify registration, health at its individual admin URL, reachability, and load reporting before continuing with the next one. Follow all checks in [Restart one broker at a time](administration-rolling-upgrade.md#restart-one-broker-at-a-time).
 
 :::tip
 
@@ -165,21 +185,23 @@ If issues occur during the canary test, you can shut down the problematic broker
 
 After the canary test to upgrade some brokers or proxies in your cluster, you can upgrade all brokers or proxies in your cluster.
 
+For a rolling upgrade of brokers, follow the [rolling upgrade procedure for brokers](administration-rolling-upgrade.md) throughout the upgrade, from pausing automatic rebalancing to verifying recovery after the last broker restarts.
+
 Before upgrading, you have to decide whether to upgrade the whole cluster at once, including downtime and rolling upgrade scenarios.
 
-In a rolling upgrade scenario, you can upgrade one broker or one proxy at a time if the size of the cluster is small. If your cluster is large, you can upgrade brokers or proxies in batches. When you upgrade a batch of brokers or proxies, make sure the remaining brokers and proxies in the cluster have enough capacity to handle the traffic during the upgrade. Before you start rolling the brokers, [pause automatic load shedding and bundle splitting](administration-rolling-restart.md#pause-automatic-rebalancing-during-the-restart), and turn them back on when the last broker is up.
+In a rolling upgrade scenario, you can upgrade one broker or one proxy at a time if the size of the cluster is small. If your cluster is large, you can upgrade brokers or proxies in batches. When you upgrade a batch of brokers or proxies, make sure the remaining brokers and proxies in the cluster have enough capacity to handle the traffic during the upgrade. Before you start rolling the brokers, [pause automatic load shedding and bundle splitting](administration-rolling-upgrade.md#pause-automatic-rebalancing-during-the-upgrade), and restore their previous settings when the last broker is healthy and reporting load.
 
 In a downtime upgrade scenario, shut down the entire cluster, upgrade each broker or proxy, and then start the cluster.
 
-While you upgrade in both scenarios, the procedure is the same for each broker or proxy.
+For each broker or proxy, perform the following steps. During a rolling broker upgrade, apply them as part of the [rolling upgrade procedure for brokers](administration-rolling-upgrade.md), restart the current leader last, and complete the [registration, health, reachability, and load-reporting checks](administration-rolling-upgrade.md#restart-one-broker-at-a-time) before stopping the next broker. Query the current leader with `pulsar-admin brokers leader-broker` (`GET /admin/v2/brokers/leaderBroker`). Verify that the replacement's load information and updated reports reflecting the increased workload on receiving brokers have reached the load managers making placement decisions before continuing. On Kubernetes, choose either [in-place replacement with `OnDelete` or replacement with a new StatefulSet](administration-rolling-upgrade.md#choose-a-rollout-strategy). The stop/start steps below describe in-place replacement; the new-pool alternative starts each new broker and transfers workload before retiring an old one. Both require the same health and load-reporting checks.
 
 1. Stop the broker (or proxy) and wait for the process to exit.
 2. Upgrade the software (either new binary or new configuration files).
-3. Start the broker (or proxy) and, for a broker, wait until it is listed and healthy before stopping the next one.
+3. Start the broker (or proxy) and, for a broker, complete the [restart checks](administration-rolling-upgrade.md#restart-one-broker-at-a-time) before stopping the next one.
 
 :::tip
 
-To check the health of the broker, you can use the following command or API.
+To check the health of the broker, use its individual admin URL with the following command or API. A shared Service or proxy can send the health check to a different broker.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -189,7 +211,7 @@ To check the health of the broker, you can use the following command or API.
 <TabItem value="Admin CLI">
 
 ```bash
-pulsar-admin brokers healthcheck
+pulsar-admin --admin-url <broker-admin-url> brokers healthcheck
 ```
 
 </TabItem>

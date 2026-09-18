@@ -36,7 +36,8 @@ When you create a new namespace, a number of bundles are assigned to the namespa
 
 ```conf
 # When a namespace is created without specifying the number of bundles, this
-# value will be used as the default. Default is 32 since 5.0.0 (was 4).
+# value will be used as the default. Default is 32 from 5.0.0.
+# The 5.0.0-M1/M2 milestones and earlier versions default to 4.
 defaultNumberOfNamespaceBundles=32
 ```
 
@@ -52,7 +53,7 @@ In general, if you know the expected traffic and number of topics in advance, yo
 
 On the same note, it is beneficial to start with more bundles than the number of brokers, due to the hashing nature of the distribution of topics into bundles. For example, for a namespace with 1000 topics, using something like 64 bundles achieves a good distribution of traffic across 16 brokers. Bundles that no topic has been looked up in cost nothing, so a generous count does not penalize small namespaces.
 
-The `pulsar/system` namespace and `public/default` are created by `pulsar initialize-cluster-metadata` with their own bundle counts (`--system-namespace-bundle-number`, 64 by default, and `--default-namespace-bundle-number`, 32 by default). For the complete picture, including what a bundle costs and how to size the system namespace for transaction coordinators, see [Namespace bundles](administration-namespace-bundles.md).
+The `pulsar/system` namespace and `public/default` are created by `pulsar initialize-cluster-metadata` with their own bundle counts (`--system-namespace-bundle-number`, 64 by default, and `--default-namespace-bundle-number`, 32 by default). The 5.0.0-M1/M2 milestones still default to 16 for both namespaces and do not provide `--system-namespace-bundle-number`. For the complete picture, including what a bundle costs and how to size the system namespace for transaction coordinators, see [Namespace bundles](administration-namespace-bundles.md).
 
 
 ## Split namespace bundles
@@ -105,7 +106,7 @@ The support for automatic load shedding is available in the load manager of Puls
 
 :::tip
 
-* The automatic load shedding is enabled by default. To disable it, set `loadBalancerSheddingEnabled` to `false`. The setting is dynamic, so you can also pause shedding temporarily with `pulsar-admin brokers update-dynamic-config`, for example during a [rolling restart](administration-rolling-restart.md#pause-automatic-rebalancing-during-the-restart).
+* The automatic load shedding is enabled by default. To disable it, set `loadBalancerSheddingEnabled` to `false`. The setting is dynamic, so you can also pause shedding temporarily with `pulsar-admin brokers update-dynamic-config`, for example during a [rolling upgrade of brokers](administration-rolling-upgrade.md#pause-automatic-rebalancing-during-the-upgrade).
 * Besides the automatic load shedding, you can [manually unload bundles](#unload-topics-and-bundles).
 
 :::
@@ -122,8 +123,8 @@ loadBalancerSheddingGracePeriodMinutes=30
 ```
 
 The strategy is selected with `loadBalancerLoadSheddingStrategy`. The modular load manager supports the following strategies:
-* [AvgShedder](#avgshedder) (the default since Pulsar 5.0)
-* [ThresholdShedder](#thresholdshedder) (the default from Pulsar 2.10 to 4.x)
+* [AvgShedder](#avgshedder) (the default from Pulsar 5.0.0)
+* [ThresholdShedder](#thresholdshedder) (the default from Pulsar 2.10 to 4.x and in 5.0.0-M1/M2)
 * [OverloadShedder](#overloadshedder)
 * [UniformLoadShedder](#uniformloadshedder)
 
@@ -131,14 +132,14 @@ The extensible load manager uses [TransferShedder](#transfershedder).
 
 :::note
 
-* From Pulsar 5.0, the **default** shedding strategy of the modular load manager is `AvgShedder`, paired with `AvgShedder` as the placement strategy (`loadBalancerLoadPlacementStrategy`). From Pulsar 2.10 to 4.x, the default was `ThresholdShedder` with `LeastLongTermMessageRate` placement.
-* You need to restart brokers if the shedding strategy is [dynamically updated](admin-api-brokers.md#dynamic-broker-configuration).
+* From Pulsar 5.0.0, the **default** shedding strategy of the modular load manager is `AvgShedder`, paired with `AvgShedder` as the placement strategy (`loadBalancerLoadPlacementStrategy`). Pulsar 2.10 to 4.x and the 5.0.0-M1/M2 milestone builds default to `ThresholdShedder` with `LeastLongTermMessageRate` placement.
+* You need to restart brokers if the shedding strategy is [dynamically updated](admin-api-brokers.md#update-broker-conf-dynamically).
 
 :::
 
 ### AvgShedder
 
-This strategy pairs the most loaded broker with the least loaded broker and moves bundles from the former to the latter once the difference between their resource usage scores has exceeded a threshold for several consecutive checks: `loadBalancerAvgShedderLowThreshold` (15 points) for `loadBalancerAvgShedderHitCountLowThreshold` (8) checks, or `loadBalancerAvgShedderHighThreshold` (40 points) for `loadBalancerAvgShedderHitCountHighThreshold` (2) checks. The repeated checks filter out short load spikes; the larger the difference, the sooner the strategy acts, which is what makes it settle a cluster quickly after a [rolling restart](administration-rolling-restart.md) or after adding brokers.
+This strategy pairs the most loaded broker with the least loaded broker and moves bundles from the former to the latter once the difference between their resource usage scores has exceeded a threshold for several consecutive checks: `loadBalancerAvgShedderLowThreshold` (15 points) for `loadBalancerAvgShedderHitCountLowThreshold` (8) checks, or `loadBalancerAvgShedderHighThreshold` (40 points) for `loadBalancerAvgShedderHitCountHighThreshold` (2) checks. The repeated checks filter out short load spikes; the larger the difference, the sooner the strategy acts, which is what makes it settle a cluster quickly after a [rolling upgrade of brokers](administration-rolling-upgrade.md) or after adding brokers.
 
 AvgShedder also plans the destination of every bundle it unloads, so that the placement of the bundle cannot undo the shedding decision. For this, it must be configured as both the shedding and the placement strategy, which is the default:
 
@@ -151,6 +152,8 @@ maxUnloadPercentage=0.5
 ```
 
 If you configure one of the classic shedding strategies below while leaving `loadBalancerLoadPlacementStrategy` at its default, the broker falls back to the `LeastLongTermMessageRate` placement strategy that those shedding strategies were paired with before Pulsar 5.0 and logs a warning. For the details of the algorithm, see [AvgShedder](concepts-broker-load-balancing-concepts.md#avgshedder) in the load balancing concepts.
+
+During a [rolling upgrade of brokers](administration-rolling-upgrade.md), AvgShedder can direct shed bundles to lightly loaded replacement brokers once the leader has their load reports and shedding is enabled. Its planned destination applies to bundles selected for shedding. Ordinary assignments without such a plan use random selection among eligible candidates, so pausing shedding does not guarantee that released bundles go to the least-loaded broker.
 
 ### ThresholdShedder
 
@@ -234,7 +237,11 @@ To use the `UniformLoadShedder` strategy, configure brokers with this value.
 
 ### TransferShedder
 
-This strategy is the default of the **extensible** load manager and is only available there. It transfers bundles from the most loaded broker to the least loaded broker until the standard deviation of the broker loads is below `loadBalancerBrokerLoadTargetStd` (0.25), and it pre-assigns the destination broker of every bundle it unloads so that clients reconnect to the new owner without a lookup. After a transfer it waits `loadBalanceSheddingDelayInSeconds` (180) before the next unloading cycle, and it does not run while any registered broker has not yet published its load data.
+This strategy is the default of the **extensible** load manager and is only available there. It transfers bundles from more loaded to less loaded brokers, targeting a standard deviation below `loadBalancerBrokerLoadTargetStd` (0.25). It also checks for underloaded and overloaded brokers even when that target is met, subject to hit counts and other shedding limits. Destinations are pre-assigned, allowing clients that support broker redirection to reconnect without a lookup.
+
+By default, TransferShedder skips bundles in namespaces with isolation policies or anti-affinity groups. Set `loadBalancerSheddingBundlesWithPoliciesEnabled=true` to allow automatic shedding of those bundles within their placement constraints. Otherwise, restoring shedding after a rollout does not rebalance them automatically; see [placement and rebalancing considerations](administration-isolation-broker.md#placement-and-rebalancing-considerations).
+
+The cooldown skips shedding until load data for a recently unloaded source broker is timestamped at least `loadBalanceSheddingDelayInSeconds` (180) after its last scheduled unload. It is not a cooldown measured from broker startup. Shedding also skips a cycle if a registered broker has no load data. See [Rolling upgrade of brokers](administration-rolling-upgrade.md) for the implications during a rollout.
 
 ```conf
 loadManagerClassName=org.apache.pulsar.broker.loadbalance.extensions.ExtensibleLoadManagerImpl
@@ -263,7 +270,7 @@ To unload all topics for a namespace and trigger reassignments:
 pulsar-admin namespaces unload tenant/namespace
 ```
 
-To move one bundle to a broker of your choice, for example when [draining a broker before a restart](administration-rolling-restart.md#move-bundles-yourself):
+To move one bundle to a broker of your choice, for example when [draining a broker before a restart](administration-rolling-upgrade.md#move-bundles-yourself):
 
 ```shell
 pulsar-admin namespaces unload tenant/namespace --bundle 0x00000000_0x08000000 --destinationBroker broker-2.example.com:8080
@@ -276,6 +283,6 @@ When your application has multiple namespaces and you want one of them available
 ## Related topics
 
 - [Namespace bundles](administration-namespace-bundles.md): how many bundles a namespace gets, what they cost and how to size them.
-- [Rolling restarts](administration-rolling-restart.md): what happens to the bundles of a broker when it stops, and how to keep the load balancer from reacting to every restart.
+- [Rolling upgrade of brokers](administration-rolling-upgrade.md): what happens to the bundles of a broker when it stops, and how to keep the load balancer from reacting to every restart.
 - [Broker load balancing | Concepts](concepts-broker-load-balancing-concepts.md): assignment, splitting and unloading in detail, including every shedding strategy.
 - [Broker load balancing | Types](concepts-broker-load-balancing-types.md): modular versus extensible load manager.

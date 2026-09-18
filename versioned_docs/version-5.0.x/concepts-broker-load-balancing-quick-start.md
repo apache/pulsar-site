@@ -377,7 +377,7 @@ You can verify if a bundle has been unloaded using the metric [pulsar_lb_unload_
 
 - The automatic bundle unloading is **enabled by default**. To disable it, update [loadBalancerSheddingEnabled](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1259C14-L1259C14) to false in the broker.conf file.
 
-- The **default** bundle unloading strategy is TransferShedder (for the extensible broker load balancer) or ThresholdShedder (for the modular broker load balancer). You can change it to other [bundle unloading strategies](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) by updating [loadBalancerLoadSheddingStrategy](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1324C52-L1324C52) in the broker.conf file.
+- The **default** bundle unloading strategy is TransferShedder for the extensible broker load balancer. For the modular broker load balancer, it is AvgShedder from Pulsar 5.0.0; 5.0.0-M1/M2 and Pulsar 2.10 to 4.x default to ThresholdShedder. See [bundle unloading strategies](administration-load-balance.md#shed-load-automatically) for the configuration and placement requirements. You can change it to other [bundle unloading strategies](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) by updating [loadBalancerLoadSheddingStrategy](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1324C52-L1324C52) in the broker.conf file.
 
 - For bundle unloading conditions, you can set more configurations in the broker.conf file.
 :::
