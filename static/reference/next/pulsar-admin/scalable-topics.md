@@ -303,7 +303,7 @@ $ pulsar-admin scalable-topics get-metadata options
 
 ## stats
 
-Get aggregated stats for a scalable topic
+Get the stats of a scalable topic as a whole: the segment DAG with per-segment load, the subscriptions with their backlog across segments, and the producers
 
 **Command:**
 
@@ -403,12 +403,148 @@ $ pulsar-admin scalable-topics get-metadata options
 
 ## stats
 
-Get aggregated stats for a scalable topic
+Get the stats of a scalable topic as a whole: the segment DAG with per-segment load, the subscriptions with their backlog across segments, and the producers
 
 **Command:**
 
 ```shell
 $ pulsar-admin scalable-topics stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## segment-stats
+
+Get the stats of a single segment of a scalable topic: the regular topic stats of the topic backing the segment
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics segment-stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+# scalable-topics
+
+Operations on scalable topics
+
+
+```shell
+$ pulsar-admin scalable-topics subcommand
+```
+
+
+
+## list
+
+Get the list of scalable topics under a namespace, optionally filtered to those whose properties contain every given key=value pair
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics list options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## create
+
+Create a new scalable topic
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics create options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## migrate
+
+Migrate an existing regular (partitioned or non-partitioned) topic to a scalable topic. Fails if legacy v4 clients are still connected unless --force is set.
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics migrate options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## get-metadata
+
+Get scalable topic metadata
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics get-metadata options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## stats
+
+Get the stats of a scalable topic as a whole: the segment DAG with per-segment load, the subscriptions with their backlog across segments, and the producers
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## segment-stats
+
+Get the stats of a single segment of a scalable topic: the regular topic stats of the topic backing the segment
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics segment-stats options
 ```
 
 **Options:**
@@ -521,12 +657,30 @@ $ pulsar-admin scalable-topics get-metadata options
 
 ## stats
 
-Get aggregated stats for a scalable topic
+Get the stats of a scalable topic as a whole: the segment DAG with per-segment load, the subscriptions with their backlog across segments, and the producers
 
 **Command:**
 
 ```shell
 $ pulsar-admin scalable-topics stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## segment-stats
+
+Get the stats of a single segment of a scalable topic: the regular topic stats of the topic backing the segment
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics segment-stats options
 ```
 
 **Options:**
@@ -657,12 +811,30 @@ $ pulsar-admin scalable-topics get-metadata options
 
 ## stats
 
-Get aggregated stats for a scalable topic
+Get the stats of a scalable topic as a whole: the segment DAG with per-segment load, the subscriptions with their backlog across segments, and the producers
 
 **Command:**
 
 ```shell
 $ pulsar-admin scalable-topics stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## segment-stats
+
+Get the stats of a single segment of a scalable topic: the regular topic stats of the topic backing the segment
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics segment-stats options
 ```
 
 **Options:**
@@ -811,12 +983,30 @@ $ pulsar-admin scalable-topics get-metadata options
 
 ## stats
 
-Get aggregated stats for a scalable topic
+Get the stats of a scalable topic as a whole: the segment DAG with per-segment load, the subscriptions with their backlog across segments, and the producers
 
 **Command:**
 
 ```shell
 $ pulsar-admin scalable-topics stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## segment-stats
+
+Get the stats of a single segment of a scalable topic: the regular topic stats of the topic backing the segment
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics segment-stats options
 ```
 
 **Options:**
@@ -983,12 +1173,30 @@ $ pulsar-admin scalable-topics get-metadata options
 
 ## stats
 
-Get aggregated stats for a scalable topic
+Get the stats of a scalable topic as a whole: the segment DAG with per-segment load, the subscriptions with their backlog across segments, and the producers
 
 **Command:**
 
 ```shell
 $ pulsar-admin scalable-topics stats options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
+
+
+## segment-stats
+
+Get the stats of a single segment of a scalable topic: the regular topic stats of the topic backing the segment
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics segment-stats options
 ```
 
 **Options:**

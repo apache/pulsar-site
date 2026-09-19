@@ -627,30 +627,19 @@
                     "address": {
                         "type": "string"
                     },
-                    "appId": {
-                        "type": "string"
-                    },
                     "availablePermits": {
                         "format": "int32",
                         "type": "integer"
                     },
-                    "avgMessagesPerEntry": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "blockedConsumerOnUnackedMsgs": {
-                        "type": "boolean"
-                    },
-                    "bytesOutCounter": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "chunkedMessageRate": {
+                    "byteRateOut": {
                         "format": "double",
                         "type": "number"
                     },
                     "clientVersion": {
                         "type": "string"
+                    },
+                    "connected": {
+                        "type": "boolean"
                     },
                     "connectedSince": {
                         "type": "string"
@@ -658,91 +647,19 @@
                     "consumerName": {
                         "type": "string"
                     },
-                    "drainingHashes": {
-                        "items": {
-                            "$ref": "#/components/schemas/DrainingHash"
-                        },
-                        "type": "array"
-                    },
-                    "drainingHashesClearedTotal": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "drainingHashesCount": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "drainingHashesUnackedMessages": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "firstConsumedFlowTimestamp": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "firstMessagesSentTimestamp": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "keyHashRangeArrays": {
-                        "items": {
-                            "items": {
-                                "format": "int32",
-                                "type": "integer"
-                            },
-                            "type": "array"
-                        },
-                        "type": "array"
-                    },
-                    "keyHashRanges": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "lastAckedTimestamp": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "lastConsumedFlowTimestamp": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "lastConsumedTimestamp": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "messageAckRate": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "metadata": {
-                        "additionalProperties": {
-                            "type": "string"
-                        },
-                        "type": "object"
-                    },
-                    "msgOutCounter": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
                     "msgRateOut": {
                         "format": "double",
                         "type": "number"
                     },
-                    "msgRateRedeliver": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "msgThroughputOut": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "readPositionWhenJoining": {
-                        "type": "string"
+                    "segmentIds": {
+                        "items": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "type": "array"
                     },
                     "unackedMessages": {
-                        "format": "int32",
+                        "format": "int64",
                         "type": "integer"
                     }
                 },
@@ -1185,6 +1102,53 @@
                     },
                     "schemaCompatibilityStrategy": {
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "LayoutSegment": {
+                "properties": {
+                    "childIds": {
+                        "items": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "entryBuckets": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "ownerBroker": {
+                        "type": "string"
+                    },
+                    "parentIds": {
+                        "items": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "state": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "LayoutStats": {
+                "properties": {
+                    "epoch": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "segments": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/LayoutSegment"
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -3697,6 +3661,44 @@
                 },
                 "type": "object"
             },
+            "ProducerStats": {
+                "properties": {
+                    "accessMode": {
+                        "enum": [
+                            "Shared",
+                            "Exclusive",
+                            "ExclusiveWithFencing",
+                            "WaitForExclusive"
+                        ],
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "averageMsgSize": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "byteRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "clientVersion": {
+                        "type": "string"
+                    },
+                    "connectedSince": {
+                        "type": "string"
+                    },
+                    "msgRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "producerName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "PublishRate": {
                 "properties": {
                     "publishThrottlingRateInByte": {
@@ -4013,33 +4015,48 @@
             },
             "ScalableTopicStats": {
                 "properties": {
-                    "activeSegments": {
-                        "format": "int32",
-                        "type": "integer"
+                    "averageMsgSize": {
+                        "format": "double",
+                        "type": "number"
                     },
-                    "epoch": {
+                    "backlogSize": {
                         "format": "int64",
                         "type": "integer"
                     },
-                    "sealedSegments": {
-                        "format": "int32",
-                        "type": "integer"
+                    "byteRateIn": {
+                        "format": "double",
+                        "type": "number"
                     },
-                    "segments": {
-                        "additionalProperties": {
-                            "$ref": "#/components/schemas/SegmentStats"
+                    "byteRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "layout": {
+                        "$ref": "#/components/schemas/LayoutStats"
+                    },
+                    "msgRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "producers": {
+                        "items": {
+                            "$ref": "#/components/schemas/ProducerStats"
                         },
-                        "type": "object"
+                        "type": "array"
+                    },
+                    "storageSize": {
+                        "format": "int64",
+                        "type": "integer"
                     },
                     "subscriptions": {
                         "additionalProperties": {
                             "$ref": "#/components/schemas/SubscriptionStats"
                         },
                         "type": "object"
-                    },
-                    "totalSegments": {
-                        "format": "int32",
-                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -4121,13 +4138,94 @@
                 },
                 "type": "object"
             },
-            "SegmentStats": {
+            "SegmentSubscriptionStats": {
                 "properties": {
-                    "name": {
+                    "backlogSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "byteRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "consumerCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "msgBacklog": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "msgRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "unackedMessages": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SegmentTopicStats": {
+                "properties": {
+                    "averageMsgSize": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "backlogSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "byteRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "byteRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "offloadedStorageSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "oldestBacklogMessageAgeSeconds": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "ownerBroker": {
                         "type": "string"
                     },
-                    "state": {
+                    "producers": {
+                        "items": {
+                            "$ref": "#/components/schemas/ProducerStats"
+                        },
+                        "type": "array"
+                    },
+                    "storageSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "subscriptions": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/SubscriptionStats"
+                        },
+                        "type": "object"
+                    },
+                    "topicCreationTime": {
                         "type": "string"
+                    },
+                    "waitingPublishers": {
+                        "format": "int32",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -4198,8 +4296,51 @@
             },
             "SubscriptionStats": {
                 "properties": {
-                    "consumerCount": {
-                        "format": "int32",
+                    "backlogSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "byteRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "consumers": {
+                        "items": {
+                            "$ref": "#/components/schemas/ConsumerStats"
+                        },
+                        "type": "array"
+                    },
+                    "messageAckRate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgBacklog": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "msgRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgRateRedeliver": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "segments": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/SegmentSubscriptionStats"
+                        },
+                        "type": "object"
+                    },
+                    "type": {
+                        "enum": [
+                            "STREAM",
+                            "QUEUE"
+                        ],
+                        "type": "string"
+                    },
+                    "unackedMessages": {
+                        "format": "int64",
                         "type": "integer"
                     }
                 },
@@ -37992,6 +38133,90 @@
                 ]
             }
         },
+        "/admin/v2/scalable/{tenant}/{namespace}/{topic}/segments/{segmentId}/stats": {
+            "get": {
+                "operationId": "getSegmentStats",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Segment ID",
+                        "in": "path",
+                        "name": "segmentId",
+                        "required": true,
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SegmentTopicStats"
+                                }
+                            }
+                        },
+                        "description": "The stats of the segment's backing topic."
+                    },
+                    "307": {
+                        "description": "Current broker doesn't serve the segment"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission on the namespace"
+                    },
+                    "404": {
+                        "description": "Scalable topic, segment, or the segment's backing topic doesn't exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Get the stats of a single segment of a scalable topic: the stats of the topic backing the segment, trimmed to what matters for a segment, served by its owning broker.",
+                "tags": [
+                    "scalable topic"
+                ]
+            }
+        },
         "/admin/v2/scalable/{tenant}/{namespace}/{topic}/split/{segmentId}": {
             "post": {
                 "operationId": "splitSegment",
@@ -38095,7 +38320,10 @@
                                 }
                             }
                         },
-                        "description": "Get aggregated stats for a scalable topic."
+                        "description": "The stats of the scalable topic."
+                    },
+                    "307": {
+                        "description": "Current broker is not the controller leader for this topic"
                     },
                     "401": {
                         "description": "Don't have permission to administrate resources on this tenant"
@@ -38110,7 +38338,7 @@
                         "description": "Internal server error"
                     }
                 },
-                "summary": "Get aggregated stats for a scalable topic.",
+                "summary": "Get the stats of a scalable topic as a whole: the segment DAG with per-segment load, the subscriptions with their backlog across segments, and the producers.",
                 "tags": [
                     "scalable topic"
                 ]
