@@ -16,11 +16,30 @@
 # under the License.
 
 import os
+import re
 from pathlib import Path
 
 from command import run
 from constant import site_path
 from execute import pulsar_build
+
+
+def remove_cumulative_output(document: str, command: str) -> str:
+    """Keep the complete final snapshot emitted by affected Pulsar releases.
+
+    Their generator prints its growing buffer inside the subcommand loop.
+    Only discard earlier snapshots when each is a prefix of the final one;
+    leave other output, including output from fixed releases, unchanged.
+    """
+    headings = list(re.finditer(rf'^# {re.escape(command)}[ \t]*$', document, re.MULTILINE))
+    if len(headings) < 2 or headings[0].start() != 0:
+        return document
+    final = document[headings[-1].start():]
+    for start, end in zip(headings, headings[1:]):
+        snapshot = document[start.start():end.start()].rstrip()
+        if not final.startswith(snapshot):
+            return document
+    return final
 
 
 def execute(basedir: Path, version: str):
@@ -65,3 +84,7 @@ def execute(basedir: Path, version: str):
             run(str(admin.absolute()), 'documents', 'generate', command, stdout=f, env={
                 **os.environ,
             })
+        document = p.read_text()
+        cleaned = remove_cumulative_output(document, command)
+        if cleaned != document:
+            p.write_text(cleaned)
