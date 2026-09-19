@@ -2994,6 +2994,17 @@ More connections host-to-host lead to better throughput over high-latency links
 
 **Category**: Replication
 
+### replicationMaxReadProcessingStepsPerTurn
+Maximum read-processing steps per persistent replicator before yielding to the broker executor. A step initiates a read, processes a completed batch, or handles cancellation or rewind; it is not a message limit. Lower values improve fairness between tasks; higher values reduce scheduling overhead. Must be at least 1. Requires a broker restart.
+
+**Type**: `int`
+
+**Default**: `64`
+
+**Dynamic**: `false`
+
+**Category**: Replication
+
 ### replicationMetricsEnabled
 Enable replication metrics
 
@@ -6222,6 +6233,17 @@ Managed ledger prometheus stats latency rollover seconds
 **Type**: `int`
 
 **Default**: `60`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerReadEntriesCallbackInline
+Allow successful ordinary multi-entry managed-ledger read callbacks to complete on the current thread. Fully cached reads may complete before the read method returns. Set false to restore ledger-executor affinity, including bounded inline completion when already on that executor. False also restores the Exclusive/Failover cache-hit handoff used before PR #26619. The JVM-wide property pulsar.managedLedger.maxReadCompletionDepth limits nested inline callbacks in both modes when callbacks issue another read before returning (default 10, values below 1 use 1); set it at JVM startup. The depth accepts Integer.decode syntax, including hexadecimal and leading-zero octal. At the limit, enabled mode queues to the JVM common ForkJoinPool; disabled mode queues to the ledger executor. If common-pool parallelism is at most 1, both use the ledger executor. Common-pool parallelism normally uses available processors minus one (at least one); override it with -Djava.util.concurrent.ForkJoinPool.common.parallelism. A limit of 1 queues every subsequent completion in a nested cached-read chain. This is not a dynamic setting: the completion policy is captured when a managed ledger opens and does not change for already loaded topics. Failure callbacks, single-entry reads, and replay callbacks are unaffected.
+
+**Type**: `boolean`
+
+**Default**: `true`
 
 **Dynamic**: `false`
 
