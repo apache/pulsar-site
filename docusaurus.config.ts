@@ -481,6 +481,14 @@ module.exports = async function createConfigAsync() {
           name: 'custom-webpack-plugin',
           configureWebpack(config, isServer, utils) {
             return {
+              devServer: {
+                historyApiFallback: {
+                  // Only browser navigations should receive the Docusaurus app.
+                  // Docsify fetches Markdown with Accept: */* and relies on 404s
+                  // for missing files to find the parent directory's sidebar.
+                  htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
+                },
+              },
               module: {
                 rules: [
                   {
