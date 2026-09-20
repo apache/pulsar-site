@@ -23,9 +23,8 @@ $ pulsar-admin broker-stats monitoring-metrics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-i, --indent]` | Indent JSON output|false|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## mbeans
@@ -42,9 +41,8 @@ $ pulsar-admin broker-stats mbeans options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-i, --indent]` | Indent JSON output|false|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## topics
@@ -61,9 +59,8 @@ $ pulsar-admin broker-stats topics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-i, --indent]` | Indent JSON output|false|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## destinations
@@ -80,9 +77,8 @@ $ pulsar-admin broker-stats destinations options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-i, --indent]` | Indent JSON output|false|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## allocator-stats
@@ -99,8 +95,8 @@ $ pulsar-admin broker-stats allocator-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## load-report
@@ -117,6 +113,6 @@ $ pulsar-admin broker-stats load-report options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 

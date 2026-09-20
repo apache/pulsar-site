@@ -23,8 +23,8 @@ $ pulsar-admin resourcegroups list options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get
@@ -41,8 +41,8 @@ $ pulsar-admin resourcegroups get options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## create
@@ -59,12 +59,8 @@ $ pulsar-admin resourcegroups create options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[--msg-publish-rate, -mp]` | message-publish-rate (default -1 will be overwrite if not passed)|null|
-| `[--byte-publish-rate, -bp]` | byte-publish-rate (default -1 will be overwrite if not passed)|null|
-| `[--msg-dispatch-rate, -md]` | message-dispatch-rate (default -1 will be overwrite if not passed)|null|
-| `[--byte-dispatch-rate, -bd]` | byte-dispatch-rate (default -1 will be overwrite if not passed)|null|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## update
@@ -81,12 +77,8 @@ $ pulsar-admin resourcegroups update options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[--msg-publish-rate, -mp]` | message-publish-rate |null|
-| `[--byte-publish-rate, -bp]` | byte-publish-rate |null|
-| `[--msg-dispatch-rate, -md]` | message-dispatch-rate |null|
-| `[--byte-dispatch-rate, -bd]` | byte-dispatch-rate |null|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## delete
@@ -103,6 +95,6 @@ $ pulsar-admin resourcegroups delete options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 

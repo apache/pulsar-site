@@ -23,8 +23,8 @@ $ pulsar-admin functions-worker function-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## monitoring-metrics
@@ -41,8 +41,8 @@ $ pulsar-admin functions-worker monitoring-metrics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-cluster
@@ -59,8 +59,8 @@ $ pulsar-admin functions-worker get-cluster options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-cluster-leader
@@ -77,8 +77,8 @@ $ pulsar-admin functions-worker get-cluster-leader options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-function-assignments
@@ -95,8 +95,8 @@ $ pulsar-admin functions-worker get-function-assignments options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## rebalance
@@ -113,6 +113,6 @@ $ pulsar-admin functions-worker rebalance options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 

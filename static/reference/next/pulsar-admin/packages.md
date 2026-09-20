@@ -23,8 +23,8 @@ $ pulsar-admin packages get-metadata options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## update-metadata
@@ -41,11 +41,8 @@ $ pulsar-admin packages update-metadata options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-d, --description]` | descriptions of a package|null|
-| `[-c, --contact]` | contact info of a package|null|
-| `[--properties, -P]` | external information of a package|{}|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## upload
@@ -62,12 +59,8 @@ $ pulsar-admin packages upload options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[--description]` | descriptions of a package|null|
-| `[--contact]` | contact information of a package|null|
-| `[--properties, -P]` | external information of a package|{}|
-| `[--path]` | file path of the package|null|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## download
@@ -84,9 +77,8 @@ $ pulsar-admin packages download options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[--path]` | download destiny path of the package|null|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## list
@@ -103,9 +95,8 @@ $ pulsar-admin packages list options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[--type]` | type of the package|null|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## list-versions
@@ -122,8 +113,8 @@ $ pulsar-admin packages list-versions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## delete
@@ -140,6 +131,6 @@ $ pulsar-admin packages delete options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 

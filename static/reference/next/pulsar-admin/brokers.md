@@ -23,8 +23,8 @@ $ pulsar-admin brokers list options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## leader-broker
@@ -41,8 +41,8 @@ $ pulsar-admin brokers leader-broker options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## namespaces
@@ -59,9 +59,8 @@ $ pulsar-admin brokers namespaces options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-u, --url]` | broker-url|null|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## update-dynamic-config
@@ -78,8 +77,8 @@ $ pulsar-admin brokers update-dynamic-config options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-c, --config]` | service-configuration name|null|
-| `[-v, --value]` | service-configuration value|null|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## delete-dynamic-config
@@ -96,9 +95,8 @@ $ pulsar-admin brokers delete-dynamic-config options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-c, --config]` | service-configuration name|null|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## list-dynamic-config
@@ -115,8 +113,8 @@ $ pulsar-admin brokers list-dynamic-config options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-all-dynamic-config
@@ -133,8 +131,8 @@ $ pulsar-admin brokers get-all-dynamic-config options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-internal-config
@@ -151,8 +149,8 @@ $ pulsar-admin brokers get-internal-config options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## get-runtime-config
@@ -169,8 +167,8 @@ $ pulsar-admin brokers get-runtime-config options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## healthcheck
@@ -187,8 +185,8 @@ $ pulsar-admin brokers healthcheck options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## backlog-quota-check
@@ -205,8 +203,8 @@ $ pulsar-admin brokers backlog-quota-check options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## version
@@ -223,8 +221,8 @@ $ pulsar-admin brokers version options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
 
 ## shutdown
@@ -241,8 +239,6 @@ $ pulsar-admin brokers shutdown options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[--max-concurrent-unload-per-sec, -m]` | Max concurrent unload per second, if the value absent(value=0) means no concurrent limitation|0|
-| `[--forced-terminate-topic, -f]` | Force terminate all topics on Broker|false|
-| `[-h, --help]` | Show this help message and exit.|false|
-| `[-v, --version]` | Print version information and exit.|false|
+| `[-h, --help]` | Show this help message and exit.|null||
+| `[-v, --version]` | Print version information and exit.|null||
 
