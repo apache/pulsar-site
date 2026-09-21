@@ -23,8 +23,8 @@ $ pulsar-admin namespaces list options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## topics
@@ -41,8 +41,10 @@ $ pulsar-admin namespaces topics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --mode]` | Allowed topic domain mode (persistent, non_persistent, all).|null|
+| `[-ist, --include-system-topic]` | Include system topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## bundles
@@ -59,8 +61,8 @@ $ pulsar-admin namespaces bundles options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## destinations
@@ -77,8 +79,8 @@ $ pulsar-admin namespaces destinations options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## policies
@@ -95,8 +97,8 @@ $ pulsar-admin namespaces policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## create
@@ -113,8 +115,10 @@ $ pulsar-admin namespaces create options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--clusters, -c]` | List of clusters this namespace will be assigned|null|
+| `[--bundles, -b]` | number of bundles to activate|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## delete
@@ -131,8 +135,9 @@ $ pulsar-admin namespaces delete options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-f, --force]` | Delete namespace forcefully by force deleting all topics under it|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## permissions
@@ -149,8 +154,8 @@ $ pulsar-admin namespaces permissions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## grant-permission
@@ -167,8 +172,10 @@ $ pulsar-admin namespaces grant-permission options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--role]` | Client role to which grant permissions|null|
+| `[--actions]` | Actions to be granted (produce,consume,sources,sinks,functions,packages)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## revoke-permission
@@ -185,8 +192,9 @@ $ pulsar-admin namespaces revoke-permission options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--role]` | Client role to which revoke permissions|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## subscription-permission
@@ -203,8 +211,8 @@ $ pulsar-admin namespaces subscription-permission options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## grant-subscription-permission
@@ -221,8 +229,10 @@ $ pulsar-admin namespaces grant-subscription-permission options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription name for which permission will be granted to roles|null|
+| `[-rs, --roles]` | Client roles to which grant permissions (comma separated roles)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## revoke-subscription-permission
@@ -239,8 +249,10 @@ $ pulsar-admin namespaces revoke-subscription-permission options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription name for which permission will be revoked to roles|null|
+| `[-r, --role]` | Client role to which revoke permissions|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-clusters
@@ -257,8 +269,10 @@ $ pulsar-admin namespaces set-clusters options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--clusters, -c]` | Replication Cluster Ids list (comma separated values)|null|
+| `[--skipCompareTopicPartitions]` | Whether skip to check topic partitions compatibility before enabling replication)|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-clusters
@@ -275,8 +289,8 @@ $ pulsar-admin namespaces get-clusters options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-subscription-types-enabled
@@ -293,8 +307,9 @@ $ pulsar-admin namespaces set-subscription-types-enabled options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--types, -t]` | Subscription types enabled list (comma separated values). Possible values: (Exclusive, Shared, Failover, Key_Shared).|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-subscription-types-enabled
@@ -311,8 +326,8 @@ $ pulsar-admin namespaces get-subscription-types-enabled options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-subscription-types-enabled
@@ -329,8 +344,8 @@ $ pulsar-admin namespaces remove-subscription-types-enabled options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-allowed-topic-property-keys-for-metrics
@@ -347,8 +362,9 @@ $ pulsar-admin namespaces set-allowed-topic-property-keys-for-metrics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--keys, -k]` | Allowed topic property keys list (comma separated values).|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-allowed-topic-property-keys-for-metrics
@@ -365,8 +381,8 @@ $ pulsar-admin namespaces get-allowed-topic-property-keys-for-metrics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-allowed-topic-property-keys-for-metrics
@@ -383,8 +399,8 @@ $ pulsar-admin namespaces remove-allowed-topic-property-keys-for-metrics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-allowed-clusters
@@ -401,8 +417,9 @@ $ pulsar-admin namespaces set-allowed-clusters options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--clusters, -c]` | Replication Cluster Ids list (comma separated values)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-allowed-clusters
@@ -419,8 +436,8 @@ $ pulsar-admin namespaces get-allowed-clusters options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-backlog-quotas
@@ -437,8 +454,8 @@ $ pulsar-admin namespaces get-backlog-quotas options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-backlog-quota
@@ -455,8 +472,12 @@ $ pulsar-admin namespaces set-backlog-quota options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-l, --limit]` | Size limit (eg: 10M, 16G)|null|
+| `[-lt, --limitTime]` | Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.|null|
+| `[-p, --policy]` | Retention policy to enforce when the limit is reached. Valid options are: [producer_request_hold, producer_exception, consumer_backlog_eviction]|null|
+| `[-t, --type]` | Backlog quota type to set. Valid options are: destination_storage (default) and message_age. destination_storage limits backlog by size. message_age limits backlog by time, that is, message timestamp (broker or publish timestamp). You can set size or time to control the backlog, or combine them together to control the backlog. |destination_storage|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-backlog-quota
@@ -473,8 +494,9 @@ $ pulsar-admin namespaces remove-backlog-quota options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-t, --type]` | Backlog quota type to remove. Valid options are: destination_storage, message_age|destination_storage|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-persistence
@@ -491,8 +513,8 @@ $ pulsar-admin namespaces get-persistence options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-persistence
@@ -509,8 +531,13 @@ $ pulsar-admin namespaces set-persistence options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-e, --bookkeeper-ensemble]` | Number of bookies to use for a topic|2|
+| `[-w, --bookkeeper-write-quorum]` | How many writes to make of each entry|2|
+| `[-a, --bookkeeper-ack-quorum]` | Number of acks (guaranteed copies) to wait for each entry|2|
+| `[-r, --ml-mark-delete-max-rate]` | Throttling rate of mark-delete operation (0 means no throttle, -1 means unset which will use the default configuration from broker)|-1.0|
+| `[-c, --ml-storage-class]` | Managed ledger storage class name|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-persistence
@@ -527,8 +554,8 @@ $ pulsar-admin namespaces remove-persistence options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-message-ttl
@@ -545,8 +572,8 @@ $ pulsar-admin namespaces get-message-ttl options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-message-ttl
@@ -563,8 +590,9 @@ $ pulsar-admin namespaces set-message-ttl options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--messageTTL, -ttl]` | Message TTL in seconds (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w). When the value is set to `0`, TTL is disabled.|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-message-ttl
@@ -581,8 +609,8 @@ $ pulsar-admin namespaces remove-message-ttl options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-subscriptions-per-topic
@@ -599,8 +627,8 @@ $ pulsar-admin namespaces get-max-subscriptions-per-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-subscriptions-per-topic
@@ -617,8 +645,9 @@ $ pulsar-admin namespaces set-max-subscriptions-per-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-subscriptions-per-topic, -m]` | Max subscriptions per topic|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-subscriptions-per-topic
@@ -635,8 +664,8 @@ $ pulsar-admin namespaces remove-max-subscriptions-per-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-subscription-expiration-time
@@ -653,8 +682,8 @@ $ pulsar-admin namespaces get-subscription-expiration-time options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-subscription-expiration-time
@@ -671,8 +700,9 @@ $ pulsar-admin namespaces set-subscription-expiration-time options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-t, --time]` | Subscription expiration time in minutes|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-subscription-expiration-time
@@ -689,8 +719,8 @@ $ pulsar-admin namespaces remove-subscription-expiration-time options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-anti-affinity-group
@@ -707,8 +737,8 @@ $ pulsar-admin namespaces get-anti-affinity-group options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-anti-affinity-group
@@ -725,8 +755,9 @@ $ pulsar-admin namespaces set-anti-affinity-group options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--group, -g]` | Anti-affinity group name|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-anti-affinity-namespaces
@@ -743,8 +774,11 @@ $ pulsar-admin namespaces get-anti-affinity-namespaces options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--tenant, -p]` | tenant is only used for authorization. Client has to be admin of any of the tenant to access this api|null|
+| `[--cluster, -c]` | Cluster name|null|
+| `[--group, -g]` | Anti-affinity group name|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## delete-anti-affinity-group
@@ -761,8 +795,8 @@ $ pulsar-admin namespaces delete-anti-affinity-group options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-deduplication
@@ -779,8 +813,10 @@ $ pulsar-admin namespaces set-deduplication options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable, -e]` | Enable deduplication|false|
+| `[--disable, -d]` | Disable deduplication|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-deduplication
@@ -797,8 +833,8 @@ $ pulsar-admin namespaces get-deduplication options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-deduplication
@@ -815,8 +851,8 @@ $ pulsar-admin namespaces remove-deduplication options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-auto-topic-creation
@@ -833,8 +869,12 @@ $ pulsar-admin namespaces set-auto-topic-creation options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable, -e]` | Enable allowAutoTopicCreation on namespace|false|
+| `[--disable, -d]` | Disable allowAutoTopicCreation on namespace|false|
+| `[--type, -t]` | Type of topic to be auto-created. Possible values: (partitioned, non-partitioned). Default value: non-partitioned|non-partitioned|
+| `[--num-partitions, -n]` | Default number of partitions of topic to be auto-created, applicable to partitioned topics only|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-auto-topic-creation
@@ -851,8 +891,8 @@ $ pulsar-admin namespaces get-auto-topic-creation options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-auto-topic-creation
@@ -869,8 +909,8 @@ $ pulsar-admin namespaces remove-auto-topic-creation options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-auto-subscription-creation
@@ -887,8 +927,9 @@ $ pulsar-admin namespaces set-auto-subscription-creation options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable, -e]` | Enable allowAutoSubscriptionCreation on namespace|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-auto-subscription-creation
@@ -905,8 +946,8 @@ $ pulsar-admin namespaces get-auto-subscription-creation options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-auto-subscription-creation
@@ -923,8 +964,8 @@ $ pulsar-admin namespaces remove-auto-subscription-creation options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-retention
@@ -941,8 +982,8 @@ $ pulsar-admin namespaces get-retention options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-retention
@@ -959,8 +1000,10 @@ $ pulsar-admin namespaces set-retention options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--time, -t]` | Retention time with optional time unit suffix. For example, 100m, 3h, 2d, 5w. If the time unit is not specified, the default unit is seconds. For example, -t 120 sets retention to 2 minutes. 0 means no retention and -1 means infinite time retention.|null|
+| `[--size, -s]` | Retention size limit with optional size unit suffix. For example, 4096, 10M, 16G, 3T.  The size unit suffix character can be k/K, m/M, g/G, or t/T.  If the size unit suffix is not specified, the default unit is bytes. 0 or less than 1MB means no retention and -1 means infinite size retention|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-retention
@@ -977,8 +1020,8 @@ $ pulsar-admin namespaces remove-retention options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-bookie-affinity-group
@@ -995,8 +1038,10 @@ $ pulsar-admin namespaces set-bookie-affinity-group options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--primary-group, -pg]` | Bookie-affinity primary-groups (comma separated) name where namespace messages should be written|null|
+| `[--secondary-group, -sg]` | Bookie-affinity secondary-group (comma separated) name where namespace messages should be written. If you want to verify whether there are enough bookies in groups, use `--secondary-group` flag. Messages in this namespace are stored in secondary groups. If a group does not contain enough bookies, a topic cannot be created.|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-bookie-affinity-group
@@ -1013,8 +1058,8 @@ $ pulsar-admin namespaces get-bookie-affinity-group options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## delete-bookie-affinity-group
@@ -1031,8 +1076,8 @@ $ pulsar-admin namespaces delete-bookie-affinity-group options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## unload
@@ -1049,8 +1094,10 @@ $ pulsar-admin namespaces unload options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--bundle, -b]` | {start-boundary}_{end-boundary}|null|
+| `[--destinationBroker, -d]` | Target brokerWebServiceAddress to which the bundle has to be allocated to. --destinationBroker cannot be set when --bundle is not specified.|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## split-bundle
@@ -1067,8 +1114,13 @@ $ pulsar-admin namespaces split-bundle options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--bundle, -b]` | {start-boundary}_{end-boundary} (mutually exclusive with --bundle-type)|null|
+| `[--bundle-type, -bt]` | bundle type (mutually exclusive with --bundle)|null|
+| `[--unload, -u]` | Unload newly split bundles after splitting old bundle|false|
+| `[--split-algorithm-name, -san]` | Algorithm name for split namespace bundle. Valid options are: [range_equally_divide, topic_count_equally_divide, specified_positions_divide, flow_or_qps_equally_divide]. Use broker side config if absent|null|
+| `[--split-boundaries, -sb]` | Specified split boundary for bundle split, will split one bundle to multi bundles only works with specified_positions_divide algorithm|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-topic-positions
@@ -1085,8 +1137,10 @@ $ pulsar-admin namespaces get-topic-positions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--bundle, -b]` | {start-boundary}_{end-boundary} format namespace bundle|null|
+| `[--topic-list, -tl]` | The list of topics(both non-partitioned topic and partitioned topic) to get positions in this bundle, if none topic provided, will get the positions of all topics in this bundle|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-dispatch-rate
@@ -1103,8 +1157,12 @@ $ pulsar-admin namespaces set-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--msg-dispatch-rate, -md]` | message-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--byte-dispatch-rate, -bd]` | byte-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--dispatch-rate-period, -dt]` | dispatch-rate-period in second type (default 1 second will be overwrite if not passed)|1|
+| `[--relative-to-publish-rate, -rp]` | dispatch rate relative to publish-rate (if publish-relative flag is enabled then broker will apply throttling value to (publish-rate + dispatch rate))|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-dispatch-rate
@@ -1121,8 +1179,8 @@ $ pulsar-admin namespaces remove-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-dispatch-rate
@@ -1139,8 +1197,8 @@ $ pulsar-admin namespaces get-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-subscribe-rate
@@ -1157,8 +1215,10 @@ $ pulsar-admin namespaces set-subscribe-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--subscribe-rate, -sr]` | subscribe-rate (default -1 will be overwrite if not passed)|-1|
+| `[--subscribe-rate-period, -st]` | subscribe-rate-period in second type (default 30 second will be overwrite if not passed)|30|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-subscribe-rate
@@ -1175,8 +1235,8 @@ $ pulsar-admin namespaces get-subscribe-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-subscribe-rate
@@ -1193,8 +1253,8 @@ $ pulsar-admin namespaces remove-subscribe-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-subscription-dispatch-rate
@@ -1211,8 +1271,12 @@ $ pulsar-admin namespaces set-subscription-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--msg-dispatch-rate, -md]` | message-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--byte-dispatch-rate, -bd]` | byte-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--dispatch-rate-period, -dt]` | dispatch-rate-period in second type (default 1 second will be overwrite if not passed)|1|
+| `[--relative-to-publish-rate, -rp]` | dispatch rate relative to publish-rate (if publish-relative flag is enabled then broker will apply throttling value to (publish-rate + dispatch rate))|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-subscription-dispatch-rate
@@ -1229,8 +1293,8 @@ $ pulsar-admin namespaces get-subscription-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-subscription-dispatch-rate
@@ -1247,8 +1311,8 @@ $ pulsar-admin namespaces remove-subscription-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-publish-rate
@@ -1265,8 +1329,10 @@ $ pulsar-admin namespaces set-publish-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--msg-publish-rate, -m]` | message-publish-rate (default -1 will be overwrite if not passed)|-1|
+| `[--byte-publish-rate, -b]` | byte-publish-rate (default -1 will be overwrite if not passed)|-1|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-publish-rate
@@ -1283,8 +1349,8 @@ $ pulsar-admin namespaces get-publish-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-publish-rate
@@ -1301,8 +1367,8 @@ $ pulsar-admin namespaces remove-publish-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-replicator-dispatch-rate
@@ -1319,8 +1385,11 @@ $ pulsar-admin namespaces set-replicator-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--msg-dispatch-rate, -md]` | message-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--byte-dispatch-rate, -bd]` | byte-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--dispatch-rate-period, -dt]` | dispatch-rate-period in second type (default 1 second will be overwrite if not passed)|1|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-replicator-dispatch-rate
@@ -1337,8 +1406,8 @@ $ pulsar-admin namespaces get-replicator-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-replicator-dispatch-rate
@@ -1355,8 +1424,8 @@ $ pulsar-admin namespaces remove-replicator-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## clear-backlog
@@ -1373,8 +1442,11 @@ $ pulsar-admin namespaces clear-backlog options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--sub, -s]` | subscription name|null|
+| `[--bundle, -b]` | {start-boundary}_{end-boundary}|null|
+| `[--force, -force]` | Whether to force clear backlog without prompt|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## unsubscribe
@@ -1391,8 +1463,10 @@ $ pulsar-admin namespaces unsubscribe options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--sub, -s]` | subscription name|null|
+| `[--bundle, -b]` | {start-boundary}_{end-boundary}|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-encryption-required
@@ -1409,8 +1483,10 @@ $ pulsar-admin namespaces set-encryption-required options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable, -e]` | Enable message encryption required|false|
+| `[--disable, -d]` | Disable message encryption required|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-encryption-required
@@ -1427,8 +1503,8 @@ $ pulsar-admin namespaces get-encryption-required options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-subscription-auth-mode
@@ -1445,8 +1521,9 @@ $ pulsar-admin namespaces set-subscription-auth-mode options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --subscription-auth-mode]` | Subscription authorization mode for Pulsar policies. Valid options are: [None, Prefix]|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-subscription-auth-mode
@@ -1463,8 +1540,8 @@ $ pulsar-admin namespaces get-subscription-auth-mode options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-delayed-delivery
@@ -1481,8 +1558,12 @@ $ pulsar-admin namespaces set-delayed-delivery options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable, -e]` | Enable delayed delivery messages|false|
+| `[--disable, -d]` | Disable delayed delivery messages|false|
+| `[--time, -t]` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1000|
+| `[--maxDelay, -md]` | The max allowed delay for delayed delivery. (eg: 1s, 10s, 1m, 5h, 3d)|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-delayed-delivery
@@ -1499,8 +1580,8 @@ $ pulsar-admin namespaces get-delayed-delivery options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-delayed-delivery
@@ -1517,8 +1598,8 @@ $ pulsar-admin namespaces remove-delayed-delivery options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-inactive-topic-policies
@@ -1535,8 +1616,8 @@ $ pulsar-admin namespaces get-inactive-topic-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-inactive-topic-policies
@@ -1553,8 +1634,12 @@ $ pulsar-admin namespaces set-inactive-topic-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable-delete-while-inactive, -e]` | Enable delete while inactive|false|
+| `[--disable-delete-while-inactive, -d]` | Disable delete while inactive|false|
+| `[--max-inactive-duration, -t]` | Max duration of topic inactivity in seconds, topics that are inactive for longer than this value will be deleted (eg: 1s, 10s, 1m, 5h, 3d)|null|
+| `[--delete-mode, -m]` | Mode of delete inactive topic, Valid options are: [delete_when_no_subscriptions, delete_when_subscriptions_caught_up]|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-inactive-topic-policies
@@ -1571,8 +1656,8 @@ $ pulsar-admin namespaces remove-inactive-topic-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-producers-per-topic
@@ -1589,8 +1674,8 @@ $ pulsar-admin namespaces get-max-producers-per-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-producers-per-topic
@@ -1607,8 +1692,9 @@ $ pulsar-admin namespaces set-max-producers-per-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-producers-per-topic, -p]` | maxProducersPerTopic for a namespace|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-producers-per-topic
@@ -1625,8 +1711,8 @@ $ pulsar-admin namespaces remove-max-producers-per-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-consumers-per-topic
@@ -1643,8 +1729,8 @@ $ pulsar-admin namespaces get-max-consumers-per-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-consumers-per-topic
@@ -1661,8 +1747,9 @@ $ pulsar-admin namespaces set-max-consumers-per-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-consumers-per-topic, -c]` | maxConsumersPerTopic for a namespace|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-consumers-per-topic
@@ -1679,8 +1766,8 @@ $ pulsar-admin namespaces remove-max-consumers-per-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-consumers-per-subscription
@@ -1697,8 +1784,8 @@ $ pulsar-admin namespaces get-max-consumers-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-consumers-per-subscription
@@ -1715,8 +1802,9 @@ $ pulsar-admin namespaces set-max-consumers-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-consumers-per-subscription, -c]` | maxConsumersPerSubscription for a namespace|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-consumers-per-subscription
@@ -1733,8 +1821,8 @@ $ pulsar-admin namespaces remove-max-consumers-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-unacked-messages-per-subscription
@@ -1751,8 +1839,8 @@ $ pulsar-admin namespaces get-max-unacked-messages-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-unacked-messages-per-subscription
@@ -1769,8 +1857,9 @@ $ pulsar-admin namespaces set-max-unacked-messages-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-unacked-messages-per-subscription, -c]` | maxUnackedMessagesPerSubscription for a namespace|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-unacked-messages-per-subscription
@@ -1787,8 +1876,8 @@ $ pulsar-admin namespaces remove-max-unacked-messages-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-unacked-messages-per-consumer
@@ -1805,8 +1894,8 @@ $ pulsar-admin namespaces get-max-unacked-messages-per-consumer options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-unacked-messages-per-consumer
@@ -1823,8 +1912,9 @@ $ pulsar-admin namespaces set-max-unacked-messages-per-consumer options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-unacked-messages-per-topic, -c]` | maxUnackedMessagesPerConsumer for a namespace|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-unacked-messages-per-consumer
@@ -1841,8 +1931,8 @@ $ pulsar-admin namespaces remove-max-unacked-messages-per-consumer options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-compaction-threshold
@@ -1859,8 +1949,8 @@ $ pulsar-admin namespaces get-compaction-threshold options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-compaction-threshold
@@ -1877,8 +1967,9 @@ $ pulsar-admin namespaces set-compaction-threshold options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--threshold, -t]` | Maximum number of bytes in a topic backlog before compaction is triggered (eg: 10M, 16G, 3T). 0 disables automatic compaction|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-compaction-threshold
@@ -1895,8 +1986,8 @@ $ pulsar-admin namespaces remove-compaction-threshold options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-offload-threshold
@@ -1913,8 +2004,8 @@ $ pulsar-admin namespaces get-offload-threshold options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-offload-threshold
@@ -1931,8 +2022,10 @@ $ pulsar-admin namespaces set-offload-threshold options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--size, -s]` | Maximum number of bytes stored in the pulsar cluster for a topic before data will start being automatically offloaded to longterm storage (eg: 10M, 16G, 3T, 100). -1 falls back to the cluster's namespace default. Negative values disable automatic offload. 0 triggers offloading as soon as possible.|-1|
+| `[--time, -t]` | Maximum number of seconds stored on the pulsar cluster for a topic before the broker will start offloading to longterm storage (eg: 10m, 5h, 3d, 2w).|-1|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-offload-deletion-lag
@@ -1949,8 +2042,8 @@ $ pulsar-admin namespaces get-offload-deletion-lag options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-offload-deletion-lag
@@ -1967,8 +2060,9 @@ $ pulsar-admin namespaces set-offload-deletion-lag options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--lag, -l]` | Duration to wait after offloading a ledger segment, before deleting the copy of that segment from cluster local storage. (eg: 10m, 5h, 3d, 2w).|-1|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## clear-offload-deletion-lag
@@ -1985,8 +2079,8 @@ $ pulsar-admin namespaces clear-offload-deletion-lag options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-schema-autoupdate-strategy
@@ -2003,8 +2097,8 @@ $ pulsar-admin namespaces get-schema-autoupdate-strategy options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-schema-autoupdate-strategy
@@ -2021,8 +2115,10 @@ $ pulsar-admin namespaces set-schema-autoupdate-strategy options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--compatibility, -c]` | Compatibility level required for new schemas created via a Producer. Possible values (Full, Backward, Forward).|null|
+| `[--disabled, -d]` | Disable automatic schema updates|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-schema-compatibility-strategy
@@ -2039,8 +2135,8 @@ $ pulsar-admin namespaces get-schema-compatibility-strategy options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-schema-compatibility-strategy
@@ -2057,8 +2153,9 @@ $ pulsar-admin namespaces set-schema-compatibility-strategy options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--compatibility, -c]` | Compatibility level required for new schemas created via a Producer. Possible values (FULL, BACKWARD, FORWARD, UNDEFINED, BACKWARD_TRANSITIVE, FORWARD_TRANSITIVE, FULL_TRANSITIVE, ALWAYS_INCOMPATIBLE,ALWAYS_COMPATIBLE).|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-is-allow-auto-update-schema
@@ -2075,8 +2172,8 @@ $ pulsar-admin namespaces get-is-allow-auto-update-schema options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-is-allow-auto-update-schema
@@ -2093,8 +2190,11 @@ $ pulsar-admin namespaces set-is-allow-auto-update-schema options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable, -e]` | Enable schema validation enforced|false|
+| `[--disable, -d]` | Disable schema validation enforced|false|
+| `[--enable-for-replicator]` | By default, brokers always allow replicator to register new compatible schemas even when auto updates are disabled, if you want to disable replicators to register compatible schemas, please set it to false|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-schema-validation-enforce
@@ -2111,8 +2211,9 @@ $ pulsar-admin namespaces get-schema-validation-enforce options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the namespace|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-schema-validation-enforce
@@ -2129,8 +2230,10 @@ $ pulsar-admin namespaces set-schema-validation-enforce options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable, -e]` | Enable schema validation enforced|false|
+| `[--disable, -d]` | Disable schema validation enforced|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-offload-policies
@@ -2147,8 +2250,22 @@ $ pulsar-admin namespaces set-offload-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--driver, -d]` | Driver to use to offload old data to long term storage, (Possible values: S3, aws-s3, google-cloud-storage, filesystem, azureblob)|null|
+| `[--region, -r]` | The long term storage region, default is s3ManagedLedgerOffloadRegion or gcsManagedLedgerOffloadRegion in broker.conf|null|
+| `[--bucket, -b]` | Bucket to place offloaded ledger into|null|
+| `[--endpoint, -e]` | Alternative endpoint to connect to, s3 default is s3ManagedLedgerOffloadServiceEndpoint in broker.conf|null|
+| `[--aws-id, -i]` | AWS Credential Id to use when using driver S3 or aws-s3|null|
+| `[--aws-secret, -s]` | AWS Credential Secret to use when using driver S3 or aws-s3|null|
+| `[--s3-role, -ro]` | S3 Role used for STSAssumeRoleSessionCredentialsProvider|null|
+| `[--s3-role-session-name, -rsn]` | S3 role session name used for STSAssumeRoleSessionCredentialsProvider|null|
+| `[--maxBlockSize, -mbs]` | Max block size (eg: 32M, 64M), default is 64MBs3 and google-cloud-storage requires this parameter|67108864|
+| `[--readBufferSize, -rbs]` | Read buffer size (eg: 1M, 5M), default is 1MB|1048576|
+| `[--offloadAfterElapsed, -oae]` | Delay time in Millis for deleting the bookkeeper ledger after offload (or seconds,minutes,hours,days,weeks eg: 10s, 100m, 3h, 2d, 5w).|null|
+| `[--offloadAfterThreshold, -oat]` | Offload after threshold size (eg: 1M, 5M)|null|
+| `[--offloadAfterThresholdInSeconds, -oats]` | Offload after threshold seconds (or minutes,hours,days,weeks eg: 100m, 3h, 2d, 5w).|null|
+| `[--offloadedReadPriority, -orp]` | Read priority for offloaded messages. By default, once messages are offloaded to long-term storage, brokers read messages from long-term storage, but messages can still exist in BookKeeper for a period depends on your configuration. For messages that exist in both long-term storage and BookKeeper, you can set where to read messages from with the option `tiered-storage-first` or `bookkeeper-first`.|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-offload-policies
@@ -2165,8 +2282,8 @@ $ pulsar-admin namespaces remove-offload-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-offload-policies
@@ -2183,8 +2300,8 @@ $ pulsar-admin namespaces get-offload-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-deduplication-snapshot-interval
@@ -2201,8 +2318,9 @@ $ pulsar-admin namespaces set-deduplication-snapshot-interval options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--interval, -i]` | deduplicationSnapshotInterval for a namespace|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-deduplication-snapshot-interval
@@ -2219,8 +2337,8 @@ $ pulsar-admin namespaces get-deduplication-snapshot-interval options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-deduplication-snapshot-interval
@@ -2237,8 +2355,8 @@ $ pulsar-admin namespaces remove-deduplication-snapshot-interval options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-topics-per-namespace
@@ -2255,8 +2373,9 @@ $ pulsar-admin namespaces set-max-topics-per-namespace options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-topics-per-namespace, -t]` | max topics per namespace|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-topics-per-namespace
@@ -2273,8 +2392,8 @@ $ pulsar-admin namespaces get-max-topics-per-namespace options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-topics-per-namespace
@@ -2291,8 +2410,8 @@ $ pulsar-admin namespaces remove-max-topics-per-namespace options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-property
@@ -2309,8 +2428,8 @@ $ pulsar-admin namespaces set-property options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--key, -k]` | Key of the property|null|
+| `[--value, -v]` | Value of the property|null|
 
 
 ## get-property
@@ -2327,8 +2446,9 @@ $ pulsar-admin namespaces get-property options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--key, -k]` | Key of the property|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-property
@@ -2345,8 +2465,9 @@ $ pulsar-admin namespaces remove-property options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--key, -k]` | Key of the property|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-properties
@@ -2363,8 +2484,9 @@ $ pulsar-admin namespaces set-properties options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--properties, -p]` | key value pair properties(a=a,b=b,c=c)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-properties
@@ -2381,8 +2503,8 @@ $ pulsar-admin namespaces get-properties options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## clear-properties
@@ -2399,8 +2521,8 @@ $ pulsar-admin namespaces clear-properties options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-resource-group
@@ -2417,8 +2539,8 @@ $ pulsar-admin namespaces get-resource-group options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-resource-group
@@ -2435,8 +2557,9 @@ $ pulsar-admin namespaces set-resource-group options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--resource-group-name, -rgn]` | ResourceGroup name|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-resource-group
@@ -2453,8 +2576,8 @@ $ pulsar-admin namespaces remove-resource-group options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-entry-filters
@@ -2471,8 +2594,8 @@ $ pulsar-admin namespaces get-entry-filters options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-entry-filters
@@ -2489,8 +2612,9 @@ $ pulsar-admin namespaces set-entry-filters options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--entry-filters-name, -efn]` | The class name for the entry filter.||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-entry-filters
@@ -2507,8 +2631,8 @@ $ pulsar-admin namespaces remove-entry-filters options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## update-migration-state
@@ -2525,8 +2649,9 @@ $ pulsar-admin namespaces update-migration-state options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--migrated]` | Is namespace migrated|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-dispatcher-pause-on-ack-state-persistent
@@ -2543,8 +2668,8 @@ $ pulsar-admin namespaces set-dispatcher-pause-on-ack-state-persistent options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-dispatcher-pause-on-ack-state-persistent
@@ -2561,8 +2686,8 @@ $ pulsar-admin namespaces get-dispatcher-pause-on-ack-state-persistent options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-dispatcher-pause-on-ack-state-persistent
@@ -2579,6 +2704,6 @@ $ pulsar-admin namespaces remove-dispatcher-pause-on-ack-state-persistent option
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 

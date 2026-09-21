@@ -23,8 +23,10 @@ $ pulsar-admin transactions coordinator-internal-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-c, --coordinator-id]` | The coordinator id|0|
+| `[-m, --metadata]` | Flag to include ledger metadata|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## pending-ack-internal-stats
@@ -41,8 +43,11 @@ $ pulsar-admin transactions pending-ack-internal-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-t, --topic]` | Topic name|null|
+| `[-s, --subscription-name]` | Subscription name|null|
+| `[-m, --metadata]` | Flag to include ledger metadata|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## buffer-snapshot-internal-stats
@@ -59,8 +64,10 @@ $ pulsar-admin transactions buffer-snapshot-internal-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-t, --topic]` | Topic name|null|
+| `[-m, --metadata]` | Flag to include ledger metadata|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## coordinator-stats
@@ -77,8 +84,9 @@ $ pulsar-admin transactions coordinator-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-c, --coordinator-id]` | The coordinator id|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## transaction-buffer-stats
@@ -95,8 +103,11 @@ $ pulsar-admin transactions transaction-buffer-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-t, --topic]` | The topic|null|
+| `[-l, --low-water-mark]` | Whether to get information about lowWaterMarks stored in transaction buffer.|false|
+| `[-s, --segment-stats]` | Whether to get segment statistics.|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## pending-ack-stats
@@ -113,8 +124,11 @@ $ pulsar-admin transactions pending-ack-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-t, --topic]` | The topic name|null|
+| `[-s, --sub-name]` | The subscription name|null|
+| `[-l, --low-water-mark]` | Whether to get information about lowWaterMarks stored in transaction pending ack.|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## transaction-in-buffer-stats
@@ -131,8 +145,11 @@ $ pulsar-admin transactions transaction-in-buffer-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --most-sig-bits]` | The most sig bits|0|
+| `[-l, --least-sig-bits]` | The least sig bits|0|
+| `[-t, --topic]` | The topic name|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## transaction-in-pending-ack-stats
@@ -149,8 +166,12 @@ $ pulsar-admin transactions transaction-in-pending-ack-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --most-sig-bits]` | The most sig bits|0|
+| `[-l, --least-sig-bits]` | The least sig bits|0|
+| `[-t, --topic]` | The topic name|null|
+| `[-s, --sub-name]` | The subscription name|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## transaction-metadata
@@ -167,8 +188,10 @@ $ pulsar-admin transactions transaction-metadata options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --most-sig-bits]` | The most sig bits|0|
+| `[-l, --least-sig-bits]` | The least sig bits|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## slow-transactions
@@ -185,8 +208,10 @@ $ pulsar-admin transactions slow-transactions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-c, --coordinator-id]` | The coordinator id|null|
+| `[-t, --time]` | The transaction timeout time. (eg: 1s, 10s, 1m, 5h, 3d)|1|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## scale-transactionCoordinators
@@ -203,8 +228,9 @@ $ pulsar-admin transactions scale-transactionCoordinators options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-r, --replicas]` | The scale of the transaction coordinators|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## position-stats-in-pending-ack
@@ -221,8 +247,13 @@ $ pulsar-admin transactions position-stats-in-pending-ack options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-t, --topic]` | The topic name|null|
+| `[-s, --subscription-name]` | Subscription name|null|
+| `[-l, --ledger-id]` | Ledger ID of the position|null|
+| `[-e, --entry-id]` | Entry ID of the position|null|
+| `[-b, --batch-index]` | Batch index of the position|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## coordinators-list
@@ -239,8 +270,8 @@ $ pulsar-admin transactions coordinators-list options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## abort-transaction
@@ -257,6 +288,8 @@ $ pulsar-admin transactions abort-transaction options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --most-sig-bits]` | The most sig bits|0|
+| `[-l, --least-sig-bits]` | The least sig bits|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 

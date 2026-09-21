@@ -23,8 +23,8 @@ $ pulsar-admin schemas get options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-v, --version]` | version|null|
+| `[-a, --all-version]` | all version|false|
 
 
 ## delete
@@ -41,8 +41,9 @@ $ pulsar-admin schemas delete options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-f, --force]` | whether to delete schema completely. If true, delete all resources (including metastore and ledger), otherwise only do a mark deletion and not remove any resources indeed|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## upload
@@ -59,8 +60,9 @@ $ pulsar-admin schemas upload options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-f, --filename]` | filename|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## extract
@@ -77,8 +79,13 @@ $ pulsar-admin schemas extract options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-j, --jar]` | jar filepath|null|
+| `[-t, --type]` | type avro or json|null|
+| `[-c, --classname]` | class name of pojo|null|
+| `[-a, --always-allow-null]` | set schema whether always allow null or not|true|
+| `[-n, --dry-run]` | dost not apply to schema registry, just prints the post schema payload|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## metadata
@@ -95,8 +102,8 @@ $ pulsar-admin schemas metadata options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## compatibility
@@ -113,6 +120,7 @@ $ pulsar-admin schemas compatibility options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-f, --filename]` | filename|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 

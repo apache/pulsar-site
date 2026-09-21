@@ -23,8 +23,9 @@ $ pulsar-admin scalable-topics list options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-p, --property]` | Filter to topics whose properties contain key=value pairs. Repeat or separate with commas to AND multiple filters together.|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## create
@@ -41,8 +42,10 @@ $ pulsar-admin scalable-topics create options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --segments]` | Number of initial segments|1|
+| `[-p, --property]` | Key-value properties. Repeat or separate with commas (key=value[,key=value...])|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## migrate
@@ -59,8 +62,9 @@ $ pulsar-admin scalable-topics migrate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-f, --force]` | Migrate even if legacy v4 clients are still connected|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-metadata
@@ -77,8 +81,8 @@ $ pulsar-admin scalable-topics get-metadata options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## stats
@@ -95,8 +99,8 @@ $ pulsar-admin scalable-topics stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## segment-stats
@@ -113,8 +117,8 @@ $ pulsar-admin scalable-topics segment-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## delete
@@ -131,8 +135,9 @@ $ pulsar-admin scalable-topics delete options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-f, --force]` | Force deletion even if topic has active subscriptions|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## split-segment
@@ -149,8 +154,9 @@ $ pulsar-admin scalable-topics split-segment options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --segment-id]` | ID of the segment to split|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## merge-segments
@@ -167,8 +173,10 @@ $ pulsar-admin scalable-topics merge-segments options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--segment-id-1]` | First segment ID to merge|0|
+| `[--segment-id-2]` | Second segment ID to merge|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## seek
@@ -185,8 +193,10 @@ $ pulsar-admin scalable-topics seek options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription name|null|
+| `[-t, --time]` | Relative offset in the past to seek to (e.g. 1h, 5d, 30m)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## clear-backlog
@@ -203,6 +213,7 @@ $ pulsar-admin scalable-topics clear-backlog options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription name|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
