@@ -104,7 +104,6 @@ $ pulsar-perf consume [options]
 | `-q, --receiver-queue-size` | Size of the receiver queue|1000|
 | `-p, --receiver-queue-size-across-partitions` | Max total size of the receiver queue across partitions|50000|
 | `-aq, --auto-scaled-receiver-queue-size` | Enable autoScaledReceiverQueueSize|false|
-| `-rs, --replicated` | Whether the subscription status should be replicated|false|
 | `--acks-delay-millis` | Acknowledgements grouping delay in millis|100|
 | `-m, --num-messages` | Number of messages to consume in total. If <= 0, it will keep consuming|0|
 | `-mc, --max_chunked_msg` | Max pending chunk messages|0|
@@ -161,7 +160,6 @@ $ pulsar-perf transaction [options]
 | `-ss, --subscriptions` | A list of subscriptions to consume (for example, sub1,sub2)|[sub]|
 | `-ns, --num-subscriptions` | Number of subscriptions (per topic)|1|
 | `-st, --subscription-type` | Subscription type|Shared|
-| `-rs, --replicated` | Whether the subscription status should be replicated|false|
 | `-q, --receiver-queue-size` | Size of the receiver queue|1000|
 | `-tto, --txn-timeout` | Set the time value of transaction timeout, and the time unit is second. (After --txn-enable setting to true, --txn-timeout takes effect)|5|
 | `-ntxn, --number-txn` | Set the number of transaction. 0 means keeping open.If transaction disabled, it means the number of tasks. The task or transaction produces or consumes a specified number of messages.|0|
@@ -318,7 +316,6 @@ $ pulsar-perf consume-v4 [options]
 | `-q, --receiver-queue-size` | Size of the receiver queue|1000|
 | `-p, --receiver-queue-size-across-partitions` | Max total size of the receiver queue across partitions|50000|
 | `-aq, --auto-scaled-receiver-queue-size` | Enable autoScaledReceiverQueueSize|false|
-| `-rs, --replicated` | Whether the subscription status should be replicated|false|
 | `--acks-delay-millis` | Acknowledgements grouping delay in millis|100|
 | `-m, --num-messages` | Number of messages to consume in total. If <= 0, it will keep consuming|0|
 | `-mc, --max_chunked_msg` | Max pending chunk messages|0|
@@ -335,6 +332,7 @@ $ pulsar-perf consume-v4 [options]
 | `-abort` | Abort the transaction. (After --txn-enable setting to true, -abort takes effect)|false|
 | `--histogram-file` | HdrHistogram output file|null|
 | `-sp, --subscription-position` | Subscription position|Latest|
+| `-rs, --replicated` | Whether the subscription status should be replicated|false|
 | `--isolated-clients` | Create consumers on this many isolated v4 clients; cannot be combined with --num-listener-threads|0|
 
 ## transaction-v4
@@ -375,7 +373,6 @@ $ pulsar-perf transaction-v4 [options]
 | `-ss, --subscriptions` | A list of subscriptions to consume (for example, sub1,sub2)|[sub]|
 | `-ns, --num-subscriptions` | Number of subscriptions (per topic)|1|
 | `-st, --subscription-type` | Subscription type|Shared|
-| `-rs, --replicated` | Whether the subscription status should be replicated|false|
 | `-q, --receiver-queue-size` | Size of the receiver queue|1000|
 | `-tto, --txn-timeout` | Set the time value of transaction timeout, and the time unit is second. (After --txn-enable setting to true, --txn-timeout takes effect)|5|
 | `-ntxn, --number-txn` | Set the number of transaction. 0 means keeping open.If transaction disabled, it means the number of tasks. The task or transaction produces or consumes a specified number of messages.|0|
@@ -385,6 +382,7 @@ $ pulsar-perf transaction-v4 [options]
 | `-abort` | Abort the transaction. (After --txn-disEnable setting to false, -abort takes effect)|false|
 | `-txnRate` | Set the rate of opened transaction or task. 0 means no limit|0|
 | `-sp, --subscription-position` | Subscription position|Earliest|
+| `-rs, --replicated` | Whether the subscription status should be replicated|false|
 
 ## read-v4
 

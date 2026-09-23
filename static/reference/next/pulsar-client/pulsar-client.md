@@ -87,8 +87,6 @@ $ pulsar-client consume [options]
 |
 | `[-pm, --pool-messages]` | Use the pooled message|null|
 |
-| `[-rs, --replicated]` | Whether the subscription status should be replicated|null|
-|
 | `[-mp, --print-metadata]` | Message metadata|null|
 |
 | `[-etp, --end-timestamp]` | End timestamp for consuming messages|null|
@@ -235,8 +233,6 @@ $ pulsar-client consume-v4 [options]
 |
 | `[-pm, --pool-messages]` | Use the pooled message|null|
 |
-| `[-rs, --replicated]` | Whether the subscription status should be replicated|null|
-|
 | `[-mp, --print-metadata]` | Message metadata|null|
 |
 | `[-etp, --end-timestamp]` | End timestamp for consuming messages|null|
@@ -246,6 +242,8 @@ $ pulsar-client consume-v4 [options]
 | `[-ca, --crypto-failure-action]` | Crypto Failure Action|null|
 |
 | `[-stp, --start-timestamp]` | Start timestamp for consuming messages|null|
+|
+| `[-rs, --replicated]` | Whether the subscription status should be replicated|null|
 |
 | `[-h, --help]` | Show this help message and exit.|null|
 |

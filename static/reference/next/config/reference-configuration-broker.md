@@ -2816,17 +2816,6 @@ Enable Key_Shared subscription (default is enabled).
 
 **Category**: Policies
 
-### subscriptionKeySharedUseClassicPersistentImplementation
-For persistent Key_Shared subscriptions, enables the use of the classic implementation of the Key_Shared subscription that was used before Pulsar 4.0.0 and PIP-379.
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `true`
-
-**Category**: Policies
-
 ### subscriptionKeySharedUseConsistentHashing
 On KeyShared subscriptions, with default AUTO_SPLIT mode, use splitting ranges or consistent hashing to reassign keys to new consumers (default is consistent hashing)
 
@@ -2855,17 +2844,6 @@ Enable subscription message redelivery tracker to send redelivery count to consu
 **Type**: `boolean`
 
 **Default**: `true`
-
-**Dynamic**: `true`
-
-**Category**: Policies
-
-### subscriptionSharedUseClassicPersistentImplementation
-For persistent Shared subscriptions, enables the use of the classic implementation of the Shared subscription that was used before Pulsar 4.0.0.
-
-**Type**: `boolean`
-
-**Default**: `false`
 
 **Dynamic**: `true`
 
