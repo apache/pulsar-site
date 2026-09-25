@@ -5165,11 +5165,11 @@ Enable bookie secondary-isolation group if bookkeeperClientIsolationGroups doesn
 **Category**: Storage (BookKeeper)
 
 ### bookkeeperClientSeparatedIoThreadsEnabled
-Use separated IO threads for BookKeeper client. Default is false, which will use Pulsar IO threads
+Use separated IO threads for BookKeeper client. Default is true, which will use dedicated BookKeeper IO threads
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
