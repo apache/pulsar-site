@@ -2816,17 +2816,6 @@ Enable Key_Shared subscription (default is enabled).
 
 **Category**: Policies
 
-### subscriptionKeySharedUseClassicPersistentImplementation
-For persistent Key_Shared subscriptions, enables the use of the classic implementation of the Key_Shared subscription that was used before Pulsar 4.0.0 and PIP-379.
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `true`
-
-**Category**: Policies
-
 ### subscriptionKeySharedUseConsistentHashing
 On KeyShared subscriptions, with default AUTO_SPLIT mode, use splitting ranges or consistent hashing to reassign keys to new consumers (default is consistent hashing)
 
@@ -2855,17 +2844,6 @@ Enable subscription message redelivery tracker to send redelivery count to consu
 **Type**: `boolean`
 
 **Default**: `true`
-
-**Dynamic**: `true`
-
-**Category**: Policies
-
-### subscriptionSharedUseClassicPersistentImplementation
-For persistent Shared subscriptions, enables the use of the classic implementation of the Shared subscription that was used before Pulsar 4.0.0.
-
-**Type**: `boolean`
-
-**Default**: `false`
 
 **Dynamic**: `true`
 
@@ -5187,11 +5165,11 @@ Enable bookie secondary-isolation group if bookkeeperClientIsolationGroups doesn
 **Category**: Storage (BookKeeper)
 
 ### bookkeeperClientSeparatedIoThreadsEnabled
-Use separated IO threads for BookKeeper client. Default is false, which will use Pulsar IO threads
+Use separated IO threads for BookKeeper client. Default is true, which will use dedicated BookKeeper IO threads
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -5629,6 +5607,28 @@ If value is NONE, then save the ManagedCursorInfo bytes data directly.
 **Default**: `LZ4`
 
 **Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerAddEntryHandoverMaxBatchBytesSize
+Total size in bytes of the entries after which a batch of add entry requests handed over to the managed ledger's executor thread stops taking more. This keeps a ledger with large entries from occupying the executor thread for as long as a full batch of managedLedgerAddEntryHandoverMaxBatchItems adds would, which would delay add completions, reads and cursor notifications for the ledgers that share the thread. A batch always takes at least one add, even one whose entry is larger than this. Set to 0 to limit batches only by their number of adds. Updates apply to managed ledgers opened after the change; ledgers that are already open keep the value they opened with.
+
+**Type**: `long`
+
+**Default**: `5242880`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerAddEntryHandoverMaxBatchItems
+Maximum number of add entry requests handed over to the managed ledger's executor thread in one batch. Publishing threads queue adds for the ledger's executor, which takes them over in batches of up to this many adds and processes each batch before other tasks on that thread can run. A batch also stops taking adds once their entries add up to managedLedgerAddEntryHandoverMaxBatchBytesSize bytes. A larger value reduces scheduling overhead and contention between publishing threads under high publish rates, but keeps the executor thread occupied for longer per batch, which can delay add completions, reads and cursor notifications for the ledgers that share the thread. A smaller value favors those tasks over add throughput. Set to 0 or 1 to disable batching, so that each add is handed over to the executor as a task of its own. Updates apply to managed ledgers opened after the change; ledgers that are already open keep the value they opened with.
+
+**Type**: `int`
+
+**Default**: `1024`
+
+**Dynamic**: `true`
 
 **Category**: Storage (Managed Ledger)
 
