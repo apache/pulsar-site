@@ -98,8 +98,6 @@ components:
   proxy: true
   # toolset
   toolset: true
-  # pulsar manager
-  pulsar_manager: true
 ```
 
 ##### Monitoring Components
@@ -155,11 +153,6 @@ images:
   functions:
     repository: apachepulsar/pulsar-all
     tag: latest
-  pulsar_manager:
-    repository: apachepulsar/pulsar-manager
-    tag: v0.3.0
-    pullPolicy: IfNotPresent
-    hasCommand: false
 ```
 
 The Pulsar Helm Chart also lets you specify the image versions used by initialization containers used to coordinate creation and connection of dependent Pulsar resources.
@@ -376,7 +369,6 @@ To check the status of the deployment, run the `helm status pulsar` command. It 
 The default values will create a `ClusterIP` for the following resources, which you can use to interact with the cluster.
 
 - Proxy: You can use the IP address to produce and consume messages to the installed Pulsar cluster.
-- Pulsar Manager: You can access the Pulsar Manager UI at `http://<pulsar-manager-ip>:9527`.
 - Grafana Dashboard: You can access the Grafana dashboard at `http://<grafana-dashboard-ip>:3000`.
 
 To find the IP addresses of those components, run the following command:
@@ -385,13 +377,10 @@ To find the IP addresses of those components, run the following command:
 kubectl get service -n <k8s-namespace>
 ```
 
-You can configure the Proxy and the Pulsar Manager as a `NodePort` instead of a `ClusterIP`.
+You can configure the Proxy as a `NodePort` instead of a `ClusterIP`.
 
 ```yaml
 proxy:
-  service:
-    type: NodePort
-pulsar_manager:
   service:
     type: NodePort
 ```
