@@ -41,7 +41,9 @@ RewriteRule "^docs/(.+/)?develop-binary-protocol/?$" "/docs/$1developing-binary-
 RewriteRule "^docs/(.+/)?administration-dashboard/?$" "/docs/$1administration-pulsar-manager" [R=301,DPI,L]
 # Pulsar Manager is no longer maintained and its page was removed from next, 5.0.x, 4.2.x, 4.1.x and 4.0.x.
 # Older versions that still ship the page are served by the "skip if file exists" rule above.
-RewriteRule "^docs/(.+/)?administration-pulsar-manager/?$" "/docs/administration-dekaf-ui/" [R=301,DPI,L]
+RewriteRule "^docs/(.+/)?administration-pulsar-manager/?$" "/docs/administration-ui/" [R=301,DPI,L]
+# The Dekaf UI page was renamed to administration-ui in every version that has it.
+RewriteRule "^docs/(.+/)?administration-dekaf-ui/?$" "/docs/$1administration-ui/" [R=301,DPI,L]
 # Broker rolling restarts are documented as rolling upgrades of brokers.
 RewriteRule "^docs/(.+/)?administration-rolling-restart/?$" "/docs/$1administration-rolling-upgrade" [R=301,DPI,L]
 RewriteRule "^docs/(.+/)?security-tls-keystore/?$" "/docs/$1security-tls-authentication" [R=301,DPI,L]

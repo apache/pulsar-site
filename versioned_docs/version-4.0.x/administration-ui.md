@@ -1,7 +1,7 @@
 ---
-id: administration-dekaf-ui
-title: Dekaf UI
-sidebar_label: "Dekaf UI"
+id: administration-ui
+title: Administration UI
+sidebar_label: "Administration UI"
 description: Dekaf is a recommended open-source web UI for managing Apache Pulsar.
 ---
 
@@ -22,3 +22,7 @@ Dekaf is a recommended web-based UI for Apache Pulsar, licensed under Apache 2.0
 - View messages in a topic or multiple topics at once. Filter messages, colorize them. Save and reuse browse sessions.
 
 Please share your feedback as the project maintainers prioritize bugfixes and new features, based on user requests.
+
+## Alternatives
+
+[DataStax Pulsar Admin Console](https://github.com/datastax/pulsar-admin-console) is an alternative web-based UI for managing Apache Pulsar. It supports OpenID Connect authentication.
