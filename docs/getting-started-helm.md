@@ -25,7 +25,7 @@ This quickstart guide uses default configurations suitable for development and t
 
 :::tip
 
-For the following steps, step 2 and step 3 are for **developers** and step 4 and step 5 are for **administrators**.
+For the following steps, step 2 and step 3 are for **developers** and step 4 is for **administrators**.
 
 :::
 
@@ -77,7 +77,7 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
    cd pulsar-helm-chart
    ```
 
-3. Run the script `prepare_helm_release.sh` to create the secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard and Pulsar Manager.
+3. Run the script `prepare_helm_release.sh` to create the secrets required for installing the Apache Pulsar Helm chart. The username `pulsar` and password `pulsar` are used for logging into the Grafana dashboard.
 
    :::note
 
@@ -110,20 +110,6 @@ We use [Minikube](https://minikube.sigs.k8s.io/docs/start/) in this quick start 
        pulsar-mini apachepulsar/pulsar
    ```
 
-:::tip
-
-Make sure the `values-minikube.yaml` file contains the following lines:
-
-```yaml
-pulsar_manager:
-  configData:
-    ENV_SPRING_CONFIGURATION_FILE: "/pulsar-manager/pulsar-manager/application.properties"
-    SPRING_CONFIGURATION_FILE: "/pulsar-manager/pulsar-manager/application.properties"
-    PULSAR_MANAGER_OPTS: " -Dlog4j2.formatMsgNoLookups=true"
-```
-
-:::
-
 5. Check the status of all pods.
 
    ```bash
@@ -145,7 +131,6 @@ pulsar_manager:
    pulsar-mini-prometheus-5fcf5dd84c-w8mgz         1/1     Running     0          9m27s
    pulsar-mini-proxy-0                             1/1     Running     0          9m27s
    pulsar-mini-pulsar-init-t7cqt                   0/1     Completed   0          9m27s
-   pulsar-mini-pulsar-manager-9bcbb4d9f-htpcs      1/1     Running     0          9m27s
    pulsar-mini-toolset-0                           1/1     Running     0          9m27s
    ```
 
@@ -167,7 +152,6 @@ pulsar_manager:
    pulsar-mini-oxia-svc           ClusterIP      None             <none>        6648/TCP,6649/TCP,8080/TCP    11m
    pulsar-mini-prometheus         ClusterIP      None             <none>        9090/TCP                      11m
    pulsar-mini-proxy              LoadBalancer   10.97.240.109    <pending>     80:32305/TCP,6650:31816/TCP   11m
-   pulsar-mini-pulsar-manager     LoadBalancer   10.103.192.175   <pending>     9527:30190/TCP                11m
    pulsar-mini-toolset            ClusterIP      None             <none>        <none>                        11m
    ```
 
@@ -369,42 +353,7 @@ Then you can proceed with the following steps:
        ---------hello apache pulsar-------
        ```
 
-## Step 4: Use Pulsar Manager to manage the cluster
-
-[Pulsar Manager](administration-pulsar-manager.md) is a web-based GUI management tool for managing and monitoring Pulsar.
-
-1. To create a superuser account, connect to the pulsar-manager pod and create the account:
-
-```bash
-kubectl exec -it YOUR_PULSAR_MANAGER_POD_NAME -n pulsar -- /bin/bash
-CSRF_TOKEN=$(curl http://localhost:7750/pulsar-manager/csrf-token)
-curl \
-    -H "X-XSRF-TOKEN: $CSRF_TOKEN" \
-    -H "Cookie: XSRF-TOKEN=$CSRF_TOKEN;" \
-    -H 'Content-Type: application/json' \
-    -X PUT http://localhost:7750/pulsar-manager/users/superuser \
-    -d '{"name": "pulsar", "password": "pulsar", "description": "test", "email": "username@test.org"}'
-```
-
-2. By default, the `Pulsar Manager` is exposed as a separate `LoadBalancer`. You can open the Pulsar Manager UI using the following command:
-
-   ```bash
-   minikube service -n pulsar pulsar-mini-pulsar-manager
-   ```
-
-3. The Pulsar Manager UI will be open in your browser. You can use the username `pulsar` and password `pulsar` to log into Pulsar Manager.
-
-4. In Pulsar Manager UI, you can create an environment.
-
-   - Click **New Environment** in the upper-left corner.
-   - Type `pulsar-mini` for the field `Environment Name` in the pop-up window.
-   - Type `http://pulsar-mini-broker:8080` for the field `Service URL` in the pop-up window.
-   - Type `http://pulsar-mini-bookie:8080` for the field `Bookie URL` in the pop-up window.
-   - Click **Confirm** in the pop-up window.
-
-5. After successfully creating an environment, you can create `tenants`, `namespaces`, and `topics` using the Pulsar Manager.
-
-## Step 5: Use Prometheus and Grafana to monitor cluster
+## Step 4: Use Prometheus and Grafana to monitor cluster
 
 Grafana is an open-source visualization tool, which can be used for visualizing time series data into dashboards.
 
