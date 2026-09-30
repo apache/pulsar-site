@@ -17,3 +17,9 @@ You have two ways to set up [function workers](functions-concepts.md#function-wo
 
 **Reference**
 * [Troubleshooting](functions-worker-troubleshooting.md)
+
+## Custom worker extensions
+
+Pulsar generates the Java messages in `org.apache.pulsar.functions.proto` with LightProto. Custom worker authentication providers, schedulers, runtimes, or other extensions that use these types must compile against the worker's API. For example, `FunctionAuthProvider` methods accept the top-level `FunctionDetails` type. Generated messages use mutable instances and setters. For migration from older generated APIs, see the [upgrade guide](administration-upgrade-to-5.0.x-applications.md#check-functions-behavior-and-extensions).
+
+Ordinary function code should use the public [Functions SDK](functions-develop.md) rather than generated worker message types.

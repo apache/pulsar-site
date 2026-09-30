@@ -14,16 +14,49 @@ Pulsar transaction is primarily a server-side and protocol-level feature. This t
 
 :::note
 
-Currently, [Pulsar transaction API](@pulsar:javadoc:admin@/) is available in **Pulsar 2.8.0 or later** versions. It is only available for **Java**, **Go** and **.NET** clients.
+[Pulsar transaction API](@pulsar:javadoc:admin@/) is currently available for **Java**, **Go** and **.NET** clients.
 
 :::
 ## Prerequisites
 
-- [Start Pulsar 2.8.0 or later versions](getting-started-standalone.md)
+- [Start Pulsar](getting-started-standalone.md)
+
+## Transactions on scalable topics
+
+To use transactions on [scalable topics](concepts-scalable-topics.md), configure the following on every broker before startup:
+
+```properties
+transactionCoordinatorEnabled=true
+scalableTopicsEnabled=true
+transactionCoordinatorScalableTopicsEnabled=true
+```
+
+`transactionCoordinatorEnabled` defaults to `false`. The other two settings default to `true`. The scalable transaction coordinator stores transaction metadata and elects its leaders in the metadata store. It runs alongside the v4 coordinator, so v4 clients use that coordinator.
+
+Keep the default dispatching providers below. They select metadata-backed transaction buffers and pending acknowledgments for scalable topic segments, and use the regular-topic implementations for regular topics. Configure these defaults explicitly if you override the providers:
+
+```properties
+transactionBufferProviderClassName=org.apache.pulsar.broker.transaction.buffer.impl.DispatchingTransactionBufferProvider
+transactionPendingAckStoreProviderClassName=org.apache.pulsar.broker.transaction.pendingack.impl.DispatchingTransactionPendingAckStoreProvider
+```
+
+Use the [v5 Java client transaction API](pathname:///client-libraries/java-v5#transactions) with a `TransactionPolicy` and a `pulsar://` or `pulsar+ssl://` service URL. Scalable transaction discovery requires the binary protocol; an HTTP service URL does not work. The v4 client examples below use the v4 coordinator. Initializing the `transaction_coordinator_assign` topic in step 2 configures that v4 coordinator; the scalable coordinator uses metadata-store elections instead.
+
+Set `transactionCoordinatorScalableTopicsParallelism` before the scalable coordinator first starts. Its default is `16`. The first broker persists this value in the metadata store, and every broker must use the same value. A mismatch rejects broker startup. Treat it as fixed for the cluster: changing it can strand coordinator IDs in existing transactions.
+
+The scalable coordinator also provides the following startup settings:
+
+| Setting | Default | Purpose |
+|---|---|---|
+| `transactionCoordinatorScalableTopicsTimeoutSweepIntervalSeconds` | `60` | How often the elected leader for coordinator partition 0 checks for timed-out open transactions and aborts them |
+| `transactionCoordinatorScalableTopicsGcIntervalSeconds` | `300` | How often that leader checks for finalized transaction metadata eligible for cleanup |
+| `transactionCoordinatorScalableTopicsGcRetentionSeconds` | `900` | Minimum retention before finalized transaction metadata is eligible for cleanup, allowing participants to observe the outcome |
+
+For the complete configuration descriptions, see the [broker configuration reference](reference-configuration.md).
 
 ## Steps
 
-To use Pulsar transaction API, complete the following steps.
+To use the v4 client transaction API, complete the following steps.
 
 1. Enable transactions.
 

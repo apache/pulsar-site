@@ -79,7 +79,7 @@ For the latest and complete information about `pulsar-perf`, including commands,
 
   :::note
 
-  If you have not created a topic (in this example, it is _my-topic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf consume`, make sure your topic has enough messages to consume.
+  Run a producer while measuring consumption, or prepare a retained backlog. A new subscription starts at `Latest` by default; use `--subscription-position Earliest` to read retained messages. Automatic topic creation depends on the broker and namespace configuration and does not create test data.
 
   :::
 
@@ -116,7 +116,7 @@ For the latest and complete information about `pulsar-perf`, including commands,
 
   :::note
 
-  If you have not created a topic (in this example, it is _my-topic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf consume`, make sure your topic has enough messages to consume.
+  Prepare messages on _my-topic_ before this example, or run a producer concurrently. Automatic topic creation depends on the broker and namespace configuration and does not create test data.
 
   :::
 
@@ -151,7 +151,7 @@ bin/pulsar-perf transaction --topics-c myConsumerTopic --topics-p MyproduceTopic
 
 :::note
 
-If you have not created a topic (in this example, it is _myConsumerTopic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf transaction`, make sure your topic has enough messages to consume.
+Prepare messages on _myConsumerTopic_ before this example, or run a producer concurrently. Creating the consumer topic does not create test data.
 
 :::
 
@@ -177,7 +177,7 @@ bin/pulsar-perf transaction --topics-c myConsumerTopic --topics-p myproduceTopic
 
 :::note
 
-If you have not created a topic (in this example, it is _myConsumerTopic_) before, the broker creates a new topic without partitions and messages, then the consumer can not receive any messages. Consequently, before using `pulsar-perf transaction --txn-disEnable`, make sure your topic has enough messages to consume.
+Prepare messages on _myConsumerTopic_ before this example, or run a producer concurrently. Disabling transactions does not remove the need for consumer input.
 
 :::
 
@@ -204,11 +204,85 @@ export PULSAR_CLIENT_CONF=<your-config-file>
 export PULSAR_LOG_CONF=<your-log-config-file>
 ```
 
-In addition, you can use the following command to configure the JVM configuration through environment variables:
+### JVM memory and garbage collection
+
+`pulsar-perf` accepts `PULSAR_MEM` from the caller's environment. Export it or set it for the command; changing its default in `conf/pulsar_env.sh` does not configure the performance tool. Leave `PULSAR_GC` unset to retain the tool's default collector behavior. The tool does not inherit the broker's garbage-collector defaults from `conf/pulsar_env.sh`. For example, after configuring [Linux THP settings](performance-broker.md#configure-linux-hosts-and-kubernetes-nodes):
 
 ```shell
-export PULSAR_EXTRA_OPTS='-Xms4g -Xmx4g -XX:MaxDirectMemorySize=4g'
+PULSAR_MEM='-Xms1g -Xmx1g -XX:MaxDirectMemorySize=2g -XX:+UseTransparentHugePages -XX:+AlwaysPreTouch' \
+bin/pulsar-perf produce persistent://public/default/perf --memory-limit 1G
 ```
+
+Choose memory sizes for your workload and available resources. The `--memory-limit` option controls the Pulsar client's memory budget separately from the JVM heap and direct-memory limits. By default, this client budget is half the JVM's maximum direct memory; use `0` to disable the client budget.
+
+Use `PULSAR_EXTRA_OPTS` for additional JVM options. These options are appended after `PULSAR_MEM` and `PULSAR_GC`. The script does not automatically apply `PULSAR_GC_LOG`; to enable GC logging, pass the JVM logging options through `PULSAR_EXTRA_OPTS`.
+
+### Isolated v4 clients
+
+For v4 `produce` and `consume`, `--isolated-clients N` creates `N` clients and distributes the producers or consumers among them. For example, this command uses eight clients for eight producers on the topic:
+
+```shell
+bin/pulsar-perf produce persistent://public/default/perf \
+  --client-api V4 --num-producers 8 --isolated-clients 8
+```
+
+The clients have separate connections and client memory budgets, while sharing thread pools and other client resources. Account for the combined memory budgets when sizing the JVM. For producers, keep `--num-test-threads` at its default of `1`. For consumers, keep `--num-listener-threads` at `1`; isolated clients cannot be combined with transaction-enabled consumption. The option is unavailable with v5.
+
+### Select the client API
+
+The message production, consumption, reading, and transaction commands select the v5 client for `topic://` scalable topics and the v4 client for `persistent://`, `non-persistent://`, and unprefixed topic names. Set `--client-api V5` explicitly to benchmark a regular persistent topic with v5.
+
+All v5 client connections require `scalableTopicsEnabled=true` on the brokers, including connections to regular persistent topics. Review the [upgrade guidance](administration-upgrade.md) before enabling this feature during an upgrade.
+
+One invocation cannot mix `topic://` topics with regular topic names, even with `--client-api V5`. In transaction benchmarks this applies to the combined producer and consumer topic lists. Direct `segment://` targets are rejected. Use the ordinary command with `--client-api V4` to select the v4 client.
+
+The selected API affects benchmark semantics and options:
+
+- v5 `consume` uses a Queue consumer by default, with shared work distribution and individual acknowledgment. `--subscription-type Exclusive` or `Failover` does not select the corresponding v4 consumer behavior. Select `--scalable-consumer-type Stream` for ordered consumption and cumulative acknowledgment. This option is v5-only. When running several consumers per subscription, also choose a non-Exclusive `--subscription-type` because the command validates that Exclusive permits only one consumer.
+- v5 `read` uses independent Checkpoint consumers and accepts `--start-message-id earliest` or `latest`. A `ledgerId:entryId` start position requires v4. Checkpoint consumers do not create durable subscription backlog; configure retention for data you want them to read.
+- v5 Stream consumers preserve per-key ordering across segment changes; they do not provide a total order across the topic. `--receiver-queue-size` configures v5 Queue consumers and has no effect on the Stream consumer.
+- Help groups options by API. Explicitly supplying a v4-only option with v5 (or a v5-only option with v4) fails validation. For example, v5 producers use `--memory-limit` instead of the v4-only `--max-outstanding` and `--max-outstanding-across-partitions` options. Match the consumer model and buffering settings when comparing API performance.
+
+The common flags `--stats-interval-seconds`, `--max-lookup-request`, and `--busy-wait` are accepted with v5 but have no effect on its client. Perf disables its v5 client's OpenTelemetry SDK and exposes no v5 lookup-limit or busy-wait setting. Perf's own throughput and latency output remains available.
+
+For example, to run eight ordered consumers on a scalable topic:
+
+```shell
+bin/pulsar-perf consume topic://public/default/perf \
+  --scalable-consumer-type Stream --subscription-type Shared \
+  --num-consumers 8 --subscriptions perf-stream --subscription-position Earliest
+```
+
+Here `--scalable-consumer-type Stream` selects the v5 consumer model. Consumer counts can drive segment splits or entry-bucket increases according to the topic's [auto-scaling policy](admin-api-scalable-topics.md#configure-auto-splitmerge).
+
+For `transaction` runs, `--scalable` explicitly creates the producer and consumer topics through the scalable admin API; `--scalable-segments` sets their initial segment count. Use `topic://` names to select v5 automatically. `--scalable` cannot be combined with `--partitions`. The broker must also have [transaction support](txn-use.md) configured, and the consumer topics need data to process. v5 transaction benchmarks use Queue consumers. Their acknowledgment latency measures the local acknowledgment call, so it is not directly comparable with the broker round-trip acknowledgment latency measured by v4.
+
+For encrypted v5 benchmarks, producers use `--encryption-key-name` and `--encryption-key-value-file` for a PEM public key. The v5 perf consumer registers its private-key file under that file's basename, so the producer's key name must match the basename passed in the consumer's `--encryption-key-value-file`. Encryption disables v5 producer batching; account for this when comparing throughput.
+
+## Interpret latency results
+
+`pulsar-perf` histograms use three significant digits. Producer send and transaction send/acknowledgment samples are recorded in microseconds and capped at one hour. Consumer and reader latency samples are recorded in milliseconds and capped at ten days. Values above these limits appear at the limit in the histogram. The printed latency statistics use milliseconds.
+
+Consumer and reader latency is the difference between receipt time and the message's publish timestamp. It includes time spent in backlog and depends on the clocks of the producer and consumer. Negative samples are excluded, so clock skew can affect both the latency values and the number of samples. Use comparable clocks, backlog, warmup, and histogram precision when comparing runs.
+
+## Docker scenario framework
+
+The Pulsar source repository also includes a [performance scenario framework](https://github.com/apache/pulsar/tree/master/tests/performance) for repeatable experiments across revisions. Its IoT telemetry workload uses v4 Java clients with `Key_Shared` subscriptions and key-based batching. It checks delivery and ordering for each device, and can restart consumer pods during the run.
+
+After following the framework's prerequisites, run a small scenario from the source repository root:
+
+```shell
+./gradlew :tests:performance:launcher:run \
+  --args='--scenario tests/performance/scenarios/iot-telemetry-small.yaml'
+```
+
+The task builds the required test images and workload applications. Successful runs write Markdown and HTML reports under `build/performance`, including throughput, latency, and correctness results. Metrics collection is enabled by default; a metrics collection failure is reported and the workload can continue. See [running scenarios](https://github.com/apache/pulsar/blob/master/tests/performance/docs/running-scenarios.md) for configuration overrides and [run reports](https://github.com/apache/pulsar/blob/master/tests/performance/docs/run-reports.md) for the outputs.
+
+For the IoT workload, warmup traffic remains part of the delivery and ordering checks, but is excluded from measured throughput and latency. Each warmup round drains outstanding sends and waits for every application to receive its messages before proceeding. Profile measurement windows extend from the first measured send through the last measured receipt across applications. See the [IoT workload settings](https://github.com/apache/pulsar/blob/master/tests/performance/scenarios/docs/iot-telemetry.md) for time-based or message-count warmup, rounds, and delays.
+
+Compare repeated runs using the same scenario and harness configuration; the framework does not automatically decide whether a revision regresses. Follow the [revision comparison guide](https://github.com/apache/pulsar/blob/master/tests/performance/docs/comparing-revisions.md), including its distinction between changing the cluster image and changing the workload's client. The separate `profile` task captures JFR and CPU/off-CPU profiles. It can change the Docker host's kernel settings through a privileged container, so follow the [profiling requirements](https://github.com/apache/pulsar/blob/master/tests/performance/docs/profiling.md) and [host configuration guide](https://github.com/apache/pulsar/blob/master/tests/performance/environment/README.md) before using it.
+
+Use the [profile analysis guide](https://github.com/apache/pulsar/blob/master/tests/performance/docs/analyzing-profiles.md) to inspect saved recordings and collapsed stacks. The `:tests:performance:report-tool:runJonoffcpuCorrelator` and `:tests:performance:report-tool:runJfrConverter` tasks run the pinned analysis tools without starting a test cluster. Keep unprofiled measurements separate from diagnostic runs with profiling or heap dumps when assessing performance changes.
 
 ## HdrHistogram Plotter
 

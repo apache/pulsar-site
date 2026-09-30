@@ -25,18 +25,17 @@ Enabling TLS encryption may impact the performance due to encryption overhead.
 
 ### TLS certificates
 
-TLS certificates include the following three types. Each certificate (key pair) contains both a public key that encrypts messages and a private key that decrypts messages.
-* Certificate Authority (CA)
-  * CA private key is distributed to all parties involved.
-  * CA public key (**trust cert**) is used for signing a certificate for either broker or clients.
-* Server key pairs
-* Client key pairs (for mutual TLS)
+TLS uses certificates containing public keys and separate private keys:
 
-For both server and client certificates, the private key with a certificate request is generated first, and the public key (the certificate) is generated after the **trust cert** signs the certificate request. When [mTLS authentication](security-tls-authentication.md) is enabled, the server uses the **trust cert** to verify that the client has a key pair that the certificate authority signs. The Common Name (CN) of a client certificate is used as the client's role token, while the Subject Alternative Name (SAN) of a server certificate is used for [Hostname verification](#hostname-verification).
+* A Certificate Authority (CA) signs server and client certificates with its **private key**. Keep that key with the CA; do not distribute it to brokers, proxies, or clients. Distribute the CA's public certificate (**trust cert**) to parties that need to verify those signatures.
+* Servers hold their own private key and certificate to prove their identity to clients.
+* Clients hold their own private key and certificate when using mutual TLS.
+
+Generate each server or client's key pair and a certificate signing request, then have the CA sign the request. During the handshake, the peer verifies the certificate chain against its trusted CA and verifies possession of the corresponding private key. The Common Name (CN) of a client certificate is used as the client's role token for [mTLS authentication](security-tls-authentication.md), while server certificates should use Subject Alternative Names (SANs) for [Hostname verification](#hostname-verification).
 
 :::note
 
-The validity of these certificates is 365 days. It's highly recommended to use `sha256` or `sha512` as the signature algorithm, while `sha1` is not supported.
+The certificate-generation examples below use a validity of 365 days and SHA-256 signatures. Choose validity and rotation policies suitable for your deployment.
 
 :::
 
@@ -44,27 +43,40 @@ The validity of these certificates is 365 days. It's highly recommended to use `
 
 You can use either one of the following certificate formats to configure TLS encryption:
 * Recommended: Privacy Enhanced Mail (PEM).
-  See [Configure TLS encryption with PEM](#configure-tls-encryption-with-pem) for detailed instructions.
+  See [Configure TLS encryption with PEM](#configure-mtls-encryption-with-pem) for detailed instructions.
 * Optional: Java [KeyStore](https://en.wikipedia.org/wiki/Java_KeyStore) (JKS).
-  See [Configure TLS encryption with KeyStore](#configure-tls-encryption-with-keystore) for detailed instructions.
+  See [Configure TLS encryption with KeyStore](#configure-mtls-encryption-with-keystore) for detailed instructions.
 
 ### Hostname verification
 
 Hostname verification is a TLS security feature whereby a client refuses to connect to a server if the server certificate's Subject Alternative Name (SAN) does not match the hostname the client is connecting to. It defends against man-in-the-middle attacks even when the attacker holds a certificate signed by the trusted CA.
 
-Since Pulsar 5.0, hostname verification is **enabled by default** — for the Pulsar client, and for the broker/proxy/geo-replication connections that act as clients to other brokers. This requires every server certificate to carry a SAN that matches the hostname clients use to reach it (each broker/proxy therefore needs a DNS record and a certificate with the matching SAN; a wildcard SAN such as `*.broker.example.com` can cover a group of hosts).
+Hostname verification is **enabled by default** for Java clients and outbound TLS connections from brokers, proxies, WebSocket services, and Functions workers, including geo-replication. Give each server certificate SANs that match the addresses clients use in service URLs and the individual addresses advertised by brokers. A wildcard DNS SAN such as `*.broker.example.com` can cover a group of hosts; connections to an IP address require a matching IP SAN. Other language clients have independent releases and defaults; enable hostname verification explicitly in their configuration.
 
-Only the SAN is used for hostname matching. Matching against the certificate's Common Name (CN) is deprecated by [RFC 6125](https://datatracker.ietf.org/doc/html/rfc6125) and has been **removed in Pulsar 5.0** — a certificate that carries the hostname only in its CN (and no matching SAN) is rejected. Regenerate such certificates with a proper SAN (see [Create a server certificate](#create-a-server-certificate)). The CN of a *client* certificate is still used as the client's role token for [mTLS authentication](security-tls-authentication.md); this change affects only server-hostname matching.
+Pulsar delegates matching to the provider's standard endpoint-identification algorithm. The default JDK/native engines can still fall back to the server certificate's CN when connecting by hostname if there is no DNS SAN. A client explicitly using Conscrypt rejects CN-only certificates because Pulsar's former CN-tolerant verifier has been removed. Reissue CN-only certificates with SANs rather than relying on fallback; current [RFC 9525](https://datatracker.ietf.org/doc/html/rfc9525) uses SAN identities. The CN of a *client* certificate remains the role token for mTLS authentication.
 
-To make hostname verification succeed, ensure the SAN exactly matches the fully qualified domain name (FQDN) the client connects to. You can turn it off (not recommended in production) by setting `enableTlsHostnameVerification` to `false`. See [Configure clients](#configure-clients) for more details.
+Hostname verification settings differ by component:
 
-Moreover, as the administrator has full control of the CA, a bad actor is unlikely to be able to pull off a man-in-the-middle attack. `allowInsecureConnection` allows the client to connect to servers whose cert has not been signed by an approved CA. The client disables `allowInsecureConnection` by default, and you should always disable `allowInsecureConnection` in production environments. As long as you disable `allowInsecureConnection`, a man-in-the-middle attack requires that the attacker has access to the CA.
+| Component | Setting | Default |
+| --- | --- | --- |
+| Existing Java client/admin builder | `enableTlsHostnameVerification(true)` | Enabled |
+| Java client configuration / `client.conf` | `tlsHostnameVerificationEnable=true` | Enabled |
+| Broker, proxy, WebSocket service | `tlsHostnameVerificationEnabled=true` | Enabled |
+| Functions worker | `tlsEnableHostnameVerification: true` | Enabled |
+
+Disabling verification allows a trusted certificate for a different server name to be accepted. Configure matching certificates; see the [upgrade checklist](administration-upgrade-to-5.0.x-applications.md#check-authentication-tls-and-extensions) when updating an existing deployment.
+
+Certificate trust and hostname verification are separate checks. Keep `allowTlsInsecureConnection(false)` on Java client/admin builders and `tlsAllowInsecureConnection=false` in server configuration to reject untrusted certificates, as well as keeping hostname verification enabled.
 
 ## Configure mTLS encryption with PEM
 
 By default, Pulsar uses [netty-tcnative](https://github.com/netty/netty-tcnative). It includes two implementations, `OpenSSL` (default) and `JDK`. When `OpenSSL` is unavailable, `JDK` is used.
 
 To configure mTLS encryption with PEM, complete the following steps.
+
+The shared Java PEM reader in Pulsar accepts unencrypted PKCS#8 private keys (`BEGIN PRIVATE KEY`), PKCS#1 RSA keys (`BEGIN RSA PRIVATE KEY`), and SEC1 EC keys (`BEGIN EC PRIVATE KEY`). SEC1 parsing requires Bouncy Castle `bcpkix` and its matching dependencies on the classpath; otherwise, convert the EC key to PKCS#8. Parsing SEC1 does not register or select a Bouncy Castle cryptographic provider: the configured JCA provider still creates the private-key object. See [Bouncy Castle providers](security-bouncy-castle.md).
+
+The examples below use unencrypted PKCS#8 keys. Keep these keys readable only by the component that needs them. Independently released language clients can have different format support; verify their requirements before reusing a key file.
 
 ### Step 1: Create TLS certificates
 
@@ -104,7 +116,7 @@ Once you have created a CA, you can create certificate requests and sign them wi
    openssl genrsa -out server.key.pem 2048
    ```
 
-   The server expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+   Convert the key to PKCS#8 for this example.
 
    ```bash
    openssl pkcs8 -topk8 -inform PEM -outform PEM -in server.key.pem -out server.key-pk8.pem -nocrypt
@@ -164,7 +176,7 @@ At this point, you have a cert, `server.cert.pem`, and a key, `server.key-pk8.pe
    openssl genrsa -out broker_client.key.pem 2048
    ```
 
-   The broker_client expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+   Convert the key to PKCS#8 for this example.
 
    ```bash
    openssl pkcs8 -topk8 -inform PEM -outform PEM -in broker_client.key.pem -out broker_client.key-pk8.pem -nocrypt
@@ -192,7 +204,7 @@ At this point, you have a cert `broker_client.cert.pem` and a key `broker_client
    openssl genrsa -out admin.key.pem 2048
    ```
 
-   The admin expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+   Convert the key to PKCS#8 for this example.
 
    ```bash
    openssl pkcs8 -topk8 -inform PEM -outform PEM -in admin.key.pem -out admin.key-pk8.pem -nocrypt
@@ -220,7 +232,7 @@ At this point, you have a cert `admin.cert.pem` and a key `admin.key-pk8.pem`, w
    openssl genrsa -out client.key.pem 2048
    ```
 
-   The client expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+   Convert the key to PKCS#8 for this example.
 
    ```bash
    openssl pkcs8 -topk8 -inform PEM -outform PEM -in client.key.pem -out client.key-pk8.pem -nocrypt
@@ -248,7 +260,7 @@ At this point, you have a cert `client.cert.pem` and a key `client.key-pk8.pem`,
    openssl genrsa -out proxy.key.pem 2048
    ```
 
-   The proxy expects the key to be in [PKCS 8](https://en.wikipedia.org/wiki/PKCS_8) format. Enter the following command to convert it.
+   Convert the key to PKCS#8 for this example.
 
    ```bash
    openssl pkcs8 -topk8 -inform PEM -outform PEM -in proxy.key.pem -out proxy.key-pk8.pem -nocrypt
@@ -282,7 +294,7 @@ webServicePortTls=8081
 tlsTrustCertsFilePath=/path/to/ca.cert.pem
 # configure server certificate
 tlsCertificateFilePath=/path/to/server.cert.pem
-# configure server's priviate key
+# configure server's private key
 tlsKeyFilePath=/path/to/server.key-pk8.pem
 
 # enable mTLS
@@ -299,21 +311,19 @@ brokerClientKeyFilePath=/path/to/broker_client.key-pk8.pem
 
 To configure the broker (and proxy) to require specific TLS protocol versions and ciphers for TLS negotiation, you can use the TLS protocol versions and ciphers to stop clients from requesting downgraded TLS protocol versions or ciphers that may have weaknesses.
 
-By default, Pulsar uses OpenSSL when it is available, otherwise, Pulsar defaults back to the JDK implementation. OpenSSL currently supports `TLSv1.1`, `TLSv1.2` and `TLSv1.3`. You can acquire a list of supported ciphers from the OpenSSL ciphers command, i.e. `openssl ciphers -tls1_3`.
+The built-in factory enables **TLS 1.3 and TLS 1.2** when protocols are unset. Binary connections use Netty's native OpenSSL engine when available and fall back to the JDK engine. Explicit JSSE provider selection uses the JDK engine with that provider. HTTPS listeners prefer Conscrypt when available and usable, falling back to the JVM default provider. See [TLS providers and custom factories](#tls-providers-and-custom-factories) for explicit selection.
 
 Both the TLS protocol versions and cipher properties can take multiple values, separated by commas. The possible values for protocol versions and ciphers depend on the TLS provider that you are using.
 
 ```properties
 tlsProtocols=TLSv1.3,TLSv1.2
-tlsCiphers=TLS_DH_RSA_WITH_AES_256_GCM_SHA384,TLS_DH_RSA_WITH_AES_256_CBC_SHA
+tlsCiphers=TLS_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
 ```
 
-* `tlsProtocols=TLSv1.3,TLSv1.2`: List out the TLS protocols that you are going to accept from clients. By default, it is not set.
-* `tlsCiphers=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`: A cipher suite is a named combination of authentication, encryption, MAC and key exchange algorithm used to negotiate the security settings for a network connection using TLS network protocol. By default, it is null. See [OpenSSL Ciphers](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html) and [JDK Ciphers](http://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#ciphersuites) for more details.
+* `tlsProtocols` specifies the enabled protocol versions. An unset value enables TLS 1.3 and TLS 1.2 with the built-in factory.
+* `tlsCiphers` specifies cipher suites. When unset, the provider's defaults apply. The example includes a TLS 1.3 suite and a TLS 1.2 suite for RSA server certificates; check support in your chosen provider.
 
-For JDK 11, you can obtain a list of supported values from the documentation:
-- [TLS protocol](https://docs.oracle.com/en/java/javase/11/security/oracle-providers.html#GUID-7093246A-31A3-4304-AC5F-5FB6400405E2__SUNJSSEPROVIDERPROTOCOLPARAMETERS-BBF75009)
-- [Ciphers](https://docs.oracle.com/en/java/javase/11/security/oracle-providers.html#GUID-7093246A-31A3-4304-AC5F-5FB6400405E2__SUNJSSE_CIPHER_SUITES)
+For JDK provider behavior and supported algorithms, see the [JSSE reference guide](https://docs.oracle.com/en/java/javase/21/security/java-secure-socket-extension-jsse-reference-guide.html).
 
 ### Step 3: Configure proxies
 
@@ -361,7 +371,7 @@ PulsarClient client = PulsarClient.builder()
     .tlsKeyFilePath("/path/to/client.key-pk8.pem")
     .tlsCertificateFilePath("/path/to/client.cert.pem")
     .tlsTrustCertsFilePath("/path/to/ca.cert.pem")
-    .enableTlsHostnameVerification(true) // enabled by default since 5.0
+    .enableTlsHostnameVerification(true) // enabled by default
     .allowTlsInsecureConnection(false) // false by default, in any case
     .build();
 ```
@@ -373,9 +383,9 @@ PulsarClient client = PulsarClient.builder()
 from pulsar import Client
 
 client = Client("pulsar+ssl://broker.example.com:6651/",
-                tls_hostname_verification=True,  # enabled by default since 5.0
+                tls_hostname_verification=True,
                 tls_trust_certs_file_path="/path/to/ca.cert.pem",
-                tls_allow_insecure_connection=False) // defaults to false from v2.2.0 onwards
+                tls_allow_insecure_connection=False)
 ```
 
 </TabItem>
@@ -389,7 +399,7 @@ config.setUseTls(true);  // shouldn't be needed soon
 config.setTlsTrustCertsFilePath(caPath);
 config.setTlsAllowInsecureConnection(false);
 config.setAuth(pulsar::AuthTls::create(clientPublicKeyPath, clientPrivateKeyPath));
-config.setValidateHostName(true); // enabled by default since 5.0
+config.setValidateHostName(true);
 ```
 
 </TabItem>
@@ -403,7 +413,7 @@ const Pulsar = require('pulsar-client');
     serviceUrl: 'pulsar+ssl://broker.example.com:6651/',
     tlsTrustCertsFilePath: '/path/to/ca.cert.pem',
     useTls: true,
-    tlsValidateHostname: true, // enabled by default since 5.0
+    tlsValidateHostname: true,
     tlsAllowInsecureConnection: false,
   });
 })();
@@ -417,7 +427,7 @@ var certificate = new X509Certificate2("ca.cert.pem");
 var client = PulsarClient.Builder()
                          .TrustedCertificateAuthority(certificate) //If the CA is not trusted on the host, you can add it explicitly.
                          .VerifyCertificateAuthority(true) //Default is 'true'
-                         .VerifyCertificateName(false)     //Default is 'false'
+                         .VerifyCertificateName(true)
                          .Build();
 ```
 
@@ -497,7 +507,7 @@ authParams=tlsCertFile:/path/to/admin.cert.pem,tlsKeyFile:/path/to/admin.key-pk8
 
 ## Configure mTLS encryption with KeyStore
 
-By default, Pulsar uses [Conscrypt](https://github.com/google/conscrypt) for both broker service and Web service.
+PEM and KeyStore configurations use the same [provider-selection rules](#tls-providers-and-custom-factories). Choosing KeyStore format does not make Conscrypt the default for binary broker connections.
 
 To configure mTLS encryption with KeyStore, complete the following steps:
 
@@ -512,6 +522,7 @@ BROKER_COMMON_PARAMS="-storetype JKS -storepass brokerpw -keypass brokerpw -nopr
 
 # create keystore
 keytool -genkeypair -keystore broker.keystore.jks ${BROKER_COMMON_PARAMS} -keyalg RSA -keysize 2048 -alias broker -validity $DAYS \
+-ext SAN=DNS:broker.example.com \
 -dname 'CN=broker,OU=Unknown,O=Unknown,L=Unknown,ST=Unknown,C=Unknown'
 keytool -genkeypair -keystore client.keystore.jks ${CLIENT_COMMON_PARAMS} -keyalg RSA -keysize 2048 -alias client -validity $DAYS \
 -dname 'CN=client,OU=Unknown,O=Unknown,L=Unknown,ST=Unknown,C=Unknown'
@@ -527,7 +538,7 @@ keytool -importcert -keystore broker.truststore.jks ${BROKER_COMMON_PARAMS} -fil
 
 :::note
 
-To configure [hostname verification](#hostname-verification), you need to append ` -ext SAN=IP:127.0.0.1,IP:192.168.20.2,DNS:broker.example.com` to the value of `BROKER_COMMON_PARAMS` as the Subject Alternative Name (SAN).
+Replace the example SAN with the DNS names and IP addresses used to reach your broker, for example `-ext SAN=IP:127.0.0.1,IP:192.168.20.2,DNS:broker.example.com`. Supply `-ext` when generating the key pair; it is not an option for all the export/import commands that reuse `BROKER_COMMON_PARAMS`.
 
 :::
 
@@ -598,7 +609,7 @@ tlsTrustStorePassword=brokerpw
 
 # internal client/admin-client config
 tlsEnabledWithKeyStore=true
-brokerClientTlsEnabled=true
+tlsEnabledWithBroker=true
 brokerClientTlsEnabledWithKeyStore=true
 brokerClientTlsTrustStoreType=JKS
 brokerClientTlsTrustStore=/var/private/tls/client.truststore.jks
@@ -632,7 +643,7 @@ The following is an example.
         .tlsKeyStoreType("JKS")
         .tlsKeyStorePath("/var/private/tls/client.keystore.jks")
         .tlsKeyStorePassword("clientpw")
-        .enableTlsHostnameVerification(true) // enabled by default since 5.0
+        .enableTlsHostnameVerification(true) // enabled by default
         .allowTlsInsecureConnection(false) // false by default, in any case
         .build();
 ```
@@ -654,7 +665,7 @@ If you set `useKeyStoreTls` to `true`, be sure to configure `tlsTrustStorePath`.
         .tlsKeyStoreType("JKS")
         .tlsKeyStorePath("/var/private/tls/client.keystore.jks")
         .tlsKeyStorePassword("clientpw")
-        .enableTlsHostnameVerification(true) // enabled by default since 5.0
+        .enableTlsHostnameVerification(true) // enabled by default
         .allowTlsInsecureConnection(false) // false by default, in any case
         .build();
 ```
@@ -671,6 +682,29 @@ For [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](/referenc
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationKeyStoreTls
 authParams={"keyStoreType":"JKS","keyStorePath":"/var/private/tls/client.keystore.jks","keyStorePassword":"clientpw"}
 ```
+
+## TLS providers and custom factories
+
+Pulsar separates TLS engine selection, JSSE context creation, and JCA material loading:
+
+| Setting in broker/proxy configuration | Purpose |
+| --- | --- |
+| `tlsProvider` | Binary engine: `JDK`, `OPENSSL`, or `OPENSSL_REFCNT`. Unset selects the native engine when available, otherwise JDK. |
+| `jsseProvider` | Named Java security provider for `SSLContext`, such as `SunJSSE`, `Conscrypt`, or `BCJSSE`. When set, uses that provider through the JDK engine. |
+| `jcaProvider` | Named provider for loading keys, certificates, and stores. Unset preserves the JVM provider search order. |
+| `brokerClientTlsProvider`, `brokerClientJsseProvider`, `brokerClientJcaProvider` | The corresponding selections for the component's outbound client connections. |
+| `webServiceTlsProvider`, `webServiceTlsProtocols`, `webServiceTlsCiphers` | HTTPS-listener overrides; unset values inherit their general TLS counterparts. |
+
+Named providers must be available on the classpath and resolvable; an unavailable explicitly selected provider fails initialization. Format and provider are independent: for example, a deployment pinning `jcaProvider=BCFIPS` needs a store type that provider supports, rather than assuming `JKS` works. See [Bouncy Castle providers](security-bouncy-castle.md).
+
+For keys held in an HSM, external credential stores, or a different rotation mechanism, implement `org.apache.pulsar.tls.PulsarTlsFactory` from `org.apache.pulsar:pulsar-tls-factory-api`. Select it with `tlsFactoryClassName` and pass parameters through `tlsFactoryConfig`; select a separate outbound factory with `brokerClientTlsFactoryClassName` and `brokerClientTlsFactoryConfig`. The configuration accepts a JSON object or comma-separated `key=value` parameters. The v4 Java client and admin builders expose `tlsFactoryClassName(...)` and `tlsFactoryConfig(...)`; the v5 builder also accepts a factory instance. See [Custom TLS factories](security-extending.md#custom-tls-factories).
+
+For migration from `PulsarSslFactory` and its configuration keys, follow the [upgrade checklist](administration-upgrade-to-5.0.x-applications.md#check-authentication-tls-and-extensions).
+
+
+### Certificate rotation
+
+With the built-in file-based factory, `tlsCertRefreshCheckDurationSec` controls periodic certificate refresh in seconds. The default is 300. **Setting it to 0 disables background rotation**; it does not request a certificate refresh on every new listener connection. Restart listeners to load replaced certificates when background rotation is disabled. A failed rebuild retains the last good TLS instance and retries on a later material change. Verify new connections after rotating certificates; existing TLS connections do not renegotiate merely because a file changed. Custom factories implement their own loading and reload behavior.
 
 ## Enable TLS Logging
 

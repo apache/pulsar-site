@@ -4,6 +4,12 @@ title: Overview
 sidebar_label: "Kubernetes"
 ---
 
+:::warning Network perimeter security required
+
+A Pulsar cluster is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. This requirement can be met by deploying Pulsar in private networks and restricting access to trusted clients and services.
+
+:::
+
 The Apache Pulsar Helm Chart provides one of the most convenient ways to deploy and operate Pulsar on Kubernetes. With all the required components, the Helm Chart is scalable and thus suitable for large-scale deployments.
 
 The Apache Pulsar Helm Chart contains all components to support the features and functions that Pulsar delivers. You can install and configure these components separately. See [README](https://github.com/apache/pulsar-helm-chart#readme) for more details.

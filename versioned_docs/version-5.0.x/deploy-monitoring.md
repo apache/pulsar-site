@@ -34,6 +34,36 @@ The aggregated broker metrics are also exposed in the [Prometheus](https://prome
 http://$BROKER_ADDRESS:8080/metrics/
 ```
 
+### Configure topic metric labels
+
+You can expose selected persistent-topic properties as Prometheus labels. The same properties also appear on OpenTelemetry topic messaging metrics. In `broker.conf`, enable custom labels and list the allowed property keys:
+
+```properties
+exposeCustomTopicMetricLabelsEnabled=true
+allowedTopicPropertyKeysForMetrics=application,region
+```
+
+Restart the broker after changing these settings. Set the corresponding properties on the topics you want to monitor. A namespace's `allowed_topic_property_keys_for_metrics` policy can override the broker allowlist. Prometheus keeps the property keys unchanged; OpenTelemetry converts them to lowercase. Use keys that remain distinct after that conversion and a small, bounded set of values to control the number of series.
+
+### Monitor subscription backlog age
+
+Enable subscription storage backlog age in `broker.conf`:
+
+```properties
+exposeTopicLevelMetricsInPrometheus=true
+exposeSubscriptionBacklogAgeInPrometheus=true
+```
+
+Restart the broker to enable backlog-age computation. The [subscription metric](reference-metrics.md#subscription-metrics) `pulsar_subscription_storage_backlog_age_seconds` reports the best-effort age of the oldest unacknowledged message in each subscription's storage backlog. Use it alongside backlog size to detect subscriptions that have stopped making progress. The series is omitted when the age is unavailable, so an absent series does not establish that the backlog is empty. The setting defaults to `false`; when disabled, the topic-stat age field is `-1`.
+
+### Monitor read backpressure and memory
+
+The [OpenTelemetry inflight-read metrics](reference-metrics-opentelemetry.md#pulsarbrokermanaged_ledgerinflightreadlimit) expose the read-byte allowance and its used/free portions. Acquisition and release counters track permit events. Compare allowance usage with read throughput when investigating storage-read backpressure; the counters measure permit events, rather than bytes.
+
+Managed-ledger cache metrics track the separate `ml-cache` allocator. The default and cache allocators use Netty's adaptive allocator in the startup scripts. Compare allocator memory with logical entry-cache size and process memory; allocator-reserved memory can remain larger than cached payload bytes. Adaptive allocator active-allocation counts are unavailable and reported as `-1`. See [broker metrics](reference-metrics.md#broker-metrics).
+
+The [message position search metrics](reference-metrics-opentelemetry.md#message-position-search-metrics) measure timestamp seeks and expiry searches. They distinguish BookKeeper and offloaded ledgers, including entries read from cache, without adding a time series for every topic.
+
 ### Metadata store stats
 
 If you use [Oxia](administration-metadata-store.md) as the metadata store (recommended for new clusters), Oxia exposes its own metrics. Refer to the [Oxia documentation](https://oxia-db.github.io/) for the metrics it provides and how to scrape them.
@@ -60,7 +90,7 @@ http://$BOOKIE_ADDRESS:8000/metrics
 The default port for bookie is `8000`. You can change the port by configuring `prometheusStatsHttpPort` in the `conf/bookkeeper.conf` file.
 
 ### Managed cursor acknowledgment state
-The acknowledgment state is persistent to the ledger first. When the acknowledgment state fails to be persistent to the ledger, they are persistent to ZooKeeper. To track the stats of acknowledgment, you can configure the metrics for the managed cursor.
+The broker persists cursor acknowledgment state to BookKeeper and the configured metadata store, which can be ZooKeeper or Oxia. The legacy metric names below retain `Zookeeper` for metadata-store persistence. To track acknowledgment persistence, monitor the managed cursor metrics.
 
 ```
 pulsar_ml_cursor_persistLedgerSucceed(namespace=", ledger_name="", cursor_name:")
@@ -92,9 +122,13 @@ The aggregated functions and connectors metrics can be exposed in Prometheus for
 http://$FUNCTIONS_WORKER_ADDRESS:$WORKER_PORT/metrics:
 ```
 
-## Configure Prometheus
+## Configure Prometheus or VictoriaMetrics {#configure-prometheus}
 
 You can use Prometheus to collect all the metrics exposed for Pulsar components and set up [Grafana](https://grafana.com/) dashboards to display the metrics and monitor your Pulsar cluster. For details, refer to [Prometheus guide](https://prometheus.io/docs/introduction/getting_started/).
+
+[VictoriaMetrics](https://docs.victoriametrics.com/) is an alternative to Prometheus with very low CPU, memory, and storage overhead. It supports Prometheus-compatible metrics scraping and query APIs, so you can use it with Pulsar's metrics endpoints and Grafana dashboards. Since **Helm chart version 4.0.0**, the Apache Pulsar Helm chart uses VictoriaMetrics through `victoria-metrics-k8s-stack` for monitoring.
+
+For either monitoring system, [match the scrape interval to the stats periods](reference-metrics.md#matching-the-scrape-interval-to-the-stats-periods).
 
 When you run Pulsar on bare metal, you can provide the list of nodes to be probed. When you deploy Pulsar in a Kubernetes cluster, the monitoring is set up automatically. For details, refer to [Kubernetes instructions](helm-deploy.md).
 
@@ -104,13 +138,13 @@ When you collect time-series statistics, the major problem is to make sure the n
 
 ### Grafana
 
-You can use Grafana to create a dashboard driven by the data that is stored in Prometheus.
+You can use Grafana to create dashboards from metrics stored in Prometheus or VictoriaMetrics.
 
-When you deploy Pulsar on Kubernetes with the Pulsar Helm Chart, a `pulsar-grafana` Docker image is enabled by default. You can use the docker image with the principal dashboards.
+The Pulsar Helm chart provides Grafana through `victoria-metrics-k8s-stack`. You can import dashboards for the Pulsar components you want to monitor.
 
 The following are some Grafana dashboards examples:
 
-- [pulsar-grafana](deploy-monitoring.md#grafana): a Grafana dashboard that displays metrics collected in Prometheus for Pulsar clusters running on Kubernetes.
+- [pulsar-grafana-dashboards](https://github.com/lhotari/pulsar-grafana-dashboards): dashboards for Pulsar on Kubernetes, compatible with the `victoria-metrics-k8s-stack` used by the Apache Pulsar Helm chart.
 - [apache-pulsar-grafana-dashboard](https://github.com/streamnative/apache-pulsar-grafana-dashboard): a collection of Grafana dashboard templates for different Pulsar components running on both Kubernetes and on-premise machines.
 
 ## Alerting rules
@@ -119,8 +153,7 @@ You can set alerting rules according to your Pulsar environment. To configure al
 ## OpenTelemetry
 
 ### Status
-Pulsar emits OpenTelemetry metrics starting from version 3.3.0. OpenTelemetry log and trace signals are not exposed by
-Pulsar. OpenTelemetry support is currently **experimental** and complements the pre-existing Prometheus metric system,
+Pulsar brokers emit OpenTelemetry metrics starting from version 3.3.0. The v4 Java client also provides [OpenTelemetry tracing](pathname:///client-libraries/java-tracing) for producer sends and consumer processing. The broker configuration below configures metrics; it does not enable client tracing. OpenTelemetry support is currently **experimental** and complements the pre-existing Prometheus metric system,
 with the goal of eventually replacing it. The metrics it exposes are semantically equivalent to the Prometheus metrics.
 
 For a detailed list of OpenTelemetry metrics exposed by Pulsar, refer to [OpenTelemetry Metrics](reference-metrics-opentelemetry.md).
@@ -185,6 +218,8 @@ Pulsar supports exporting OpenTelemetry metrics in Prometheus format. This expor
 opening up a server in the local Pulsar process. To use it, set `OTEL_METRICS_EXPORTER=prometheus` and the Prometheus
 listener details using the following environment variables:
 
+The Prometheus exporter binds to `0.0.0.0` by default. Set `OTEL_EXPORTER_PROMETHEUS_HOST` to choose a different bind address.
+
 ```shell
 OTEL_EXPORTER_PROMETHEUS_HOST
 OTEL_EXPORTER_PROMETHEUS_PORT
@@ -212,7 +247,7 @@ Any of these attributes can be overridden by means of environment variable `OTEL
 attributes can be added too. For example:
 
 ```shell
-OTEL_RESOURCE_ATTRIBUTES=pulsar.cluster=my-cluster,service.name=my-broker,service.version=1.0.0,custom.attr=custom-value
+OTEL_RESOURCE_ATTRIBUTES=pulsar.cluster=my-cluster,service.name=my-broker,service.version=@pulsar:version@,custom.attr=custom-value
 ```
 
 For further details on configuring resource attributes, refer to the SDK [documentation](https://github.com/open-telemetry/opentelemetry-java/tree/main/sdk-extensions/autoconfigure#opentelemetry-resource-attributes).

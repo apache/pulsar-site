@@ -5,7 +5,9 @@ sidebar_label: "Built-in connector"
 description: Learn configuration, examples, and Java classes of Pulsar IO connectors.
 ---
 
-Pulsar distribution includes a set of common connectors that have been packaged and tested with the rest of Apache Pulsar. These built-in connectors import and export data from some of the most commonly used data systems.
+Pulsar IO connectors import and export data from external systems. Connector implementations are maintained in [apache/pulsar-connectors](https://github.com/apache/pulsar-connectors) with a release cycle separate from Pulsar core. The server distribution and Docker image do not bundle these connector NARs.
+
+The term **built-in** refers to a connector installed in the worker's connector directory and selected by name, such as `builtin://cassandra`; it does not mean the connector ships in the image. [Install the required NARs](io-quickstart.md#install-pulsar-and-built-in-connector) on every worker and verify compatibility with your Pulsar version.
 
 Using any of these built-in connectors is as easy as writing a simple connector and running the connector locally or submitting the connector to a Pulsar Functions cluster.
 

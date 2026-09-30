@@ -6,6 +6,10 @@ sidebar_label: "Plugin"
 
 You can develop various plugins for Pulsar, such as entry filters, protocol handlers, interceptors, and so on.
 
+## Build requirements
+
+Use **JDK 21 or later** to build plugins and extensions that depend on broker-side libraries such as `pulsar-broker`. These libraries target Java 21, so the plugin build also needs a compiler that can read Java 21 class files. Configure your local build and CI environment accordingly, and build and test against the Pulsar version used by the target broker.
+
 ## Additional Servlets
 
 This chapter describes what additional servlets are and how to use them.

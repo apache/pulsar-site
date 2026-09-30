@@ -32,7 +32,7 @@ If you enable authorization on the broker, the broker checks the authorization o
 
 ### Proxy Roles
 
-By default, the broker treats the connection between a proxy and the broker as a normal user connection. The broker authenticates the user as the role configured in `proxy.conf` (see [Enable mTLS authentication on proxies](security-tls-authentication.md#enable-mtls-authentication-on-proxies)). However, when the user connects to the cluster through a proxy, the user rarely requires authentication. The user expects to be able to interact with the cluster as the role for which they have authenticated with the proxy.
+The proxy authenticates the client, then authenticates its own connection to the broker using the credentials configured in `proxy.conf`. These identities are separate: the authenticated proxy role identifies the gateway, while the *original principal* identifies the client whose operation it forwards.
 
 Pulsar uses *Proxy roles* to enable the authentication. Proxy roles are specified in the broker configuration file, [`conf/broker.conf`](reference-configuration.md). If a client that is authenticated with a broker is one of its `proxyRoles`, all requests from that client must also carry information about the role of the client that is authenticated with the proxy. This information is called the *original principal*. If the *original principal* is absent, the client is not able to access anything.
 
@@ -49,6 +49,12 @@ You can specify the roles as proxy roles in [`conf/broker.conf`](reference-confi
 ```properties
 proxyRoles=proxy,<my-proxy-role>
 ```
+
+Brokers default to `authenticateOriginalAuthData=true`: they also authenticate the client's forwarded credentials. For authentication methods with replayable credentials, such as tokens, set `forwardAuthorizationCredentials=true` in `proxy.conf` so the broker receives that data.
+
+For **TLS client-certificate authentication or SASL through a proxy**, explicitly set `authenticateOriginalAuthData=false` in `broker.conf`. The broker's TLS connection presents the proxy's certificate, and a SASL handshake cannot be replayed as a separate client-to-broker exchange. In this mode, the broker trusts the proxy's authenticated original principal and still authorizes the proxy role and original principal. Restrict `proxyRoles` to trusted proxies. See [Proxy authentication limitations](security-overview.md#authentication-data-limitations-on-the-proxies).
+
+The same separation applies to proxied HTTP administration. Tenant administration requires **both** the proxy role and original principal to be a superuser or an administrator of the tenant. A tenant-admin proxy role alone does not authorize a client that lacks tenant-admin permission. Custom authorization providers receive the original principal's forwarded authentication data separately from the proxy's authentication data; do not use the proxy's credentials to establish the original client's permissions.
 
 ## Administer tenants
 
@@ -80,6 +86,18 @@ persistent://tenant/namespace/topic
 
 You can use [Pulsar Admin Tools](admin-api-permissions.md) for managing permission in Pulsar.
 
+### Schema and transaction requests over the binary protocol
+
+With authorization enabled, Pulsar checks topic permissions for binary schema requests. Fetching a schema requires the `LOOKUP` topic operation; registering a schema through `GetOrCreateSchema` requires `PRODUCE`. The standard `PulsarAuthorizationProvider` grants lookup through produce or consume access; there is no separate `LOOKUP` permission to grant. Custom authorization providers must handle these operations for schema requests as well as ordinary topic access. Proxied requests check both the proxy role and original principal, supplying the original authentication data to the provider when available.
+
+With authorization enabled, registering a produced partition with the v4 transaction coordinator requires produce permission on that topic. Registering an acknowledged subscription with that coordinator requires consume permission for the topic and subscription. Owning the transaction does not by itself grant access to its participants. Test transactional applications with their actual roles, including any subscription-role or subscription-name restrictions.
+
+### Subscription permissions for administrative operations
+
+Pulsar applies namespace subscription-role grants and the `Prefix` subscription authorization mode to administrative subscription operations, including namespace unsubscribe and backlog clearing. A non-admin caller needs consume permission and must satisfy the restrictions for the named subscription. With `Prefix`, the subscription name must start with the authorized role. The checks also apply to anonymous roles and the original principal of a proxied request.
+
+For non-admin callers, clearing backlog across a namespace or expiring messages across all subscriptions of a topic processes only the subscriptions that the caller may access; unauthorized subscriptions are skipped. A successful bulk request therefore does not mean every subscription was changed. Clearing replication-cursor backlog requires superuser or tenant-admin privileges. Review automation that previously relied on namespace consume permission alone, and verify the affected subscriptions after bulk operations.
+
 ### Pulsar admin authentication
 
 ```java
@@ -101,18 +119,24 @@ PulsarAdmin admin = PulsarAdmin.builder()
 
 ## Authorize an authenticated client with multiple roles
 
-When a client is identified with multiple roles in a token (the type of role claim in the token is an array) during the authentication process, Pulsar supports checking the permissions of all the roles and further authorizing the client as long as one of its roles has the required permissions.
+When a token contains multiple roles, Pulsar can authorize an operation if any of those roles has the required permission. `MultiRolesTokenAuthorizationProvider` obtains the roles from the initialized authentication provider's validated token. Signature, time, and audience/issuer checks configured on that provider apply before additional roles are used.
 
 :::note
 
-This authorization method is only compatible with [JWT authentication](security-jwt.md).
+This authorization method supports [JWT authentication](security-jwt.md) and [OpenID Connect authentication](security-openid-connect.md#authorize-multiple-roles). Authentication and authorization must both be enabled, with an initialized token or OpenID authentication provider.
 
 :::
 
 To enable this authorization method, configure the authorization provider as `MultiRolesTokenAuthorizationProvider` in the `conf/broker.conf` file.
 
- ```conf
- # Authorization provider fully qualified class-name
- authorizationProvider=org.apache.pulsar.broker.authorization.MultiRolesTokenAuthorizationProvider
- ```
+```properties
+authenticationEnabled=true
+authorizationEnabled=true
+authorizationProvider=org.apache.pulsar.broker.authorization.MultiRolesTokenAuthorizationProvider
+# The claim used by the authorization provider. Its default is roles.
+tokenAuthClaim=roles
+```
 
+Configure the corresponding authentication provider as well, including its verification keys or OIDC issuer/audience settings. The claim can contain a string or an array of strings. `AuthenticationProviderToken` normally uses `sub` for its single principal, while the multi-role provider defaults to `roles` when `tokenAuthClaim` is unset; configure the intended claim explicitly. For OIDC, use `openIDRoleClaim` for the authentication principal and `tokenAuthClaim` for multi-role authorization, typically naming the same claim.
+
+For token/OIDC clients through a proxy, set `forwardAuthorizationCredentials=true` in `proxy.conf` and retain `authenticateOriginalAuthData=true` on the brokers so they can validate the original token and expand its roles. If only a forwarded principal is available, the broker authorizes that principal rather than inferring additional roles from the proxy's credentials. A token in a proxied HTTP request is used for additional original-client roles only when it authenticates as that original principal.

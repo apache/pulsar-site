@@ -51,9 +51,11 @@ Packages can efficiently use the same set of functions and IO connectors. For ex
    |tenant|Specify the tenant where you want to create the package.|
    |namespace|Specify the namespace where you want to create the package.|
    |name|Specify the complete name of the package, using the format `<tenant>/<namespace>/<package name>`.|
-   |version|Specify the version of the package using the format `MajorVerion.MinorVersion` in numerals.|
+   |version|Specify a version string, such as `1.0` or `v0.1`. Numeric major/minor formatting is not required.|
 
-   The information you provide creates a URL for a package, in the format `<type>://<tenant>/<namespace>/<package name>/<version>`.
+   The information you provide creates a URL for a package, in the format `<type>://<tenant>/<namespace>/<package name>@<version>`.
+
+   Pulsar validates each tenant, namespace, package name, and version as a single storage-path component. Components cannot be `.` or `..`, contain `/`, `\`, or a NUL character, or be empty. An omitted or empty version resolves to `latest` before validation. Check existing package names and automation for these restrictions before upgrading.
 
 2. Upload the elements to the package, i.e., the functions, sources, and sinks that you want to use across namespaces.
 
@@ -66,6 +68,25 @@ sink://public/default/mysql-sink@1.0
 function://my-tenant/my-ns/my-function@0.1
 source://my-tenant/my-ns/mysql-cdc-source@2.3
 ```
+
+## Metadata format and upgrades
+
+The package-management service stores metadata for versioned Pulsar Functions and IO connector packages (`function://`, `source://`, and `sink://` URLs). These records contain the package description, contact, timestamps, and custom properties. Package management is disabled by default (`enablePackagesManagement=false`); the following guidance applies when you enable it.
+
+Pulsar stores this package metadata as JSON by default (`packagesManagementJsonSerializationEnabled=true`), replacing the previous default of Java-based serialization. With `packagesManagementAllowLegacyJavaSerialization=true` (the default), it can read Java-serialized metadata from Pulsar 4.0.x and 4.2.x through a restricted deserialization filter. These settings concern the package's metadata record, not the uploaded JAR, NAR, or other package payload.
+
+Uploading a package or updating its metadata writes the configured format. Changing the write-format setting does not convert existing records. If you need rollback to 4.x, set `packagesManagementJsonSerializationEnabled=false` before upgrading and retain legacy reads. Keep Java writes throughout mixed-version operation and the rollback window; 4.x cannot read JSON metadata. See [package-management rollback guidance](administration-upgrade-to-5.0.x.md#preserve-and-rehearse-rollback).
+
+The default `broker.conf` does not list these serialization settings. For Pulsar Helm chart deployments, set the environment variables in `broker.configData` using `PULSAR_PREFIX_packagesManagementJsonSerializationEnabled=false` and `PULSAR_PREFIX_packagesManagementAllowLegacyJavaSerialization=true` so the configuration helper adds the missing keys. See the [Helm example in the upgrade guide](administration-upgrade-to-5.0.x.md#preserve-and-rehearse-rollback).
+
+After the old package-metadata readers have been retired and the rollback window has closed, you can migrate retained metadata to JSON:
+
+1. Ensure every package-management broker uses JSON writes and still allows legacy reads.
+2. List the packages and versions that must remain usable. Read each Java record and submit its complete metadata to the REST metadata-update endpoint or Java admin `updateMetadata` method through a broker configured for JSON writes. The update replaces the stored record without deserializing it first and leaves the package payload in place. Supply the complete description, contact, properties, and `createTime` that must be retained; the server sets `modificationTime` to the update time. An omitted field is not preserved. The CLI `update-metadata` command supplies description, contact, and properties, but does not provide an option to retain `createTime`.
+3. Verify that all retained versions can be inspected and downloaded, including versions still referenced by Functions or connectors.
+4. Once no required legacy records remain and the rollback window is closed, set `packagesManagementAllowLegacyJavaSerialization=false` on every package-management broker and restart them. Do not disable legacy reads while writes are configured to use the legacy format.
+
+The write-format and legacy-read flags are startup settings. Turning off legacy reads rejects remaining Java-serialized records; it does not migrate them. Keep a record of which package versions were rewritten so a rollback plan accounts for metadata compatibility as well as broker binaries.
 
 ## Package management in Pulsar
 
@@ -177,7 +198,7 @@ You can use the following commands to delete a package.
 The following command deletes a package of version 0.1.
 
 ```shell
-bin/pulsar-admin packages delete functions://public/default/example@v0.1
+bin/pulsar-admin packages delete function://public/default/example@v0.1
 ```
 
 </TabItem>

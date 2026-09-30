@@ -17,6 +17,8 @@ By default, Pulsar persistently stores *all* unacknowledged messages on multiple
 
 Pulsar also, however, supports **non-persistent topics**, which are topics on which messages are *never* persisted to disk and live only in memory. When using non-persistent delivery, killing a Pulsar [broker](reference-terminology.md#broker) or disconnecting a subscriber to a topic means that all in-transit messages are lost on that (non-persistent) topic, meaning that clients may see message loss.
 
+The v4 Java client ignores a configured acknowledgment timeout for non-persistent topics. These topics retain no backlog to replay, so an acknowledgment timeout cannot provide redelivery. Use persistent topics when recovery of unacknowledged messages is required.
+
 Non-persistent topics have names of this form (note the `non-persistent` in the name):
 
 ```http

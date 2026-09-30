@@ -6,9 +6,15 @@ original_id: deploy-ibm
 description: Learn to deploy a Pulsar cluster on IBM cloud.
 ---
 
+:::warning Network perimeter security required
+
+A Pulsar cluster is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. This requirement can be met by deploying Pulsar in private networks and restricting access to trusted clients and services.
+
+:::
+
 :::tip
 
-This tutorial uses Apache Pulsar 2.9.3 as an example. If you want to upgrade Pulsar version, follow the instructions in [Helm Upgrade Guide](https://pulsar.apache.org/docs/2.10.x/helm-upgrade/).
+Select the Pulsar image version for your deployment in the Helm values. For upgrades, follow the [Helm upgrade guide](helm-upgrade.md).
 
 :::
 

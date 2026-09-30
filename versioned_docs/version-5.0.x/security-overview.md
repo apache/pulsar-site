@@ -20,7 +20,7 @@ Pulsar security is based on the following core pillars.
 
 By default, Pulsar configures no encryption, authentication, or authorization. Any clients can communicate to Pulsar via plain text service URLs. So you must ensure that Pulsar accessing via these plain text service URLs is restricted to trusted clients only. In such cases, you can use network segmentation and/or authorization ACLs to restrict access to trusted IPs. If you use neither, the state of the cluster is wide open and anyone can access the cluster.
 
-Apache Pulsar uses an [Authentication Provider](#authentication) or an [Authentication Provider Chain](security-extending.md#proxybroker-authentication-plugin) to establish the identity of a client and then assign a *role token* (a string like `admin` or `app1`) to that client. This role token can represent a single client or multiple clients and is then used for [Authorization](security-authorization.md) to determine what the client is authorized to do. You can use roles to control permission for clients to produce or consume from certain topics, administer the configuration for tenants, and so on.
+Apache Pulsar uses an [Authentication Provider](#authentication) or an [Authentication Provider Chain](security-extending.md#brokerproxy-authentication-plugin) to establish the identity of a client and then assign a *role token* (a string like `admin` or `app1`) to that client. This role token can represent a single client or multiple clients and is then used for [Authorization](security-authorization.md) to determine what the client is authorized to do. You can use roles to control permission for clients to produce or consume from certain topics, administer the configuration for tenants, and so on.
 
 ## Encryption
 
@@ -51,11 +51,15 @@ When you use proxies between clients and brokers, there are two authentication d
 * authentication data from proxies that brokers default to authenticate - known as **self-authentication**.
 * authentication data from clients that proxies forward to brokers for authenticating - known as **original authentication**.
 
-**Important:** If your authentication data contains an expiration time, or your authorization provider depends on the authentication data, you must:
+For replayable credentials such as tokens, configure forwarding when the broker must recheck the original credentials or the authorization provider needs them:
 
-1. Ensure your authentication data of proxies has no expiration time since brokers don't support refreshing this authentication data.
+1. Ensure the proxy's own credentials remain valid for its broker connection. The protocol does not independently refresh the proxy and original-client credentials when original credentials are forwarded; test refresh and reconnect behavior with your authentication plugin.
 2. Set `forwardAuthorizationCredentials` to `true` in the `conf/proxy.conf` file.
 3. Set `authenticateOriginalAuthData` to `true` in the `conf/broker.conf` file, which ensures that brokers recheck the client authentication.
+
+Pulsar defaults `authenticateOriginalAuthData` to `true`. The forwarding procedure above applies to replayable credentials such as tokens. For **TLS client-certificate or SASL authentication through a proxy**, set `authenticateOriginalAuthData=false` on the brokers: the broker sees the proxy's certificate, and the client-to-proxy SASL exchange cannot be replayed. The proxy authenticates the client, and the broker trusts its forwarded identity while checking authorization for both identities. Keep `proxyRoles` limited to trusted proxies; see [Proxy roles](security-authorization.md#proxy-roles).
+
+Java client authentication uses asynchronous credential acquisition. Existing authentication plugins are adapted so blocking credential work runs outside Netty event-loop threads. New plugins can use the v5 authentication interfaces directly; see [Extend authentication](security-extending.md#asynchronous-client-authentication).
 
 **What's next?**
 

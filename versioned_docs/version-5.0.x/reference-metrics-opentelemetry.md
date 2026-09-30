@@ -4,7 +4,7 @@ title: Pulsar OpenTelemetry Metrics
 sidebar_label: "OpenTelemetry Metrics"
 ---
 
-Pulsar exposes the following OpenTelemetry metrics.
+Pulsar exposes the following OpenTelemetry metrics when an OpenTelemetry SDK and exporter are configured. Names below are OpenTelemetry instrument names; a Prometheus exporter can translate names and append unit or type suffixes. See [metrics changes when upgrading](administration-upgrade-to-5.0.x-metrics.md).
 
 ## Broker
 
@@ -12,7 +12,7 @@ Pulsar exposes the following OpenTelemetry metrics.
 
 #### pulsar.broker.connection.count
 The number of connections.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{connection}`
 * Attributes:
   * `pulsar.connection.status` - The status of the connection. Can be one of:
@@ -22,7 +22,7 @@ The number of connections.
 
 #### pulsar.broker.connection.create.operation.count
 The number of connection create operations.
-* Type: UpDownCounter
+* Type: Counter
 * Unit: `{operation}`
 * Attributes:
   * `pulsar.connection.create.operation.status` - The status of the create operation. Can be one of:
@@ -41,6 +41,8 @@ The number of times a connection has been rate limited.
     * `unthrottled`
 
 ### Topic Messaging metrics
+
+Persistent-topic messaging metrics can include custom attributes derived from topic properties. Enable `exposeCustomTopicMetricLabelsEnabled` and allow the property keys with `allowedTopicPropertyKeysForMetrics`, or a namespace-level allowlist. OpenTelemetry converts the allowed property keys to lowercase; Prometheus keeps the original keys. These attributes apply to persistent topics. See [Configure topic metric labels](deploy-monitoring.md#configure-topic-metric-labels).
 
 #### pulsar.broker.topic.subscription.count
 The number of Pulsar subscriptions of the topic served by this broker.
@@ -315,7 +317,7 @@ The total number of compaction operations.
 
 #### pulsar.broker.topic.compaction.duration
 The total time duration of compaction operations on the topic.
-* Type: DoubleUpDownCounter
+* Type: UpDownCounter
 * Unit: `s`
 * Attributes:
   * `pulsar.domain` - The domain of the topic. Can be one of:
@@ -426,10 +428,12 @@ The total number of message batches (entries) delayed for dispatching.
 
 ### Topic Lookup metrics
 
-#### pulsar.broker.lookup.request.duration
+<span id="pulsarbrokerlookuprequestduration" />
+
+#### pulsar.broker.request.topic.lookup.duration
 The duration of topic lookup requests (either binary or HTTP)
 * Type: Histogram
-* Unit: `second`
+* Unit: `s`
 * Attributes:
   * `pulsar.lookup.response` - The response type of the lookup request
     * `failure`
@@ -456,6 +460,14 @@ The maximum number of pending topic load operations in the broker. Equal to "max
 * Type: UpDownCounter
 * Unit: `{operation}`
 
+#### pulsar.broker.topic.policies.cache.init.timeout.count
+
+Number of namespace topic-policy cache initialization timeouts. A timeout closes the stuck `__change_events` reader and clears cached state so topic loading can be retried.
+
+* Type: Counter
+* Unit: `{timeout}`
+* Attributes: None.
+
 ### Metadata Store metrics
 
 #### pulsar.broker.metadata.store.outgoing.size
@@ -465,12 +477,9 @@ The total amount of data written to the metadata store.
 * Attributes:
   * `pulsar.metadata.store.name` - The name of the metadata store.
 
-#### pulsar.broker.metadata.store.executor.queue.size
-The number of batch operations in the metadata store executor queue.
-* Type: UpDownCounter
-* Unit: `{operation}`
-* Attributes:
-  * `pulsar.metadata.store.name` - The name of the metadata store.
+<span id="pulsarbrokermetadatastoreexecutorqueuesize" />
+
+For the batch metadata-store executor queue depth, use the Prometheus gauge `pulsar_batch_metadata_store_executor_queue_size`; there is no corresponding Pulsar OpenTelemetry instrument. See [Metadata store metrics](reference-metrics.md#metadata-store-metrics).
 
 ### Consumer metrics
 
@@ -569,6 +578,14 @@ The number of permits currently available for this consumer.
   * `pulsar.subscription.type` - The subscription type.
   * `pulsar.consumer.name` - The name of the consumer.
   * `pulsar.consumer.id` - The ID of the consumer.
+
+#### pulsar.broker.consumer.blocked
+
+Whether a consumer is blocked because it has too many unacknowledged messages: `1` when blocked, `0` otherwise.
+
+* Type: UpDownCounter
+* Unit: `1`
+* Attributes: The same topic, subscription, and consumer attributes as [consumer message metrics](#pulsarbrokerconsumermessageoutgoingcount).
 
 ### Managed Ledger Cursor metrics
 
@@ -696,7 +713,7 @@ The byte amount of data retrieved from cache operations.
     * `miss` - Indicates a failed cache lookup operation.
 
 #### pulsar.broker.managed_ledger.cache.pool.allocation.active.count
-The number of currently active allocations in the direct arena.
+The number of currently active allocations in the managed-ledger cache allocator. This is the separate `ml-cache` allocator. Adaptive and unpooled allocators report `-1` for unsupported allocation counts.
 * Type: UpDownCounter
 * Unit: `{allocation}`
 * Attributes:
@@ -706,7 +723,7 @@ The number of currently active allocations in the direct arena.
     * `huge`
 
 #### pulsar.broker.managed_ledger.cache.pool.allocation.size
-The memory allocated in the direct arena.
+Direct memory reserved or used by the managed-ledger cache allocator. This is the separate `ml-cache` allocator. For adaptive and unpooled allocators, both `allocated` and `used` use the allocator's reported direct-memory usage. This value differs from logical cached entry size.
 * Type: UpDownCounter
 * Unit: `{By}`
 * Attributes:
@@ -887,6 +904,49 @@ Estimated number of bytes retained by managed ledger data read from storage or c
     * `used`
     * `free`
 
+#### pulsar.broker.managed_ledger.inflight.read.acquire.count
+The number of times an inflight-read permit acquisition decreases the remaining byte allowance. This counts acquisition events, not bytes or acquisition attempts that wait or fail.
+
+* Type: Counter
+* Unit: `{event}`
+
+#### pulsar.broker.managed_ledger.inflight.read.release.count
+The number of times inflight-read permits are released, increasing the remaining byte allowance.
+
+* Type: Counter
+* Unit: `{event}`
+
+### Message position search metrics
+
+These broker-wide metrics measure timestamp searches used by seeks and message expiry. They do not carry topic or subscription attributes.
+
+#### pulsar.broker.message.find.duration
+Time taken to find a message position by timestamp.
+
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.broker.message.find.reason` - `seek` or `expiry`.
+  * `pulsar.broker.message.find.result` - `found`, `not_found`, or `failure`.
+
+#### pulsar.broker.message.find.entry.read.count
+The number of entries read while finding a message position by timestamp, including entries served from the broker entry cache.
+
+* Type: Counter
+* Unit: `{entry}`
+* Attributes:
+  * `pulsar.broker.message.find.reason` - `seek` or `expiry`.
+  * `pulsar.broker.message.find.entry.storage` - `bookkeeper` or `offloaded`, according to the ledger's storage location even when the entry is served from cache.
+
+#### pulsar.broker.message.find.entry.read.size
+The total bytes read while finding a message position by timestamp, including entries served from the broker entry cache.
+
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.broker.message.find.reason` - `seek` or `expiry`.
+  * `pulsar.broker.message.find.entry.storage` - `bookkeeper` or `offloaded`, according to the ledger's storage location even when the entry is served from cache.
+
 ### Web Executor Service metrics
 
 #### pulsar.web.executor.thread.limit
@@ -912,7 +972,7 @@ The current usage of threads in the pulsar-web executor pool.
 
 #### pulsar.broker.replication.message.incoming.count
 The total number of messages received from the remote cluster through this replicator.
-* Type: Counter
+* Type: UpDownCounter
 * Unit: `{message}`
 * Attributes:
   * `pulsar.domain` - The domain of the topic. Can be one of:
@@ -926,7 +986,7 @@ The total number of messages received from the remote cluster through this repli
 
 #### pulsar.broker.replication.message.outgoing.count
 The total number of messages sent to the remote cluster through this replicator.
-* Type: Counter
+* Type: UpDownCounter
 * Unit: `{message}`
 * Attributes:
   * `pulsar.domain` - The domain of the topic. Can be one of:
@@ -940,7 +1000,7 @@ The total number of messages sent to the remote cluster through this replicator.
 
 #### pulsar.broker.replication.message.incoming.size
 The total number of messages bytes received from the remote cluster through this replicator.
-* Type: Counter
+* Type: UpDownCounter
 * Unit: `{By}`
 * Attributes:
   * `pulsar.domain` - The domain of the topic. Can be one of:
@@ -954,7 +1014,7 @@ The total number of messages bytes received from the remote cluster through this
 
 #### pulsar.broker.replication.message.outgoing.size
 The total number of messages bytes sent to the remote cluster through this replicator.
-* Type: Counter
+* Type: UpDownCounter
 * Unit: `{By}`
 * Attributes:
   * `pulsar.domain` - The domain of the topic. Can be one of:
@@ -968,7 +1028,7 @@ The total number of messages bytes sent to the remote cluster through this repli
 
 #### pulsar.broker.replication.message.backlog.count
 The total number of messages in the backlog for this replicator.
-* Type: Counter
+* Type: UpDownCounter
 * Unit: `{message}`
 * Attributes:
   * `pulsar.domain` - The domain of the topic. Can be one of:
@@ -996,7 +1056,7 @@ The age of the oldest message in the replicator backlog.
 
 #### pulsar.broker.replication.message.expired.count
 The total number of messages that expired for this replicator.
-* Type: Counter
+* Type: UpDownCounter
 * Unit: `{message}`
 * Attributes:
   * `pulsar.domain` - The domain of the topic. Can be one of:
@@ -1010,7 +1070,7 @@ The total number of messages that expired for this replicator.
 
 #### pulsar.broker.replication.message.dropped.count
 The total number of messages dropped by this replicator.
-* Type: Counter
+* Type: UpDownCounter
 * Unit: `{message}`
 * Attributes:
   * `pulsar.domain` - The domain of the topic. Can be one of:
@@ -1148,6 +1208,17 @@ Time taken to complete a consistent snapshot operation across clusters.
   * `pulsar.replication.subscription.snapshot.operation.result` - The result of the snapshot operation. Can be one of:
     * `success`
     * `timeout`
+
+### Transaction buffer client pending requests
+
+#### pulsar.broker.transaction.buffer.client.pending.count
+
+Number of pending requests in the transaction buffer client.
+
+* Type: UpDownCounter
+* Unit: `{transaction}`
+* Attributes: None.
+
 
 ## Java Client
 
@@ -1387,3 +1458,62 @@ Current memory buffer usage by the client.
 Memory buffer limit configured for the client.
 * Type: UpDownCounter
 * Unit: `By`
+
+## Topic-list memory limiting (broker and proxy)
+
+These instruments are emitted by the broker and proxy topic-list memory limiters. The instrument names have no `pulsar.` prefix. They have no per-topic attributes; use the resource and instrumentation scope to distinguish the emitting service. Heap and direct-memory limits, queue lengths, and acquisition timeouts are controlled by the `maxTopicListInFlightHeapMem*` and `maxTopicListInFlightDirectMem*` settings.
+
+| Name | Type | Unit | Description |
+|---|---|---|---|
+| `topic.list.direct.memory.limit` | Gauge | `By` | Configured direct memory limit. |
+| `topic.list.direct.memory.used` | Gauge | `By` | Current direct memory used by topic listings. |
+| `topic.list.direct.queue.max.size` | Gauge | `1` | Maximum direct memory limiter queue size. |
+| `topic.list.direct.queue.size` | UpDownCounter | `1` | Current direct memory limiter queue size. |
+| `topic.list.direct.timeout.total` | Counter | `1` | Total direct memory permit timeouts. |
+| `topic.list.direct.wait.time` | Histogram | `s` | Wait time for direct memory permits. |
+| `topic.list.heap.memory.limit` | Gauge | `By` | Configured heap memory limit. |
+| `topic.list.heap.memory.used` | Gauge | `By` | Current heap memory used by topic listings. |
+| `topic.list.heap.queue.max.size` | Gauge | `1` | Maximum heap memory limiter queue size. |
+| `topic.list.heap.queue.size` | UpDownCounter | `1` | Current heap memory limiter queue size. |
+| `topic.list.heap.timeout.total` | Counter | `1` | Total heap memory permit timeouts. |
+| `topic.list.heap.wait.time` | Histogram | `s` | Wait time for heap memory permits. |
+
+## Client authentication
+
+The asynchronous authentication framework records credential acquisition through `getAuthDataAsync` and `getHttpHeadersAsync`. These instruments use the `org.apache.pulsar.client.auth` instrumentation scope and require a real OpenTelemetry instance in the authentication initialization context; a no-op instance produces no measurements.
+
+#### pulsar.client.auth.credential.duration
+
+Time spent acquiring credentials asynchronously, in seconds.
+
+* Type: Histogram
+* Unit: `s`
+* Attributes: `auth_method`: authentication method, or `unknown` when unspecified.
+
+#### pulsar.client.auth.failure
+
+Failed credential acquisitions. Terminal failures include rejected or unsupported credentials; transient failures can recover on retry, such as an unreachable identity provider.
+
+* Type: Counter
+* Unit: Unspecified (event count).
+* Attributes: `auth_method`; `error`: `terminal` or `transient`.
+
+## TLS material reloads
+
+The built-in TLS factory records these instruments in the `org.apache.pulsar.tls` scope when its initialization context supplies a real OpenTelemetry instance. An initial material load or a reload after a change is an event; polling unchanged files does not increment the counter.
+
+#### pulsar.tls.reload
+
+TLS material load and reload events on client and server paths.
+
+* Type: Counter
+* Unit: Unspecified (event count).
+* Attributes: `purpose`: TLS purpose name; `result`: `success` or `failure`.
+
+#### pulsar.tls.last_reload_success
+
+Unix timestamp in seconds of the last successful TLS material load or reload for each purpose. A failed reload does not advance it.
+
+* Type: Gauge
+* Unit: `s`
+* Attributes: `purpose`: TLS purpose name.

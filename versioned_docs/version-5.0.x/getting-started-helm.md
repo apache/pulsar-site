@@ -5,6 +5,12 @@ sidebar_label: "Run Pulsar in Kubernetes"
 description: Get started with Apache Pulsar on your local machine using Kubernetes.
 ---
 
+:::warning Network perimeter security required
+
+A Pulsar cluster is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. This requirement can be met by deploying Pulsar in private networks and restricting access to trusted clients and services.
+
+:::
+
 This section guides you through every step of installing and running Apache Pulsar with Helm on Kubernetes quickly.
 
 For deploying a Pulsar cluster for production usage, read the documentation on [how to configure and install a Pulsar Helm chart](helm-deploy.md).
