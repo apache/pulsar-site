@@ -62,15 +62,15 @@ In addition to being able to identify which component that the issue, PR is fixe
 
 ## ready-to-test
 
-After [PR-17693](https://github.com/apache/pulsar/pull/17693) merged, pull requests **except [docs only changes](https://github.com/apache/pulsar/blob/master/.github/changes-filter.yaml#L5)** should be first tested in your own fork since the pulsar CI based on GitHub Actions has constrained resources and quota. GitHub Actions provides separate quota for pull requests that are executed in a forked repository.
+Use [Personal CI](personal-ci.md) to test changes in your fork while developing them. In `apache/pulsar`, the readiness check stops CI for draft pull requests and for stacked pull requests above the lowest open pull request in the stack. Documentation-only changes bypass this check.
 
-When a committer believe the PR is ready to test, they will label `ready-to-test` to the PR, and then you can rerun the CI tasks by commenting `/pulsarbot run-failure-checks` and trigger the full CI validation.
+An Apache Pulsar committer can add `ready-to-test` to override the readiness check. A non-draft pull request at the bottom of its stack, or targeting a trunk branch directly, does not require the label. Marking a PR ready for review, adding the label, or merging the PR below it does not automatically restart a stopped run. Rerun failed jobs in GitHub Actions or comment `/pulsarbot rerun` after the run finishes.
 
 See also [CI Testing in Fork](personal-ci.md).
 
 ## doc-*
 
-When submitting an issue or PR, you must [choose one of the documentation checkboxes](https://github.com/apache/pulsar/blob/master/.github/PULL_REQUEST_TEMPLATE.md#documentation), so the automation can label the PR correctly.
+These labels describe documentation work associated with a change. The documentation-label bot and its required PR-template checkboxes have been removed; the labels are no longer assigned by that automation. Describe documentation changes and follow-up work in the pull request.
 
 | Label               | Description                                                                                                                                                                                                                                                                                               |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

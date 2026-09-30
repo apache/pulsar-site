@@ -345,7 +345,7 @@ Key | Type | Required? | Explanation
 :---|:-----|:----------|:-----------
 `readerName` | string | no | Reader name
 `receiverQueueSize` | int | no | Size of the consumer receive queue (default: 1000)
-`messageId` | int or enum | no | Message ID to start from, `earliest` or `latest` (default: `latest`)
+`messageId` | string | no | Base64-encoded serialized message ID to start from, or `earliest` or `latest` (default: `latest`). Invalid Base64 or message-ID bytes cause an HTTP 400 response when creating the reader.
 `token` | string | no | Authentication token, this is used for the browser javascript client
 
 ##### Receiving messages
@@ -616,4 +616,3 @@ ws.on('message', function(message) {
     ws.send(JSON.stringify(ackMsg));
 });
 ```
-

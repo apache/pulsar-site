@@ -349,6 +349,12 @@ You can use [maven-shade-plugin](https://maven.apache.org/plugins/maven-shade-pl
 </plugin>
 ```
 
+## Schedule batch-source discovery
+
+Batch sources using `org.apache.pulsar.io.batchdiscovery.CronTriggerer` supply the schedule in the triggerer's `__CRON__` configuration key. The schedule uses the six-field syntax `second minute hour day-of-month month day-of-week`, supports the `L`, `W`, and `#` qualifiers, and accepts macros such as `@hourly` and `@daily`.
+
+Schedules use the JVM's default time zone. Trigger callbacks run sequentially, and the next firing is calculated after the previous callback finishes; slow callbacks do not queue every missed firing. Invalid expressions fail during trigger initialization. Test existing schedules, especially time-zone and daylight-saving transitions, when upgrading a custom batch source.
+
 ## Monitor
 
 Pulsar connectors enable you to move data in and out of Pulsar easily. It is important to ensure that the running connectors are healthy at any time. You can monitor Pulsar connectors that have been deployed with the following methods:

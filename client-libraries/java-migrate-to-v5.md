@@ -1,104 +1,67 @@
 ---
 id: java-migrate-to-v5
-title: Migrate to the V5 Java client
-sidebar_label: "Migrate to V5"
-description: Move existing Pulsar Java applications from the current client API to the V5 client API for scalable topics.
+title: Migrate to the v5 Java client
+sidebar_label: "Migrate to v5"
+description: Move existing Pulsar Java applications from the current client API to the v5 client API for scalable topics.
 ---
 
-This guide explains how to migrate an existing Java application from the [current client SDK](java.md#java-client-sdks) (`org.apache.pulsar.client.api`) to the [V5 client SDK](java-v5.md) (`org.apache.pulsar.client.api.v5`) used by [scalable topics](pathname:///docs/concepts-scalable-topics).
+This guide explains how to migrate an existing Java application from the [v4 client](java.md#java-client-sdks) (`org.apache.pulsar.client.api`) to the [v5 client SDK](java-v5.md) (`org.apache.pulsar.client.api.v5`) used by [scalable topics](pathname:///docs/concepts-scalable-topics).
 
 :::note
 
-You don't have to migrate. The current SDK is fully supported and remains the right choice for non-Java applications, for applications that don't need scalable topics, and for non-persistent topics (which the V5 client does not support). Migrate a Java application when you want scalable topics or the V5 API.
+You do not have to migrate to the v5 API. The v4 Java client remains supported for applications using regular topics and for features such as non-persistent topics and TableView. Adopt the v5 API when you want scalable topics or its consumer model.
 
 :::
 
 ## How migration works
 
-The two SDKs are independent and can run **side by side in the same JVM**, so you can migrate incrementally -- one producer or consumer at a time -- rather than all at once. A typical path:
+Dependency migration, API migration, and topic migration are separate steps. Existing v4 applications using regular topics do not need to change their API or dependencies for a broker upgrade. The v4 client remains supported.
 
-1. Add the `pulsar-client-v5` dependency (plus `pulsar-client-original` for the not-yet-migrated v4 code -- see [Dependencies](#dependencies)).
-2. Move producers and consumers to the V5 API. The V5 client works against your **existing** `persistent://` topics, so you can do this without changing any topic.
-3. When you're ready, [migrate the topics themselves to scalable topics](#migrating-the-topics) -- a separate, server-side step that is transparent to V5 applications.
+The two APIs can run **side by side in the same JVM**, so you can move one producer or consumer at a time. To adopt v5:
+
+1. Follow [Java client setup](java-setup.md#step-1-install-java-client-library) to install `pulsar-client-v5-all` and align its dependencies. Your v4 source code can keep using `org.apache.pulsar.client.api`.
+2. Move producers and consumers to `org.apache.pulsar.client.api.v5`. The v5 client works against **existing** `persistent://` topics when the brokers meet the requirements below, so no topic migration is needed for this step.
+3. To use scalable topics, [migrate the topics themselves](#migrating-the-topics). This is a separate server-side operation with its own cutover requirements.
 
 ## Prerequisites
 
-- **Java 17.** The V5 client requires Java 17 (the current SDK supports Java 8+).
-- **Dependencies.** Add `pulsar-client-v5`, plus `pulsar-client-original` while v4 code remains -- see [Dependencies](#dependencies) below.
+- **Java 17 or later.** The combined Java client artifacts require this runtime for both APIs.
+- **Pulsar 5.x brokers with scalable topics enabled.** The v5 client requires the scalable-topic protocol even when accessing existing `persistent://` topics. It cannot connect through this API to older brokers or brokers with `scalableTopicsEnabled=false`. These v5 connection requirements do not apply merely because a v4 application uses a combined dependency.
+- **Aligned dependencies.** Complete the [dependency setup and runtime graph checks](java-setup.md#pulsar-bom) before migrating API usage.
 
 ## Dependencies
 
-`pulsar-client-v5` already bundles the **unshaded** v4 client (`pulsar-client-original`). While you migrate incrementally, depend on `pulsar-client-original` for code still on the v4 API -- **not** the shaded `pulsar-client`, which would add a second, conflicting copy of the client classes. Once everything is on the V5 API, `pulsar-client-v5` alone is enough.
+Follow [Java client setup](java-setup.md) for Maven and Gradle declarations, [Pulsar and Netty BOMs](java-setup.md#pulsar-bom), and [transitive exclusions](java-setup.md#replace-existing-dependencies). It is the canonical dependency guide, including runtime graph checks and the shaded fallback for unresolved conflicts.
 
-Use the [Pulsar BOM](java-setup.md#pulsar-bom) to keep all Pulsar artifacts on one version.
-
-### Maven
-
-```xml
-<!-- in your <properties> block -->
-<pulsar.version>@pulsar:version:latest-v5plus@</pulsar.version>
-
-<!-- in your <dependencyManagement> block -->
-<dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>pulsar-bom</artifactId>
-  <version>${pulsar.version}</version>
-  <type>pom</type>
-  <scope>import</scope>
-</dependency>
-
-<!-- in your <dependencies> block; version comes from the BOM -->
-<dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>pulsar-client-v5</artifactId>
-</dependency>
-<!-- only while v4 code remains; remove once fully migrated -->
-<dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>pulsar-client-original</artifactId>
-</dependency>
-```
-
-### Gradle
-
-```groovy
-def pulsarVersion = '@pulsar:version:latest-v5plus@'
-
-dependencies {
-    implementation enforcedPlatform("org.apache.pulsar:pulsar-bom:${pulsarVersion}")
-
-    implementation 'org.apache.pulsar:pulsar-client-v5'
-    // only while v4 code remains; remove once fully migrated
-    implementation 'org.apache.pulsar:pulsar-client-original'
-}
-```
+Changing dependencies does not require changing v4 application code. Continue with the API migration below when you are ready to adopt v5.
 
 ## API mapping
 
 The biggest change is the consumer model: the four subscription types collapse into three purpose-built consumer types.
 
-| Current SDK | V5 SDK |
+| v4 client | v5 client |
 |-------------|--------|
 | `org.apache.pulsar.client.api.PulsarClient` | `org.apache.pulsar.client.api.v5.PulsarClient` |
 | Exclusive / Failover subscription | **Stream consumer** -- ordered, cumulative ack |
-| Shared / Key_Shared subscription | **Queue consumer** -- individual ack, negative ack, dead-letter |
+| Shared subscription | **Queue consumer** -- individual ack, negative ack, dead-letter |
+| Key_Shared subscription | **Stream consumer** for ordered key-shared processing on scalable topics; adapt processing to cumulative acknowledgment |
 | `Reader` | **Checkpoint consumer** -- external position via `Checkpoint` |
 | `Schema.STRING`, `Schema.JSON(T.class)`, `Schema.AVRO(T.class)` | `Schema.string()`, `Schema.json(T.class)`, `Schema.avro(T.class)` |
 | `consumer.acknowledge(msg)` | `consumer.acknowledge(msg.id())` |
 | `reader.seek(messageId)` | a `Checkpoint` passed to `startPosition(...)` at build time |
 | timeouts and delays as `long` milliseconds | `Duration` / `Instant` |
-| builder option setters | immutable config records (`DeadLetterPolicy`, `BackoffPolicy`, …) |
+| builder option setters | immutable policy objects (`DeadLetterPolicy`, `BackoffPolicy`, …), with builders or static factories |
 
-Keep the current SDK for anything the V5 client does not yet cover: `Reader`-style arbitrary seeking, `TableView`, and non-persistent topics. Scalable-topic support in the other language SDKs is planned; today the V5 client is Java-only.
+Keep the v4 client for anything the v5 client does not yet cover: `Reader`-style arbitrary seeking, `TableView`, and non-persistent topics. Scalable-topic support in the other language SDKs is planned; today the v5 client is Java-only.
 
 ## Client
 
 The client builder is nearly identical; the package changes from `...client.api` to `...client.api.v5`.
 
 ```java
-// Current
+// v4
 import org.apache.pulsar.client.api.PulsarClient;
-// V5
+// v5
 import org.apache.pulsar.client.api.v5.PulsarClient;
 
 PulsarClient client = PulsarClient.builder()
@@ -111,12 +74,12 @@ PulsarClient client = PulsarClient.builder()
 Producers and the message builder carry over almost unchanged. Note the lowercase schema factory, and that the same code works against an existing `persistent://` topic or a `topic://` scalable topic.
 
 ```java
-// Current
+// v4
 Producer<String> producer = client.newProducer(Schema.STRING)
         .topic("persistent://public/default/orders")
         .create();
 
-// V5
+// v5
 Producer<String> producer = client.newProducer(Schema.string())
         .topic("persistent://public/default/orders")   // or topic://... for a scalable topic
         .create();
@@ -126,14 +89,16 @@ producer.newMessage().key("user-123").value("order placed").send();
 
 ## Consumers
 
-Pick the V5 consumer that matches your current subscription type.
+Pick the v5 consumer that matches your current subscription type.
+
+For a durable subscription cutover, stop the old consumers before attaching consumers with a different subscription model. Do not assume that a live v4 Key_Shared or Failover subscription can be mixed with v5 stream consumers. While reading a regular topic, v5 stream consumers coordinate at the existing partition granularity; entry-bucket parallelism becomes available after migration to a scalable topic.
 
 ### Exclusive or Failover → Stream consumer
 
 Ordered consumption with cumulative acknowledgment.
 
 ```java
-// Current
+// v4
 Consumer<String> consumer = client.newConsumer(Schema.STRING)
         .topic("persistent://public/default/orders")
         .subscriptionName("my-sub")
@@ -142,7 +107,7 @@ Consumer<String> consumer = client.newConsumer(Schema.STRING)
 Message<String> msg = consumer.receive();
 consumer.acknowledgeCumulative(msg);
 
-// V5
+// v5
 StreamConsumer<String> consumer = client.newStreamConsumer(Schema.string())
         .topic("persistent://public/default/orders")
         .subscriptionName("my-sub")
@@ -151,12 +116,12 @@ Message<String> msg = consumer.receive();
 consumer.acknowledgeCumulative(msg.id());
 ```
 
-### Shared or Key_Shared → Queue consumer
+### Shared → Queue consumer
 
 Parallel consumption with individual acknowledgment, negative acknowledgment, and dead-letter support.
 
 ```java
-// Current
+// v4
 Consumer<String> consumer = client.newConsumer(Schema.STRING)
         .topic("persistent://public/default/orders")
         .subscriptionName("workers")
@@ -165,7 +130,7 @@ Consumer<String> consumer = client.newConsumer(Schema.STRING)
 Message<String> msg = consumer.receive();
 consumer.acknowledge(msg);            // or consumer.negativeAcknowledge(msg);
 
-// V5
+// v5
 QueueConsumer<String> consumer = client.newQueueConsumer(Schema.string())
         .topic("persistent://public/default/orders")
         .subscriptionName("workers")
@@ -174,19 +139,23 @@ Message<String> msg = consumer.receive();
 consumer.acknowledge(msg.id());       // or consumer.negativeAcknowledge(msg.id());
 ```
 
+### Key_Shared → Stream consumer
+
+On scalable topics, v5 stream consumers share segments by entry bucket and preserve per-key order. A queue consumer uses Shared dispatch and does not preserve that guarantee. Use a stream consumer for ordered keyed processing and adapt individual acknowledgments to cumulative acknowledgments: finish processing all previously delivered messages before acknowledging a later one. See [Stream consumer](java-v5.md#stream-consumer).
+
 ### Reader → Checkpoint consumer
 
 For code that tracks its own position (a `Reader` started from a `MessageId`), use a checkpoint consumer with a serializable `Checkpoint`.
 
 ```java
-// Current
+// v4
 Reader<String> reader = client.newReader(Schema.STRING)
         .topic("persistent://public/default/orders")
         .startMessageId(MessageId.earliest)
         .create();
 Message<String> msg = reader.readNext();
 
-// V5
+// v5
 CheckpointConsumer<String> consumer = client.newCheckpointConsumer(Schema.string())
         .topic("persistent://public/default/orders")
         .startPosition(Checkpoint.earliest())
@@ -199,10 +168,10 @@ A `Checkpoint` replaces the `MessageId` you would store with a reader. The two a
 
 ### Multiple topics: pattern subscriptions → namespace consumers
 
-In the current SDK, a single consumer can attach to many topics with a topic list or a regular-expression pattern:
+In the v4 client, a single consumer can attach to many topics with a topic list or a regular-expression pattern:
 
 ```java
-// Current -- pattern subscription
+// v4 -- pattern subscription
 Consumer<String> consumer = client.newConsumer(Schema.STRING)
         .topicsPattern(Pattern.compile("persistent://tenant/ns/orders-.*"))
         .subscriptionName("workers")
@@ -210,16 +179,16 @@ Consumer<String> consumer = client.newConsumer(Schema.STRING)
         .subscribe();
 ```
 
-In the V5 SDK, a stream or queue consumer attaches to an entire **namespace** instead, optionally narrowed by topic **properties** rather than a name pattern. Set `namespace(...)` in place of `topic(...)`:
+In the v5 client, a stream or queue consumer attaches to an entire **namespace** instead, optionally narrowed by topic **properties** rather than a name pattern. Set `namespace(...)` in place of `topic(...)`:
 
 ```java
-// V5 -- every scalable topic in the namespace
+// v5 -- every scalable topic in the namespace
 QueueConsumer<String> consumer = client.newQueueConsumer(Schema.string())
         .namespace("tenant/ns")
         .subscriptionName("workers")
         .subscribe();
 
-// V5 -- only topics whose properties match every filter (AND semantics)
+// v5 -- only topics whose properties match every filter (AND semantics)
 Map<String, String> filters = Map.ofEntries(
         Map.entry("team", "orders"),
         Map.entry("tier", "gold"));
@@ -238,20 +207,20 @@ Filtering is by topic **properties**, not by a name regex, so tag topics with pr
 
 - **Schemas** -- replace the `Schema.STRING` / `Schema.JSON(...)` constants with the lowercase factory methods `Schema.string()` / `Schema.json(...)`. See [Schemas](java-v5.md#schemas).
 - **Transactions** -- the model is unchanged: bind a produce with `.transaction(txn)` and an ack with the two-argument `acknowledge`. See [Transactions](java-v5.md#transactions).
-- **Configuration** -- option setters become immutable records (`DeadLetterPolicy`, `BackoffPolicy`, `BatchingPolicy`, …), and time values use `Duration` / `Instant` instead of `long` milliseconds.
+- **Configuration** -- grouped options use immutable policy objects (`DeadLetterPolicy`, `BackoffPolicy`, `BatchingPolicy`, …), and time values use `Duration` / `Instant` instead of `long` milliseconds. Queue `ackTimeout` becomes `processingTimeout(ProcessingTimeoutPolicy)`. Enable transactions with `transactionPolicy(TransactionPolicy)` on the client builder.
 
 ## Migrating the topics
 
-Adopting the V5 API does not require changing your topics -- the V5 client operates against existing `persistent://` topics. To gain the benefits of scalable topics (automatic split/merge, no fixed partition count), migrate a topic on the server:
+Adopting the v5 API does not require changing your topics -- the v5 client operates against existing `persistent://` topics. To gain the benefits of scalable topics (automatic split/merge, no fixed partition count), migrate a topic on the server:
 
 ```shell
-bin/pulsar-admin scalable-topics migrate persistent://public/default/orders
+bin/pulsar-admin scalable-topics migrate public/default/orders
 ```
 
-This is a one-way operation and is transparent to connected V5 clients. See [Migrate a regular topic](pathname:///docs/admin-api-scalable-topics#migrate-a-regular-topic).
+This is a one-way operation. Upgrade and disconnect remaining v4 clients before running it; the broker rejects migration while they are connected unless forced. Connected v5 clients follow the new layout, and ordered consumers drain the old topics as sealed predecessors. Use `topic://public/default/orders` for subsequent client configuration. See [Migrate a regular topic](pathname:///docs/admin-api-scalable-topics#migrate-a-regular-topic).
 
 ## What's next
 
-- [Java client (V5)](java-v5.md) -- the V5 client reference.
-- [Scalable topics](pathname:///docs/concepts-scalable-topics) -- the topic model the V5 client is built for.
+- [Java client (v5)](java-v5.md) -- the v5 client reference.
+- [Scalable topics](pathname:///docs/concepts-scalable-topics) -- the topic model the v5 client is built for.
 - [Manage scalable topics](pathname:///docs/admin-api-scalable-topics) -- create and migrate scalable topics.

@@ -22,6 +22,10 @@ const releasePulsarAdapters: string[] = require("../../data/release-pulsar-adapt
 
 export const pulsarAdaptersVersion: string = releasePulsarAdapters[0];
 
+// Netty used by the current Pulsar docs. Keep in sync with `netty` in
+// apache/pulsar's gradle/libs.versions.toml when updating dependency guidance.
+export const nettyVersion: string = "4.2.18.Final";
+
 const versions = versionsList as string[];
 
 export const latestMajorRelease: string = versions[0];
@@ -42,6 +46,12 @@ function isMilestoneRelease(version: string): boolean {
 function latestBySemver(list: string[]): string {
   return list.filter((v) => semver.valid(v)).sort(semver.rcompare)[0] ?? "";
 }
+
+// Current connector examples use the latest published stable 4.2.x release.
+// Keep this separate from the broker release while independent connectors are pending.
+export const connectorsVersion: string = latestBySemver(
+  releases.filter((version) => semver.valid(version) !== null && semver.satisfies(version, "4.2.x"))
+);
 
 // The latest release that ships the V5 client (Pulsar 5.0.0+, i.e. the
 // `org.apache.pulsar.client.api.v5` API). A stable 5.x+ release always wins over a
@@ -246,12 +256,13 @@ export function resolveTokens(versionKey: string, referenceLatest = false): Map<
   const versionReference = isCurrent && !referenceLatest ? "next" : referenceVersion(resolvedVersion);
   const restApiVersion = isCurrent ? "master" : versionNumber;
   const pythonArg = isCurrent ? originVersion : resolvedVersion;
+  const connectorVersion = isCurrent ? connectorsVersion : resolvedVersion;
 
   return new Map<string, string>([
     ["apidoc:cpp", clientCPPVersionUrl(pythonArg)],
     ["apidoc:python", clientPythonVersionUrl(pythonArg)],
     ["binary_release_url", binaryReleaseUrl(resolvedVersion)],
-    ["connector_release_url", connectorReleaseUrl(resolvedVersion)],
+    ["connector_release_url", connectorReleaseUrl(connectorVersion)],
     ["deb:client-devel", debDistUrl(resolvedVersion, "-dev")],
     ["deb:client", debDistUrl(resolvedVersion, "")],
     ["dist_deb:client-devel", debDistUrl(resolvedVersion, "-dev")],
@@ -275,12 +286,14 @@ export function resolveTokens(versionKey: string, referenceLatest = false): Map<
     ["version_origin", versionOrigin],
     ["version_reference", versionReference],
     ["version:adapters", pulsarAdaptersVersion],
+    ["version:connectors", connectorVersion],
     ["version:current-milestone", currentMilestoneRelease],
     ["version:current-milestone-suffix", currentMilestoneSuffix],
     ["version:latest", latestVersion],
     ["version:latest-v5plus", latestV5PlusRelease],
     ["version:lts", ltsVersion],
     ["version:python", clientPythonVersion(pythonArg)],
+    ["version:netty", nettyVersion],
     ["version", resolvedVersion],
   ]);
 }

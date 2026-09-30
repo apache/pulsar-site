@@ -340,6 +340,8 @@ Suppose that you have a topic containing three schemas (V1, V2, and V3). V1 is t
 
 By default, schema `AutoUpdate` is enabled. When a schema passes the schema compatibility check, the producer automatically updates this schema to the topic it produces.
 
+Pulsar has a separate namespace policy for geo-replication producers. They can register compatible schemas by default even when auto-update is disabled for ordinary producers. See [Control schema registration by replicators](admin-api-schemas.md#control-schema-registration-by-replicators) before disabling schema updates in a replicated namespace.
+
 #### Producer side
 
 For a producer, the `AutoUpdate` happens in the following cases:

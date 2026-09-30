@@ -86,13 +86,13 @@ Here is an example of using the File source connecter.
 1. Pull a Pulsar image.
 
    ```bash
-   docker pull apachepulsar/pulsar:{version}
+   docker pull apachepulsar/pulsar:@pulsar:version@
    ```
 
 2. Start Pulsar standalone.
 
    ```bash
-   docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --name pulsar-standalone apachepulsar/pulsar:{version} bin/pulsar standalone
+   docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --name pulsar-standalone apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
    ```
 
 3. Create a configuration file _file-connector.yaml_.
@@ -111,13 +111,13 @@ Here is an example of using the File source connecter.
 5. Download the File source connector.
 
    ```bash
-   curl -O https://mirrors.tuna.tsinghua.edu.cn/apache/pulsar/pulsar-{version}/connectors/pulsar-io-file-{version}.nar
+   curl -O @pulsar:connector_release_url@/pulsar-io-file-@pulsar:version:connectors@.nar
    ```
 
 6. Copy it to the `connectors` folder, then restart the container.
 
    ```bash
-   docker cp pulsar-io-file-{version}.nar pulsar-standalone:/pulsar/connectors/
+   docker cp pulsar-io-file-@pulsar:version:connectors@.nar pulsar-standalone:/pulsar/connectors/
    docker restart pulsar-standalone
    ```
 
@@ -127,7 +127,7 @@ Here is an example of using the File source connecter.
    docker exec -it pulsar-standalone /bin/bash
 
    ./bin/pulsar-admin sources localrun \
-      --archive /pulsar/connectors/pulsar-io-file-{version}.nar \
+      --archive /pulsar/connectors/pulsar-io-file-@pulsar:version:connectors@.nar \
       --name file-test \
       --destination-topic-name  pulsar-file-test \
       --source-config-file /pulsar/file-connector.yaml

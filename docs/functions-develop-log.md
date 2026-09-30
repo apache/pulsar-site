@@ -49,6 +49,8 @@ You can access all the logs produced by `LoggingFunction` via the `persistent://
 
 By default, the log level for Java functions is `info`. If you want to customize the log level of your Java functions, for example, change it to `debug`, you can update the [`functions_log4j2.xml`](https://github.com/apache/pulsar/blob/master/conf/functions_log4j2.xml) file.
 
+The bundled Java process and Kubernetes instance templates (`java_instance_log4j2.xml` and `kubernetes_instance_log4j2.xml`) also use the function JVM's `pulsar.log.level` system property for the root logger, defaulting to `info`. Set `-Dpulsar.log.level=debug` on the function JVM to enable debug events with those templates. For worker-managed Java processes, this can be supplied through `additionalJavaRuntimeArguments` in `functions_worker.yml`. Setting only an appender's level cannot admit events rejected by the root logger; update custom templates accordingly.
+
 :::tip
 
 The `functions_log4j2.xml` file is under your Pulsar configuration directory, for example, `/etc/pulsar/` on bare-metal, or `/pulsar/conf` on Kubernetes.

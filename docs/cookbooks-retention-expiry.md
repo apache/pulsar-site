@@ -355,6 +355,10 @@ By default, Pulsar stores all unacknowledged messages forever. This can lead to 
 
 The TTL parameter is like a stopwatch attached to each message that defines the amount of time a message is allowed to stay unacknowledged. When the TTL expires, Pulsar automatically moves the message to the acknowledged state (and thus makes it ready for deletion).
 
+Automatic TTL expiry advances durable subscription cursors. It does not advance non-durable reader cursors past unread retained messages. This does not make readers a retention mechanism: configure a retention policy to keep the data they need.
+
+Changing TTL to a positive value schedules the expiry check in the background. Completion of the policy update does not mean all newly expired messages have already been acknowledged; the periodic expiry monitor also checks them.
+
 The diagram below illustrates the concept of TTL.
 ![Concept of TTL in Pulsar](/assets/ttl.svg)
 

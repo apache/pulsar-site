@@ -51,6 +51,12 @@ When topic compaction is triggered [via the CLI](cookbooks-compaction.md), it wo
       * Read from the topic like normal (if the message ID is greater than or equal to the compaction horizon) or
       * Read beginning at the compaction horizon (if the message ID is lower than the compaction horizon)
 
+### Recovery when a compacted ledger is missing
+
+Cursor recovery can restore a metadata snapshot that references a compacted ledger deleted by a later compaction. When the broker detects that this ledger no longer exists, it clears the stale compacted view and falls back to the original topic data until the next successful compaction. The broker logs this fallback with the compacted ledger ID and compaction horizon.
+
+Consumers and readers with `readCompacted=true` can therefore receive historical values for the same key during this recovery period. Retention still limits which original messages are available. Use the [topic compaction commands](cookbooks-compaction.md) to run and inspect a new compaction when restoring the compacted view.
+
 ## Compaction Configuration
 
 Topic compaction behavior can be configured through various broker settings:
@@ -75,4 +81,3 @@ This setting is useful for topics that mix keyed and unkeyed messages, allowing 
 - **Compaction frequency**: Balance between storage savings and CPU/I/O overhead
 - **Topic size**: Larger topics take longer to compact but may benefit more from compaction
 - **Key distribution**: Topics with many unique keys benefit less from compaction
-

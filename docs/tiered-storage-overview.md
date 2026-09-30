@@ -55,7 +55,7 @@ For more information on how to configure tiered storage, see [Tiered storage coo
 :::note
 
 * If you are running Pulsar in a bare metal cluster, make sure that `offloaders` tarball is unzipped in every broker's pulsar directory.
-* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md)), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. `apachepulsar/pulsar-all` image has already bundled tiered storage offloaders.
+* For [Docker](getting-started-docker.md) and [Kubernetes](deploy-kubernetes.md), the Pulsar `apachepulsar/pulsar` image includes the offloader NARs **except the filesystem (Hadoop) offloader**. If you need the filesystem offloader, install its NAR from the matching offloaders tarball in `/pulsar/offloaders` on every broker. The `pulsar-all` image is no longer produced.
 
 :::
 
@@ -86,3 +86,7 @@ Tiered storage works as follows:
 6. After transferring ledgers to long-term storage, the messages within these ledgers remain accessible to Pulsar consumers and readers, ensuring transparency in data retrieval.
 
 For more information about tiered storage for Pulsar topics, see [PIP-17](https://github.com/apache/pulsar/wiki/PIP-17:-Tiered-storage-for-Pulsar-topics) and [offload metrics](reference-metrics.md#offload-metrics).
+
+## Read performance for object storage
+
+The jclouds offloader caches entry offsets discovered while reading through an offloaded block. Later reads can reuse a nearby cached offset instead of scanning again from the block's sparse index marker. The broker JVM property `pulsar.jclouds.readhandleimpl.offsetprobe.max` limits the backward search to 1,024 entries by default; `0` disables that backward search while retaining exact-offset cache lookups. If no usable cached offset is found, reading falls back to the sparse index. This setting applies to the jclouds offloader, not the filesystem offloader, and requires a broker restart to change. Evaluate changes with your backlog access pattern before tuning it.

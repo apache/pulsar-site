@@ -293,7 +293,7 @@ managedLedgerMaxEntriesPerLedger=100
 
 #### Step 4: Offload data from BookKeeper to filesystem
 
-Execute the following commands in the repository where you download Pulsar tarball. For example, `~/path/to/apache-pulsar-2.5.1`.
+Execute the following commands in the repository where you download Pulsar tarball. For example, `~/path/to/apache-pulsar-@pulsar:version@`.
 
 1. Start Pulsar standalone.
 

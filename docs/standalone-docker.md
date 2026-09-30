@@ -4,6 +4,12 @@ title: Set up a standalone Pulsar in Docker
 sidebar_label: "Run Pulsar in Docker"
 ---
 
+:::warning Network perimeter security required
+
+A Pulsar cluster is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. This requirement can be met by deploying Pulsar in private networks and restricting access to trusted clients and services.
+
+:::
+
 For local development and testing, you can run Pulsar in standalone mode on your own machine within a Docker container.
 
 ## Prerequisites
@@ -135,7 +141,7 @@ The output is something like this:
             "metadata": {},
             "address": "/127.0.0.1:35604",
             "connectedSince": "2021-07-04T09:05:43.04788Z",
-            "clientVersion": "2.8.0",
+            "clientVersion": "@pulsar:version@",
             "producerName": "standalone-2-5"
         }
     ],
@@ -181,7 +187,7 @@ The output is something like this:
                     "metadata": {},
                     "address": "/127.0.0.1:35472",
                     "connectedSince": "2021-07-04T08:58:21.287682Z",
-                    "clientVersion": "2.8.0"
+                    "clientVersion": "@pulsar:version@"
                 }
             ],
             "isDurable": true,

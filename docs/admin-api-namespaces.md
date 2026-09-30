@@ -66,6 +66,23 @@ admin.namespaces().createNamespace(namespace);
 </Tabs>
 ````
 
+### Configure automatic topic creation
+
+Override the broker's automatic topic creation policy for a namespace with `set-auto-topic-creation`. For example, enable automatic creation of non-partitioned topics:
+
+```shell
+pulsar-admin namespaces set-auto-topic-creation test-tenant/test-namespace \
+  --enable --type non-partitioned
+```
+
+For partitioned topics, use `--type partitioned --num-partitions 4` with a positive partition count. A non-partitioned policy accepts `defaultNumPartitions` values of `null`, `0`, or `1` through the admin APIs. These values still create a non-partitioned topic; other partition counts are rejected when automatic creation is enabled.
+
+Use `--disable` to disable automatic topic creation for the namespace. To remove the override and inherit the broker policy again:
+
+```shell
+pulsar-admin namespaces remove-auto-topic-creation test-tenant/test-namespace
+```
+
 ### Get policies
 
 You can fetch the current policies associated with a namespace at any time.
@@ -643,6 +660,8 @@ admin.namespaces().removeNamespaceMessageTTL(namespace)
 
 It clears all message backlogs for all the topics that belong to a specific namespace. You can also clear backlogs for a specific subscription as well.
 
+The operation includes unloaded bundles and persistent topics, acquiring bundle ownership and loading topics as needed. System topics are skipped.
+
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="pulsar-admin"
@@ -776,6 +795,17 @@ admin.namespaces().getRetention(namespace)
 
 </Tabs>
 ````
+
+### Configure subscribe rate
+
+To limit subscription attempts per consumer on persistent topics in a namespace, set a count and a period in seconds:
+
+```shell
+bin/pulsar-admin namespaces set-subscribe-rate test-tenant/namespace1 \
+  --subscribe-rate 10 --subscribe-rate-period 30
+```
+
+Use `get-subscribe-rate` to inspect the namespace policy and `remove-subscribe-rate` to remove its override. System topics and the broker's internal compaction subscription are exempt from this limit, so throttling application subscription attempts does not stall topic-policy loading or compaction.
 
 ### Configure dispatch throttling for topics
 

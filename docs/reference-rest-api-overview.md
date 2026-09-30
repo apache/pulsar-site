@@ -39,7 +39,7 @@ curl -X POST "http://broker.example.com:8080/admin/v2/brokers/configuration/load
 
 ### OpenAPI specifications
 
-Since Pulsar 5.0, the REST API is described by [OpenAPI 3](https://spec.openapis.org/oas/v3.0.1) documents that are generated from the broker source code for every release and published together with this site. Each Pulsar version has its own directory, `https://pulsar.apache.org/openapi/<version>/` (for the version this page documents: [`@pulsar:rest_api_spec_dir@`](pathname://@pulsar:rest_api_spec_dir@); the `master` directory follows the development branch), with one document per REST API category:
+The REST API is described by [OpenAPI 3](https://spec.openapis.org/oas/v3.0.1) documents that are generated from the broker source code for every release and published together with this site. Each Pulsar version has its own directory, `https://pulsar.apache.org/openapi/<version>/` (for the version this page documents: [`@pulsar:rest_api_spec_dir@`](pathname://@pulsar:rest_api_spec_dir@); the `master` directory follows the development branch), with one document per REST API category:
 
 | Document | REST API | Base path |
 | --- | --- | --- |

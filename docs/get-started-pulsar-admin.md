@@ -71,7 +71,7 @@ This tutorial guides you through every step of using pulsar-admin CLI to manage 
 
     ```bash
     2023-03-07T15:33:56,832+0800 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer - Starting Pulsar perf producer with config: {
-      "confFile" : "/Users/yu/apache-pulsar-2.11.0/conf/client.conf",
+      "confFile" : "/Users/yu/apache-pulsar-@pulsar:version@/conf/client.conf",
       "serviceURL" : "pulsar://localhost:6650",
       "authPluginClassName" : "",
       "authParams" : "",

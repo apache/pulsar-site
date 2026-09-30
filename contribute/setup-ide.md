@@ -19,7 +19,7 @@ Open the Pulsar source directory in IntelliJ IDEA (**File** → **Open** and sel
 
 ### Configure the JDK
 
-Building the `master` branch requires JDK 21 or 25 (see ["Setting up JDKs using SDKMAN"](setup-buildtools.md)).
+Building the `master` branch requires JDK 21, 25, or 26 (see ["Setting up JDKs using SDKMAN"](setup-buildtools.md)).
 
 1. Set the project JDK: Click **File** → **Project Structure** → **Project Settings** → **Project** and select a Java 21 JDK. From the JDK version drop-down list you can also choose **Download JDK...** and select version **21** and vendor **Amazon Corretto**.
 2. Set the Gradle JVM: Click **Settings** → **Build, Execution, Deployment** → **Build Tools** → **Gradle** and set **Gradle JVM** to **Project SDK**.
@@ -29,6 +29,8 @@ Building the `master` branch requires JDK 21 or 25 (see ["Setting up JDKs using 
 Keep the default setting **Build and run using: Gradle** and **Run tests using: Gradle** (**Settings** → **Build, Execution, Deployment** → **Build Tools** → **Gradle**). With Gradle delegation, annotation processing (Lombok) and code generation (protobuf / lightproto) are handled by the Gradle build, so no separate annotation-processing configuration is needed.
 
 Ensure the Lombok plugin is enabled in IntelliJ (it is bundled with recent IntelliJ IDEA versions).
+
+Gradle test runs launched from IntelliJ disable automatic test retries by default, so a failure remains visible while debugging. Command-line runs default to one retry. Set the Gradle property `-PtestRetryCount=<count>` to override either default.
 
 ### Configure code style
 

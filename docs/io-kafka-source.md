@@ -151,10 +151,11 @@ This example describes how to use the Kafka source connector to feed data from K
    client.close()
    ```
 
-5. Copy the following files to Pulsar.
+5. Download the Kafka connector and copy the following files to Pulsar.
 
    ```bash
-   docker cp pulsar-io-kafka.nar pulsar-kafka-standalone:/pulsar
+   curl -fLO @pulsar:connector_release_url@/pulsar-io-kafka-@pulsar:version:connectors@.nar
+   docker cp pulsar-io-kafka-@pulsar:version:connectors@.nar pulsar-kafka-standalone:/pulsar
    docker cp kafkaSourceConfig.yaml pulsar-kafka-standalone:/pulsar/conf
    ```
 
@@ -164,7 +165,7 @@ This example describes how to use the Kafka source connector to feed data from K
    docker exec -it pulsar-kafka-standalone /bin/bash
 
    ./bin/pulsar-admin source localrun \
-      --archive $PWD/pulsar-io-kafka.nar \
+      --archive $PWD/pulsar-io-kafka-@pulsar:version:connectors@.nar \
       --tenant public \
       --namespace default \
       --name kafka \
@@ -198,7 +199,7 @@ This example explains how to create a Kafka source connector in an on-premises c
 1. Copy the NAR package of the Kafka connector to the Pulsar connectors directory.
 
    ```bash
-   cp pulsar-io-kafka-{{connector:version}}.nar $PULSAR_HOME/connectors/pulsar-io-kafka-{{connector:version}}.nar
+   cp pulsar-io-kafka-@pulsar:version:connectors@.nar $PULSAR_HOME/connectors/pulsar-io-kafka-@pulsar:version:connectors@.nar
    ```
 
 2. Reload all [built-in connectors](io-connectors.md).

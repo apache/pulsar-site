@@ -15,7 +15,7 @@ Pulsar admin interfaces let you administer clusters: create, update, delete and 
 | Interface | Reference | Use it when |
 | --- | --- | --- |
 | **Command line**: `pulsar-admin` | [pulsar-admin CLI reference](/reference/#/@pulsar:version_reference@/pulsar-admin/) | You administer a cluster interactively or from shell scripts. It ships in the `bin` folder of the Pulsar installation and needs no extra setup, but each invocation starts a JVM. [Pulsar shell](administration-pulsar-shell.md) is an interactive shell around the same commands that starts the JVM once. |
-| **REST API** | [REST APIs and OpenAPI specifications](reference-rest-api-overview.md), [endpoint reference](pathname:///admin-rest-api/?version=@pulsar:rest_api_version@) | You automate from any language or tool that speaks HTTP, for example an operator, a controller or a `curl` call in a script. Since Pulsar 5.0 the API has [OpenAPI 3 specifications](reference-rest-api-overview.md#openapi-specifications) from which you can [generate a client](reference-rest-api-overview.md#generate-a-client-from-the-specification) for your language. |
+| **REST API** | [REST APIs and OpenAPI specifications](reference-rest-api-overview.md), [endpoint reference](pathname:///admin-rest-api/?version=@pulsar:rest_api_version@) | You automate from any language or tool that speaks HTTP, for example an operator, a controller or a `curl` call in a script. The API has [OpenAPI 3 specifications](reference-rest-api-overview.md#openapi-specifications) from which you can [generate a client](reference-rest-api-overview.md#generate-a-client-from-the-specification) for your language. |
 | **Java Library** | [Java admin API Javadoc](@pulsar:javadoc:admin@/) | You manage Pulsar from Java applications or tests. The client is the `org.apache.pulsar:pulsar-client-admin` artifact. |
 | **Go Library** | [`pulsaradmin` package](https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsaradmin) of the Go client | You manage Pulsar from Go applications, for example a Kubernetes operator. |
 
@@ -24,7 +24,7 @@ Pulsar admin interfaces let you administer clusters: create, update, delete and 
 The REST API deserves a closer look, because it is what the other interfaces are built on and the right choice when the CLI or the Java client does not fit:
 
 - **Call it directly.** Every operation on the [feature pages](admin-api-features.md) has a REST API tab with the endpoint. Endpoints that upload a package (functions, sources, sinks) take a multipart request; see the [`curl` example for creating a function](admin-api-functions.md#create-a-function).
-- **Use the OpenAPI specifications.** Since Pulsar 5.0, the REST API is described by [OpenAPI 3 documents](reference-rest-api-overview.md#openapi-specifications) generated from the broker source for every release, one per API (admin, lookup, functions, sources, sinks, packages, transactions). They can be [downloaded per release line](reference-rest-api-overview.md#download-the-specifications), imported into tools such as Postman, and are what renders the [REST API reference](reference-rest-api-overview.md).
+- **Use the OpenAPI specifications.** The REST API is described by [OpenAPI 3 documents](reference-rest-api-overview.md#openapi-specifications) generated from the broker source for every release, one per API (admin, lookup, functions, sources, sinks, packages, transactions). They can be [downloaded per release line](reference-rest-api-overview.md#download-the-specifications), imported into tools such as Postman, and are what renders the [REST API reference](reference-rest-api-overview.md).
 - **Generate a client for your language.** With the specification and [OpenAPI Generator](https://openapi-generator.tech/), a client library for Go, Python, TypeScript, Rust, C# and many other languages is [generated instead of written](reference-rest-api-overview.md#generate-a-client-from-the-specification).
 
 The rest of this page walks you through the quickest way to get started with the command line, the REST API and the Java API by managing a topic with each of them, including the setup each interface needs when authentication is enabled.
@@ -60,7 +60,7 @@ Check the detailed steps below.
   values={[{"label":"pulsar-admin","value":"pulsar-admin"},{"label":"REST API","value":"REST API"},{"label":"Java","value":"Java"}]}>
 <TabItem value="pulsar-admin">
 
-To manage topics using pulsar-admin CLI, complte the following steps.
+To manage topics using pulsar-admin CLI, complete the following steps.
 
 1. Set the service URL.
 
@@ -76,7 +76,7 @@ To manage topics using pulsar-admin CLI, complte the following steps.
 
 **Prerequisites**
 
-- Install and start Pulsar standalone. This tutorial runs Pulsar 2.11 as an example.
+- Install and start [Pulsar standalone](getting-started-standalone.md).
 
 **Steps**
 
@@ -95,11 +95,13 @@ To manage topics using pulsar-admin CLI, complte the following steps.
     |brokerServiceUrl|The Pulsar protocol URL for the cluster.|pulsar://localhost:6650/|
     |authPlugin|The authentication plugin.| |
     |authParams|The authentication parameters for the cluster, as a comma-separated string.| |
-    |useTls|Whether or not TLS authentication will be enforced in the cluster.|false|
-    |tlsAllowInsecureConnection|Accept untrusted TLS certificate from client.|false|
+    |tlsAllowInsecureConnection|Allow untrusted server certificates.|false|
+    |tlsEnableHostnameVerification|Verify the server hostname against its TLS certificate.|true|
     |tlsTrustCertsFilePath|Path for the trusted TLS certificate file.| |
 
     See the [client configuration reference](/reference/#/@pulsar:version_reference@/config/reference-configuration-client) for all settings.
+
+    Use an `https://` web service URL to enable TLS for admin requests. `pulsar-admin` loads supported admin-client properties from this file through the client builder, including settings beyond the connection and authentication options shown above. For example, `readTimeoutMs=120000` sets the HTTP read timeout to two minutes. Command-line settings take precedence where a corresponding CLI option is available.
 
 **Step 2:** Create a persistent topic named _test-topic-1_ with 6 partitions.
 
@@ -141,7 +143,7 @@ To manage topics using pulsar-admin CLI, complte the following steps.
 
     ```bash
     2023-03-07T15:33:56,832+0800 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer - Starting Pulsar perf producer with config: {
-      "confFile" : "/Users/yu/apache-pulsar-2.11.0/conf/client.conf",
+      "confFile" : "/Users/yu/apache-pulsar-@pulsar:version@/conf/client.conf",
       "serviceURL" : "pulsar://localhost:6650",
       "authPluginClassName" : "",
       "authParams" : "",
@@ -299,7 +301,7 @@ To manage topics using REST API, complete the following steps.
 
 **Prerequisites**
 
-- Install and start Pulsar standalone. This tutorial runs Pulsar 2.11 as an example.
+- Install and start [Pulsar standalone](getting-started-standalone.md).
 
 **Steps**
 
@@ -341,7 +343,7 @@ To manage topics using REST API, complete the following steps.
 
     ```bash
     2023-03-08T15:47:06,268+0800 [main] INFO  org.apache.pulsar.testclient.PerformanceProducer - Starting Pulsar perf producer with config: {
-      "confFile" : "/Users/yu/apache-pulsar-2.11.0/conf/client.conf",
+      "confFile" : "/Users/yu/apache-pulsar-@pulsar:version@/conf/client.conf",
       "serviceURL" : "pulsar://localhost:6650",
       "authPluginClassName" : "",
       "authParams" : "",
@@ -454,13 +456,13 @@ To manage topics using Java admin API, complete following steps.
 
 **Prerequisites**
 
-- Prepare a Java project and add the following dependency to your POM file.
+- Prepare a Java project and add the combined client dependency to your POM file. It includes the admin implementation and both the v4 and v5 clients. Set `pulsar.version` to the release you are using; see [Java client dependencies](pathname:///docs/client-libraries/java-setup) for supported versions, the shaded fallback, and exclusions when replacing separate client dependencies.
 
-  ```java
+  ```xml
   <dependency>
         <groupId>org.apache.pulsar</groupId>
-        <artifactId>pulsar-client-admin</artifactId>
-        <version>@pulsar:version@</version>
+        <artifactId>pulsar-client-v5-all</artifactId>
+        <version>${pulsar.version}</version>
     </dependency>
   ```
 

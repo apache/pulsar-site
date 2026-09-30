@@ -116,7 +116,9 @@ Before starting using connectors, you can perform the following operations:
 
 ### `reload`
 
-If you add or delete a nar file in a connector folder, reload the available built-in connector before using it.
+If you add, replace, or delete a NAR file in a connector folder, reload the available built-in connectors before using them.
+
+Reload is incremental: unchanged archives at the same path retain their cached package and classloader, based on the archive's SHA-256 content checksum. Changed or new archives are loaded, and replaced or removed cached packages are closed. Touching an unchanged archive does not force a new classloader. Reload updates the available-connectors catalog; manage deployed connector instances through their update or restart operations separately. Distribute the intended archives to every relevant worker and verify the available connectors after reloading.
 
 #### Source
 

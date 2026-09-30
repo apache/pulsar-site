@@ -427,6 +427,10 @@ module.exports = async function createConfigAsync() {
               from: '/client-feature-matrix',
               to: '/docs/client-libraries/feature-matrix',
             },
+            ...(buildVersions.includes("current") ? ["configuration", "applications"] : []).map((page) => ({
+              from: `/docs/next/administration-upgrade-${page}`,
+              to: `/docs/next/administration-upgrade-to-5.0.x-${page}`,
+            })),
             ...clientLibrariesLegacyRedirects(),
           ],
         },

@@ -58,6 +58,20 @@ Alternatively, you can create a PR to your own fork through the GitHub web inter
 2. Choose "master" as the "base" branch and your PR branch as the "compare" branch (should be the default)
 3. Complete the PR creation process as normal
 
+## Runner memory and restricted repositories
+
+The readiness check in `apache/pulsar` stops CI for draft PRs and PRs above the bottom of a stack. These changes can still run in your fork. See the [`ready-to-test` label](develop-labels.md#ready-to-test) for overrides and restarting a stopped run. The PR-title check also runs only in `apache/pulsar`; a successful fork run does not validate the upstream PR title.
+
+On Linux runners with up to 8 GiB of physical RAM, Pulsar's `setup-gradle` action automatically selects a smaller memory profile: a 2 GiB Gradle heap, two workers across projects, up to two test forks per task, and worker recycling after 50 detected test classes. Task-specific limits still apply. The action's `memory-profile` input accepts `auto`, `low-memory`, or `standard`; `standard` leaves memory settings unchanged.
+
+Develocity injection and build-scan publishing are disabled when the workflow repository is private or its visibility is unavailable. A public repository can disable them with `build-scan-publish: 'false'` on the action. Private repositories with GitHub Code Security enabled can opt in to CodeQL with the repository variable `CI_ENABLE_CODEQL=true`.
+
+The workflows declare their required token permissions. Organization policies and restrictions on fork pull-request tokens still apply. For local test memory limits and worker recycling options, see [Running tests](https://github.com/apache/pulsar/blob/master/CONTRIBUTING.md#running-tests).
+
+## Inspect failed test reports
+
+Download the failed job's `*-test-reports` artifact and extract the whole archive, preserving its directories. XML results are collected under `test-reports/`, and Gradle HTML reports retain their module paths under `build/reports/tests/`. When standard module test reports are present, `test-reports/index.html` links to them. The separate `*-dumps` artifact can include JVM thread dumps under `build/threaddumps/`, heap dumps, and crash files.
+
 ## Stay in-sync with upstream
 
 It's worth keeping your master branch in sync with apache/pulsar's master (the upstream) so that the diff of PR will be reasonable in your own fork.
@@ -66,7 +80,11 @@ Read more about the instructions to sync a fork from the WebUI, from the GitHub 
 
 ## SSH to CI jobs
 
-The additional benefit of the "Personal CI" is that you get SSH access to the build VMs when the build is running. That is handled by this logic in the [pulsar-ci.yaml](https://github.com/apache/pulsar/blob/master/.github/workflows/pulsar-ci.yaml) GitHub Actions workflow file:
+Personal CI can provide SSH access to the build VM while a job is running.
+
+SSH is enabled by default for public workflow repositories and disabled for private, internal, or unknown visibility. Set the repository variable `CI_ENABLE_SSH` to `true` or `false` to override that default; `false` also disables the SSH wait step. The workflow's event conditions and SSH-key restrictions still apply.
+
+The [pulsar-ci.yaml](https://github.com/apache/pulsar/blob/master/.github/workflows/pulsar-ci.yaml) workflow enables the action for fork pull requests and restricts access to the actor's keys:
 
 ```yaml
 - name: Setup ssh access to build runner VM
