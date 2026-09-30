@@ -2717,7 +2717,7 @@ PIP-486 segments-vs-buckets lever: on consumer-driven scale-up, split only if th
 **Category**: Policies
 
 ### scalableTopicsEnabled
-Enables the scalable-topics V5 API on this broker. When disabled, the broker advertises supports_scalable_topics=false in CommandConnected feature flags and rejects scalable-topic commands from clients.
+Enables the scalable-topics V5 API on this broker. When disabled, the broker advertises supports_scalable_topics=false in CommandConnected feature flags, rejects scalable-topic commands and topic/segment lookups and loads, and does not start scalable-topic services or expose the scalable-topic admin API. Disable before migrating from 4.x to preserve the option to roll back without using scalable topics. Existing scalable-topic data is retained but inaccessible while disabled. Changing this setting requires a broker restart.
 
 **Type**: `boolean`
 
@@ -3673,11 +3673,11 @@ Time in milliseconds to delay the new delivery of a message when an EntryFilter 
 **Category**: Server
 
 ### dispatcherMaxReadBatchSize
-Max number of entries to read from bookkeeper. By default it is 100 entries.
+Max number of entries to read from bookkeeper. By default it is 500 entries.
 
 **Type**: `int`
 
-**Default**: `100`
+**Default**: `500`
 
 **Dynamic**: `true`
 
@@ -3817,6 +3817,17 @@ Enable to run bookie autorecovery along with broker
 
 ### enableRunBookieTogether
 Enable to run bookie along with broker
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### enableShadowTopics
+Enable shadow topic creation, loading and replication. Requires a broker restart.
 
 **Type**: `boolean`
 
