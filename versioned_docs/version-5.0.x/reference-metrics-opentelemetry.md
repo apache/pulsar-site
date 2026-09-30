@@ -1220,6 +1220,47 @@ Number of pending requests in the transaction buffer client.
 * Attributes: None.
 
 
+### Message Find Metrics
+
+The broker finds the position of a message by timestamp when the cursor of a subscription is reset to a timestamp (a consumer seek by timestamp, or `pulsar-admin topics reset-cursor --time`) and when it looks for the messages that exceeded the message TTL. The search reads entries from the managed ledger, which can be slow for ledgers offloaded to tiered storage. These metrics are recorded per broker, not per topic. The `pulsar-admin topics get-message-id` operation is not included.
+
+#### pulsar.broker.message.find.duration
+Time taken to find the position of a message by timestamp.
+* Type: Histogram
+* Unit: `s`
+* Attributes:
+  * `pulsar.broker.message.find.reason` - The reason of the search. Can be one of:
+    * `seek` - The cursor of a subscription is reset to a timestamp.
+    * `expiry` - The messages that exceeded the message TTL are looked up.
+  * `pulsar.broker.message.find.result` - The result of the search. Can be one of:
+    * `found`
+    * `not_found`
+    * `failure`
+
+#### pulsar.broker.message.find.entry.read.count
+The number of entries read while finding the position of a message by timestamp. Entries served from the broker entry cache are included.
+* Type: Counter
+* Unit: `{entry}`
+* Attributes:
+  * `pulsar.broker.message.find.reason` - The reason of the search. Can be one of:
+    * `seek`
+    * `expiry`
+  * `pulsar.broker.message.find.entry.storage` - The storage that the ledger of the entry is read from. Can be one of:
+    * `bookkeeper`
+    * `offloaded` - The ledger is read from tiered storage.
+
+#### pulsar.broker.message.find.entry.read.size
+The number of bytes read while finding the position of a message by timestamp. Entries served from the broker entry cache are included.
+* Type: Counter
+* Unit: `By`
+* Attributes:
+  * `pulsar.broker.message.find.reason` - The reason of the search. Can be one of:
+    * `seek`
+    * `expiry`
+  * `pulsar.broker.message.find.entry.storage` - The storage that the ledger of the entry is read from. Can be one of:
+    * `bookkeeper`
+    * `offloaded` - The ledger is read from tiered storage.
+
 ## Java Client
 
 ### Producer Metrics
