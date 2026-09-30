@@ -22,8 +22,10 @@ To get the list of available built-in Functions, use the `available-functions` c
 bin/pulsar-admin functions available-functions
 ```
 
-If you add or delete a NAR file in a `functions` folder, reload the available built-in functions before using it.
+If you add, replace, or delete a NAR file in a `functions` folder, reload the available built-in functions before using it.
 
 ```bash
 bin/pulsar-admin functions reload
 ```
+
+Reload is incremental: an archive with the same path and SHA-256 content checksum retains its existing cached package and classloader. New or changed archives are loaded, and replaced or removed cached packages are closed. Touching an unchanged file does not force a new classloader. Reload updates the worker's available-functions catalog; use the function update or restart operations to manage deployed instances separately. Distribute the intended archives to every relevant worker and verify `available-functions` after reloading.

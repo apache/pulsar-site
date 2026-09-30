@@ -5,6 +5,12 @@ sidebar_label: "Run Pulsar in Docker"
 description: Get started with Apache Pulsar on your local machine using Docker.
 ---
 
+:::warning Network perimeter security required
+
+A Pulsar cluster is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. This requirement can be met by deploying Pulsar in private networks and restricting access to trusted clients and services.
+
+:::
+
 ````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -21,6 +27,8 @@ For local development and testing, you can run Pulsar in standalone mode on your
 To run Pulsar in Docker, follow the steps below.
 
 ## Step1: Start Pulsar in Docker
+
+If you already have a standalone data volume, read [Reuse standalone data](getting-started-standalone.md#reuse-standalone-data) before attaching it to a different container image. Preserve the old volume and image; use a fresh data volume for disposable tests.
 
 For macOS, Linux, and Windows, run the following command to start Pulsar within a Docker container.
 
@@ -236,7 +244,7 @@ The output is something like this:
             "metadata": {},
             "address": "/127.0.0.1:35604",
             "connectedSince": "2021-07-04T09:05:43.04788Z",
-            "clientVersion": "2.8.0",
+            "clientVersion": "@pulsar:version@",
             "producerName": "standalone-2-5"
         }
     ],
@@ -282,7 +290,7 @@ The output is something like this:
                     "metadata": {},
                     "address": "/127.0.0.1:35472",
                     "connectedSince": "2021-07-04T08:58:21.287682Z",
-                    "clientVersion": "2.8.0"
+                    "clientVersion": "@pulsar:version@"
                 }
             ],
             "isDurable": true,

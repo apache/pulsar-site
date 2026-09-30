@@ -4,407 +4,129 @@ title: OpenTelemetry Tracing for Pulsar Java Client
 sidebar_label: "OpenTelemetry Tracing"
 ---
 
-This document describes how to use OpenTelemetry distributed tracing with the Pulsar Java client.
+Follow [Java client setup](java-setup.md) to configure the combined dependency. This guide uses the v4 API (`org.apache.pulsar.client.api`); see [Java client (v5)](java-v5.md) for the v5 API.
 
-## Overview
+The v4 Pulsar Java client provides OpenTelemetry tracing for producer sends and consumer processing. Tracing is disabled by default. Enable it with `ClientBuilder.enableTracing(true)`; the client automatically installs its producer and consumer tracing interceptors.
 
-The Pulsar Java client provides built-in support for OpenTelemetry distributed tracing. This allows you to:
+## Quick start
 
-- Trace message publishing from producer to broker
-- Trace message consumption from broker to consumer
-- Propagate trace context across services via message properties
-- Extract trace context from external sources (e.g., HTTP requests)
-- Create end-to-end traces across your distributed system
+Configure an OpenTelemetry SDK with a trace exporter, then pass it to the client with `.openTelemetry(openTelemetry)`. The client uses that instance to create spans. **Context propagation uses the propagators from `GlobalOpenTelemetry`**, so register the propagators globally even when you supply an explicit SDK to the client.
 
-## Features
-
-### Producer Tracing
-
-Producer tracing creates spans for:
-- **send** - Span starts when `send()` or `sendAsync()` is called and completes when broker acknowledges receipt
-
-### Consumer Tracing
-
-Consumer tracing creates spans for:
-- **process** - Span starts when message is received and completes when message is acknowledged, negatively acknowledged, or ack timeout occurs
-
-### Trace Context Propagation
-
-Trace context is automatically propagated using W3C TraceContext format:
-- `traceparent` - Contains trace ID, span ID, and trace flags
-- `tracestate` - Contains vendor-specific trace information
-
-Context is injected into and extracted from message properties, enabling seamless trace propagation across services.
-
-## Quick Start
-
-### 1. Add Dependencies
-
-The Pulsar client already includes OpenTelemetry API dependencies. You'll need to add the SDK and exporters:
-
-```xml
-<dependency>
-    <groupId>io.opentelemetry</groupId>
-    <artifactId>opentelemetry-sdk</artifactId>
-    <version>${opentelemetry.version}</version>
-</dependency>
-<dependency>
-    <groupId>io.opentelemetry</groupId>
-    <artifactId>opentelemetry-exporter-otlp</artifactId>
-    <version>${opentelemetry.version}</version>
-</dependency>
-```
-
-### 2. Enable Tracing
-
-There are three ways to enable tracing:
-
-#### Option 1: Using OpenTelemetry Java Agent (Easiest)
-
-```bash
-# Start your application with the Java Agent
-java -javaagent:opentelemetry-javaagent.jar \
-     -Dotel.service.name=my-service \
-     -Dotel.exporter.otlp.endpoint=http://localhost:4317 \
-     -jar your-application.jar
-```
+The following example registers a W3C trace-context propagator and an OTLP trace exporter. Add `io.opentelemetry:opentelemetry-sdk` and `io.opentelemetry:opentelemetry-exporter-otlp` to your application, using matching OpenTelemetry versions.
 
 ```java
-// Just enable tracing - uses GlobalOpenTelemetry from the agent
-PulsarClient client = PulsarClient.builder()
-    .serviceUrl("pulsar://localhost:6650")
-    .enableTracing(true)  // That's it!
-    .build();
-```
-
-#### Option 2: With Explicit OpenTelemetry Instance
-
-```java
-OpenTelemetry openTelemetry = // configure your OpenTelemetry instance
-
-PulsarClient client = PulsarClient.builder()
-    .serviceUrl("pulsar://localhost:6650")
-    .openTelemetry(openTelemetry, true)  // Set OpenTelemetry AND enable tracing
-    .build();
-```
-
-#### Option 3: Using GlobalOpenTelemetry
-
-```java
-// Configure GlobalOpenTelemetry once in your application
-GlobalOpenTelemetry.set(myOpenTelemetry);
-
-// Enable tracing in the client - uses GlobalOpenTelemetry
-PulsarClient client = PulsarClient.builder()
-    .serviceUrl("pulsar://localhost:6650")
-    .enableTracing(true)
-    .build();
-```
-
-**What happens when tracing is enabled:**
-- **Create spans** for producer send operations
-- **Inject trace context** into message properties automatically
-- **Create spans** for consumer receive/ack operations
-- **Extract trace context** from message properties automatically
-- Link all spans to create end-to-end distributed traces
-
-### 3. Manual Interceptor Configuration (Advanced)
-
-If you prefer manual control, you can add interceptors explicitly:
-
-```java
-import org.apache.pulsar.client.impl.tracing.OpenTelemetryProducerInterceptor;
-import org.apache.pulsar.client.impl.tracing.OpenTelemetryConsumerInterceptor;
-
-// Create client (tracing not enabled globally)
-PulsarClient client = PulsarClient.builder()
-    .serviceUrl("pulsar://localhost:6650")
-    .openTelemetry(openTelemetry)
-    .build();
-
-// Add interceptor manually to specific producer
-Producer<String> producer = client.newProducer(Schema.STRING)
-    .topic("my-topic")
-    .intercept(new OpenTelemetryProducerInterceptor())
-    .create();
-
-// Add interceptor manually to specific consumer
-Consumer<String> consumer = client.newConsumer(Schema.STRING)
-    .topic("my-topic")
-    .subscriptionName("my-subscription")
-    .intercept(new OpenTelemetryConsumerInterceptor<>())
-    .subscribe();
-```
-
-## Advanced Usage
-
-### End-to-End Tracing Example
-
-This example shows how to create a complete trace from an HTTP request through Pulsar to a consumer:
-
-```java
-// Service 1: HTTP API that publishes to Pulsar
-@POST
-@Path("/order")
-public Response createOrder(@Context HttpHeaders headers, Order order) {
-    // Extract trace context from incoming HTTP request
-    Context context = TracingProducerBuilder.extractFromHeaders(
-        convertHeaders(headers));
-
-    // Publish to Pulsar with trace context
-    TracingProducerBuilder tracingBuilder = new TracingProducerBuilder();
-    producer.newMessage()
-        .value(order)
-        .let(builder -> tracingBuilder.injectContext(builder, context))
-        .send();
-
-    return Response.accepted().build();
-}
-
-// Service 2: Pulsar consumer that processes orders
-Consumer<Order> consumer = client.newConsumer(Schema.JSON(Order.class))
-    .topic("orders")
-    .subscriptionName("order-processor")
-    .intercept(new OpenTelemetryConsumerInterceptor<>())
-    .subscribe();
-
-while (true) {
-    Message<Order> msg = consumer.receive();
-    // Trace context is automatically extracted
-    // Any spans created here will be part of the same trace
-    processOrder(msg.getValue());
-    consumer.acknowledge(msg);
-}
-```
-
-### Custom Span Creation
-
-You can create custom spans during message processing:
-
-```java
-import io.opentelemetry.api.trace.Span;
-import io.opentelemetry.api.trace.Tracer;
-import io.opentelemetry.context.Scope;
-
-Tracer tracer = GlobalOpenTelemetry.get().getTracer("my-app");
-
-Message<String> msg = consumer.receive();
-
-// Create a custom span for processing
-Span span = tracer.spanBuilder("process-message")
-    .setSpanKind(SpanKind.INTERNAL)
-    .startSpan();
-
-try (Scope scope = span.makeCurrent()) {
-    // Your processing logic
-    processMessage(msg.getValue());
-    span.setStatus(StatusCode.OK);
-} catch (Exception e) {
-    span.recordException(e);
-    span.setStatus(StatusCode.ERROR);
-    throw e;
-} finally {
-    span.end();
-    consumer.acknowledge(msg);
-}
-```
-
-## Configuration
-
-### Compatibility with OpenTelemetry Java Agent
-
-This implementation is **fully compatible** with the [OpenTelemetry Java Instrumentation](https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/pulsar) for Pulsar:
-
-- Both use **W3C TraceContext** format (traceparent, tracestate headers)
-- Both propagate context via **message properties**
-- **No conflicts**: Our implementation checks if trace context is already present (from Java Agent) and avoids duplicate injection
-- You can use either approach or both together
-
-### Using OpenTelemetry Java Agent
-
-The easiest way to enable tracing is using the OpenTelemetry Java Agent (automatic instrumentation):
-
-```bash
-java -javaagent:path/to/opentelemetry-javaagent.jar \
-     -Dotel.service.name=my-service \
-     -Dotel.exporter.otlp.endpoint=http://localhost:4317 \
-     -jar your-application.jar
-```
-
-**Note**: When using the Java Agent, you don't need to call `.openTelemetry(otel, true)` as the agent automatically instruments Pulsar. However, calling it won't cause conflicts.
-
-### Programmatic Configuration
-
-You can also configure OpenTelemetry programmatically:
-
-```java
+import io.opentelemetry.api.trace.propagation.W3CTraceContextPropagator;
+import io.opentelemetry.context.propagation.ContextPropagators;
+import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
 import io.opentelemetry.sdk.OpenTelemetrySdk;
 import io.opentelemetry.sdk.trace.SdkTracerProvider;
 import io.opentelemetry.sdk.trace.export.BatchSpanProcessor;
-import io.opentelemetry.exporter.otlp.trace.OtlpGrpcSpanExporter;
+import org.apache.pulsar.client.api.PulsarClient;
 
-OtlpGrpcSpanExporter spanExporter = OtlpGrpcSpanExporter.builder()
-    .setEndpoint("http://localhost:4317")
-    .build();
-
+OtlpGrpcSpanExporter exporter = OtlpGrpcSpanExporter.builder()
+        .setEndpoint("http://localhost:4317")
+        .build();
 SdkTracerProvider tracerProvider = SdkTracerProvider.builder()
-    .addSpanProcessor(BatchSpanProcessor.builder(spanExporter).build())
-    .build();
-
+        .addSpanProcessor(BatchSpanProcessor.builder(exporter).build())
+        .build();
 OpenTelemetrySdk openTelemetry = OpenTelemetrySdk.builder()
-    .setTracerProvider(tracerProvider)
-    .buildAndRegisterGlobal();
+        .setTracerProvider(tracerProvider)
+        .setPropagators(ContextPropagators.create(W3CTraceContextPropagator.getInstance()))
+        .buildAndRegisterGlobal();
+
+PulsarClient client = PulsarClient.builder()
+        .serviceUrl("pulsar://localhost:6650")
+        .openTelemetry(openTelemetry)
+        .enableTracing(true)
+        .build();
+
+// Create producers and consumers, send and process messages, then close them.
+client.close();
+openTelemetry.close();
 ```
 
-### Environment Variables
+Register the global SDK once per application. Close the client and its producers and consumers before closing the SDK. If your application already has a global SDK, including one supplied by an OpenTelemetry Java agent, you can omit `.openTelemetry(openTelemetry)` and use that global instance. Agent instrumentation is configured separately from Pulsar's built-in `enableTracing` option.
 
-Configure via environment variables:
+## Trace context propagation
 
-```bash
-export OTEL_SERVICE_NAME=my-service
-export OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
-export OTEL_TRACES_EXPORTER=otlp
-export OTEL_METRICS_EXPORTER=otlp
-```
+The producer interceptor creates a send span from the current OpenTelemetry context and injects that span's context into message properties. The consumer interceptor extracts those properties to create its processing span. With the W3C propagator configured, `traceparent` carries the trace identity and `tracestate` carries optional vendor information.
 
-## Span Attributes
+When publishing from an HTTP handler or another traced operation, make its extracted context current around the send:
 
-The tracing implementation adds the following attributes to spans following the [OpenTelemetry messaging semantic conventions](https://opentelemetry.io/docs/specs/semconv/messaging/messaging-spans/):
-
-### Producer Spans
-- `messaging.system`: "pulsar"
-- `messaging.destination.name`: Topic name
-- `messaging.operation.name`: "send"
-- `messaging.message.id`: Message ID (added when broker confirms)
-
-**Span naming**: `send {topic}` (e.g., "send my-topic")
-
-### Consumer Spans
-- `messaging.system`: "pulsar"
-- `messaging.destination.name`: Topic name
-- `messaging.destination.subscription.name`: Subscription name
-- `messaging.operation.name`: "process"
-- `messaging.message.id`: Message ID
-- `messaging.pulsar.acknowledgment.type`: How the message was acknowledged
-  - `"acknowledge"`: Normal individual acknowledgment
-  - `"cumulative_acknowledge"`: Cumulative acknowledgment
-  - `"negative_acknowledge"`: Message negatively acknowledged (will retry)
-  - `"ack_timeout"`: Acknowledgment timeout occurred (will retry)
-
-**Span naming**: `process {topic}` (e.g., "process my-topic")
-
-## Span Lifecycle and Acknowledgment Behavior
-
-Understanding how spans are handled for different acknowledgment scenarios. Every consumer span includes a `messaging.pulsar.acknowledgment.type` attribute indicating how it was completed:
-
-### Successful Acknowledgment
-- Span ends with **OK** status
-- Attribute: `messaging.pulsar.acknowledgment.type = "acknowledge"`
-
-### Cumulative Acknowledgment
-- Span ends with **OK** status
-- Attribute: `messaging.pulsar.acknowledgment.type = "cumulative_acknowledge"`
-- All spans up to the acknowledged position are ended with this attribute
-
-### Negative Acknowledgment
-- Span ends with **OK** status (not an error)
-- Attribute: `messaging.pulsar.acknowledgment.type = "negative_acknowledge"`
-- This is normal flow, not a failure - the message will be redelivered and a new span will be created
-
-### Acknowledgment Timeout
-- Span ends with **OK** status (not an error)
-- Attribute: `messaging.pulsar.acknowledgment.type = "ack_timeout"`
-- This is expected behavior when `ackTimeout` is configured - the message will be redelivered and a new span will be created
-
-### Application Exception During Processing
-- If your application code throws an exception, create a child span and mark it with ERROR status
-- The consumer span itself will end normally when you call `negativeAcknowledge()`
-- This provides clear separation between messaging operations (OK) and application logic (ERROR)
-
-**Example - Separating messaging and application errors**:
 ```java
-Message<String> msg = consumer.receive();
-Span processingSpan = tracer.spanBuilder("business-logic").startSpan();
-try (Scope scope = processingSpan.makeCurrent()) {
-    processMessage(msg.getValue());
-    processingSpan.setStatus(StatusCode.OK);
-    consumer.acknowledge(msg);  // Consumer span ends with acknowledgment.type="acknowledge"
-} catch (Exception e) {
-    processingSpan.recordException(e);
-    processingSpan.setStatus(StatusCode.ERROR);  // Business logic failed
-    consumer.negativeAcknowledge(msg);  // Consumer span ends with acknowledgment.type="negative_acknowledge"
-    throw e;
-} finally {
-    processingSpan.end();
+import io.opentelemetry.context.Context;
+import io.opentelemetry.context.Scope;
+
+// requestContext is the context extracted by your HTTP instrumentation.
+Context requestContext = Context.current();
+try (Scope scope = requestContext.makeCurrent()) {
+    producer.newMessage().value("order placed").send();
 }
 ```
 
-### Querying by Acknowledgment Type
+The consumer interceptor creates a span but does not make it current in your application's processing thread. To connect your application spans to the incoming trace, explicitly extract the message properties and set the parent of your application span. For example:
 
-The `messaging.pulsar.acknowledgment.type` attribute allows you to filter and analyze spans:
+```java
+import io.opentelemetry.api.GlobalOpenTelemetry;
+import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.StatusCode;
+import io.opentelemetry.api.trace.Tracer;
+import io.opentelemetry.context.Context;
+import io.opentelemetry.context.Scope;
+import io.opentelemetry.context.propagation.TextMapGetter;
+import java.util.Map;
+import org.apache.pulsar.client.api.Message;
 
-**Example queries in your tracing backend**:
-- Find all retried messages: `messaging.pulsar.acknowledgment.type = "negative_acknowledge" OR "ack_timeout"`
-- Calculate retry rate: `count(negative_acknowledge) / count(acknowledge)`
-- Identify timeout issues: `messaging.pulsar.acknowledgment.type = "ack_timeout"`
-- Analyze cumulative vs individual acks: Group by `messaging.pulsar.acknowledgment.type`
+TextMapGetter<Map<String, String>> getter = new TextMapGetter<>() {
+    public Iterable<String> keys(Map<String, String> properties) {
+        return properties.keySet();
+    }
+    public String get(Map<String, String> properties, String key) {
+        return properties == null ? null : properties.get(key);
+    }
+};
+Tracer tracer = GlobalOpenTelemetry.get().getTracer("order-service");
+Message<String> message = consumer.receive();
+Context parent = GlobalOpenTelemetry.get().getPropagators().getTextMapPropagator()
+        .extract(Context.root(), message.getProperties(), getter);
+Span span = tracer.spanBuilder("process-order").setParent(parent).startSpan();
+try (Scope scope = span.makeCurrent()) {
+    processOrder(message.getValue());
+    consumer.acknowledge(message);
+} catch (Exception error) {
+    span.recordException(error);
+    span.setStatus(StatusCode.ERROR);
+    consumer.negativeAcknowledge(message);
+} finally {
+    span.end();
+}
+```
 
-## Best Practices
+This application span and the built-in consumer processing span share the producer span as their parent.
 
-1. **Always use interceptors**: Add tracing interceptors to both producers and consumers for complete visibility.
+## Span attributes
 
-2. **Propagate context from HTTP**: When publishing from HTTP endpoints, always extract and propagate the trace context.
+| Attribute | Producer span | Consumer span |
+|---|---|---|
+| `messaging.system` | `pulsar` | `pulsar` |
+| `messaging.destination.name` | Topic returned by the sending producer | Topic from the received message, falling back to the consumer's topic |
+| `messaging.operation.name` | `send` | `process` |
+| `messaging.destination.subscription.name` | — | Subscription name |
+| `messaging.message.id` | Added on broker acknowledgment | Received message ID |
+| `messaging.pulsar.acknowledgment.type` | — | How the message's processing span ended |
 
-3. **Handle errors properly**: Ensure spans are ended even when exceptions occur.
+Producer span names are `send {topic}`; consumer span names are `process {topic}`. A multi-topic consumer uses the actual received topic for each span, and a partitioned producer uses the sending partition's topic. This lets you distinguish partitions and topics in trace queries.
 
-4. **Distinguish messaging vs. application errors**:
-   - Messaging operations (nack, timeout) end with OK status + events
-   - Application failures should be tracked in separate child spans with ERROR status
+## Span lifecycle and acknowledgment behavior
 
-5. **Use meaningful span names**: The default span names include the topic name for easy identification.
+A producer span ends when the send acknowledgment callback runs. A consumer span starts before message delivery and ends on acknowledgment, negative acknowledgment, acknowledgment timeout, or interceptor cleanup.
 
-6. **Consider performance**: Tracing adds minimal overhead, but in high-throughput scenarios, consider sampling.
+Successful consumer acknowledgment callbacks set `messaging.pulsar.acknowledgment.type` to `acknowledge` or `cumulative_acknowledge`. Cumulative acknowledgment ends tracked spans through the acknowledged position in the same topic partition. Negative acknowledgments and acknowledgment timeouts set it to `negative_acknowledge` and `ack_timeout` respectively; these end the messaging span with `OK` status. An exception passed to an acknowledgment callback ends the span with `ERROR` status. Cleanup can end outstanding spans without an acknowledgment-type attribute.
 
-7. **Clean up resources**: Ensure interceptors and OpenTelemetry SDK are properly closed when shutting down.
+Record business-logic failures on an application span, as in the example above. The interceptor does not observe exceptions thrown by your message handler directly.
 
 ## Troubleshooting
 
-### Traces not appearing
+If traces are missing, check that `enableTracing(true)` is set, the SDK has a tracer provider and exporter, and the export endpoint is reachable. Adding an OpenTelemetry instance alone does not enable the tracing interceptors.
 
-1. Verify OpenTelemetry SDK is configured and exporters are set up
-2. Check that interceptors are added to producers/consumers
-3. Verify trace exporter endpoint is reachable
-4. Enable debug logging: `-Dio.opentelemetry.javaagent.debug=true`
-
-### Missing parent-child relationships
-
-1. Ensure trace context is being injected via `TracingProducerBuilder.injectContext()`
-2. Verify message properties contain `traceparent` header
-3. Check that both producer and consumer have tracing interceptors
-
-### High overhead
-
-1. Consider using sampling: `-Dotel.traces.sampler=parentbased_traceidratio -Dotel.traces.sampler.arg=0.1`
-2. Use batch span processor (default)
-3. Adjust batch processor settings if needed
-
-## Examples
-
-See the following files for complete examples:
-- `TracingExampleTest.java` - Comprehensive usage examples
-- `OpenTelemetryTracingTest.java` - Unit tests demonstrating API usage
-
-## API Reference
-
-### Main Classes
-
-- `OpenTelemetryProducerInterceptor` - Producer interceptor for tracing
-- `OpenTelemetryConsumerInterceptor` - Consumer interceptor for tracing
-- `TracingContext` - Utility methods for span creation and context propagation
-- `TracingProducerBuilder` - Helper for injecting trace context into messages
-
-## Additional Resources
-
-- [OpenTelemetry Java Documentation](https://opentelemetry.io/docs/instrumentation/java/)
-- [W3C Trace Context Specification](https://www.w3.org/TR/trace-context/)
-- [Pulsar Documentation](https://pulsar.apache.org/docs/)
+If producer and consumer spans appear in different traces, check the global propagator configuration and the received message properties. With W3C propagation, the properties should contain `traceparent`. The built-in producer interceptor injects context automatically; no manual tracing interceptor or Pulsar implementation helper is required.

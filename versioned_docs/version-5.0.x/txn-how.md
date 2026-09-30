@@ -7,6 +7,14 @@ description: Learn the working principles of transactions in Pulsar.
 
 This section describes transaction components and how the components work together. For the complete design details, see [PIP-31: Transactional Streaming](https://docs.google.com/document/d/145VYp09JKTw9jAT-7yNyFU255FptB2_B2Fye100ZXDI/edit#heading=h.bm5ainqxosrx).
 
+The concepts and diagrams below describe the v4 transaction coordinator. Pulsar also provides a scalable coordinator for the [v5 Java client](pathname:///client-libraries/java-v5#transactions), with different metadata persistence.
+
+## Scalable transaction persistence
+
+The scalable coordinator stores transaction headers, operations, and notifications under `/txn` in the broker's metadata store. Transactional message payloads remain in the topics' BookKeeper ledgers. The default dispatching providers select metadata-backed transaction buffers and pending-acknowledgment stores for scalable topic segments, while regular topics use their regular-topic implementations. See [Transactions on scalable topics](txn-use.md#transactions-on-scalable-topics) for the required settings.
+
+A segment persists its transaction read boundary and aborted-transaction records so it can recover visibility after a broker restart, even after finalized coordinator records are cleaned up. An open transaction can hold back later messages on that segment, including committed and nontransactional messages. When recovery finds an open transaction whose earliest position is unknown, reads remain bounded by the persisted read boundary until that transaction resolves. Aborted messages are filtered from delivery; an abort does not immediately remove their payloads from the ledger.
+
 ## Key concept
 
 It is important to know the following key concepts, which is a prerequisite for understanding how transactions work.
@@ -33,7 +41,7 @@ Transaction buffer stores all ongoing and aborted transactions in memory. All me
 
 ### Transaction ID
 
-Transaction ID (TxnID) identifies a unique transaction in Pulsar. The transaction ID is 128-bit. The highest 16 bits are reserved for the ID of the transaction coordinator, and the remaining bits are used for monotonically increasing numbers in each transaction coordinator. It is easy to locate the transaction crash with the TxnID.
+The transaction ID (`TxnID`) identifies a unique transaction in Pulsar. It consists of two 64-bit values. The v4 coordinator places its coordinator ID in the most significant value and a monotonically increasing sequence number in the least significant value, allowing requests to be routed to the responsible coordinator.
 
 ### Pending acknowledge state
 

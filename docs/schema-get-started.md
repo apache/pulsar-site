@@ -347,6 +347,8 @@ Producer<SensorReading> producer = client.newProducer(AvroSchema.of(SensorReadin
 
 You can declare an `AvroSchema` using Python through one of the following methods.
 
+<span id="method-1-record"></span>
+
 **Method 1: Record**
 
 Declare an `AvroSchema` by passing a class that inherits from `pulsar.schema.Record` and defines the fields as class variables.
@@ -369,6 +371,8 @@ consumer = client.subscribe(
 msg = consumer.receive()
 e = msg.value()
 ```
+
+<span id="method-2-json-definition"></span>
 
 **Method 2: JSON definition**
 
@@ -486,6 +490,23 @@ type avroExampleStruct struct {
 </Tabs>
 ````
 
+#### Java Avro class trust
+
+Avro checks whether classes resolved through reflection are trusted. Most applications need no extra configuration: `Schema.AVRO(MyPojo.class)` trusts the application-supplied class and the types referenced by the schema derived from it. `Schema.JSON(...)` uses Jackson and is unaffected by this Avro check.
+
+A schema definition fetched from the registry or supplied as JSON does not automatically grant trust to classes named in that definition. `Schema.AUTO_CONSUME()` normally decodes top-level records generically, but non-record schemas such as enums or arrays of records can require reflective class resolution. If your application needs those classes, declare its known model types before creating producers or consumers:
+
+```java
+import org.apache.pulsar.client.schema.AvroTrustedClasses;
+
+// Colour is an enum defined by this application.
+AvroTrustedClasses.trust(Colour.class);
+```
+
+`trust` also follows types referenced by the class's derived schema. Use `trustExactly` to declare only the supplied classes, or `trustClasses` for explicit binary class names such as `com.example.Outer$Inner`. Declarations accumulate across the process and widen the existing Avro policy. Choose classes from your application model; do not automatically trust class names received in a remote schema. Use this Pulsar API with both shaded and unshaded clients, since Avro's own classes and property names are relocated in shaded clients.
+
+Existing schemas that represent named-type references as objects, such as `{"type":"com.example.Colour"}`, remain accepted by Pulsar's schema parsing paths. Pulsar normalizes those references for Avro 1.12.2; field defaults are not rewritten.
+
 ### JSON
 
 ````mdx-code-block
@@ -495,7 +516,7 @@ type avroExampleStruct struct {
 
 <TabItem value="Java">
 
-Similar to using `AvroSchema`, you can declare a `JsonSchema` by passing a class. The only difference is to use  `JsonSchema` instead of `AvroSchema` when defining the schema type, as shown below. For how to use `AvroSchema` via record, see [Method 1 - Record](#method-1-record).
+Similar to using `AvroSchema`, you can declare a `JsonSchema` by passing a class. The only difference is to use `JsonSchema` instead of `AvroSchema` when defining the schema type, as shown below. For the Java `AvroSchema` example, see [Avro](#avro).
 
 ```java
 static class SchemaDemo {
@@ -551,7 +572,7 @@ To declare a `JSON` schema using C++, do the following:
 </TabItem>
 <TabItem value="Python">
 
-You can declare a `JsonSchema` by passing a class that inherits from `pulsar.schema.Record` and defines the fields as class variables. This is similar to using `AvroSchema`. The only difference is to use  `JsonSchema` instead of `AvroSchema` when defining schema type, as shown below. For how to use `AvroSchema` via record, see (#method-1-record).
+You can declare a `JsonSchema` by passing a class that inherits from `pulsar.schema.Record` and defines the fields as class variables. This is similar to using `AvroSchema`. The only difference is to use `JsonSchema` instead of `AvroSchema` when defining schema type, as shown below. For how to use `AvroSchema` via record, see [Method 1: Record](#method-1-record).
 
 ```python
 producer = client.create_producer(

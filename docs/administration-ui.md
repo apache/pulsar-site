@@ -7,6 +7,16 @@ description: Web-based UIs for managing Apache Pulsar, with Dekaf UI as the reco
 
 You can manage Apache Pulsar with a web-based UI. Dekaf UI is the recommended option.
 
+:::warning Pulsar Manager is discontinued
+
+Apache Pulsar Manager is no longer maintained by the Apache Pulsar project. It will not receive new releases, bug fixes, or updates for newer Pulsar versions, and its documentation has been removed from the current Pulsar documentation.
+
+We do not recommend using Pulsar Manager for new deployments. If you are running it today, plan to move to an alternative solution and remove the Pulsar Manager deployment. If you deployed it with the Apache Pulsar Helm chart, disable the `pulsar_manager` component, which is already disabled by default in current chart versions.
+
+See the replacement UIs below.
+
+:::
+
 ## Dekaf UI
 
 Dekaf is a recommended web-based UI for Apache Pulsar. It is licensed under the Apache License 2.0.

@@ -86,7 +86,7 @@ Pulsar provides three different messaging delivery semantics that you can apply 
 * The `Exclusive` subscription type is **not** available in Pulsar Functions because:
   * If there is only one instance, `exclusive` equals `failover`.
   * If there are multiple instances, `exclusive` may crash and restart when functions restart. In this case, `exclusive` does not equal `failover`. Because when the master consumer disconnects, all non-acknowledged and subsequent messages are delivered to the next consumer in line.
-* To change the subscription type from `shared` to `key_shared`, you can use the `—retain-key-ordering` option in [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/).
+* To change the subscription type from `shared` to `key_shared`, you can use the `--retain-key-ordering` option in [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/).
 
 :::
 
@@ -106,6 +106,33 @@ bin/pulsar-admin functions update \
   --processing-guarantees ATMOST_ONCE \
   # Other function configs
 ```
+
+## Python and Go runtime settings
+
+The Python and Go runtimes apply producer batching settings to control output latency, batch sizes, and memory use.
+
+Configure the output producer through `producerConfig` in the Function configuration (or the CLI's `--producer-config` JSON option). For example:
+
+```yaml
+producerConfig:
+  maxPendingMessages: 1000
+  batchingConfig:
+    enabled: true
+    batchingMaxPublishDelayMs: 5
+    batchingMaxMessages: 100
+    batchingMaxBytes: 65536
+    batchBuilder: KEY_BASED
+```
+
+The runtimes apply positive batching limits and pending-message limits; omitted or non-positive numeric values leave the client/runtime defaults in place. Without a batching configuration, batching remains enabled with a 10 ms maximum publish delay. `batchingConfig.batchBuilder` takes precedence over `producerConfig.batchBuilder`. Python supports `maxPendingMessagesAcrossPartitions`; the Go client has no equivalent, so Go ignores that field. Neither runtime applies `roundRobinRouterBatchingPartitionSwitchFrequency`.
+
+Go Functions honor `retainOrdering` and `retainKeyOrdering`: the former selects a Failover subscription, and the latter selects Key_Shared. If both reach the runtime, `retainOrdering` takes precedence. Choose the ordering requirement explicitly. Go Functions do not support the `EFFECTIVELY_ONCE` processing guarantee.
+
+Python and Go also apply a positive `SourceSpec.negativeAckRedeliveryDelayMs` to consumer negative acknowledgments. An unset or zero value leaves the language client's default delay in place. For Functions created through `FunctionConfig`, `timeoutMs` (CLI `--timeout-ms`) is copied into this negative-acknowledgment delay as well as the source timeout field. This does not mean every runtime implements every timeout behavior identically; in particular, it is not a time limit that forcibly stops user function code. Check retry timing when upgrading functions with an existing timeout setting.
+
+The Go runtime processes subsequent messages after user-function errors instead of terminating the instance. It records the error and negatively acknowledges the input with `ATLEAST_ONCE` or `MANUAL` processing. Output-publish errors are recorded as system exceptions and negatively acknowledge the input with `ATLEAST_ONCE`. Use the negative-acknowledgment delay to control retry timing and make processing safe to repeat; `ATMOST_ONCE` does not retry these failures.
+
+The Python runtime honors `forwardSourceMessageProperty`: input message properties are copied to the function's output when this setting is enabled. The worker permits this feature by default, and the function setting defaults to `true` when omitted. Set `forwardSourceMessageProperty: false` in the Function configuration to opt out, or disable the feature at the worker. The runtime still adds `__pfn_input_topic__` and `__pfn_input_msg_id__`, overwriting input properties with those reserved names. Check downstream consumers that depend on output properties when upgrading existing Python functions.
 
 ## Context
 

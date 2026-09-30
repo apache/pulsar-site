@@ -69,6 +69,18 @@ The target clusters for replication of a message are determined by a hierarchy o
 
 The `clusters` and `allowed-clusters` settings are resolved hierarchically. When the tenant-level `allowed-clusters` is non-empty, all clusters specified in namespace-level `allowed-clusters` must be a subset of it — this is validated when `allowed-clusters` is modified at the namespace level. Namespace-level `allowed-clusters` can further restrict the tenant-level configuration, and topic-level policies can override the namespace-level `clusters` setting for a specific topic.
 
+### Bound replication reads
+
+Persistent replicators honor `dispatcherMaxReadBatchSize` and `dispatcherMaxReadSizeBytes` even when replication rate limiting is disabled. The entry limit is also bounded by `replicationProducerQueueSize`; available rate-limit permits can reduce either limit further. These are storage-read limits, separate from producer message batching. Compare replication backlog, throughput, and read memory when tuning them. See [Broker read and memory tuning](performance-broker.md) for the shared read settings.
+
+### Disconnect idle replication producers
+
+Pulsar can disconnect an idle persistent replicator's producer without deleting its cursor or replication configuration. `brokerReplicationInactiveThresholdSeconds` defaults to **86,400 seconds (24 hours)**. A replicator is eligible only when it is connected, has no backlog, and has not processed entries for replication for longer than the threshold. New replication work reconnects the producer automatically; an idle disconnected producer is therefore not by itself evidence of a replication failure.
+
+The check uses the inactive-topic monitor's interval, `brokerDeleteInactiveTopicsFrequencySeconds`. The broker schedules it at startup when inactive-topic deletion **or** inactive-topic closing is enabled and the replication threshold is positive. This check is separate from deleting or closing a topic. Set the threshold to `0` or a negative value to disable idle replication disconnection. If you enable a monitor that was not scheduled at startup, restart the broker to apply the monitoring configuration.
+
+Monitor backlog and replication progress as well as the connection state when checking replication health. The same idle-producer check also applies to persistent shadow replicators when shadow topics are enabled.
+
 ### 1-way (unidirectional) and 2-way (bidirectional) geo-replication
 
 Geo-replication can be configured as 1-way (unidirectional) or 2-way (bidirectional). The available options depend on whether a shared configuration store is used.

@@ -15,20 +15,16 @@ The number of bundles is fixed when the namespace is created and can afterwards 
 
 | Namespace | Created by | Number of bundles |
 |-----------|------------|-------------------|
-| Any namespace created with `pulsar-admin namespaces create`, the REST API or the Java admin client without an explicit bundle count | Broker | `defaultNumberOfNamespaceBundles` in `broker.conf`, 32 by default (4 before Pulsar 5.0.0) |
+| Any namespace created with `pulsar-admin namespaces create`, the REST API or the Java admin client without an explicit bundle count | Broker | `defaultNumberOfNamespaceBundles` in `broker.conf`, 32 by default |
 | Same, with `pulsar-admin namespaces create ... --bundles N` | Broker | `N` |
-| `public/default` | `pulsar initialize-cluster-metadata` | `--default-namespace-bundle-number`, 32 by default (16 before Pulsar 5.0.0) |
+| `public/default` | `pulsar initialize-cluster-metadata` | `--default-namespace-bundle-number`, 32 by default |
 | Namespaces created with `pulsar initialize-namespace` | CLI tool | 32 |
-| `pulsar/system` | `pulsar initialize-cluster-metadata` or `pulsar initialize-transaction-coordinator-metadata` | `--system-namespace-bundle-number`, 64 by default (16 before Pulsar 5.0.0) |
-| `pulsar/system`, when it does not exist yet at start-up | Broker (extensible load manager) or `pulsar standalone` | `defaultNumberOfSystemNamespaceBundles` in `broker.conf`, 64 by default (before Pulsar 5.0.0: `defaultNumberOfNamespaceBundles`) |
+| `pulsar/system` | `pulsar initialize-cluster-metadata` or `pulsar initialize-transaction-coordinator-metadata` | `--system-namespace-bundle-number`, 64 by default |
+| `pulsar/system`, when it does not exist yet at start-up | Broker (extensible load manager) or `pulsar standalone` | `defaultNumberOfSystemNamespaceBundles` in `broker.conf`, 64 by default |
 | `public/default` | `pulsar standalone` | `defaultNumberOfNamespaceBundles` |
 | The heartbeat namespaces of each broker | Broker | 1 (the full hash range) |
 
-:::note Pulsar 5.0 milestones
-
-The defaults in the table describe Pulsar 5.0.0 after the 5.0.0-M1/M2 milestones. Those milestone builds still use 4 bundles for broker-created namespaces and 16 for namespaces created during cluster metadata initialization. They do not provide `defaultNumberOfSystemNamespaceBundles` or `--system-namespace-bundle-number`; broker-created system namespaces use `defaultNumberOfNamespaceBundles`. Existing namespaces retain their bundle counts when upgraded.
-
-:::
+Existing namespaces retain their bundle counts when broker defaults change.
 
 To see the bundles of a namespace:
 

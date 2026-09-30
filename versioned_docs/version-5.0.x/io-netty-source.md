@@ -64,9 +64,9 @@ The following examples show how to use the Netty source connector with TCP and H
 1. Start Pulsar standalone.
 
    ```bash
-   docker pull apachepulsar/pulsar:{version}
+   docker pull apachepulsar/pulsar:@pulsar:version@
 
-   docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --name pulsar-netty-standalone apachepulsar/pulsar:{version} bin/pulsar standalone
+   docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --name pulsar-netty-standalone apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
    ```
 
 2. Create a configuration file _netty-source-config.yaml_.
@@ -89,14 +89,14 @@ The following examples show how to use the Netty source connector with TCP and H
 
    ```bash
    docker exec -it pulsar-netty-standalone /bin/bash
-   curl -O http://mirror-hk.koddos.net/apache/pulsar/pulsar-{version}/connectors/pulsar-io-netty-{version}.nar
+   curl -O @pulsar:connector_release_url@/pulsar-io-netty-@pulsar:version:connectors@.nar
    ```
 
 5. Start the Netty source connector.
 
    ```bash
    ./bin/pulsar-admin sources localrun \
-   --archive $PWD/pulsar-io-@pulsar:version@.nar \
+   --archive $PWD/pulsar-io-netty-@pulsar:version:connectors@.nar \
    --tenant public \
    --namespace default \
    --name netty \
@@ -141,8 +141,8 @@ The following examples show how to use the Netty source connector with TCP and H
 1. Start Pulsar standalone.
 
    ```bash
-   docker pull apachepulsar/pulsar:{version}
-   docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --name pulsar-netty-standalone apachepulsar/pulsar:{version} bin/pulsar standalone
+   docker pull apachepulsar/pulsar:@pulsar:version@
+   docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --name pulsar-netty-standalone apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
    ```
 
 2. Create a configuration file _netty-source-config.yaml_.
@@ -165,14 +165,14 @@ The following examples show how to use the Netty source connector with TCP and H
 
    ```bash
    docker exec -it pulsar-netty-standalone /bin/bash
-   curl -O http://mirror-hk.koddos.net/apache/pulsar/pulsar-{version}/connectors/pulsar-io-netty-{version}.nar
+   curl -O @pulsar:connector_release_url@/pulsar-io-netty-@pulsar:version:connectors@.nar
    ```
 
 5. Start the Netty source connector.
 
    ```bash
    ./bin/pulsar-admin sources localrun \
-   --archive $PWD/pulsar-io-@pulsar:version@.nar \
+   --archive $PWD/pulsar-io-netty-@pulsar:version:connectors@.nar \
    --tenant public \
    --namespace default \
    --name netty \

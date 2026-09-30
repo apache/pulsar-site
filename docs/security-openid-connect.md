@@ -37,39 +37,41 @@ authenticationProviders=org.apache.pulsar.broker.authentication.oidc.Authenticat
 
 # Required settings for AuthenticationProviderOpenID
 # A comma separated list of allowed, or trusted, token issuers. The token issuer is the URL of the token issuer.
-PULSAR_PREFIX_openIDAllowedTokenIssuers=https://my-issuer-1.com,https://my-issuer-2.com
+openIDAllowedTokenIssuers=https://my-issuer-1.com,https://my-issuer-2.com
 # The list of allowed audiences for the token. The audience is the intended recipient of the token. A token with
 # at least one of these audience claims will pass the audience validation check.
-PULSAR_PREFIX_openIDAllowedAudiences=audience-1,audience-2
+openIDAllowedAudiences=audience-1,audience-2
 
 # Optional settings (values shown are the defaults)
 # The path to the file containing the trusted certificate(s) of the token issuer(s). If not set, uses the default
 # trust store of the JVM.
-PULSAR_PREFIX_openIDTokenIssuerTrustCertsFilePath=
+openIDTokenIssuerTrustCertsFilePath=
 # The JWT's claim to use for the role/principal during authorization.
-PULSAR_PREFIX_openIDRoleClaim=sub
+openIDRoleClaim=sub
 # The leeway, in seconds, to use when validating the token's expiration time.
-PULSAR_PREFIX_openIDAcceptedTimeLeewaySeconds=0
+openIDAcceptedTimeLeewaySeconds=0
 
 # Cache settings
-PULSAR_PREFIX_openIDCacheSize=5
-PULSAR_PREFIX_openIDCacheRefreshAfterWriteSeconds=64800
-PULSAR_PREFIX_openIDCacheExpirationSeconds=86400
-PULSAR_PREFIX_openIDHttpConnectionTimeoutMillis=10000
-PULSAR_PREFIX_openIDHttpReadTimeoutMillis=10000
+openIDCacheSize=5
+openIDCacheRefreshAfterWriteSeconds=64800
+openIDCacheExpirationSeconds=86400
+openIDHttpConnectionTimeoutMillis=10000
+openIDHttpReadTimeoutMillis=10000
 
 # The number of seconds to wait before refreshing the JWKS when a token presents a key ID (kid claim) that is not
 # in the cache. This setting is documented below.
-PULSAR_PREFIX_openIDKeyIdCacheMissRefreshSeconds=300
+openIDKeyIdCacheMissRefreshSeconds=300
 
 # Whether to require that issuers use HTTPS. It is part of the OIDC spec to use HTTPS, so the default is true.
 # This setting is for testing purposes and is not recommended for any production environment.
-PULSAR_PREFIX_openIDRequireIssuersUseHttps=true
+openIDRequireIssuersUseHttps=true
 
 # A setting describing how to handle discovery of the OpenID Connect configuration document when the issuer is not
 # in the list of allowed issuers. This setting is documented below.
-PULSAR_PREFIX_openIDFallbackDiscoveryMode=DISABLED
+openIDFallbackDiscoveryMode=DISABLED
 ```
+
+Use the unprefixed property names above in configuration files. With container environment configuration applied through `apply-config-from-env.py`, use names such as `PULSAR_PREFIX_openIDAllowedTokenIssuers` instead.
 
 :::note
 
@@ -81,9 +83,24 @@ When using OIDC for a client connecting through the proxy to the broker, it is n
 
 The [OpenID Connect Discovery 1.0](https://openid.net/specs/openid-connect-discovery-1_0.html) spec gives the `AuthenticationProviderOpenID` a way to discover trusted public keys. The public keys are formatted as a [JSON Web Key (JWK)](https://www.rfc-editor.org/rfc/rfc7517) set, also known as a JWKS. When the Identity Provider rotates signing keys, there is a chance that the Identity Provider will start signing tokens with the new key before the JWKS cache has been refreshed. To avoid rejecting tokens signed with the new key, the OIDC Authentication Provider will attempt to refresh the JWKS when a token has a trusted issuer claim but the key ID (kid claim) is not in the issuer's cached JWKS. The `openIDKeyIdCacheMissRefreshSeconds` setting determines how long the OIDC Authentication Provider will wait before attempting to refresh the JWKS. The default value is 300 seconds. It means that a JWKS must have been in the cache for at least 300 seconds before a missing key ID triggers cache invalidation. The `openIDKeyIdCacheMissRefreshSeconds` setting protects the OIDC Authentication Provider from a malicious client that presents a token with a new key ID every time it connects.
 
+### Authorize multiple roles
+
+OIDC can use `MultiRolesTokenAuthorizationProvider` to consider all roles in a token claim. The provider reuses OIDC token validation, including issuer, audience, signature, and time checks, before reading the additional roles. Keep the issuer/audience authentication settings above and add the following broker settings for a token whose `roles` claim is a string or array of role strings:
+
+```properties
+authorizationEnabled=true
+authorizationProvider=org.apache.pulsar.broker.authorization.MultiRolesTokenAuthorizationProvider
+openIDRoleClaim=roles
+tokenAuthClaim=roles
+```
+
+`openIDRoleClaim` determines the authentication principal; when its value is an array, authentication selects the first role. `tokenAuthClaim` tells the multi-role authorization provider which claim to examine, allowing any validated role with the required permission to authorize the operation. Without the multi-role provider, only the selected principal is used for authorization. Grant the intended roles access through the [authorization APIs](admin-api-permissions.md).
+
+For clients through a proxy, set `forwardAuthorizationCredentials=true` in `proxy.conf` and keep `authenticateOriginalAuthData=true` on the brokers. Additional client roles must come from the validated original token, rather than the proxy's own token. See [Multiple-role authorization](security-authorization.md#authorize-an-authenticated-client-with-multiple-roles).
+
 ## Enable OpenID Connect Authentication in the Function Worker
 
-To configure the Pulsar Function Worker to authenticate clients using OpenID Connect, add the following parameters to the `conf/functions_worker.yml` file. The documentation for these settings is [above](#enable-openid-connect-authentication-in-the-brokers-proxies-and-websocket-proxies).
+To configure the Pulsar Function Worker to authenticate clients using OpenID Connect, add the following parameters to the `conf/functions_worker.yml` file. The documentation for these settings is [above](#enable-openid-connect-authentication-in-the-broker-and-proxy).
 
 ```yaml
 # Configuration to enable authentication
@@ -110,7 +127,7 @@ Kubernetes has a built-in OpenID Connect integration where [Service Account Toke
 
 The modes configure how the Open ID Connect Authentication Provider should handle a JWT that has an issuer claim that is not explicitly in the allowed issuers set configured by `openIDAllowedTokenIssuers`. The current implementations rely on using the Kubernetes API Server's Open ID Connect features to discover an additional issuer or additional public keys to trust.
 
-The available values for `openIDFallbackDiscoveryMode` are: `DISABLED`, `KUBERNETES_DISCOVER_TRUSTED_ISSUER`, and `KUBERNETES_DISCOVER_PUBLIC_KEYS`. The quick summary is that EKS requires `KUBERNETES_DISCOVER_TRUSTED_ISSUER` right now, but GKE and AKS require `KUBERNETES_DISCOVER_PUBLIC_KEYS`. The implementation details follow.
+The available values for `openIDFallbackDiscoveryMode` are: `DISABLED`, `KUBERNETES_DISCOVER_TRUSTED_ISSUER`, and `KUBERNETES_DISCOVER_PUBLIC_KEYS`. Choose a mode from the actual issuer URL and discovery responses of your cluster; cloud-provider names alone do not determine which mode is needed. The implementation details follow.
 
 1. `DISABLED`: There will be no discovery of additional trusted issuers or public keys. This setting requires that operators explicitly allow all issuers that will be trusted. For the Kubernetes Service Account Token Projections to work, the operator must explicitly trust the issuer on the token's `iss` claim. This is the default setting because it is the only mode that explicitly follows the OIDC spec for verification of discovered provider configuration.
 2. `KUBERNETES_DISCOVER_TRUSTED_ISSUER`: The Kubernetes API Server will be used to discover an additional trusted issuer by getting the issuer at the API Server's `/.well-known/openid-configuration` endpoint, verifying that issuer matches the `iss` claim on the supplied token, then treating that issuer as a trusted issuer by discovering the `jwks_uri` via that issuer's `/.well-known/openid-configuration` endpoint. This mode can be helpful in EKS environments where the API Server's public keys served at the `/openid/v1/jwks` endpoint are not the same as the public keys served at the issuer's `jwks_uri`. It fails to be OIDC compliant because the URL used to discover the provider configuration is not the same as the issuer claim on the token.

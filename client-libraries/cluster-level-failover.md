@@ -31,6 +31,8 @@ For more information about cluster-level failover, including concepts, benefits,
 
 ## Configure cluster-level failover
 
+Create a separate `ServiceUrlProvider` instance for each `PulsarClient`. The client initializes its provider during construction and closes it when the client closes; applications should not initialize the provider manually or share it between clients. The built-in failover providers reject repeated initialization.
+
 ### Automatic failover
 
 This is an example of how to construct a Java Pulsar client to use automatic cluster-level failover. The switchover is triggered automatically.

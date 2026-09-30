@@ -40,3 +40,9 @@ If any of these cases happen, follow the instructions below to fix the problem.
 5. Set the correct cluster name for the `pulsarFunctionsCluster` parameter in the `conf/functions_worker.yml` file.
 
 6. Restart brokers.
+
+## Function package downloads and process failures
+
+For function packages downloaded through DistributedLog-backed BookKeeper storage, Pulsar bounds each wait to open the reader or obtain the next records to 60 seconds. This is a per-wait timeout, not a total package-download limit. A log stream without its upload-completion marker can report a download timeout instead of blocking the worker indefinitely. Check BookKeeper availability and whether the upload completed; re-upload an incomplete package before retrying the deployment. HTTP downloads and package-management storage providers have their own download paths.
+
+The worker logs successful package downloads with `sizeBytes` and `durationMs`. Process-runtime start and unexpected-exit events include `pid`, which helps correlate worker events with the function process's logs. When a process has already died, its status reports `running=false` and the recorded failure exception, when available, without waiting for a gRPC status request to time out.

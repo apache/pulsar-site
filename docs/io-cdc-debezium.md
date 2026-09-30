@@ -81,7 +81,7 @@ You can use one of the following methods to create a configuration file.
   namespace: "default"
   name: "debezium-mysql-source"
   topicName: "debezium-mysql-topic"
-  archive: "connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar"
+  archive: "connectors/pulsar-io-debezium-mysql-@pulsar:version:connectors@.nar"
   parallelism: 1
 
   configs:
@@ -134,11 +134,11 @@ This example shows how to change the data of a MySQL table using the Pulsar Debe
 
     * Use the **JSON** configuration file as shown previously.
 
-       Make sure the NAR file is available at `connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar`.
+       Make sure the NAR file is available at `connectors/pulsar-io-debezium-mysql-@pulsar:version:connectors@.nar`.
 
        ```bash
        bin/pulsar-admin source localrun \
-       --archive $PWD/connectors/pulsar-io-debezium-mysql-@pulsar:version@.nar \
+       --archive $PWD/connectors/pulsar-io-debezium-mysql-@pulsar:version:connectors@.nar \
        --name debezium-mysql-source \
        --tenant public \
        --namespace default \
@@ -245,7 +245,7 @@ You can use one of the following methods to create a configuration file.
   namespace: "default"
   name: "debezium-postgres-source"
   topicName: "debezium-postgres-topic"
-  archive: "connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar"
+  archive: "connectors/pulsar-io-debezium-postgres-@pulsar:version:connectors@.nar"
   parallelism: 1
 
   configs:
@@ -285,11 +285,11 @@ This example shows how to change the data of a PostgreSQL table using the Pulsar
 
    * Use the **JSON** configuration file as shown previously.
 
-    Make sure the NAR file is available at `connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar`.
+    Make sure the NAR file is available at `connectors/pulsar-io-debezium-postgres-@pulsar:version:connectors@.nar`.
 
        ```bash
        bin/pulsar-admin source localrun \
-       --archive $PWD/connectors/pulsar-io-debezium-postgres-@pulsar:version@.nar \
+       --archive $PWD/connectors/pulsar-io-debezium-postgres-@pulsar:version:connectors@.nar \
        --name debezium-postgres-source \
        --tenant public \
        --namespace default \
@@ -379,7 +379,7 @@ You need to create a configuration file before using the Pulsar Debezium connect
   namespace: "default"
   name: "debezium-mongodb-source"
   topicName: "debezium-mongodb-topic"
-  archive: "connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar"
+  archive: "connectors/pulsar-io-debezium-mongodb-@pulsar:version:connectors@.nar"
   parallelism: 1
 
   configs:
@@ -427,11 +427,11 @@ This example shows how to change the data of a MongoDB table using the Pulsar De
 
    * Use the **JSON** configuration file as shown previously.
 
-    Make sure the NAR file is available at `connectors/pulsar-io-mongodb-@pulsar:version@.nar`.
+    Make sure the NAR file is available at `connectors/pulsar-io-debezium-mongodb-@pulsar:version:connectors@.nar`.
 
        ```bash
        bin/pulsar-admin source localrun \
-       --archive $PWD/connectors/pulsar-io-debezium-mongodb-@pulsar:version@.nar \
+       --archive $PWD/connectors/pulsar-io-debezium-mongodb-@pulsar:version:connectors@.nar \
        --name debezium-mongodb-source \
        --tenant public \
        --namespace default \

@@ -138,6 +138,8 @@ All stats below are **reset** to 0 upon broker restart or topic unloading, **exc
 
 ### Replication stats
 
+The `replication` map is keyed by remote cluster. A persistent topic also reports incoming-only connections, such as the receiving side of one-way replication. Incoming fields describe traffic from that cluster; outgoing fields describe the local replicator sending to it. For an incoming-only entry, `connected=false` means there is no connected outbound replicator, rather than indicating that incoming replication has failed. Check the incoming connection and traffic fields when monitoring the receiving side.
+
 | Stat                      | Description                                                                                                                                                      |
 |---------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | msgRateIn                 | The total rate (message per second) of messages received from the remote cluster.                                                                                |
@@ -149,7 +151,7 @@ All stats below are **reset** to 0 upon broker restart or topic unloading, **exc
 | connected                 | Whether the outbound replicator is connected.                                                                                                                    |
 | replicationDelayInSeconds | How long the oldest message has been waiting to be sent through the connection when connected.                                                                   |
 | inboundConnection         | The IP and port of the broker in the remote cluster's publisher connection to this broker.                                                                       |
-| inboundConnectedSince     | The TCP connection used to publish messages to the remote cluster. If no local publishers are connected, this connection is automatically closed after a minute. |
+| inboundConnectedSince     | The timestamp when the incoming replication connection was established.                                                                                         |
 | outboundConnection        | The address of the outbound replication connection.                                                                                                              |
 | outboundConnectedSince    | The timestamp of establishing an outbound connection.                                                                                                            |
 
@@ -159,6 +161,7 @@ The following table outlines the internal stats inside a topic. For more details
 
 | Stat                               | Description                                                                                                                                                                         |
 |------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| properties | The managed ledger's string properties at the time of the internal-stats request. These can include topic properties and broker-managed metadata; they are not per-message properties. For a partitioned topic, inspect each partition's internal stats. |
 | entriesAddedCounter                | Messages published since this broker loads this topic.                                                                                                                              |
 | numberOfEntries                    | The total number of messages tracked.                                                                                                                                               |
 | totalSize                          | The total storage size in bytes of all messages.                                                                                                                                    |

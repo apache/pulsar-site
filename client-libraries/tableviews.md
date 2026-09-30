@@ -5,6 +5,8 @@ sidebar_label: "Work with TableView"
 description: Learn how to work with TableView in Pulsar.
 ---
 
+Follow [Java client setup](java-setup.md) to configure the combined dependency. This guide uses the v4 API (`org.apache.pulsar.client.api`); see [Java client (v5)](java-v5.md) for the v5 API.
+
 ````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -26,7 +28,7 @@ values={[{"label":"Java","value":"Java"},{"label":"C++","value":"C++"}]}>
   ```java
     TableView<String> tv = client.newTableViewBuilder(Schema.STRING)
     .topic("my-tableview")
-    .create()
+    .create();
   ```
 
 You can use the available parameters in the `loadConf` configuration or the API [`TableViewBuilder`](@pulsar:javadoc:client@/org/apache/pulsar/client/api/TableViewBuilder.html) to customize your TableView.
@@ -77,6 +79,45 @@ You can use the available parameters in the `loadConf` configuration or the API 
 - `forEachAndListen(action)` first runs `forEach` over the current non-tombstoned entries, then registers the action as a live listener. Every subsequent update - **including tombstones** - is delivered to the listener as `action.accept(key, null)`. If you need to react to deletions (for example, to clean up downstream state), check for `value == null` in your listener.
 
 :::
+
+## Refresh a Java TableView
+
+Call `refreshAsync()` when a read must include the messages published before the refresh captured the topic's latest positions:
+
+```java
+tv.refreshAsync().thenRun(() -> System.out.println(tv.get("my-key")));
+```
+
+The future completes after the view has applied those messages. New messages can continue updating the view, so refresh does not create a frozen snapshot across subsequent reads. Completion follows the map update, including when a refresh is initiated from a listener. Avoid blocking a client callback while waiting for the refresh.
+
+For persistent topics, the view uses compacted reads. Short names such as `my-tableview` resolve to persistent topics just like their fully qualified `persistent://public/default/my-tableview` form.
+
+## Map messages to Java TableView values
+
+The v4 Java client can build a view whose values are derived from the complete message, including its properties and metadata, with `createMapped` or `createMappedAsync`. The message schema and the stored value type can differ:
+
+```java
+TableView<String> regions = client.newTableViewBuilder(Schema.STRING)
+        .topic("persistent://public/default/customer-updates")
+        .createMapped(message -> message.getProperty("region"));
+
+CompletableFuture<TableView<Message<String>>> messages =
+        client.newTableViewBuilder(Schema.STRING)
+                .topic("persistent://public/default/customer-updates")
+                .createMappedAsync(message -> message);
+```
+
+The view still uses the message key as its map key. Its mapper follows these rules:
+
+- Messages without a key are ignored. For a keyed message with an empty payload, the view removes the key without calling the mapper.
+- Returning `null` removes the key and notifies listeners of the deletion, just like a tombstone.
+- If the mapper throws, the message is skipped. The key keeps its previous value (or remains absent), and listeners are not notified. The view invokes `TableViewMessageMapper.onMappingError(message, error)`; the default handler logs the failure. A custom handler can return `true` to suppress that log after handling the error.
+
+Mapping and error callbacks run on a client internal thread and must not block. Do not close the TableView from its error callback. Mapped views disable message pooling, so retaining a `Message` is supported, but it also retains metadata, schema, and a connection reference. For large key sets, prefer copying the fields your application needs into a value object.
+
+A mapped view rejects `topicCompactionStrategyClassName` supplied through `loadConf`: that custom strategy compares schema values, while the view stores mapped values. This restriction concerns the client-side strategy; the view can still read a compacted topic. The synchronous method throws `IllegalArgumentException` for a null mapper or configured strategy, and the asynchronous method completes its future exceptionally.
+
+See [`TableViewMessageMapper`](@pulsar:javadoc:client@/org/apache/pulsar/client/api/TableViewMessageMapper.html) and [`TableViewBuilder`](@pulsar:javadoc:client@/org/apache/pulsar/client/api/TableViewBuilder.html) for the full contract. TableView remains a v4 client API; the v5 API does not expose it.
 
 ## Register listeners
 

@@ -2,142 +2,59 @@
 id: security-bouncy-castle
 title: Bouncy Castle Providers
 sidebar_label: "Bouncy Castle Providers"
-description: Get a comprehensive understanding of concepts and packaging methods of BouncyCastle in Pulsar.
+description: Configure Bouncy Castle cryptographic providers and TLS provider selection in Pulsar.
 ---
 
-## BouncyCastle Introduce
+[Bouncy Castle](https://www.bouncycastle.org/documentation/documentation-java/) supplies Java cryptographic providers and utilities for keys, certificates, and message encryption. Pulsar supports the general-purpose provider (`BC`) and the FIPS provider (`BCFIPS`). These are separate dependency families; do not put both on the same JVM classpath, because they define overlapping classes with different signatures.
 
-`Bouncy Castle` is a Java library that complements the default Java Cryptographic Extension (JCE),
-and it provides more cipher suites and algorithms than the default JCE provided by Sun.
+## Packaging
 
-In addition to that, `Bouncy Castle` has lots of utilities for reading arcane formats like PEM and ASN.1 that no sane person would want to rewrite themselves.
+Pulsar uses the provider's ordinary signed JARs rather than the former `bouncy-castle-bc` / `bouncy-castle-bcfips` jar-in-jar modules. The server distribution includes the non-FIPS `bcprov-jdk18on` and `bcpkix-jdk18on` dependency family and excludes `bc-fips`. Those older Pulsar packaging modules and their `pkg` classifier are no longer the way to select a provider.
 
-In Pulsar, security and crypto have dependencies on BouncyCastle Jars. For the detailed installing and configuring Bouncy Castle FIPS, see [BC FIPS Documentation](https://www.bouncycastle.org/documentation.html), especially the **User Guides** and **Security Policy** PDFs.
+Java client dependencies also use ordinary Bouncy Castle dependencies. Shaded Pulsar clients keep `org.bouncycastle` classes outside the shaded JAR and expose their provider dependencies separately, preserving the original signatures. Do not merge signed provider classes into an application JAR or remove signatures as a workaround for packaging errors. See [Java client libraries](/docs/client-libraries/java).
 
-`Bouncy Castle` provides both [FIPS](https://www.bouncycastle.org/fips_faq.html) and non-FIPS versions. But in a JVM, you can not include both of the 2 versions, and you need to exclude the current version before including the other.
+For a FIPS-provider deployment, assemble a compatible classpath with:
 
-In Pulsar, the security and crypto methods of end to end encryption also depend on the Bouncy Castle library. This document contains the configuration between BouncyCastle FIPS (BC-FIPS) and non-FIPS (BC-non-FIPS) version while using Pulsar.
+- `org.bouncycastle:bc-fips` for the crypto provider;
+- the matching `bcpkix-fips` and `bcutil-fips` dependencies for the required key/certificate utilities;
+- the matching FIPS TLS/JSSE library when using `BCJSSE` for TLS.
 
-## How BouncyCastle modules packaged in Pulsar
+Exclude the non-FIPS `bcprov-jdk18on`, `bcprov-ext-jdk18on`, `bcpkix-jdk18on`, `bcutil-jdk18on`, and any non-FIPS TLS provider dependencies from the complete runtime classpath, including transitive client and plugin dependencies. Add the selected FIPS family consistently to each component that needs it. The [Pulsar FIPS-provider integration-test configuration](https://github.com/apache/pulsar/blob/master/tests/pulsar-client-test-bcfips/build.gradle.kts) shows the dependency exclusions and replacement used for interoperability testing.
 
-In Pulsar's `bouncy-castle` module, We provide 2 sub modules: `bouncy-castle-bc`(for non-FIPS versions) and `bouncy-castle-bcfips`(for FIPS version), to package BC jars together to make the include and exclude of `Bouncy Castle` easier.
+## Select TLS providers
 
-To achieve this goal, we will need to package several `bouncy-castle` jars together into `bouncy-castle-bc` or `bouncy-castle-bcfips` jar.
-Each of the original bouncy-castle jars is related to security, so BouncyCastle dutifully supplies signed of each jar.
-But when we do the re-package, Maven shade explodes the BouncyCastle jar file which puts the signatures into META-INF,
-these signatures aren't valid for this new, uber-jar (signatures are only for the original BC jar).
-Usually, You will meet error like `java.lang.SecurityException: Invalid signature file digest for Manifest main attributes`.
+Pulsar distinguishes the provider that creates the TLS context from the provider that loads keys and certificates:
 
-You can exclude these signatures in the mvn pom file to avoid the above error.
+| Configuration | Purpose |
+| --- | --- |
+| `jsseProvider` | JSSE provider that supplies `SSLContext` for server connections. |
+| `jcaProvider` | JCA provider that loads server key, certificate, and store material. |
+| `brokerClientJsseProvider` | JSSE provider for the component's outbound client connections. |
+| `brokerClientJcaProvider` | JCA provider for outbound key, certificate, and store loading. |
 
-```xml
-<exclude>META-INF/*.SF</exclude>
-<exclude>META-INF/*.DSA</exclude>
-<exclude>META-INF/*.RSA</exclude>
+For example, once a compatible FIPS crypto and JSSE provider family is installed, a broker or proxy can select it with:
+
+```properties
+jsseProvider=BCJSSE
+jcaProvider=BCFIPS
+brokerClientJsseProvider=BCJSSE
+brokerClientJcaProvider=BCFIPS
 ```
 
-But it can also lead to new, cryptic errors, e.g. `java.security.NoSuchAlgorithmException: PBEWithSHA256And256BitAES-CBC-BC SecretKeyFactory not available`
-By explicitly specifying where to find the algorithm like this: `SecretKeyFactory.getInstance("PBEWithSHA256And256BitAES-CBC-BC","BC")`
-It will get the real error: `java.security.NoSuchProviderException: JCE cannot authenticate the provider BC`
+Explicit JSSE selection uses the JDK engine with that provider. Provider names must resolve to installed or discoverable Java security providers; initialization fails if an explicitly configured provider is unavailable. Pulsar can register the Bouncy Castle providers available on its classpath, but an already registered provider's configuration takes precedence. Configure that provider's approved-mode and cryptographic policies according to its own documentation.
 
-So, we used a [executable packer plugin](https://github.com/nthuemmel/executable-packer-maven-plugin) that uses a jar-in-jar approach to preserve the BouncyCastle signature in a single, executable jar.
+Store format is independent of provider selection. A provider pinned with `jcaProvider=BCFIPS` must support the configured store type. Use an appropriate format such as `BCFKS` when required by your provider configuration, or supported PEM material; do not assume a `JKS` file can be loaded by every provider. The v4 Java client and admin builders accept the `jsseProvider` and `jcaProvider` keys through `loadConf(...)`; the v5 client's `TlsPolicy` carries the same selections. See [TLS providers and custom factories](security-tls-transport.md#tls-providers-and-custom-factories).
 
-### Include dependencies of BC-non-FIPS
+## v4 Java message-encryption providers
 
-Pulsar module `bouncy-castle-bc`, which is defined by `bouncy-castle/bc/pom.xml` contains the needed non-FIPS jars for Pulsar, and packaged as a jar-in-jar(need to provide `<classifier>pkg</classifier>`).
+`MessageCryptoBc` resolves the Bouncy Castle provider lazily for asymmetric key operations instead of registering non-FIPS `BC` unconditionally. Functions producer and consumer setup also no longer force that registration. Keep the chosen provider family consistent across the client and Functions classpath.
 
-```xml
-<dependency>
-  <groupId>org.bouncycastle</groupId>
-  <artifactId>bcpkix-jdk15on</artifactId>
-  <version>${bouncycastle.version}</version>
-</dependency>
+Randomness is selected when `MessageCryptoBc` initializes. If `BCFIPS` is already registered, the implementation obtains its `DEFAULT` DRBG for data-key and IV generation; failure to obtain it aborts initialization instead of falling back to another random source. Register the configured FIPS provider before loading message crypto. Adding its JAR or registering it after initialization does not change the already selected random source.
 
-<dependency>
-  <groupId>org.bouncycastle</groupId>
-  <artifactId>bcprov-ext-jdk15on</artifactId>
-  <version>${bouncycastle.version}</version>
-</dependency>
-```
+This random-source selection does not pin every encryption operation to BCFIPS. The built-in AES-GCM implementation prefers `SunJCE` when available, then the JVM's provider selection, with Bouncy Castle as a fallback. TLS `jsseProvider` / `jcaProvider` settings do not select the message-encryption implementation. Validate every required operation and provider against your cryptographic policy; selecting a FIPS random source alone does not establish an approved-mode message-encryption deployment.
 
-By using this `bouncy-castle-bc` module, you can easily include and exclude BouncyCastle non-FIPS jars.
+## Validation and FIPS requirements
 
-### Modules that include BC-non-FIPS module (`bouncy-castle-bc`)
+Selecting a FIPS provider does **not** make Pulsar FIPS 140-3 certified. Interoperability tests and a newer provider library version do not establish that a deployment satisfies a specific validation. Use the exact cryptographic module version, operating environment, approved algorithms, and configuration identified by your applicable validation and security policy. The supporting PKIX, utility, and TLS libraries have their own compatibility requirements.
 
-For Pulsar client, user need the bouncy-castle module, so `pulsar-client-original` will include the `bouncy-castle-bc` module, and have `<classifier>pkg</classifier>` set to reference the `jar-in-jar` package.
-It is included as the following example:
-
-```xml
-<dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>bouncy-castle-bc</artifactId>
-  <version>${pulsar.version}</version>
-  <classifier>pkg</classifier>
-</dependency>
-```
-
-By default `bouncy-castle-bc` already included in `pulsar-client-original`, And `pulsar-client-original` has been included in a lot of other modules like `pulsar-client-admin`, `pulsar-broker`.
-But for the above shaded jar and signatures reason, we should not package Pulsar's `bouncy-castle` module into `pulsar-client-all` other shaded modules directly, such as `pulsar-client-shaded`, `pulsar-client-admin-shaded` and `pulsar-broker-shaded`.
-So in the shaded modules, we will exclude the `bouncy-castle` modules.
-
-```xml
-<filters>
-  <filter>
-    <artifact>org.apache.pulsar:pulsar-client-original</artifact>
-    <includes>
-      <include>**</include>
-    </includes>
-    <excludes>
-      <exclude>org/bouncycastle/**</exclude>
-    </excludes>
-  </filter>
-</filters>
-```
-
-That means, `bouncy-castle` related jars are not shaded in these fat jars.
-
-### Module BC-FIPS (`bouncy-castle-bcfips`)
-
-Pulsar module `bouncy-castle-bcfips`, which is defined by `bouncy-castle/bcfips/pom.xml`, contains the needed FIPS jars for Pulsar.
-Similar to `bouncy-castle-bc`, `bouncy-castle-bcfips` is also packaged as a `jar-in-jar` package for easy include/exclude.
-
-```xml
-<dependency>
-  <groupId>org.bouncycastle</groupId>
-  <artifactId>bc-fips</artifactId>
-  <version>${bouncycastle.bc-fips.version}</version>
-</dependency>
-
-<dependency>
-  <groupId>org.bouncycastle</groupId>
-  <artifactId>bcpkix-fips</artifactId>
-  <version>${bouncycastle.bcpkix-fips.version}</version>
-</dependency>
-```
-
-### Exclude BC-non-FIPS and include BC-FIPS
-
-If you want to switch from BC-non-FIPS to BC-FIPS version, Here is an example for `pulsar-broker` module:
-
-```xml
-<dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>pulsar-broker</artifactId>
-  <version>${pulsar.version}</version>
-  <exclusions>
-    <exclusion>
-      <groupId>org.apache.pulsar</groupId>
-      <artifactId>bouncy-castle-bc</artifactId>
-    </exclusion>
-  </exclusions>
-</dependency>
-
-<dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>bouncy-castle-bcfips</artifactId>
-  <version>${pulsar.version}</version>
-  <classifier>pkg</classifier>
-</dependency>
-```
-
-For more example, you can reference module `bcfips-include-test`.
+Read the provider's [FIPS security policies and user guides](https://www.bouncycastle.org/documentation/documentation-java/) when choosing the module and configuration. Verify the final runtime dependency graph and test TLS handshakes, hostname verification, certificate rotation, client authentication, geo-replication, and message encryption with the chosen provider. For HSM-backed keys or material sources beyond supported files, implement a [custom TLS factory](security-extending.md#custom-tls-factories).

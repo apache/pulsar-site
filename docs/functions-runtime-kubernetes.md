@@ -24,6 +24,20 @@ To quickly configure a Kubernetes runtime, you can use the default settings of [
 
 If you have [set up a Pulsar cluster on Kubernetes using [Helm chart](helm-install.md), which means function workers have also been set up on Kubernetes, you can use the `serviceAccount` associated with the pod where the function worker is running. Otherwise, you can configure function workers to communicate with a Kubernetes cluster by setting `functionRuntimeFactoryConfigs` to `k8Uri`.
 
+### Configure the function instance DNS suffix
+
+By default, the worker connects to a function instance at `<jobName>-<instanceId>.<jobName>.<namespace>.svc.cluster.local`. For a Kubernetes cluster with a different DNS domain, set `kubernetesServiceDomainSuffix` in `functionRuntimeFactoryConfigs` in `conf/functions_worker.yml`:
+
+```yaml
+functionRuntimeFactoryClassName: org.apache.pulsar.functions.runtime.kubernetes.KubernetesRuntimeFactory
+functionRuntimeFactoryConfigs:
+  kubernetesServiceDomainSuffix: svc.cluster.example
+```
+
+Specify the suffix **without a leading dot**; the runtime inserts the separator. A blank value uses `svc.cluster.local`. Preserve your other runtime-factory settings when adding this property.
+
+An external Functions worker can use a custom suffix when its network and DNS route these instance addresses through an appropriate gateway. The setting only changes the constructed gRPC hostname; it does not create DNS records, expose pods, or configure a gateway. Verify that the worker can resolve and reach each resulting instance address.
+
 ### Integrate Kubernetes secrets
 
 A [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) in Kubernetes is an object that holds some confidential data such as a password, a token, or a key. When you create a secret in the Kubernetes namespace where your functions are deployed, functions can safely reference and distribute it. To enable this feature, set `secretsProviderConfiguratorClassName` to `org.apache.pulsar.functions.secretsproviderconfigurator.KubernetesSecretsProviderConfigurator` in the `conf/functions-worker.yml` file.

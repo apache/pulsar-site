@@ -5,13 +5,13 @@ title: Setting up JDKs using SDKMAN
 
 ## Build tool requirements for Pulsar master branch
 
-Building the Pulsar `master` branch requires **JDK 21 or JDK 25** (the bytecode targets Java 17). There is no separate build tool to install: Pulsar uses a [Gradle](https://gradle.org/) build (migrated from Maven via [PIP-463](https://github.com/apache/pulsar/blob/master/pip/pip-463.md)), and the repository includes the [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) — use `./gradlew`. On Windows, developing inside WSL2 is strongly recommended (see [Setup and building](setup-building.md)), where the Linux instructions apply as-is.
+Building the Pulsar `master` branch requires **JDK 21, JDK 25, or JDK 26** (server bytecode targets Java 21; client and public API bytecode targets Java 17). There is no separate build tool to install: Pulsar uses a [Gradle](https://gradle.org/) build (migrated from Maven via [PIP-463](https://github.com/apache/pulsar/blob/master/pip/pip-463.md)), and the repository includes the [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html) — use `./gradlew`. On Windows, developing inside WSL2 is strongly recommended (see [Setup and building](setup-building.md)), where the Linux instructions apply as-is.
 
 The instructions below cover installing and managing JDK versions with [SDKMAN](https://sdkman.io/).
 
 :::note
 
-Maintenance branches (`branch-4.2` and earlier) and the [release process](release-process.md) continue to use the Maven build. When needed for those, install Maven with SDKMAN (`sdk i maven 3.9.9`) and additional JDK versions the same way as below (e.g. `sdk i java 17.0.19-amzn` for branches that build with JDK 17).
+Maintenance branches (`branch-4.2` and earlier) continue to use the Maven build. When releasing those versions, follow the [Maven release prerequisites](release-process-maven.md#prerequisites). Install additional JDK versions with SDKMAN as needed (for example, `sdk i java 17.0.19-amzn` for branches that build with JDK 17). The main branch uses Gradle and the current [release process](release-process.md).
 
 :::
 
@@ -25,9 +25,9 @@ See https://sdkman.io/install for detailed instructions.
 
 In Pulsar development, we use [Amazon Corretto OpenJDK](https://docs.aws.amazon.com/corretto/) to build Pulsar.
 
-- JDK 21 or 25 is required for building the Pulsar `master` branch
-  - code is compiled for Java 17 bytecode
-  - Pulsar docker images run Java 21
+- JDK 21, 25, or 26 is required for building the Pulsar `master` branch
+  - server implementations compile to Java 21 bytecode; client libraries, client CLI tools, and public Functions/IO interfaces retain Java 17 compatibility
+  - Pulsar Docker images run Java 25
 
 #### Installing Amazon Corretto OpenJDK using SDKMAN
 

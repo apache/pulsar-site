@@ -111,7 +111,7 @@ This example describes how to use the RabbitMQ source connector to feed data fro
 
     ```bash
     cd connectors
-    curl -LO "https://www.apache.org/dyn/closer.lua/pulsar/pulsar-@pulsar:version@/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar?action=download"
+    curl -LO "@pulsar:connector_release_url@/pulsar-io-rabbitmq-@pulsar:version:connectors@.nar"
     ```
 
 3. Messages published to a topic lacking at least one durable subscription are automatically marked as ready for deletion by default. We can set a retention policy at the namespace level to prevent this.
@@ -151,7 +151,7 @@ This example describes how to use the RabbitMQ source connector to feed data fro
    ```bash
    ./bin/pulsar-admin source localrun \
     --source-config-file $PWD/conf/rabbitmq-source-queue-name.yaml \
-    --archive $PWD/connectors/pulsar-io-rabbitmq-@pulsar:version@.nar \
+    --archive $PWD/connectors/pulsar-io-rabbitmq-@pulsar:version:connectors@.nar \
     --name rabbitmq-source \
     --destination-topic-name pulsar-rabbitmq-test-topic \
     --broker-service-url pulsar://{ip}:{port}

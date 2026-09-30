@@ -45,7 +45,7 @@ If you haven't already done it, [create and publish the GPG key](create-gpg-keys
 Before you start the next release steps, make sure you have installed these software:
 
 * Amazon Corretto OpenJDK
-  * JDK 21 or 25 for building releases with the Gradle build (`master` branch and release branches created from it)
+  * JDK 21, 25, or 26 for building releases with the Gradle build (`master` branch and release branches created from it)
   * for Maven-based maintenance branches, see the [Maven build steps prerequisites](release-process-maven.md#prerequisites)
 * Zip
 
@@ -304,11 +304,7 @@ gpgconf --reload gpg-agent
 
 The src and bin artifacts need to be signed and finally uploaded to the dist SVN repository for staging. This step should not run inside the $PULSAR_PATH.
 
-:::caution Draft
-
-With the Gradle build, the binary distributions are produced under `distribution/*/build/distributions` instead of `distribution/*/target`, and there is no Pulsar IO connectors directory. The `src/stage-release.sh` script will be updated for the Gradle build layout; verify the staged files after running it.
-
-:::
+`src/stage-release.sh` archives the committed `HEAD` as the source release and copies the server, offloaders, and shell distributions from `distribution/*/build/distributions`. Commit all release changes and build those distributions before staging. Pulsar IO connectors are released separately and are not staged by this script. Verify the staged files after running it.
 
 ```shell
 # make sure to run svn mkdir commmand in a different dir(NOT IN $PULSAR_PATH).
@@ -736,7 +732,7 @@ Go to check the result:
 
 * https://hub.docker.com/r/apachepulsar/pulsar/tags
 
-for Pulsar &tl;5.0
+For Pulsar &lt;5.0 only
 
 ```shell
 CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
@@ -757,7 +753,7 @@ This step is for the latest release only.
 regctl image copy apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
 ```
 
-for Pulsar &tl;5.0
+For Pulsar &lt;5.0 only
 
 ```shell
 regctl image copy apachepulsar/pulsar-all:$VERSION_WITHOUT_RC apachepulsar/pulsar-all:latest
@@ -804,11 +800,7 @@ git checkout v$VERSION_WITHOUT_RC
 PULSAR_PATH=$(pwd)
 ```
 
-:::caution Draft
-
-The Gradle build generates the OpenAPI specs into a different location (`pulsar-broker/build/`) than the Maven build. The `rest-apidoc-generator.py` tooling below may need updating for the Gradle build layout.
-
-:::
+The site generator detects the build system. For Gradle releases it runs `:pulsar-broker:generateOpenApiSpecs` and reads `pulsar-broker/build/openapi`; Maven maintenance releases retain their existing generation path.
 
 Now, run the following script from the main branch of apache/pulsar-site repo:
 

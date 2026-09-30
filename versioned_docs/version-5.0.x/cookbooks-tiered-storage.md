@@ -250,6 +250,12 @@ The model for storing topic data uses `org.apache.hadoop.io.MapFile`. You can us
 
 For more information about the configurations in `org.apache.hadoop.io.MapFile`, see [Filesystem Storage](http://hadoop.apache.org/).
 
+## Offload policy inheritance
+
+An explicitly set topic offload policy value takes precedence over the namespace value, which takes precedence over the broker configuration. Unset values inherit from the lower level.
+
+The `managedLedgerExtraConfigurations` map is merged **per key** across these levels. Broker properties prefixed with `managedLedgerOffloadExtraConfig` supply the base entries, namespace entries override matching keys, and topic entries override matching namespace or broker keys. Setting one extra configuration at a higher level preserves unrelated keys inherited from lower levels; it does not replace the entire map.
+
 ## Configuring offload to run automatically
 
 Namespace policies can be configured to offload data automatically once a threshold is reached. The threshold is based on the size of data that the topic has stored on the pulsar cluster. Once the topic reaches the threshold, an offload operation will be triggered. Setting a negative value to the threshold will disable automatic offloading. Setting the threshold to 0 will cause the broker to offload data as soon as it possiby can.

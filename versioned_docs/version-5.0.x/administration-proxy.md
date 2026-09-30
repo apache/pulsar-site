@@ -7,7 +7,11 @@ description: Get a comprehensive understanding of Pulsar proxy.
 
 Pulsar proxy is an optional gateway. Pulsar proxy is used when direct connections between clients and Pulsar brokers are either infeasible or undesirable. For example, when you run Pulsar in a cloud environment or on [Kubernetes](https://kubernetes.io) or an analogous platform, you can run Pulsar proxy.
 
+:::warning Network perimeter security required
+
 The Pulsar proxy is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. The requirement of network perimeter security can be achieved with private networks.
+
+:::
 
 If a proxy deployment cannot be protected with network perimeter security, the alternative would be to use [Pulsar's "Proxy SNI routing" feature](concepts-proxy-sni-routing.md) with a properly secured and audited solution. In that case Pulsar proxy component is not used at all.
 
@@ -23,7 +27,7 @@ Before using a proxy, you need to configure it with a broker's address in the cl
 
 It is more secure to specify a URL to connect to the brokers.
 
-Proxy authorization requires access to ZooKeeper, so if you use these broker URLs to connect to the brokers, you need to disable authorization at the Proxy level. Brokers still authorize requests after the proxy forwards them.
+Proxy authorization requires access to the metadata store, so if you use these broker URLs without metadata-store access, disable authorization at the proxy level. Brokers still authorize requests after the proxy forwards them.
 
 You can configure the broker URLs in `conf/proxy.conf` as follows.
 
@@ -46,6 +50,16 @@ The hostname in the URLs provided should be a DNS entry that points to multiple 
 The ports to connect to the brokers (6650 and 8080, or in the case of TLS, 6651 and 8443) should be open in the network ACLs.
 
 Note that if you do not use functions, you do not need to configure `functionWorkerWebServiceURL`.
+
+### Configure authentication and TLS
+
+The client-to-proxy and proxy-to-broker connections have separate identities and TLS settings. Configure the proxy's `brokerClientAuthenticationPlugin` and `brokerClientAuthenticationParameters` for its own broker connection, and list its authenticated role in `proxyRoles` on the brokers. Grant permissions to both that role and the original client role; see [Proxy roles](security-authorization.md#proxy-roles).
+
+Brokers default to `authenticateOriginalAuthData=true`. For token authentication, set `forwardAuthorizationCredentials=true` on the proxy so the broker can authenticate the original client. For TLS client-certificate or SASL authentication through a proxy, explicitly set `authenticateOriginalAuthData=false` on the brokers instead: the broker receives the proxy's TLS certificate, and it cannot replay the client's SASL exchange. The proxy authenticates the client in that mode, and the broker trusts the authenticated proxy's forwarded identity while checking authorization for both roles.
+
+For TLS to brokers, set `tlsEnabledWithBroker=true`, configure trust and client identity material, and use the TLS broker URLs. Hostname verification is enabled by default, including the lookup connection and direct connections to the owning broker's advertised address. Certificates must cover both the shared broker URL and each advertised endpoint used by the proxy. Configure a separate certificate and private key for clients connecting to the proxy's TLS listener. See [TLS encryption](security-tls-transport.md) and [mTLS authentication on proxies](security-tls-authentication.md#enable-mtls-authentication-on-proxies).
+
+For Kubernetes deployments, use a readiness-gated broker Service for the shared URLs and individually resolvable advertised broker names for direct connections. See [Required Services for brokers and ZooKeeper](administration-rolling-upgrade.md#required-services-for-brokers-and-zookeeper).
 
 ### Use service discovery
 

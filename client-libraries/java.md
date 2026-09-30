@@ -5,25 +5,24 @@ sidebar_label: "Java"
 description: Learn how to use the Pulsar Java client to create producers, consumers, and readers, and to perform administrative tasks.
 ---
 
-You can use a Pulsar Java client to create Pulsar [producers](pathname:///docs/concepts-clients#producer), [consumers](pathname:///docs/concepts-clients#consumer), and [readers](pathname:///docs/concepts-clients#reader) in Java and perform [administrative tasks](pathname:///docs/admin-get-started). All the methods in Java clients are thread-safe. The current Java client LTS version is **@pulsar:version:lts@** and the latest version is **@pulsar:version:latest@**.
+You can use a Pulsar Java client to create Pulsar [producers](pathname:///docs/concepts-clients#producer), [consumers](pathname:///docs/concepts-clients#consumer), and [readers](pathname:///docs/concepts-clients#reader) in Java and perform [administrative tasks](pathname:///docs/admin-get-started). Share a client instance across your producers and consumers.
 
 ## Java client SDKs
 
-Pulsar provides two Java client SDKs:
+The names **v4** and **v5** identify Java API generations, not dependency or server release versions. The v4 client remains supported with Pulsar 5 and later. Pulsar provides both APIs:
 
-| | Current SDK | V5 SDK |
+| | v4 client | v5 client |
 |---|---|---|
 | Package | `org.apache.pulsar.client.api` | `org.apache.pulsar.client.api.v5` |
-| Maven artifact | `pulsar-client` | `pulsar-client-v5` |
-| Topics | Partitioned and non-partitioned | [Scalable topics](pathname:///docs/concepts-scalable-topics) (and existing topics) |
+| Topics | Regular partitioned and non-partitioned topics | [Scalable topics](pathname:///docs/concepts-scalable-topics) and regular persistent topics |
 | Consumption | Exclusive / Failover / Shared / Key_Shared subscriptions | Stream / Queue / Checkpoint consumers |
-| Minimum Java | 8 | 17 |
+| Minimum Java with the combined artifacts | 17 | 17 |
 
-The **current SDK** is the stable, full-featured client used by most applications. It is documented in the [Get started](#get-started) and [Advanced use](clients.md) sections below.
+The **v4 client** is the existing supported client used by applications with regular topics. The [Get started](#get-started) and [Advanced use](clients.md) guides describe this API.
 
-The **V5 SDK** is a newer client purpose-built for [scalable topics](pathname:///docs/concepts-scalable-topics); it also works against existing topics. See [Java client (V5)](java-v5.md).
+The **v5 client** supports [scalable topics](pathname:///docs/concepts-scalable-topics) and also works against regular persistent topics. See [Java client (v5)](java-v5.md). It requires Pulsar 5.x brokers with `scalableTopicsEnabled=true`, even for regular topics. Use the v4 API for older brokers, non-persistent topics, or features outside the v5 API.
 
-Both SDKs are fully supported and can be used side by side in the same application.
+Use **`pulsar-client-v5-all`** by default to obtain the v4 client, v5 client, and admin implementations through unshaded dependencies. If unshaded dependency conflicts cannot be resolved, `pulsar-client-v5-shaded` is a fallback with relocated implementations. Follow [Java client setup](java-setup.md) for release selection, external dependencies, and classpath exclusions. Both APIs can run side by side in one application; adopting a combined dependency and [migrating source code to v5](java-migrate-to-v5.md) are separate choices. Existing v4 applications using regular topics do not need to change their API or dependencies for a broker upgrade.
 
 ## Get started
 
@@ -52,11 +51,13 @@ Please refer to [Java client Performance considerations](java-setup.md#java-clie
 
 The following table outlines the API packages and reference docs for Pulsar Java clients.
 
-Package | Description | Maven Artifact
-:-------|:------------|:--------------
-[`org.apache.pulsar.client.api`](@pulsar:javadoc:client@) | Java client API. <br/> See [Client API overview](pathname:///docs/pulsar-api-overview#pulsar-client-apis) for more reference. | [org.apache.pulsar:pulsar-client:@pulsar:version:lts@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client%7C@pulsar:version:lts@%7Cjar)
-[`org.apache.pulsar.client.admin`](@pulsar:javadoc:admin@admin) | Java admin API. <br/> See [Pulsar admin interfaces - Get started](pathname:///docs/admin-get-started) for more reference. | [org.apache.pulsar:pulsar-client-admin:@pulsar:version:lts@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-admin%7C@pulsar:version:lts@%7Cjar)
-`org.apache.pulsar.client.all` | Include both `pulsar-client` and `pulsar-client-admin`.<br /> Both `pulsar-client` and `pulsar-client-admin` are independently shaded packages. Consequently, the applications using both `pulsar-client` and `pulsar-client-admin` have redundant shaded classes. It would be troublesome if you introduce new dependencies but forget to update shading rules. <br /> In this case, you can use `pulsar-client-all`, which shades dependencies only one time and reduces the size of dependencies.  | [org.apache.pulsar:pulsar-client-all:@pulsar:version:lts@](http://search.maven.org/#artifactdetails%7Corg.apache.pulsar%7Cpulsar-client-all%7C@pulsar:version:lts@%7Cjar)
+| Package | Description | Recommended dependency |
+|---|---|---|
+| [`org.apache.pulsar.client.api`](@pulsar:javadoc:client@) | v4 Java client API | `pulsar-client-v5-all` |
+| [`org.apache.pulsar.client.api.v5`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/package-summary.html) | v5 Java client API | `pulsar-client-v5-all` |
+| [`org.apache.pulsar.client.admin`](@pulsar:javadoc:admin@/org/apache/pulsar/client/admin/package-summary.html) | Java admin API | `pulsar-client-v5-all` |
+
+All three APIs are also available with the shaded fallback. See [Java client setup](java-setup.md#step-1-install-java-client-library) for the dependency graph; an aggregate artifact name does not introduce a separate API package.
 
 #### More reference
 

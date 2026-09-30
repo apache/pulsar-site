@@ -5,15 +5,21 @@ sidebar_label: "Docker"
 description: Learn to deploy a Pulsar cluster on Docker.
 ---
 
+:::warning Network perimeter security required
+
+A Pulsar cluster is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. This requirement can be met by deploying Pulsar in private networks and restricting access to trusted clients and services.
+
+:::
+
 To deploy a Pulsar cluster on Docker using Docker commands, you need to complete the following steps.
 
 ## Step 1: Pull a Pulsar image
 
 To run Pulsar on Docker, you need to create a container for each Pulsar component: the metadata store, a bookie, and a broker. This tutorial uses [Oxia](https://github.com/oxia-db/oxia) as the [metadata store](administration-metadata-store.md) (the recommended option for new clusters), which runs from its own image; the bookie and broker run from the Pulsar image. Oxia standalone serves a single `default` namespace, which both Pulsar and BookKeeper use here; production clusters use separate Oxia namespaces (see [Configure metadata store](administration-metadata-store.md#use-oxia-as-metadata-store)).
 
-You can pull a Pulsar image from Docker Hub with the following command. If you do not want to use some connectors, you can use `apachepulsar/pulsar:latest` there.
+Use the `apachepulsar/pulsar` image for container deployments. The image includes Java 25 and tiered-storage offloaders except the filesystem offloader. Install any required [IO connectors](io-quickstart.md#install-pulsar-and-built-in-connector) separately. Pin the image tag to the version you are deploying; these examples use the documentation version.
 ```bash
-docker pull apachepulsar/pulsar-all:latest
+docker pull apachepulsar/pulsar:@pulsar:version@
 ```
 
 ## Step 2: Create a network
@@ -46,7 +52,7 @@ After creating the Oxia container successfully, you can use the following comman
 ```bash
 docker run --net=pulsar \
     --name initialize-pulsar-cluster-metadata \
-    apachepulsar/pulsar-all:latest bash -c "bin/pulsar initialize-cluster-metadata \
+    apachepulsar/pulsar:@pulsar:version@ bash -c "bin/pulsar initialize-cluster-metadata \
 --cluster cluster-a \
 --metadata-store oxia://oxia:6648/default \
 --configuration-store oxia://oxia:6648/default \
@@ -63,7 +69,7 @@ docker run -d -e clusterName=cluster-a --net=pulsar \
     -e metadataServiceUri=metadata-store:oxia://oxia:6648/default \
     -v $(pwd)/data/bookkeeper:/pulsar/data/bookkeeper \
     --name bookie --hostname bookie \
-    apachepulsar/pulsar-all:latest \
+    apachepulsar/pulsar:@pulsar:version@ \
     bash -c "bin/apply-config-from-env.py conf/bookkeeper.conf && exec bin/pulsar bookie"
 ```
 
@@ -76,7 +82,7 @@ docker run -d -p 6650:6650 -p 8080:8080 --net=pulsar \
     -e metadataStoreUrl=oxia://oxia:6648/default \
     -e clusterName=cluster-a \
     --name broker --hostname broker \
-    apachepulsar/pulsar-all:latest \
+    apachepulsar/pulsar:@pulsar:version@ \
     bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
 ```
 
@@ -114,7 +120,7 @@ docker run -d \
     -e managedLedgerDefaultEnsembleSize=2 \
     -e managedLedgerDefaultWriteQuorum=2 \
     -e managedLedgerDefaultAckQuorum=2 \
-    apachepulsar/pulsar-all:latest \
+    apachepulsar/pulsar:@pulsar:version@ \
     bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
 ```
 
@@ -124,7 +130,7 @@ For a large number of configuration properties, use an environment file to keep 
 
 ```bash
 docker run -d --env-file ./broker-config.env \
-    apachepulsar/pulsar-all:latest \
+    apachepulsar/pulsar:@pulsar:version@ \
     bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
 ```
 
@@ -147,7 +153,7 @@ You can mount a custom configuration file from the host into the container, bypa
 docker run -d \
     -e PULSAR_MEM="-Xms4g -Xmx4g -XX:MaxDirectMemorySize=8g" \
     -v $(pwd)/my-broker.conf:/pulsar/conf/broker.conf \
-    apachepulsar/pulsar-all:latest \
+    apachepulsar/pulsar:@pulsar:version@ \
     bin/pulsar broker
 ```
 
@@ -181,7 +187,7 @@ docker run -d -e clusterName=cluster-a --net=pulsar \
     -v $(pwd)/data/bookkeeper/journal:/pulsar/data/bookkeeper/journal \
     -v $(pwd)/data/bookkeeper/ledgers:/pulsar/data/bookkeeper/ledgers \
     --name bookie --hostname bookie \
-    apachepulsar/pulsar-all:latest \
+    apachepulsar/pulsar:@pulsar:version@ \
     bash -c "bin/apply-config-from-env.py conf/bookkeeper.conf && exec bin/pulsar bookie"
 ```
 
@@ -203,7 +209,7 @@ docker run -d -p 6650:6650 -p 8080:8080 --net=pulsar \
     # Extra JVM options: appended to JVM flags in the startup script, can override default JVM parameters
     -e PULSAR_EXTRA_OPTS="-Dio.netty.allocator.maxOrder=13 -Dio.netty.allocator.numDirectArenas=8 -Dio.netty.allocator.maxCachedBufferCapacity=1048576" \
     --name broker --hostname broker \
-    apachepulsar/pulsar-all:latest \
+    apachepulsar/pulsar:@pulsar:version@ \
     bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
 ```
 

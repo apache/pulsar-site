@@ -28,8 +28,8 @@ To better demonstrate how to debug Pulsar connectors, take the Mongo sink connec
 3. Start Pulsar standalone.
 
    ```bash
-   docker pull apachepulsar/pulsar:2.4.0
-   docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --link pulsar-mongo --name pulsar-mongo-standalone apachepulsar/pulsar:2.4.0 bin/pulsar standalone
+   docker pull apachepulsar/pulsar:@pulsar:version@
+   docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data --link pulsar-mongo --name pulsar-mongo-standalone apachepulsar/pulsar:@pulsar:version@ bin/pulsar standalone
    ```
 
 4. Configure the Mongo sink with the `mongo-sink-config.yaml` file.
@@ -47,11 +47,12 @@ To better demonstrate how to debug Pulsar connectors, take the Mongo sink connec
    docker cp mongo-sink-config.yaml pulsar-mongo-standalone:/pulsar/
    ```
 
-5. Download the Mongo sink nar package.
+5. Download the Mongo sink NAR package. Connector releases are independent of broker releases; these examples use the latest published 4.2.x connector release, @pulsar:version:connectors@. See the [upgrade guide](administration-upgrade-to-5.0.x.md#check-runtime-and-packaging-requirements).
 
    ```bash
    docker exec -it pulsar-mongo-standalone /bin/bash
-   curl -O http://apache.01link.hk/pulsar/pulsar-2.4.0/connectors/pulsar-io-mongo-2.4.0.nar
+   mkdir -p connectors
+   curl -fL --output-dir connectors -O @pulsar:connector_release_url@/pulsar-io-mongo-@pulsar:version:connectors@.nar
    ```
 
 ## Debug in localrun mode
@@ -65,7 +66,7 @@ For more information about the `localrun` command, see [`localrun`](reference-co
 
 ```bash
 ./bin/pulsar-admin sinks localrun \
-    --archive $PWD/connectors/pulsar-io-mongo-@pulsar:version@.nar \
+    --archive $PWD/connectors/pulsar-io-mongo-@pulsar:version:connectors@.nar \
     --tenant public --namespace default \
     --inputs test-mongo \
     --name pulsar-mongo-sink \
@@ -94,12 +95,12 @@ To clearly explain the log information, the following is a breakdown into smalle
 * This piece of log information shows the storage path of the nar package after decompression.
 
   ```bash
-  08:21:54.132 [main] INFO  org.apache.pulsar.common.nar.NarClassLoader - Created class loader with paths: [file:/tmp/pulsar-nar/pulsar-io-mongo-2.4.0.nar-unpacked/, file:/tmp/pulsar-nar/pulsar-io-mongo-2.4.0.nar-unpacked/META-INF/bundled-dependencies/,
+  08:21:54.132 [main] INFO  org.apache.pulsar.common.nar.NarClassLoader - Created class loader with paths: [file:/tmp/pulsar-nar/pulsar-io-mongo-@pulsar:version:connectors@.nar-unpacked/, file:/tmp/pulsar-nar/pulsar-io-mongo-@pulsar:version:connectors@.nar-unpacked/META-INF/bundled-dependencies/,
   ```
 
   :::tip
 
-  If `class cannot be found` exception is thrown, check whether the nar file is decompressed in the folder `file:/tmp/pulsar-nar/pulsar-io-mongo-2.4.0.nar-unpacked/META-INF/bundled-dependencies/` or not.
+  If `class cannot be found` exception is thrown, check whether the nar file is decompressed in the folder `file:/tmp/pulsar-nar/pulsar-io-mongo-@pulsar:version:connectors@.nar-unpacked/META-INF/bundled-dependencies/` or not.
 
   :::
 
@@ -216,7 +217,7 @@ Pulsar admin CLI helps you debug Pulsar connectors with the following subcommand
 
 ```bash
 ./bin/pulsar-admin sinks create \
-    --archive $PWD/pulsar-io-mongo-2.4.0.nar \
+    --archive $PWD/connectors/pulsar-io-mongo-@pulsar:version:connectors@.nar \
     --tenant public \
     --namespace default \
     --inputs test-mongo \
@@ -352,7 +353,7 @@ Output:
           "id" : "public/default/pulsar-mongo-sink"
         },
         "connectedSince" : "2019-08-26T08:48:07.582Z",
-        "clientVersion" : "2.4.0",
+        "clientVersion" : "@pulsar:version@",
         "address" : "/172.17.0.3:57790"
       } ],
       "isReplicated" : false

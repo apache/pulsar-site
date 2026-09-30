@@ -1,117 +1,73 @@
 ---
 id: bookkeeper-metadata-serviceuri
-title: BookKeeper Metadata Configuration (metadataServiceUri)
+title: BookKeeper metadata configuration
+sidebar_label: "BookKeeper metadata URI"
+description: Configure the Pulsar metadata-store driver for BookKeeper and tune its metadata connections.
 ---
 
-# BookKeeper Metadata Configuration (metadataServiceUri)
+BookKeeper uses `metadataServiceUri` in `conf/bookkeeper.conf` to select a metadata driver and locate ledger metadata and bookie registrations. Brokers connect to that same store through `bookkeeperMetadataServiceUri` in `conf/broker.conf`.
 
-BookKeeper needs to know where to store ledger metadata so it can place data across different racks (rack-awareness).
-There are **three main ways** this is configured, and the behavior changes depending on which one you use.
+## Use the Pulsar metadata-store driver
 
-### **1\. Default Behavior — When You Don’t Configure Anything**
+The `metadata-store:` prefix selects the Pulsar driver. For a new deployment with a dedicated Oxia namespace for BookKeeper, configure bookies with:
 
-If you leave out **metadataServiceUri** in **bookkeeper.conf**:
+```conf
+metadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper
+```
 
-1. **BookKeeper looks for these older configs**:
-* zkServers → list of ZooKeeper hosts, e.g.:
+Configure brokers to use the same endpoint and namespace:
 
-  | zk1:2181,zk2:2181,zk3:2181 |
-  | :---- |
+```conf
+bookkeeperMetadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper
+```
 
-* zkLedgersRootPath `→` where BookKeeper’s metadata is stored in ZooKeeper, e.g.:
+The Oxia namespace must already exist. For new deployments, keep it separate from the namespace used by the brokers' `metadataStoreUrl`. For a live migration of a shared ZooKeeper store, preserve the single target scope used by that migration instead; see [Migrate metadata store](administration-metadata-store-migration.md#step-5-update-bookkeeper-configuration).
 
-  | /ledgers |
-  | :---- |
+For a ZooKeeper store shared with brokers using `metadataStoreUrl=zk:zk1:2181,zk2:2181,zk3:2181`, use the same source scope on bookies:
 
-2. **If found**, BookKeeper automatically **builds this old-style URI** internally:
+```conf
+metadataServiceUri=metadata-store:zk:zk1:2181,zk2:2181,zk3:2181
+```
 
-* Often
+The Pulsar driver uses `/ledgers` as its default ledger root within the selected store. A path appended to the inner ZooKeeper URL selects a ZooKeeper chroot. For example, `metadata-store:zk:zk1:2181/pulsar` opens the store under `/pulsar`; it does not simply change the ledger root to `/pulsar`. Verify the existing chroot and ledger paths before changing a running deployment's URI. Copying a plain BookKeeper `zk+hierarchical://hosts/ledgers` URI into the Pulsar format can change its meaning.
 
-  | zk+hierarchical:*//zk1:2181,zk2:2181,zk3:2181/ledgers* |
-  | :---- |
+If `bookkeeperMetadataServiceUri` is empty, the broker uses its local metadata store for BookKeeper and shares the existing metadata-store instance. Set an explicit URI when BookKeeper has a separate store. All brokers, bookies, and auto-recovery processes must agree on the location of the existing ledger metadata.
 
-* But if no layout type is set, it may be:
+The Pulsar distribution's `bin/bookkeeper` and `bin/pulsar` scripts register the Pulsar client and bookie metadata drivers. If you launch BookKeeper through another wrapper, provide the equivalent JVM options and the Pulsar metadata driver on the classpath:
 
-  | zk+null:*//zk1:2181,zk2:2181,zk3:2181/ledgers* |
-  | :---- |
+```text
+-Dbookkeeper.metadata.client.drivers=org.apache.pulsar.metadata.bookkeeper.PulsarMetadataClientDriver
+-Dbookkeeper.metadata.bookie.drivers=org.apache.pulsar.metadata.bookkeeper.PulsarMetadataBookieDriver
+```
 
-3. If layout type is missing or you explicitly use: **metadataServiceUri=zk+hierarchical://…**.
-* BookKeeper may log warnings like:
-  Failed to initialize DNS Resolver org.apache.pulsar.zookeeper.ZkBookieRackAffinityMapping, used default subnet resolver because METADATA\_STORE\_INSTANCE failed to init BookieId list
-* This URI format works, but it can break **rack-awareness** (Pulsar issue [\#24455](https://github.com/apache/pulsar/issues/24455))
-* The warning occurs only if metadataServiceUri=zk+hierarchical://… is used.
+## Tune the metadata-store driver
 
-* This can happen in Pulsar 3.x or 4.x.
+Pulsar accepts `MetadataStoreConfig` query parameters on `metadata-store:` URIs. The driver removes recognized parameters from the provider URL and applies them when it creates the metadata-store connection:
 
-### **2\. Legacy Explicit ZooKeeper Config (Deprecated but Still Works)**
+```conf
+metadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper?batchingMaxDelayMillis=10&batchingMaxSizeKb=256&numSerDesThreads=4
+```
 
-Older setups didn’t have **metadataServiceUri**.
-Instead, they used
+Use the same URI on the broker's `bookkeeperMetadataServiceUri` when its BookKeeper client creates a separate connection.
 
-| zkServers\=zk1:2181,zk2:2181,zk3:2181zkLedgersRootPath\=/ledgers |
-| :---- |
+| Parameter | Accepted values | Default when omitted |
+|---|---|---|
+| `allowReadOnlyOperations` | `true` or `false` | `false` |
+| `batchingEnabled` | `true` or `false` | `true` |
+| `batchingMaxDelayMillis` | Integer greater than or equal to `0` | `5` |
+| `batchingMaxOperations` | Positive integer | `1000` |
+| `batchingMaxSizeKb` | Positive integer | `128` |
+| `configFilePath` | URL-encoded file path understood by the backend | Unset |
+| `fsyncEnable` | `true` or `false`; applies to backends supporting it, such as RocksDB | `true` |
+| `numSerDesThreads` | Positive integer | `1` |
+| `sessionTimeoutMillis` | Positive integer, in milliseconds | BookKeeper's configured ZooKeeper timeout |
 
-BookKeeper still supports this for **backward compatibility**,
-but it’s basically the same as the “default” behavior above —
-it ends up internally as:
+Invalid recognized values fail metadata-store initialization. Other query parameters are passed to the underlying provider; their support depends on that provider. URL-encode special characters in keys and values, and quote the complete URI when passing it through a shell because `&` has shell syntax.
 
-| zk+null:*//zk1:2181,zk2:2181,zk3:2181/ledgers* |
-| :---- |
+These query parameters are applied only when the BookKeeper driver creates a metadata-store instance. They are not applied when a broker injects its existing shared instance. Configure that instance through the broker's metadata-store settings instead. The direct Oxia provider does not parse these BookKeeper query settings on `metadataStoreUrl` or `configurationMetadataStoreUrl`.
 
-(Sometimes zk+hierarchical://zk1:2181,zk2:2181,zk3:2181/ledgers if a layout type is specified)
+## Legacy ZooKeeper configuration
 
-* Still works in Pulsar 3.x and 4.x.
-* You must set zkLedgersRootPath when using this style.
-* This is the “old” way — kept only for backward compatibility.
-* New features in Pulsar might not be fully tested with this mode, so plan to migrate.
+BookKeeper also accepts its native ZooKeeper driver, such as `zk+hierarchical://hosts/ledgers`, and can derive a ZooKeeper URI from legacy settings such as `zkServers` and `zkLedgersRootPath`. These select a different driver from `metadata-store:`.
 
-### **3\. Metadata Service URI (Preferred)**
-
-For new clusters, [Oxia is the recommended metadata store](administration-metadata-store.md). Point BookKeeper at its own Oxia namespace, separate from the Pulsar metadata store (the [Pulsar Helm chart](https://github.com/apache/pulsar-helm-chart) uses `bookkeeper`):
-
-| metadataServiceUri\=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper |
-| :---- |
-
-The `metadata-store:` prefix is required and the format differs from Pulsar's `metadataStoreUrl`. The broker's `bookkeeperMetadataServiceUri` in `conf/broker.conf` should be set to this same value.
-
-Alternatively, with ZooKeeper as the metadata store, the **correct and working setup** (from our **OSS Pulsar 4.x tests**) is:
-
-| metadataServiceUri\=metadata-store:zk:pulsar-mini-zookeeper:2181zkLedgersRootPath\=/ledgerszkServers\= |
-| :---- |
-
-* Works correctly with rack-awareness in Pulsar 3.x and 4.x.
-* In most Pulsar 3.x and 4.x deployments, the correct metadata driver is already enabled, but if needed, set:
-
-| Dbookkeeper.metadata.client.drivers\=org.apache.pulsar.metadata.bookkeeper.PulsarMetadataClientDriver Dbookkeeper.metadata.bookie.drivers\=org.apache.pulsar.metadata.bookkeeper.PulsarMetadataBookieDriver |
-| :---- |
-
-
-#### **Avoid this format**
-
-| metadataServiceUri=zk+hierarchical:*//zk1:2181,zk2:2181,zk3:2181/ledgers* |
-| :---- |
-
-* This is because, In Pulsar 3.x and 4.x, rack-awareness may fail with this format.
-* This is a known bug — see [Pulsar \#24426](https://github.com/apache/pulsar/issues/24426).
-* Use **metadata-store:zk:** instead.
-
-### **Summary :**
-
-Always set **metadataServiceUri** in bookkeeper.conf. For new clusters, [Oxia](administration-metadata-store.md) is the recommended metadata store:
-
-| metadataServiceUri=metadata-store:oxia://oxia-1.example.com:6648/bookkeeper |
-| :---- |
-
-With ZooKeeper:
-
-| metadataServiceUri=metadata-store:zk:zk1:2181,zk2:2181,zk3:2181/ledgers |
-| :---- |
-
-*  → This is the modern, reliable method. Works well with rack-awareness in Pulsar 3.x and 4.x.
-
-* If you **don’t set it**, BookKeeper will:
-
-  1. Check for old configs zkServers \+ zkLedgersRootPath.
-
-  2. The “warning / failure” only happens with metadataServiceUri=zk+hierarchical://…, not with legacy zkServers.
-      → This may cause **rack-awareness to break** in Pulsar 3.x and 4.x.
+For new Pulsar deployments, configure the Pulsar metadata-store driver explicitly. It supports the metadata-store integration and migration framework used by Pulsar. Bookies using the native ZooKeeper driver do not participate in the [live ZooKeeper-to-Oxia migration](administration-metadata-store-migration.md). Before converting an existing deployment, verify that the new driver points at its existing ledger metadata; changing the URI does not move data.

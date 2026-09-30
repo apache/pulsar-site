@@ -124,6 +124,14 @@ tokenSecretKey=file:///path/to/secret.key
 # tokenPublicKey=file:///path/to/public.key
 ```
 
+### Configure token validation and multiple roles
+
+`AuthenticationProviderToken` reads `tokenAuthClaim` as the authentication principal, defaulting to `sub`. Optional audience validation uses `tokenAudienceClaim` (typically `aud`) together with `tokenAudience`; configuring the claim without the expected audience fails initialization. `tokenAllowedClockSkewSeconds` controls time-validation leeway and defaults to `0`. If `tokenSettingPrefix` is configured, it prefixes these token-provider property names as well as the verification-key properties.
+
+`MultiRolesTokenAuthorizationProvider` extracts additional roles from the authenticated provider's validated token, rather than accepting roles from an unverified payload. Existing key, audience, and clock-skew settings therefore also apply to role extraction. Configure authentication and authorization together, choose the role claim explicitly, and verify that the intended token claims pass validation. See [Multiple-role authorization](security-authorization.md#authorize-an-authenticated-client-with-multiple-roles).
+
+For clients through a proxy, set `forwardAuthorizationCredentials=true` on the proxy and retain `authenticateOriginalAuthData=true` on the brokers to authenticate and authorize the original token. Pulsar enables the broker setting by default. See [Proxy roles](security-authorization.md#proxy-roles).
+
 ## Configure JWT authentication in CLI Tools
 
 [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/), [`pulsar-perf`](/reference/#/@pulsar:version_reference@/pulsar-perf/), and [`pulsar-client`](/reference/#/@pulsar:version_reference@/pulsar-client/) use the `conf/client.conf` config file in a Pulsar installation.
@@ -157,7 +165,7 @@ You can use tokens to authenticate the following Pulsar clients.
 PulsarClient client = PulsarClient.builder()
     .serviceUrl("pulsar://broker.example.com:6650/")
     .authentication(
-        AuthenticationFactory.token("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ.ipevRNuRP6HflG8cFKnmUPtypruRC4fb1DWtoLL62SY")）
+        AuthenticationFactory.token("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ.ipevRNuRP6HflG8cFKnmUPtypruRC4fb1DWtoLL62SY"))
     .build();
 ```
 

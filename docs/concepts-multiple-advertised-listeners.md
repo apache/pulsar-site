@@ -45,8 +45,8 @@ Without proper configuration, external clients would receive internal broker add
 
 Pulsar introduces three key configuration options to solve this problem:
 
-- **advertisedListeners**: Specifies multiple addresses that the broker advertises to clients.
-- **bindAddresses**: Maps each advertised listener to a specific local binding address and port.
+- **advertisedListeners**: Specifies the addresses advertised for each listener. Pulsar supports `pulsar`, `pulsar+ssl`, `http`, and `https` schemes, so the same listener can expose both messaging and admin endpoints.
+- **bindAddresses**: Maps a listener and scheme to a local socket binding. HTTP/HTTPS listener selection requires these bindings; a client cannot choose an admin listener with the binary client's `listenerName` setting.
 - **internalListenerName**: Specifies which listener the broker uses for internal communication.
 
 ### Configuration details
@@ -59,6 +59,14 @@ Pulsar introduces three key configuration options to solve this problem:
 
 - **internalListenerName**: Specifies which listener is used for internal communication. Example:
   `internalListenerName=internal`
+
+### Default internal listener
+
+`internalListenerName` defaults to `internal`. Pulsar derives that listener's advertised URLs from `advertisedAddress` and the configured `brokerServicePort`, `brokerServicePortTls`, `webServicePort`, and `webServicePortTls`. Its socket bindings come from `bindAddress` and those ports. You do not need to repeat these internal endpoints in `advertisedListeners` or `bindAddresses`; the explicit internal entries in the example below remain supported.
+
+Keep the internal advertised addresses reachable from every broker. Declaring URLs under the internal listener name overrides the derived URLs, so pointing that listener at an external load balancer can send broker-to-broker lookups and admin forwarding outside the cluster. Declare a separate external listener instead. If `internalListenerName` is explicitly empty, Pulsar uses the first listener declared in `advertisedListeners` as the legacy fallback.
+
+Each local IP and port can belong to only one listener and scheme. An exact duplicate of a derived internal binding is tolerated, but assigning that socket to another listener fails validation. Use distinct external binding ports when the internal and external listeners bind on the same interface.
 
 ## Configuration example
 
@@ -107,6 +115,35 @@ PulsarClient externalClient = PulsarClient.builder()
 ```
 
 > **Note**: While older Pulsar documentation suggested using the `listenerName` parameter in the client configuration, this approach is no longer necessary in cases when the `bindAddresses` is properly configured. The Pulsar lookup mechanism will return the appropriate advertised address based on the binding port.
+
+## Direct admin access with HTTP/HTTPS listeners
+
+An HTTP/HTTPS request arriving on a listener's dedicated bind port keeps that listener when the broker returns an owner or leader redirect. This lets a layer-4 load balancer provide direct admin access to the brokers. Clients must reach both the initial load balancer and every per-broker address returned in redirects.
+
+For example, on broker 1, keep the internal endpoints on private addresses and declare separate external messaging and admin endpoints:
+
+```properties
+advertisedAddress=broker-1.internal
+internalListenerName=internal
+brokerServicePort=6650
+webServicePort=8080
+
+advertisedListeners=external:pulsar+ssl://external-broker-1.example.com:6651,external:https://external-broker-1.example.com:8443
+bindAddresses=external:pulsar+ssl://0.0.0.0:16651,external:https://0.0.0.0:18443
+```
+
+This example assumes [TLS](security-tls-transport.md) and authentication are configured. With hostname verification enabled, the broker certificates must match the hostnames clients use, including the load balancer hostname if it forwards TLS without terminating it.
+
+Configure the external messaging load balancer to forward to each broker's port `16651`, and the external HTTPS load balancer to forward to port `18443`. Separately, map `external-broker-1.example.com:6651` to broker 1's port `16651` and `external-broker-1.example.com:8443` to its port `18443`. Give every other broker its own external hostname and mappings, and configure the same `external` listener name on all brokers.
+
+An admin client can start through the shared HTTPS endpoint:
+
+```shell
+bin/pulsar-admin --admin-url https://external-brokers.example.com:8443 \
+  topics stats persistent://public/default/orders
+```
+
+Retain the client's configured credentials and trust settings. If the request must move to another broker, its redirect points to that broker's advertised `external` HTTPS address. Adding only an advertised HTTPS URL is insufficient: the request must enter through the corresponding HTTP/HTTPS bind port. Forwarding all external requests to the internal port `8080` selects the internal listener and can return private addresses.
 
 ## Kubernetes deployment suggestions
 

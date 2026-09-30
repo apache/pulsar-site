@@ -4,6 +4,12 @@ title: Get started in Kubernetes
 sidebar_label: "Run Pulsar in Kubernetes"
 ---
 
+:::warning Network perimeter security required
+
+A Pulsar cluster is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. This requirement can be met by deploying Pulsar in private networks and restricting access to trusted clients and services.
+
+:::
+
 :::tip
 
 This page has been deprecated and is no longer updated. For the latest and complete information about running Pulsar in Kubernetes, see the [quick start guide](getting-started-helm.md).
