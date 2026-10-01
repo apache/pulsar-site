@@ -27,11 +27,11 @@ The two APIs can run **side by side in the same JVM**, so you can move one produ
 
 - **Java 17 or later.** The combined Java client artifacts require this runtime for both APIs.
 - **Pulsar 5.x brokers with scalable topics enabled.** The v5 client requires the scalable-topic protocol even when accessing existing `persistent://` topics. It cannot connect through this API to older brokers or brokers with `scalableTopicsEnabled=false`. These v5 connection requirements do not apply merely because a v4 application uses a combined dependency.
-- **Aligned dependencies.** Complete the [dependency setup and runtime graph checks](java-setup.md#pulsar-bom) before migrating API usage.
+- **Aligned dependencies.** Complete the [dependency setup and runtime graph checks](java-dependency-configuration.md#pulsar-bom) before migrating API usage.
 
 ## Dependencies
 
-Follow [Java client setup](java-setup.md) for Maven and Gradle declarations, [Pulsar and Netty BOMs](java-setup.md#pulsar-bom), and [transitive exclusions](java-setup.md#replace-existing-dependencies). It is the canonical dependency guide, including runtime graph checks and the shaded fallback for unresolved conflicts.
+Follow [Java client setup](java-setup.md) for Maven and Gradle declarations, [Pulsar and Netty BOMs](java-dependency-configuration.md#pulsar-bom), and [transitive exclusions](java-dependency-configuration.md#replace-existing-dependencies). The dependency configuration page is the canonical dependency guide, including runtime graph checks and the shaded fallback for unresolved conflicts.
 
 Changing dependencies does not require changing v4 application code. Continue with the API migration below when you are ready to adopt v5.
 
