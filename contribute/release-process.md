@@ -17,12 +17,6 @@ The Pulsar `master` branch has migrated from Maven to Gradle ([PIP-463](https://
 
 :::
 
-:::caution Draft
-
-The Gradle build steps in this document are a draft. They will be refined and verified when the first release is performed with the Gradle build.
-
-:::
-
 ## Preparation
 
 Open a discussion on dev@pulsar.apache.org to notify others that you volunteer to be the release manager of a specific release. If there are no disagreements, you can start the release process.
@@ -64,14 +58,14 @@ To verify the release branch is not broken, you should trigger a Pulsar CI build
 *For &ge;5.x releases*
 
 ```shell
-export VERSION_RC=5.0.0-M1-candidate-1
+export VERSION_RC=5.0.0-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
-export NEXT_VERSION_WITHOUT_RC=5.0.0-M2
-export VERSION_BRANCH=branch-5.0-M1
+export NEXT_VERSION_WITHOUT_RC=5.0.1
+export VERSION_BRANCH=branch-5.0
 # for milestone releases, set the upcoming LTS release version (used in the release announcement)
 export LTS_RELEASE=5.0
 export UPSTREAM_REMOTE=origin
-export SDKMAN_JAVA_VERSION=21
+export SDKMAN_JAVA_VERSION=25
 # set the pulsarIncludeBuildInfo project property for all Gradle invocations in this shell session
 # so that release binaries include the real git commit / build metadata
 export ORG_GRADLE_PROJECT_pulsarIncludeBuildInfo=true
@@ -415,7 +409,7 @@ Log in to the ASF Nexus repository at https://repository.apache.org
 
 Click on "Staging Repositories" on the left sidebar and then select the current Pulsar staging repo. This should be called something like `orgapachepulsar-XYZ`.
 
-Add a version string such as "Apache Pulsar 5.0.0-M1-candidate-1" to the clipboard with this command:
+Add a version string such as "Apache Pulsar 5.0.0-candidate-1" to the clipboard with this command:
 
 ```shell
 printf "Apache Pulsar $VERSION_RC" |pbcopy
