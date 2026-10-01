@@ -46,16 +46,40 @@ Operators can keep Scalable Topics behind a feature gate during the upgrade by s
 
 ### Keep consumers at the tail with 100s of publishers {#keep-consumers-at-the-tail-with-many-publishers}
 
-IoT telemetry often combines hundreds of independent publishers, small message batches, and several applications consuming the same topic. Pulsar 5.0 reduces the broker queueing and contention that could make those consumers fall behind even when the applications were fast enough to keep up.
+In a typical IoT deployment, hundreds of thousands of devices connect to hundreds of gateways, and each gateway publishes the devices' telemetry to Pulsar, which serves as the message bus for the applications that process it. The messages are keyed by device ID, so that each device's messages are processed in order, and for that reason they usually aren't batched. Pulsar 5.0 reduces the broker queueing and contention that could make the consuming applications fall behind even when they were fast enough to keep up.
 
-A benchmark of the broker dispatch improvements used **500 producers and 20 Key_Shared consumers on one topic**, with unbatched 128-byte messages. It compared the same workload before and after those improvements:
+A benchmark compared Pulsar 4.0.13 and 5.0.0 in a simplified version of this use case:
 
-| Measurement | Before the dispatch improvements | With the dispatch improvements |
-| --- | --- | --- |
-| Steady consumption | About 5,700 messages/s | About 153,000 messages/s, keeping pace with publishing |
-| Sampled maximum backlog | About 11.37 million messages | About 17,700 messages—more than **99% lower** |
+- **500 gateways** publish keyed, unbatched 128-byte messages to one shared topic, as fast as the cluster accepts them.
+- **20 instances of a message-processing application** consume them from that topic on one Key_Shared subscription, which delivers each key's messages in order to one instance at a time.
+- Each gateway and each application instance has its own Pulsar client and TCP connection.
 
-For these **tailing reads**—consuming newly published messages near the end of the topic—fewer thread handoffs and batched publish submission let dispatch keep moving instead of waiting behind one executor task per entry. The measurements describe this workload and configuration; see the [benchmark and reproduction details](https://github.com/apache/pulsar/pull/26620) to compare with your own application. Consumers still need enough processing capacity to keep up with producers.
+The results:
+
+| Means of 3 runs | 4.0.13 | 5.0.0 | Change |
+| --- | ---: | ---: | ---: |
+| Publishing rate, messages/s | 128,716 | 107,048 | −16.8% |
+| **Consumption rate while publishing, messages/s** | **131** | **106,875** | **×816** |
+| Delivered throughput, until the last message arrived, messages/s | 17,038 | 106,658 | +526% |
+| Time the consumers needed after publishing ended | 202–205 s | 0 s | |
+| **Maximum backlog, messages** | **3,990,044** | **12,729** | **−99.7%** |
+| End-to-end latency, p99 | 202.3 s | 1.08 s | −99.5% |
+
+What the results show:
+
+- **4.0.13's consumers fell behind:** they received almost nothing while the producers published, and needed more than 200 s afterwards to catch up.
+- **5.0.0's consumers kept up:** they received the messages as fast as they were published, about 1 s after publishing at p99.
+- **4.0.13 published faster** because its broker was hardly delivering anything at the same time, while 5.0.0's broker did both.
+
+For these **tailing reads**—consuming newly published messages near the end of the topic—fewer thread handoffs and batched publish submission let dispatch keep moving instead of waiting behind one executor task per entry.
+
+How it was measured:
+
+- [Pulsar's performance testing framework](https://github.com/apache/pulsar/tree/master/tests/performance) ran its [`iot-telemetry-max-rate`](https://github.com/apache/pulsar/blob/master/tests/performance/scenarios/iot-telemetry-max-rate.yaml) scenario, with single-copy ledgers on three bookies, on one 8-core host at a fixed 2.4 GHz.
+- Each run measured 4 million messages after a warmup. With 4.0.13, publishing took about 31 s and the last message arrived after about 235 s; with 5.0.0, both took about 37 s.
+- 4.0.13 ran with its own defaults, and both versions used the same 5.0.0 client. Every run delivered every message without duplicates or ordering violations.
+
+The results describe this workload, not general broker capacity: run the scenario on your own hardware to compare with your application. Consumers still need enough processing capacity to keep up with producers.
 
 ### Less work per message {#less-work-per-message}
 
