@@ -62,14 +62,23 @@ A benchmark compared Pulsar 4.0.13 and 5.0.0 in a simplified version of this use
 
 The results:
 
+<div className="release-highlights-benchmark">
+
 | Means of 3 runs | 4.0.13 | 5.0.0 | Change |
 | --- | ---: | ---: | ---: |
 | Publishing rate, messages/s | 128,716 | 107,048 | −16.8% |
-| **Consumption rate while publishing, messages/s** | **131** | **106,875** | **×816** |
+| Consuming rate during publishing, messages/s | 131 | 106,875 | ×816 |
+| **Backlog growth rate during publishing, messages/s** | **128,585** | **173** | **−99.9%** |
 | Delivered throughput, until the last message arrived, messages/s | 17,038 | 106,658 | +526% |
 | Time the consumers needed after publishing ended | 202–205 s | 0 s | |
 | **Maximum backlog, messages** | **3,990,044** | **12,729** | **−99.7%** |
 | End-to-end latency, p99 | 202.3 s | 1.08 s | −99.5% |
+
+</div>
+
+**Backlog growth rate during publishing** is **publishing rate − consumption rate during publishing**, or equivalently **(messages published − messages consumed by the time all publishers finished) ÷ publishing duration in seconds**. A lower value means consumers keep closer to the publishers.
+
+**Delivered throughput** is calculated for each run as **4,000,000 messages ÷ elapsed seconds from the start of publishing until the last message was consumed**, including any time spent draining the backlog after publishing ended. The table reports the mean of the three runs.
 
 What the results show:
 
