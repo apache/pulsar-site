@@ -15,15 +15,15 @@ Pulsar 5.0 Java client libraries, including v4 and v5, client CLI tools, and the
 
 ## Choose Java client dependencies separately
 
-For new Java applications or when updating client dependencies, use `org.apache.pulsar:pulsar-client-v5-all`. This recommended unshaded combined dependency includes the v4 client, v5 client, and admin implementation. `pulsar-client-v5-shaded` is a fallback only when unshaded dependency conflicts cannot be resolved. When adopting either artifact, replace the older separate client/admin dependencies and exclude transitive copies to avoid duplicate implementations; see [Java client setup](pathname:///docs/client-libraries/java-setup).
+**One dependency for the v4, v5, and admin clients.** For new applications or client dependency updates, use `org.apache.pulsar:pulsar-client-v5-all`. This unshaded dependency resolves all three clients and their libraries transitively. Applications can keep using the v4 API; separate client dependencies are unnecessary.
 
-Dependency migration is separate from v5 API adoption. An application using either combined dependency can continue using the v4 API without enabling scalable-topic services. The v5 API requires those services even for regular topics; that requirement applies to API usage, not to the artifact's name. See the [v4-to-v5 API migration guide](pathname:///docs/client-libraries/java-migrate-to-v5).
+Follow the complete [Maven](pathname:///docs/client-libraries/java-dependency-configuration#maven) or [Gradle](pathname:///docs/client-libraries/java-dependency-configuration#gradle) example to configure **both the Pulsar and Netty BOMs, exclude conflicting client libraries, and verify the runtime dependency graph**. The [dependency configuration guide](pathname:///docs/client-libraries/java-dependency-configuration) also covers Spring Boot and the shaded fallback for unresolved classpath conflicts.
+
+Changing dependencies does not require adopting the v5 API. The v4 API works without scalable-topic services; the v5 API requires those services even for regular topics. See the [API migration guide](pathname:///docs/client-libraries/java-migrate-to-v5) when adopting v5.
 
 ## Align application Netty dependencies
 
-When adopting the unshaded `pulsar-client-v5-all` dependency, upgrade application dependencies from Netty 4.1.x to **Netty 4.2.x**. Pulsar uses **@pulsar:version:netty@**. Netty 4.2 is largely backward compatible with 4.1, but both lines cannot coexist on the same classpath. This dependency alignment is part of updating the application; it is not required merely to upgrade brokers while retaining an existing v4 client dependency.
-
-Import `io.netty:netty-bom` alongside `pulsar-bom`, update framework-managed Netty versions, and verify that the resolved runtime graph and packaged application contain a consistent set of Netty modules without old or duplicate JARs. See the [Maven and Gradle setup examples](pathname:///docs/client-libraries/java-dependency-configuration#pulsar-bom) and the [Netty migration guide](https://netty.io/wiki/netty-4.2-migration-guide.html).
+The unshaded client requires **Netty 4.2.x**; Netty 4.1.x and 4.2.x cannot coexist on the same classpath. Align application and framework dependencies using the [BOM guidance](pathname:///docs/client-libraries/java-dependency-configuration#pulsar-bom). This applies when updating client dependencies, not merely upgrading brokers while retaining an existing v4 client dependency.
 
 ## Check schema dependencies
 
