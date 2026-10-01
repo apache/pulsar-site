@@ -23,7 +23,7 @@ Dependency migration is separate from v5 API adoption. An application using eith
 
 When adopting the unshaded `pulsar-client-v5-all` dependency, upgrade application dependencies from Netty 4.1.x to **Netty 4.2.x**. Pulsar uses **@pulsar:version:netty@**. Netty 4.2 is largely backward compatible with 4.1, but both lines cannot coexist on the same classpath. This dependency alignment is part of updating the application; it is not required merely to upgrade brokers while retaining an existing v4 client dependency.
 
-Import `io.netty:netty-bom` alongside `pulsar-bom`, update framework-managed Netty versions, and verify that the resolved runtime graph and packaged application contain a consistent set of Netty modules without old or duplicate JARs. See the [Maven and Gradle setup examples](pathname:///docs/client-libraries/java-setup#pulsar-bom) and the [Netty migration guide](https://netty.io/wiki/netty-4.2-migration-guide.html).
+Import `io.netty:netty-bom` alongside `pulsar-bom`, update framework-managed Netty versions, and verify that the resolved runtime graph and packaged application contain a consistent set of Netty modules without old or duplicate JARs. See the [Maven and Gradle setup examples](pathname:///docs/client-libraries/java-dependency-configuration#pulsar-bom) and the [Netty migration guide](https://netty.io/wiki/netty-4.2-migration-guide.html).
 
 ## Check schema dependencies
 
