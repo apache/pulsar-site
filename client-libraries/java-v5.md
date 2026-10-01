@@ -17,7 +17,7 @@ The v5 client requires **Java 17** and Pulsar 5.x brokers with `scalableTopicsEn
 
 ## Install
 
-Use **`pulsar-client-v5-all`** and follow [Java client setup](java-setup.md#step-1-install-java-client-library) for the Maven and Gradle dependency examples, [Pulsar and Netty BOMs](java-setup.md#pulsar-bom), and transitive dependency exclusions. The setup page also covers external dependencies and the shaded fallback for unresolved dependency conflicts.
+Use **`pulsar-client-v5-all`** and follow [Java client setup](java-setup.md#step-1-install-java-client-library) for the Maven and Gradle dependency examples, [Pulsar and Netty BOMs](java-dependency-configuration.md#pulsar-bom), and transitive dependency exclusions. The dependency configuration page also covers external dependencies and the shaded fallback for unresolved dependency conflicts.
 
 The v5 API lives under [`org.apache.pulsar.client.api.v5`](@pulsar:javadoc:client-v5@/org/apache/pulsar/client/api/v5/package-summary.html). Choosing a combined dependency does not switch an application from v4 to v5; changing the API is a separate [source migration](java-migrate-to-v5.md).
 

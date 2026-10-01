@@ -15,7 +15,11 @@ import { docUrl } from "@site/src/utils/index";
 
 This portal holds a variety of topics, tutorials, guides, and reference material to help you work with Pulsar.
 
-Preparing to upgrade? Start with the [release highlights](release-highlights.md) and the [cluster upgrade guide](administration-upgrade.md).
+:::tip Preparing to upgrade to Pulsar @pulsar:version:major@?
+
+Start with the [release highlights](release-highlights.md) and the [cluster upgrade guide](administration-upgrade.md).
+
+:::
 
 ## Choose your path
 Select one of the content blocks below to begin your Pulsar journey. If you ...

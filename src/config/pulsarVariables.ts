@@ -292,6 +292,7 @@ export function resolveTokens(versionKey: string, referenceLatest = false): Map<
     ["version:latest", latestVersion],
     ["version:latest-v5plus", latestV5PlusRelease],
     ["version:lts", ltsVersion],
+    ["version:major", originVersion.split(".").slice(0, 2).join(".")],
     ["version:python", clientPythonVersion(pythonArg)],
     ["version:netty", nettyVersion],
     ["version", resolvedVersion],
