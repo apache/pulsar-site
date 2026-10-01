@@ -44,6 +44,12 @@ Operators can keep Scalable Topics behind a feature gate during the upgrade by s
 
 ## Performance and reliability {#performance-and-reliability}
 
+:::tip
+
+The performance and reliability improvements in Pulsar 5.0 apply to existing applications and topics. They don't require adopting Scalable Topics or the v5 client API. After [upgrading from Pulsar 4.x](administration-upgrade-to-5.0.x.md), existing applications continue to work with all their current features and benefit from these improvements without code changes.
+
+:::
+
 ### Keep consumers at the tail with 100s of publishers {#keep-consumers-at-the-tail-with-many-publishers}
 
 In a typical IoT deployment, hundreds of thousands of devices connect to hundreds of gateways, and each gateway publishes the devices' telemetry to Pulsar, which serves as the message bus for the applications that process it. The messages are keyed by device ID, so that each device's messages are processed in order, and for that reason they usually aren't batched. Pulsar 5.0 reduces the broker queueing and contention that could make the consuming applications fall behind even when they were fast enough to keep up.
@@ -71,12 +77,21 @@ What the results show:
 - **5.0.0's consumers kept up:** they received the messages as fast as they were published, about 1 s after publishing at p99.
 - **4.0.13 published faster** because its broker was hardly delivering anything at the same time, while 5.0.0's broker did both.
 
+Throughput of one run of each version, each in a panel of its own with the same axes. With 4.0.13, consumption (the solid line) stays near zero until publishing ends, then drains the backlog at about 20,000 messages/s for more than 200 s; with 5.0.0, it follows publishing (the dashed line):
+
+![Throughput of Pulsar 4.0.13 and 5.0.0: published and consumed messages per second, in separate panels with the same axes](/assets/release-highlights-5.0/throughput-4.0.13-vs-5.0.0-separate.svg)
+
+Publish and end-to-end latency by percentile, on a logarithmic scale. The publish latencies are similar, about 1 s, while 4.0.13's end-to-end latency reaches about 200 s:
+
+![Latency by percentile of Pulsar 4.0.13 and 5.0.0 on a logarithmic scale, in separate panels with the same axes](/assets/release-highlights-5.0/latency-percentiles-log-4.0.13-vs-5.0.0-separate.svg)
+
 For these **tailing reads**—consuming newly published messages near the end of the topic—fewer thread handoffs and batched publish submission let dispatch keep moving instead of waiting behind one executor task per entry.
 
 How it was measured:
 
 - [Pulsar's performance testing framework](https://github.com/apache/pulsar/tree/master/tests/performance) ran its [`iot-telemetry-max-rate`](https://github.com/apache/pulsar/blob/master/tests/performance/scenarios/iot-telemetry-max-rate.yaml) scenario, with single-copy ledgers on three bookies, on one 8-core host at a fixed 2.4 GHz.
 - Each run measured 4 million messages after a warmup. With 4.0.13, publishing took about 31 s and the last message arrived after about 235 s; with 5.0.0, both took about 37 s.
+- The topic was a regular persistent topic, not a Scalable Topic, so that both versions ran the same kind of topic and the comparison with 4.0.13 is like for like.
 - 4.0.13 ran with its own defaults, and both versions used the same 5.0.0 client. Every run delivered every message without duplicates or ordering violations.
 
 The results describe this workload, not general broker capacity: run the scenario on your own hardware to compare with your application. Consumers still need enough processing capacity to keep up with producers.
