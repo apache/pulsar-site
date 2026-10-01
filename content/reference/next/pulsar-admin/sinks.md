@@ -57,6 +57,7 @@ $ pulsar-admin sinks create options
 | `[--transform-function-classname]` | The transform function class name|null|
 | `[--transform-function-config]` | Configuration of the transform function applied before the Sink|null|
 | `[--log-topic]` | The topic to which the logs of a Pulsar Sink are produced|null|
+| `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|
 | `[--runtime-flags]` | Any flags that you want to pass to a runtime (for process & Kubernetes runtime only).|null|
 | `[-h, --help]` | Show this help message and exit.|false|
 | `[-v, --version]` | Print version information and exit.|false|
@@ -110,6 +111,7 @@ $ pulsar-admin sinks update options
 | `[--transform-function-classname]` | The transform function class name|null|
 | `[--transform-function-config]` | Configuration of the transform function applied before the Sink|null|
 | `[--log-topic]` | The topic to which the logs of a Pulsar Sink are produced|null|
+| `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|
 | `[--runtime-flags]` | Any flags that you want to pass to a runtime (for process & Kubernetes runtime only).|null|
 | `[--update-auth-data]` | Whether or not to update the auth data|false|
 | `[-h, --help]` | Show this help message and exit.|false|
@@ -336,6 +338,7 @@ $ pulsar-admin sinks localrun options
 | `[--transform-function-classname]` | The transform function class name|null|
 | `[--transform-function-config]` | Configuration of the transform function applied before the Sink|null|
 | `[--log-topic]` | The topic to which the logs of a Pulsar Sink are produced|null|
+| `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|
 | `[--runtime-flags]` | Any flags that you want to pass to a runtime (for process & Kubernetes runtime only).|null|
 | `[--state-storage-service-url]` | The URL for the state storage service (the default is Apache BookKeeper)|null|
 | `[--broker-service-url]` | The URL for the Pulsar broker|null|
