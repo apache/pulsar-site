@@ -4698,7 +4698,7 @@ Amount of seconds to timeout when loading a topic. In situations with many geo-r
 
 **Default**: `60`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Server
 

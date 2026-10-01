@@ -56,6 +56,7 @@ $ pulsar-admin functions localrun options
 | `[--subs-name]` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer|null|Java, Python, Go|
 | `[--subs-position]` | Pulsar source subscription position if user wants to consume messages from the specified location|null|Java|
 | `[--skip-to-latest]` | Whether or not the consumer skip to latest message upon function instance restart|null||
+| `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|Java|
 | `[--parallelism]` | The parallelism factor of a Pulsar Function (i.e. the number of function instances to run)|null|Java|
 | `[--cpu]` | The cpu in cores that need to be allocated per function instance(applicable only to docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `[--ram]` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
@@ -136,6 +137,7 @@ $ pulsar-admin functions create options
 | `[--subs-name]` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer|null|Java, Python, Go|
 | `[--subs-position]` | Pulsar source subscription position if user wants to consume messages from the specified location|null|Java|
 | `[--skip-to-latest]` | Whether or not the consumer skip to latest message upon function instance restart|null||
+| `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|Java|
 | `[--parallelism]` | The parallelism factor of a Pulsar Function (i.e. the number of function instances to run)|null|Java|
 | `[--cpu]` | The cpu in cores that need to be allocated per function instance(applicable only to docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `[--ram]` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
@@ -224,6 +226,7 @@ $ pulsar-admin functions update options
 | `[--subs-name]` | Pulsar source subscription name if user wants a specific subscription-name for input-topic consumer|null|Java, Python, Go|
 | `[--subs-position]` | Pulsar source subscription position if user wants to consume messages from the specified location|null|Java|
 | `[--skip-to-latest]` | Whether or not the consumer skip to latest message upon function instance restart|null||
+| `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|Java|
 | `[--parallelism]` | The parallelism factor of a Pulsar Function (i.e. the number of function instances to run)|null|Java|
 | `[--cpu]` | The cpu in cores that need to be allocated per function instance(applicable only to docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `[--ram]` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
