@@ -25,8 +25,8 @@ authenticationProviders=org.apache.pulsar.broker.authentication.AuthenticationPr
 
 # Authentication settings of the broker itself. Used when the broker connects to other brokers, or when the proxy connects to brokers, either in same or other clusters
 brokerClientAuthenticationPlugin=org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2
-brokerClientAuthenticationParameters={"privateKey":"file:///path/to/privateKey","audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/","issuerUrl":"https://dev-kt-aa9ne.us.auth0.com"}
-# brokerClientAuthenticationParameters={"privateKey":"data:application/json;base64,privateKey-body-to-base64","audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/","issuerUrl":"https://dev-kt-aa9ne.us.auth0.com"}
+brokerClientAuthenticationParameters={"privateKey":"file:///path/to/privateKey","audience":"https://broker.example.com","issuerUrl":"https://issuer.example.com"}
+# brokerClientAuthenticationParameters={"privateKey":"data:application/json;base64,privateKey-body-to-base64","audience":"https://broker.example.com","issuerUrl":"https://issuer.example.com"}
 
 # If using secret key (Note: key files must be DER-encoded)
 tokenSecretKey=file:///path/to/secret.key
@@ -50,9 +50,9 @@ You can use the OAuth2 authentication provider with the following Pulsar clients
 ```java
 import org.apache.pulsar.client.impl.auth.oauth2.AuthenticationFactoryOAuth2;
 
-URL issuerUrl = new URL("https://dev-kt-aa9ne.us.auth0.com");
+URL issuerUrl = new URL("https://issuer.example.com");
 URL credentialsUrl = new URL("file:///path/to/KeyFile.json");
-String audience = "https://dev-kt-aa9ne.us.auth0.com/api/v2/";
+String audience = "https://broker.example.com";
 
 PulsarClient client = PulsarClient.builder()
     .serviceUrl("pulsar://broker.example.com:6650/")
@@ -80,9 +80,9 @@ from pulsar import Client, AuthenticationOauth2
 
 params = '''
 {
-    "issuer_url": "https://dev-kt-aa9ne.us.auth0.com",
+    "issuer_url": "https://issuer.example.com",
     "private_key": "/path/to/privateKey",
-    "audience": "https://dev-kt-aa9ne.us.auth0.com/api/v2/"
+    "audience": "https://broker.example.com"
 }
 '''
 
@@ -97,9 +97,9 @@ client = Client("pulsar://my-cluster:6650", authentication=AuthenticationOauth2(
 
 pulsar::ClientConfiguration config;
 std::string params = R"({
-    "issuer_url": "https://dev-kt-aa9ne.us.auth0.com",
+    "issuer_url": "https://issuer.example.com",
     "private_key": "../../pulsar-broker/src/test/resources/authentication/token/cpp_credentials_file.json",
-    "audience": "https://dev-kt-aa9ne.us.auth0.com/api/v2/"})";
+    "audience": "https://broker.example.com"})";
 
 config.setAuth(pulsar::AuthOauth2::create(params));
 
@@ -157,8 +157,8 @@ The support for OAuth2 authentication is only available in Node.js client 1.6.2 
 ```go
 oauth := pulsar.NewAuthenticationOAuth2(map[string]string{
 		"type":       "client_credentials",
-		"issuerUrl":  "https://dev-kt-aa9ne.us.auth0.com",
-		"audience":   "https://dev-kt-aa9ne.us.auth0.com/api/v2/",
+		"issuerUrl":  "https://issuer.example.com",
+		"audience":   "https://broker.example.com",
 		"privateKey": "/path/to/privateKey",
 		"clientId":   "0Xx...Yyxeny",
 	})
@@ -186,8 +186,8 @@ This section describes how to use Pulsar CLI tools to connect a cluster through 
 bin/pulsar-admin --admin-url https://streamnative.cloud:443 \
     --auth-plugin org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2 \
     --auth-params '{"privateKey":"file:///path/to/key/file.json",
-        "issuerUrl":"https://dev-kt-aa9ne.us.auth0.com",
-        "audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/"}' \
+        "issuerUrl":"https://issuer.example.com",
+        "audience":"https://broker.example.com"}' \
     tenants list
 ```
 
@@ -199,8 +199,8 @@ bin/pulsar-client \
     --url SERVICE_URL \
     --auth-plugin org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2 \
     --auth-params '{"privateKey":"file:///path/to/key/file.json",
-        "issuerUrl":"https://dev-kt-aa9ne.us.auth0.com",
-        "audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/"}' \
+        "issuerUrl":"https://issuer.example.com",
+        "audience":"https://broker.example.com"}' \
     produce test-topic -m "test-message" -n 10
 ```
 
@@ -211,8 +211,8 @@ bin/pulsar-client \
 bin/pulsar-perf produce --service-url pulsar+ssl://streamnative.cloud:6651 \
     --auth-plugin org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2 \
     --auth-params '{"privateKey":"file:///path/to/key/file.json",
-        "issuerUrl":"https://dev-kt-aa9ne.us.auth0.com",
-        "audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/"}' \
+        "issuerUrl":"https://issuer.example.com",
+        "audience":"https://broker.example.com"}' \
     -r 1000 -s 1024 test-topic
 ```
 
@@ -253,16 +253,16 @@ The following is an example of a typical original OAuth2 request, which is used 
 
 ```bash
 curl --request POST \
-  --url https://dev-kt-aa9ne.us.auth0.com/oauth/token \
+  --url https://issuer.example.com/oauth/token \
   --header 'content-type: application/json' \
   --data '{
-  "client_id":"Xd23RHsUnvUlP7wchjNYOaIfazgeHd9x",
-  "client_secret":"rT7ps7WY8uhdVuBTKWZkttwLdQotmdEliaM5rLfmgNibvqziZ-g07ZH52N_poGAb",
-  "audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/",
+  "client_id":"YOUR_CLIENT_ID",
+  "client_secret":"YOUR_CLIENT_SECRET",
+  "audience":"https://broker.example.com",
   "grant_type":"client_credentials"}'
 ```
 
 In the above example, the mapping relationship is shown below.
-- The `issuerUrl` parameter is mapped to `--url https://dev-kt-aa9ne.us.auth0.com`.
+- The `issuerUrl` parameter is mapped to `--url https://issuer.example.com`.
 - The `privateKey` parameter should contain the `client_id` and `client_secret` fields at least.
-- The `audience` parameter is mapped to  `"audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/"`. This field is only used by some identity providers.
+- The `audience` parameter is mapped to  `"audience":"https://broker.example.com"`. This field is only used by some identity providers.

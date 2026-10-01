@@ -58,21 +58,21 @@ The following shows a typical original OAuth2 request, which is used to obtain t
 ```bash
 
 curl --request POST \
-  --url https://dev-kt-aa9ne.us.auth0.com/oauth/token \
+  --url https://issuer.example.com/oauth/token \
   --header 'content-type: application/json' \
   --data '{
-  "client_id":"Xd23RHsUnvUlP7wchjNYOaIfazgeHd9x",
-  "client_secret":"rT7ps7WY8uhdVuBTKWZkttwLdQotmdEliaM5rLfmgNibvqziZ-g07ZH52N_poGAb",
-  "audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/",
+  "client_id":"YOUR_CLIENT_ID",
+  "client_secret":"YOUR_CLIENT_SECRET",
+  "audience":"https://broker.example.com",
   "grant_type":"client_credentials"}'
 
 ```
 
 In the above example, the mapping relationship is shown as below.
 
-- The `issuerUrl` parameter in this plugin is mapped to `--url https://dev-kt-aa9ne.us.auth0.com`.
+- The `issuerUrl` parameter in this plugin is mapped to `--url https://issuer.example.com`.
 - The `privateKey` file parameter in this plugin should at least contains the `client_id` and `client_secret` fields.
-- The `audience` parameter in this plugin is mapped to  `"audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/"`. This field is only used by some identity providers.
+- The `audience` parameter in this plugin is mapped to  `"audience":"https://broker.example.com"`. This field is only used by some identity providers.
 
 ## Client Configuration
 
@@ -86,9 +86,9 @@ You can use the factory method to configure authentication for Pulsar Java clien
 
 import org.apache.pulsar.client.impl.auth.oauth2.AuthenticationFactoryOAuth2;
 
-URL issuerUrl = new URL("https://dev-kt-aa9ne.us.auth0.com");
+URL issuerUrl = new URL("https://issuer.example.com");
 URL credentialsUrl = new URL("file:///path/to/KeyFile.json");
-String audience = "https://dev-kt-aa9ne.us.auth0.com/api/v2/";
+String audience = "https://broker.example.com";
 
 PulsarClient client = PulsarClient.builder()
     .serviceUrl("pulsar://broker.example.com:6650/")
@@ -121,9 +121,9 @@ The C++ client is similar to the Java client. You need to provide the parameters
 
 pulsar::ClientConfiguration config;
 std::string params = R"({
-    "issuer_url": "https://dev-kt-aa9ne.us.auth0.com",
+    "issuer_url": "https://issuer.example.com",
     "private_key": "../../pulsar-broker/src/test/resources/authentication/token/cpp_credentials_file.json",
-    "audience": "https://dev-kt-aa9ne.us.auth0.com/api/v2/"})";
+    "audience": "https://broker.example.com"})";
 
 config.setAuth(pulsar::AuthOauth2::create(params));
 
@@ -140,8 +140,8 @@ This example shows how to configure OAuth2 authentication in Go client.
 
 oauth := pulsar.NewAuthenticationOAuth2(map[string]string{
 		"type":       "client_credentials",
-		"issuerUrl":  "https://dev-kt-aa9ne.us.auth0.com",
-		"audience":   "https://dev-kt-aa9ne.us.auth0.com/api/v2/",
+		"issuerUrl":  "https://issuer.example.com",
+		"audience":   "https://broker.example.com",
 		"privateKey": "/path/to/privateKey",
 		"clientId":   "0Xx...Yyxeny",
 	})
@@ -163,9 +163,9 @@ from pulsar import Client, AuthenticationOauth2
 
 params = '''
 {
-    "issuer_url": "https://dev-kt-aa9ne.us.auth0.com",
+    "issuer_url": "https://issuer.example.com",
     "private_key": "/path/to/privateKey",
-    "audience": "https://dev-kt-aa9ne.us.auth0.com/api/v2/"
+    "audience": "https://broker.example.com"
 }
 '''
 
@@ -235,8 +235,8 @@ This example shows how to use pulsar-admin to connect to a cluster through OAuth
 bin/pulsar-admin --admin-url https://streamnative.cloud:443 \
 --auth-plugin org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2 \
 --auth-params '{"privateKey":"file:///path/to/key/file.json",
-    "issuerUrl":"https://dev-kt-aa9ne.us.auth0.com",
-    "audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/"}' \
+    "issuerUrl":"https://issuer.example.com",
+    "audience":"https://broker.example.com"}' \
 tenants list
 
 ```
@@ -254,8 +254,8 @@ bin/pulsar-client \
 --url SERVICE_URL \
 --auth-plugin org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2 \
 --auth-params '{"privateKey":"file:///path/to/key/file.json",
-    "issuerUrl":"https://dev-kt-aa9ne.us.auth0.com",
-    "audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/"}' \
+    "issuerUrl":"https://issuer.example.com",
+    "audience":"https://broker.example.com"}' \
 produce test-topic -m "test-message" -n 10
 
 ```
@@ -272,8 +272,8 @@ This example shows how to use pulsar-perf to connect to a cluster through OAuth2
 bin/pulsar-perf produce --service-url pulsar+ssl://streamnative.cloud:6651 \
 --auth-plugin org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2 \
 --auth-params '{"privateKey":"file:///path/to/key/file.json",
-    "issuerUrl":"https://dev-kt-aa9ne.us.auth0.com",
-    "audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/"}' \
+    "issuerUrl":"https://issuer.example.com",
+    "audience":"https://broker.example.com"}' \
 -r 1000 -s 1024 test-topic
 
 ```

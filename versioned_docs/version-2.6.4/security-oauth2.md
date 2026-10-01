@@ -54,21 +54,21 @@ The following shows a typical original Oauth2 request, which is used to obtain t
 ```bash
 
 curl --request POST \
-  --url https://dev-kt-aa9ne.us.auth0.com/oauth/token \
+  --url https://issuer.example.com/oauth/token \
   --header 'content-type: application/json' \
   --data '{
-  "client_id":"Xd23RHsUnvUlP7wchjNYOaIfazgeHd9x",
-  "client_secret":"rT7ps7WY8uhdVuBTKWZkttwLdQotmdEliaM5rLfmgNibvqziZ-g07ZH52N_poGAb",
-  "audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/",
+  "client_id":"YOUR_CLIENT_ID",
+  "client_secret":"YOUR_CLIENT_SECRET",
+  "audience":"https://broker.example.com",
   "grant_type":"client_credentials"}'
 
 ```
 
 In the above example, the mapping relationship is shown as below.
 
-- The `issuerUrl` parameter in this plugin is mapped to `--url https://dev-kt-aa9ne.us.auth0.com/oauth/token`.
+- The `issuerUrl` parameter in this plugin is mapped to `--url https://issuer.example.com/oauth/token`.
 - The `privateKey` file parameter in this plugin should at least contains the `client_id` and `client_secret` fields.
-- The `audience` parameter in this plugin is mapped to  `"audience":"https://dev-kt-aa9ne.us.auth0.com/api/v2/"`.
+- The `audience` parameter in this plugin is mapped to  `"audience":"https://broker.example.com"`.
 
 ## Client Configuration
 
@@ -82,9 +82,9 @@ You can use the factory method to configure authentication for Pulsar Java clien
 
 import org.apache.pulsar.client.impl.auth.oauth2.AuthenticationFactoryOAuth2;
 
-String issuerUrl = "https://dev-kt-aa9ne.us.auth0.com/oauth/token";
+String issuerUrl = "https://issuer.example.com/oauth/token";
 String credentialsUrl = "file:///path/to/KeyFile.json";
-String audience = "https://dev-kt-aa9ne.us.auth0.com/api/v2/";
+String audience = "https://broker.example.com";
 
 PulsarClient client = PulsarClient.builder()
     .serviceUrl("pulsar://broker.example.com:6650/")
@@ -117,9 +117,9 @@ The C++ client is similar to the Java client. You need to provide parameters of 
 
 pulsar::ClientConfiguration config;
 std::string params = R"({
-    "issuer_url": "https://dev-kt-aa9ne.us.auth0.com/oauth/token",
+    "issuer_url": "https://issuer.example.com/oauth/token",
     "private_key": "../../pulsar-broker/src/test/resources/authentication/token/cpp_credentials_file.json",
-    "audience": "https://dev-kt-aa9ne.us.auth0.com/api/v2/"})";
+    "audience": "https://broker.example.com"})";
 
 config.setAuth(pulsar::AuthOauth2::create(params));
 
@@ -136,8 +136,8 @@ This example shows how to configure OAuth2 authentication in Go client.
 
 oauth := pulsar.NewAuthenticationOAuth2(map[string]string{
 		"type":       "client_credentials",
-		"issuerUrl":  "https://dev-kt-aa9ne.us.auth0.com/oauth/token",
-		"audience":   "https://dev-kt-aa9ne.us.auth0.com/api/v2/",
+		"issuerUrl":  "https://issuer.example.com/oauth/token",
+		"audience":   "https://broker.example.com",
 		"privateKey": "/path/to/privateKey",
 		"clientId":   "0Xx...Yyxeny",
 	})
@@ -159,9 +159,9 @@ from pulsar import Client, AuthenticationOauth2
 
 params = '''
 {
-    "issuer_url": "https://dev-kt-aa9ne.us.auth0.com",
+    "issuer_url": "https://issuer.example.com",
     "private_key": "/path/to/privateKey",
-    "audience": "https://dev-kt-aa9ne.us.auth0.com/api/v2/"
+    "audience": "https://broker.example.com"
 }
 '''
 
