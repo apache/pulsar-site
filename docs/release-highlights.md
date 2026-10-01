@@ -10,7 +10,7 @@ import ReleaseSeriesNotes from '@site/src/components/ReleaseSeriesNotes';
 Pulsar 5.0 introduces **Scalable Topics** for applications that need to grow beyond a fixed partition count, alongside **major performance and reliability improvements for existing workloads**. Scale topics and consumers as demand changes, benefit from more efficient brokers, and keep the applications and topics you already run.
 
 - **Scalable Topics: grow beyond a fixed partition count.** Traditional partitions cannot shrink, and adding partitions can disrupt per-key ordering. Sizing too generously wastes resources; sizing too narrowly creates hot partitions and costly migrations. Scalable Topics let you split and merge key ranges and scale consumers while preserving per-key ordering and producer batching.
-- **More performance from existing workloads.** Fewer thread handoffs, less contention, and batched storage reads reduce the work behind each message. In one [many-publisher benchmark](#keep-consumers-at-the-tail-with-many-publishers), steady consumption rose from about **5,700 to 153,000 messages/s** and the maximum backlog fell by more than **99%**.
+- **More performance from existing workloads.** Fewer thread handoffs, less contention, and batched storage reads reduce the work behind each message. In one [many-publisher benchmark](#keep-consumers-at-the-tail-with-many-publishers), backlog growth during publishing fell from **128,585 to 173 messages/s (−99.9%)**, and the maximum backlog fell by **99.7%**. In this workload, consumers stayed at the tail with hundreds of publishers without accumulating a sustained backlog.
 - **More dependable delivery.** Fixes across geo-replication, subscriptions, delayed delivery, and acknowledgment recovery address stalls in the features applications use every day.
 - **Easier operation at scale.** Better load distribution, coordinated rolling-upgrade guidance, structured logs, and the ability to close idle topics without deleting their data give operators more control.
 
@@ -128,6 +128,10 @@ Assignment and ownership cleanup fixes also improve recovery in the extensible l
 
 ## New capabilities {#new-capabilities}
 
+### Scalable Topics {#scalable-topics-capability}
+
+[See section above](#scalable-topics).
+
 ### A Java client API built around how you consume {#v5-java-client}
 
 The [v5 Java client API](pathname:///docs/client-libraries/java-v5) gives applications three focused consumption models:
@@ -144,7 +148,7 @@ The v5 API requires scalable-topic services to be enabled on the brokers, includ
 
 ### Oxia for new clusters, continuity for ZooKeeper deployments {#oxia-and-metadata-migration}
 
-Oxia is the recommended metadata store for new clusters and the supported choice for Scalable Topics in production. Existing ZooKeeper deployments can continue running their workloads: with Scalable Topics disabled, all previously available features remain fully supported in production configurations with ZooKeeper.
+[Oxia](https://oxia-db.github.io/) is fully open source under the [Apache-2.0 license](https://github.com/oxia-db/oxia/blob/main/LICENSE) and has been accepted into CNCF at the [Sandbox maturity level](https://www.cncf.io/projects/oxia/). It is the recommended metadata store for new clusters and the supported choice for Scalable Topics in production. Existing ZooKeeper deployments can continue running their workloads: with Scalable Topics disabled, all previously available features remain fully supported in production configurations with ZooKeeper.
 
 When you choose to move to Oxia, the [metadata-store migration framework](administration-metadata-store-migration.md) copies metadata while publishing and consuming continue, with a planned cutover and validation procedure. You can schedule this separately from the software upgrade. ZooKeeper can also be used to test Scalable Topics in Pulsar 5.0.0; some scalable-topic features, including transactions, require Oxia.
 
