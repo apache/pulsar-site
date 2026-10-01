@@ -17,7 +17,11 @@ This portal holds a variety of topics, tutorials, guides, and reference material
 
 :::tip Preparing to upgrade to Pulsar @pulsar:version:major@?
 
-Start with the [release highlights](release-highlights.md) and the [cluster upgrade guide](administration-upgrade.md).
+Quick links:
+
+- [Release highlights and upgrading](release-highlights.md)
+- [Cluster upgrade guide](administration-upgrade.md)
+- [Java client dependency configuration for Pulsar @pulsar:version:major@](pathname:///docs/client-libraries/java-dependency-configuration)
 
 :::
 
