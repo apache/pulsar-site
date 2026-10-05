@@ -5,6 +5,10 @@
       "id": "about"
     },
     {
+      "type": "doc",
+      "id": "release-highlights"
+    },
+    {
       "type": "category",
       "label": "Get Started",
       "link": {
@@ -26,6 +30,10 @@
         "concepts-messaging",
         "concepts-architecture-overview",
         "concepts-clients",
+        "concepts-replication",
+        "concepts-cluster-level-failover",
+        "concepts-multi-tenancy",
+        "concepts-authentication",
         {
           "type": "category",
           "label": "Broker load balancing",
@@ -40,10 +48,6 @@
             "concepts-broker-load-balancing-migration"
           ]
         },
-        "concepts-replication",
-        "concepts-cluster-level-failover",
-        "concepts-multi-tenancy",
-        "concepts-authentication",
         "concepts-topic-compaction",
         "concepts-throttling",
         "concepts-proxy-sni-routing",
@@ -230,8 +234,6 @@
         "id": "install-deploy-upgrade-landing"
       },
       "items": [
-        "deploy-aws",
-        "deploy-ibm",
         {
           "type": "category",
           "label": "Kubernetes",
@@ -245,9 +247,11 @@
             "helm-upgrade"
           ]
         },
+        "deploy-docker",
         "deploy-bare-metal",
         "deploy-bare-metal-multi-cluster",
-        "deploy-docker"
+        "deploy-aws",
+        "deploy-ibm"
       ]
     },
     {
@@ -258,12 +262,28 @@
         "administration-metadata-store",
         "administration-metadata-store-migration",
         "administration-geo",
-        "administration-dekaf-ui",
-        "administration-pulsar-manager",
+        "administration-ui",
         "administration-pulsar-shell",
         "administration-proxy",
+        "administration-load-balance",
+        "administration-namespace-bundles",
         "administration-anti-affinity-namespaces",
+        {
+          "type": "category",
+          "label": "Upgrading to Pulsar 5.x",
+          "link": {
+            "type": "doc",
+            "id": "administration-upgrade-to-5.0.x"
+          },
+          "items": [
+            "administration-upgrade-to-5.0.x-configuration",
+            "administration-upgrade-to-5.0.x-applications",
+            "administration-upgrade-to-5.0.x-metrics",
+            "administration-upgrade-to-5.0.x-standalone"
+          ]
+        },
         "administration-upgrade",
+        "administration-rolling-upgrade",
         {
           "type": "category",
           "label": "Pulsar isolation",
@@ -285,6 +305,7 @@
         "administration-stats",
         "reference-metrics",
         "deploy-monitoring",
+        "administration-logging",
         "reference-metrics-opentelemetry"
       ]
     },
@@ -323,7 +344,8 @@
       "type": "category",
       "label": "Performance",
       "items": [
-        "performance-pulsar-perf"
+        "performance-pulsar-perf",
+        "performance-broker"
       ]
     },
     {
@@ -335,8 +357,26 @@
       "type": "category",
       "label": "Admin API",
       "items": [
-        "admin-api-overview",
-        "admin-api-use-cases",
+        "admin-api-get-started",
+        {
+          "type": "link",
+          "href": "https://pulsar.apache.org/api/admin/5.0.x/",
+          "label": "Java Library"
+        },
+        {
+          "type": "link",
+          "href": "https://pkg.go.dev/github.com/apache/pulsar-client-go/pulsaradmin",
+          "label": "Go Library"
+        },
+        {
+          "type": "ref",
+          "id": "reference-rest-api-overview"
+        },
+        {
+          "type": "link",
+          "href": "pathname:///reference/#/5.0.x/pulsar-admin/",
+          "label": "pulsar-admin CLI"
+        },
         {
           "type": "category",
           "label": "Features",
@@ -356,10 +396,7 @@
             "admin-api-topics",
             "admin-api-transactions"
           ]
-        },
-        "admin-api-tools",
-        "admin-api-get-started",
-        "admin-api-tutorial"
+        }
       ]
     },
     {

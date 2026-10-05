@@ -4,6 +4,11 @@ title: Overview
 sidebar_label: "Overview"
 ---
 
+:::tip Start with the administration guide
+
+For most users, [Load balance across brokers](administration-load-balance.md) is the best starting point. It explains how load balancing works in a running cluster and how to configure and manage it. Use the concepts pages in this section for additional background on load balancer designs and features.
+
+:::
 
 ## Challenges of load balancing in distributed streaming systems
 

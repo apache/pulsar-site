@@ -5,6 +5,15 @@ sidebar_label: "Run function workers with brokers"
 description: Run Pulsar function workers with brokers.
 ---
 
+:::warning Run only fully trusted code
+
+Pulsar Functions and connectors execute user-provided code by design. This intended capability is not itself a remote code execution (RCE) vulnerability. **Run only code that you fully trust**, because it can modify its execution environment:
+
+- **Thread and process runtimes** can read or modify any files and state accessible to the process they run in.
+- **The Kubernetes runtime** does not, on its own, restrict access to Kubernetes cluster resources. Pulsar provides hooks for custom hardening, but the hardening itself is outside the project.
+
+:::
+
 The following diagram illustrates the deployment of function workers running along with brokers.
 
 ![Deployment of function workers in Pulsar](/assets/function-workers-corun.svg)

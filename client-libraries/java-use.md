@@ -5,6 +5,8 @@ sidebar_label: "Use"
 description: Learn how to use Java client in Pulsar.
 ---
 
+Follow [Java client setup](java-setup.md) to configure the combined dependency. This guide uses the v4 API (`org.apache.pulsar.client.api`); see [Java client (v5)](java-v5.md) for the v5 API.
+
 ## Create a producer
 
 Once you've instantiated a [PulsarClient](@pulsar:javadoc:client@/org/apache/pulsar/client/api/PulsarClient) object, you can create a [Producer](@pulsar:javadoc:client@/org/apache/pulsar/client/api/Producer) for a specific Pulsar [topic](pathname:///docs/reference-terminology#topic).
@@ -98,6 +100,12 @@ Consumer<byte[]> consumer = client.newConsumer()
      .messageListener(myMessageListener)
      .subscribe();
 ```
+
+### Acknowledgment receipts and retries
+
+For persistent topics, the v4 Java client makes a best-effort retry of grouped individual and batch-index acknowledgments after a local network write failure, even when acknowledgment receipts are disabled. This retry does not make a completed acknowledgment call proof that the broker processed it.
+
+Enable `.isAckReceiptEnabled(true)` on the consumer builder when your application needs to wait for a broker acknowledgment receipt. Prefer `acknowledgeAsync` and handle its completion so processing can continue while receipts are in flight. A receipt still does not guarantee that a message can never be redelivered; consumers should tolerate duplicates.
 
 ## Create a reader
 

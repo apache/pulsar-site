@@ -137,6 +137,8 @@ Use the `get` subcommand.
 pulsar-admin schemas get <topic-name>
 ```
 
+Pulsar preserves explicit JSON `null` values in schema output, including Avro field defaults such as `"default": null`. A null default and an omitted default have different schema semantics; preserve these values when inspecting or transferring a schema.
+
 Example output:
 
 ```json
@@ -344,9 +346,7 @@ Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/setIsAllowAu
 The post payload is in JSON format.
 
 ```json
-{
-"isAllowAutoUpdateSchema": "true"
-}
+true
 ```
 
 </TabItem>
@@ -355,7 +355,7 @@ The post payload is in JSON format.
 Here is an example to enable schema auto-update for a tenant/namespace.
 
 ```java
-admin.namespaces().setIsAllowAutoUpdateSchema("my-namspace", true);
+admin.namespaces().setIsAllowAutoUpdateSchema("tenant/namespace", true, null);
 ```
 
 </TabItem>
@@ -366,7 +366,7 @@ admin.namespaces().setIsAllowAutoUpdateSchema("my-namspace", true);
 
 :::note
 
-When schema auto-update is disabled, you can only [register a new schema](#upload-a-schema).
+When schema auto-update is disabled, ordinary producers cannot register a new schema automatically; [upload the schema](#upload-a-schema) explicitly. By default, geo-replication producers can still register compatible schemas. See [Control schema registration by replicators](#control-schema-registration-by-replicators).
 
 :::
 
@@ -393,23 +393,49 @@ Send a `POST` request to a namespace endpoint: [](swagger:/admin/v2/setIsAllowAu
 The post payload is in JSON format.
 
 ```json
-{
-"isAllowAutoUpdateSchema": "false"
-}
+false
 ```
 
 </TabItem>
 <TabItem value="Java">
 
-Here is an example to enable schema auto-unpdate of a tenant/namespace.
+Here is an example to disable schema auto-update for ordinary producers while leaving the replicator policy unchanged.
 
 ```java
-admin.namespaces().setIsAllowAutoUpdateSchema("my-namspace", false);
+admin.namespaces().setIsAllowAutoUpdateSchema("tenant/namespace", false, null);
 ```
 
 </TabItem>
 </Tabs>
 ````
+
+### Control schema registration by replicators
+
+Pulsar allows replication producers to register compatible schemas by default, even when automatic schema updates are disabled for ordinary producers. This lets the destination accept schemas used by replicated messages without also permitting local applications to register new schemas. Schema compatibility checks still apply.
+
+To disable automatic registration for both ordinary producers and replicators:
+
+```shell
+bin/pulsar-admin namespaces set-is-allow-auto-update-schema \
+  --disable --enable-for-replicator false tenant/namespace
+```
+
+Pre-register the required schemas at the destination before disabling replicator updates; otherwise replication can fail when it encounters an unregistered schema. To keep ordinary producer updates disabled but allow replicators:
+
+```shell
+bin/pulsar-admin namespaces set-is-allow-auto-update-schema \
+  --disable --enable-for-replicator true tenant/namespace
+```
+
+Omitting `--enable-for-replicator` leaves that policy unchanged. Enabling auto-update for ordinary producers while explicitly disabling it for replicators is rejected.
+
+The REST endpoint accepts a JSON boolean body for the ordinary producer setting and the optional query parameter `allowAutoUpdateSchemaWithReplicator` for the replicator setting. The Java admin API now takes three arguments:
+
+```java
+admin.namespaces().setIsAllowAutoUpdateSchema("tenant/namespace", false, false);
+```
+
+The third argument is a nullable `Boolean`; `null` preserves the existing replicator setting. Applications compiled against the former two-argument method must update their calls and recompile, including calls to `setIsAllowAutoUpdateSchemaAsync`.
 
 ## Manage schema validation enforcement
 

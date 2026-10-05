@@ -49,7 +49,7 @@ tlsKeyFilePath=/path/to/server.key-pk8.pem
 tlsRequireTrustedClientCertOnConnect=true
 tlsAllowInsecureConnection=false
 
-# Tls cert refresh duration in seconds (set 0 to check on every new connection)
+# TLS certificate refresh interval in seconds (0 disables background rotation)
 tlsCertRefreshCheckDurationSec=300
 ```
 
@@ -63,14 +63,14 @@ authenticationEnabled=true
 # set mTLS authentication provider
 authenticationProviders=org.apache.pulsar.broker.authentication.AuthenticationProviderTls
 
-# configure TLS for client to connect proxies
+# configure TLS for the proxy to connect to brokers
 tlsEnabledWithBroker=true
 brokerClientTrustCertsFilePath=/path/to/ca.cert.pem
 brokerClientAuthenticationPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
 brokerClientAuthenticationParameters={"tlsCertFile":"/path/to/proxy.cert.pem","tlsKeyFile":"/path/to/proxy.key-pk8.pem"}
 
-# configure TLS ports
-brokerServicePortTls=6651
+# configure proxy TLS ports
+servicePortTls=6651
 webServicePortTls=8081
 
 # configure CA certificate
@@ -85,9 +85,11 @@ tlsRequireTrustedClientCertOnConnect=true
 tlsAllowInsecureConnection=false
 ```
 
+On the brokers, configure the authenticated proxy role as a trusted `proxyRoles` entry and explicitly set `authenticateOriginalAuthData=false`. Pulsar enables original-client authentication by default, but the broker receives the proxy's certificate on its TLS connection rather than the client's certificate. The proxy authenticates the client and forwards its role; the broker still checks authorization for both roles. See [Proxy roles](security-authorization.md#proxy-roles).
+
 ## Configure mTLS authentication in Pulsar clients
 
-When using mTLS authentication, clients connect via TLS transport. You need to configure clients to use `https://` and the `8443` port for the web service URL, use `pulsar+ssl://` and the `6651` port for the broker service URL.
+When using mTLS authentication, clients connect via TLS transport. Use `https://` with the configured `webServicePortTls` (8081 in the examples above) and `pulsar+ssl://` with the configured binary TLS port (6651 above). Certificates must match the hostnames used to connect; Java clients enable [hostname verification](security-tls-transport.md#hostname-verification) by default.
 
 ````mdx-code-block
 <Tabs groupId="lang-choice"
@@ -186,11 +188,11 @@ var client = PulsarClient.Builder()
 
 [Command-line tools](reference-cli-tools.md) like [`pulsar-admin`](/reference/#/@pulsar:version_reference@/pulsar-admin/), [`pulsar-perf`](/reference/#/@pulsar:version_reference@/pulsar-perf/), and [`pulsar-client`](/reference/#/@pulsar:version_reference@/pulsar-client/) use the `conf/client.conf` config file in a Pulsar installation.
 
-To use mTLS authentication with the CLI tools of Pulsar, you need to add the following parameters to the `conf/client.conf` file, alongside [the configurations to enable mTLS encryption](security-tls-transport.md#configure-mtls-encryption-in-cli-tools):
+To use mTLS authentication with the CLI tools of Pulsar, you need to add the following parameters to the `conf/client.conf` file, alongside [the configurations to enable mTLS encryption](security-tls-transport.md#step-5-configure-cli-tools):
 
 ```properties
-webServiceUrl=https://localhost:8081/
-brokerServiceUrl=pulsar+ssl://localhost:6651/
+webServiceUrl=https://broker.example.com:8081/
+brokerServiceUrl=pulsar+ssl://broker.example.com:6651/
 authPlugin=org.apache.pulsar.client.impl.auth.AuthenticationTls
 authParams=tlsCertFile:/path/to/admin.cert.pem,tlsKeyFile:/path/to/admin.key-pk8.pem
 ```
@@ -267,7 +269,7 @@ For example:
        .tlsTrustStorePath("/var/private/tls/client.truststore.jks")
        .tlsTrustStorePassword("clientpw")
        .allowTlsInsecureConnection(false)
-       .enableTlsHostnameVerification(false)
+       .enableTlsHostnameVerification(true)
        .authentication(
                "org.apache.pulsar.client.impl.auth.AuthenticationKeyStoreTls",
                "keyStoreType:JKS,keyStorePath:/var/private/tls/client.keystore.jks,keyStorePassword:clientpw")
@@ -282,7 +284,7 @@ For example:
            .tlsTrustStorePath("/var/private/tls/client.truststore.jks")
            .tlsTrustStorePassword("clientpw")
            .allowTlsInsecureConnection(false)
-           .enableTlsHostnameVerification(false)
+           .enableTlsHostnameVerification(true)
            .authentication(
                   "org.apache.pulsar.client.impl.auth.AuthenticationKeyStoreTls",
                   "keyStoreType:JKS,keyStorePath:/var/private/tls/client.keystore.jks,keyStorePassword:clientpw")

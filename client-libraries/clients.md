@@ -5,6 +5,8 @@ sidebar_label: "Work with clients"
 description: Learn how to work with clients in Pulsar.
 ---
 
+For the Java examples, follow [Java client setup](java-setup.md) to configure the combined dependency. The Java examples use the v4 API (`org.apache.pulsar.client.api`); see [Java client (v5)](java-v5.md) for the v5 API.
+
 ````mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

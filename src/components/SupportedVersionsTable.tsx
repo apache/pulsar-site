@@ -17,7 +17,7 @@ type SimpleReleaseData = {
   releaseNoteLink: string,
 };
 
-type SupportedVersionData = {
+export type SupportedVersionData = {
   version: semver.SemVer,
   milestone: boolean,
   released: moment.Moment,
@@ -135,7 +135,10 @@ type SupportedVersionsTableProps = {
   isHideUnmaintained?: boolean
 };
 
-const SupportedVersionsTable: FC<SupportedVersionsTableProps> = (props) => {
+// One entry per feature release line (major.minor), newest first, with the support
+// windows derived from the release dates in data/release-pulsar. Shared with other
+// components that need to know which release lines are still maintained.
+export function buildSupportedVersionList(): SupportedVersionData[] {
   let releaseList: SimpleReleaseData[] = releases.map(r => ({
     version: semver.coerce(r.tagName),
     displayVersion: r.tagName.replace(/^v/, ''),
@@ -145,7 +148,7 @@ const SupportedVersionsTable: FC<SupportedVersionsTableProps> = (props) => {
   }))
   releaseList.sort((o1, o2) => semver.rcompare(o1.version, o2.version))
 
-  let supportedVersionList: SupportedVersionData[] = []
+  const supportedVersionList: SupportedVersionData[] = []
   for (const release of releaseList) {
     const version = release.version
     const released = release.released
@@ -171,13 +174,22 @@ const SupportedVersionsTable: FC<SupportedVersionsTableProps> = (props) => {
       latestReleaseNoteLink: release.releaseNoteLink,
     })
   }
+  return supportedVersionList
+}
+
+// A release line is maintained while it is in active or security support; a milestone
+// counts as maintained until the release it precedes ships.
+export function isMaintained(v: SupportedVersionData, now: Date = new Date()): boolean {
+  return v.milestone ||
+    (v.activeSupport && v.activeSupport.isAfter(now)) ||
+    (v.securitySupport && v.securitySupport.isAfter(now))
+}
+
+const SupportedVersionsTable: FC<SupportedVersionsTableProps> = (props) => {
+  let supportedVersionList = buildSupportedVersionList()
 
   if (props.isHideUnmaintained) {
-    supportedVersionList = supportedVersionList.filter(v =>
-      v.milestone ||
-      (v.activeSupport && v.activeSupport.isAfter(new Date())) ||
-      (v.securitySupport && v.securitySupport.isAfter(new Date()))
-    );
+    supportedVersionList = supportedVersionList.filter(v => isMaintained(v));
   }
 
   const TableHeaderCell = styled(TableCell)({fontWeight: "bold"})

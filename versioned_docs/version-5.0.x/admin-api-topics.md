@@ -322,7 +322,7 @@ The following is an example of a topic status.
     "metadata" : { },
     "address" : "/127.0.0.1:65402",
     "connectedSince" : "2021-06-09T17:22:55.913+08:00",
-    "clientVersion" : "2.9.0-SNAPSHOT",
+    "clientVersion" : "@pulsar:version@",
     "producerName" : "standalone-1-0"
   } ],
   "waitingPublishers" : 0,
@@ -371,7 +371,7 @@ The following is an example of a topic status.
         "metadata" : { },
         "address" : "/127.0.0.1:65172",
         "connectedSince" : "2021-06-09T17:22:45.353+08:00",
-        "clientVersion" : "2.9.0-SNAPSHOT"
+        "clientVersion" : "@pulsar:version@"
       } ],
       "allowOutOfOrderDelivery": false,
       "consumersAfterMarkDeletePosition" : { },
@@ -497,6 +497,8 @@ To get the internal status of a topic, you can use the following ways.
 pulsar-admin topics stats-internal persistent://test-tenant/ns1/tp1
 ```
 
+Add `--metadata` to include BookKeeper ledger metadata. The response also includes metadata for the compacted ledger and schema ledgers when they are present.
+
 </TabItem>
 <TabItem value="REST API">
 
@@ -515,9 +517,34 @@ admin.topics().getInternalStats(topic);
 </Tabs>
 ````
 
+### Analyze a subscription backlog
+
+Use `analyze-backlog` to scan the backlog of a persistent topic subscription. `--backlog-scan-max-entries` enables a client-side loop that resumes after a server scan reaches its limit and combines the results:
+
+```shell
+pulsar-admin topics analyze-backlog persistent://test-tenant/ns1/tp1 \
+  --subscription my-subscription --backlog-scan-max-entries 100000
+```
+
+The entry threshold must be positive. It is checked between scan responses, so the final count can exceed the threshold. The loop also stops when the scan completes or cannot make progress. Without this option, the command performs a single server scan, which can return a partial result.
+
+Use `--position ledgerId:entryId` to choose a starting position, `--quiet` to suppress intermediate progress results, and `--plain` to emit compact newline-delimited JSON. For scripts that need only the final result, combine `--quiet --plain`.
+
 ### Peek messages
 
 You can peek a number of messages for a specific subscription of a given topic in the following ways.
+
+The REST response separates transaction state from the topic's read boundary:
+
+- `X-Pulsar-txn-uncommitted` is present for transactional messages and indicates whether that transaction is still ongoing. It no longer means that the message lies beyond the maximum readable position.
+- `X-Pulsar-txn-aborted` identifies an aborted transaction's message.
+- `X-Pulsar-txn-consumable` indicates whether the message position is at or before the topic's maximum readable position. It does not by itself exclude aborted messages. A committed or nontransactional message can still lie beyond this boundary while an earlier transaction is ongoing.
+
+The Java admin client exposes `X-Pulsar-txn-consumable` as a property of the peeked messages, and includes `X-Pulsar-txn-uncommitted` and `X-Pulsar-txn-aborted` properties when their values are `true`. Its `READ_COMMITTED` isolation mode excludes aborted or ongoing transaction messages and messages beyond the consumable boundary. Update diagnostic tools that used the old `txn-uncommitted` header as a position check.
+
+Message inspection endpoints return message properties in HTTP response headers. If large properties exceed the header limit, configure `httpMaxResponseHeaderSize` on the broker and, when used, the proxy. The default is 8192 bytes. Increasing this limit also increases the memory available to response headers.
+
+For persistent topics, a missing subscription is created at the earliest position only when automatic subscription creation is allowed. If it is disabled, peeking a nonexistent subscription fails with HTTP `412 Precondition Failed` (Java admin `PreconditionFailedException`). Create the subscription explicitly or use an existing one before peeking.
 
 ````mdx-code-block
 <Tabs groupId="api-choice"
@@ -1122,6 +1149,28 @@ admin.topics().removeDeduplicationSnapshotInterval(topic)
 ````
 
 
+### Close inactive topics without deleting data
+
+Pulsar can close inactive topics to release broker memory while preserving their persistent data and metadata. The next producer or consumer connection reloads the topic. This is useful for large fleets of infrequently used topics: unloaded topics no longer contribute their per-topic metric series or hold their managed-ledger cache in memory.
+
+To enable this mode, configure each broker in `conf/broker.conf`:
+
+```properties
+brokerDeleteInactiveTopicsEnabled=false
+brokerCloseInactiveTopicsEnabled=true
+brokerDeleteInactiveTopicsMode=delete_when_no_subscriptions
+brokerDeleteInactiveTopicsFrequencySeconds=60
+brokerDeleteInactiveTopicsMaxInactiveDurationSeconds=300
+```
+
+This example checks every 60 seconds and closes eligible topics after at least 300 seconds of inactivity. The close feature defaults to `false`. Its inactivity check uses the existing inactive-topic policy: in `delete_when_no_subscriptions` mode, a topic must have no subscriptions or active producers. A disconnected durable subscription still counts as a subscription; an empty backlog alone does not make the topic eligible.
+
+The broker refuses to start if both inactive-topic deletion and closing are enabled, or if closing is combined with the broker mode `delete_when_subscriptions_caught_up`. Apply a consistent configuration before restarting brokers. While close mode is enabled, it takes precedence over namespace- or topic-level `deleteWhileInactive` settings. For persistent topics, a namespace or topic policy that overrides the mode to `delete_when_subscriptions_caught_up` causes the close check to skip that topic.
+
+Closing does not delete the topic's BookKeeper data, schema, policies, or partitioned-topic metadata. Retention settings do not prevent closing because the operation preserves the data. This mode does not turn non-persistent topics into durable storage. Scalable-topic backing segments are excluded from this inactive-topic cleanup; the scalable-topic controller manages their lifecycle.
+
+Observe the broker log message `Topic closed successfully due to inactivity` and the loaded-topic count when evaluating the feature. Allow for topic reload latency when an idle workload resumes.
+
 ### Configure inactive topic policies
 
 #### Get inactive topic policies
@@ -1315,12 +1364,12 @@ admin.topics().removeOffloadPolicies(topic)
 
 
 ## Manage non-partitioned topics
-You can use Pulsar [admin API](admin-api-overview.md) to create, delete and check the status of non-partitioned topics.
+You can use Pulsar [admin API](admin-get-started.md) to create, delete and check the status of non-partitioned topics.
 
 ### Create
 Non-partitioned topics must be explicitly created. When creating a new non-partitioned topic, you need to provide a name for the topic.
 
-By default, 60 seconds after creation, topics are considered inactive and deleted automatically to avoid generating trash data. To disable this feature, set `brokerDeleteInactiveTopicsEnabled` to `false`. To change the frequency of checking inactive topics, set `brokerDeleteInactiveTopicsFrequencySeconds` to a specific value.
+Inactive-topic deletion is enabled by default and checked every 60 seconds. Eligibility depends on the effective inactive-topic policy, producer/subscription activity, inactivity duration, and retention settings; creation time alone does not determine deletion. Set `brokerDeleteInactiveTopicsEnabled=false` to disable the broker default, or use [close-on-inactivity](#close-inactive-topics-without-deleting-data) to release broker resources while preserving data.
 
 For more information about the two parameters, see [here](reference-configuration.md#broker).
 
@@ -1574,7 +1623,7 @@ admin.topics().getInternalStats(topic);
 ````
 
 ## Manage partitioned topics
-You can use Pulsar [admin API](admin-api-overview.md) to create, update, delete and check the status of partitioned topics.
+You can use Pulsar [admin API](admin-get-started.md) to create, update, delete and check the status of partitioned topics.
 
 ### Create
 
@@ -1582,7 +1631,7 @@ When creating a new partitioned topic, you need to provide a name and the number
 
 :::note
 
-By default, if there are no messages 60 seconds after creation, topics are considered inactive and deleted automatically to avoid generating trash data. To disable this feature, set `brokerDeleteInactiveTopicsEnabled` to `false`. To change the frequency of checking inactive topics, set `brokerDeleteInactiveTopicsFrequencySeconds` to a specific value.
+Partitions follow the effective inactive-topic policy. An empty backlog alone does not make a partition eligible for deletion in the default `delete_when_no_subscriptions` mode. Partitioned-topic metadata is preserved by default (`brokerDeleteInactivePartitionedTopicMetadataEnabled=false`). See [close-on-inactivity](#close-inactive-topics-without-deleting-data) for an alternative that unloads topics without deleting their data.
 
 :::
 
@@ -1982,7 +2031,7 @@ admin.topics().getPartitionedInternalStats(topic);
 
 ## Manage subscriptions
 
-You can use [Pulsar admin API](admin-api-overview.md) to create, check, and delete subscriptions.
+You can use [Pulsar admin API](admin-get-started.md) to create, check, and delete subscriptions.
 
 ### Create subscription
 
@@ -2094,3 +2143,35 @@ admin.topics().deleteSubscription(topic, subscriptionName);
 
 </Tabs>
 ````
+
+## Shadow topics
+
+Shadow topics provide separate subscriptions to a persistent source topic while sharing its underlying message storage. They are not independent data copies or backups. Applications publish to the source topic and consume from a shadow topic.
+
+Shadow-topic creation, loading, and replication are **disabled by default**. To use them, set the following on every broker that may own source or shadow topics and restart those brokers:
+
+```properties
+enableShadowTopics=true
+```
+
+For an upgrade of an existing shadow-topic deployment, apply this setting to the replacement brokers before rolling them. Leaving the default `false` prevents shadow topics from loading and source topics from starting shadow replication. This setting requires a broker restart; it is not a dynamic configuration option.
+
+For example, after creating a persistent source topic, create and attach a shadow topic:
+
+```shell
+pulsar-admin topics create-shadow-topic persistent://public/default/orders-shadow \
+  --source persistent://public/default/orders
+pulsar-admin topics set-shadow-topics persistent://public/default/orders \
+  --topics persistent://public/default/orders-shadow
+```
+
+`set-shadow-topics` replaces the source topic's shadow-topic list. Include all required shadow topics in the comma-separated `--topics` value when updating an existing configuration.
+
+Inspect the relationship with:
+
+```shell
+pulsar-admin topics get-shadow-topics persistent://public/default/orders
+pulsar-admin topics get-shadow-source persistent://public/default/orders-shadow
+```
+
+To remove the source's shadow replication configuration, use `pulsar-admin topics remove-shadow-topics persistent://public/default/orders`. This removes the association; it does not delete the shadow topic.

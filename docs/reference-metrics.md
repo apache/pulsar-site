@@ -21,6 +21,68 @@ The following types of metrics are available:
 - [Histogram](https://prometheus.io/docs/concepts/metric_types/#histogram): a histogram samples observations (usually things like request durations or response sizes) and counts them in configurable buckets. The `_bucket` suffix is the number of observations within a histogram bucket, configured with parameter `{le="<upper inclusive bound>"}`. The `_count` suffix is the number of observations, shown as a time series and behaves like a counter. The `_sum` suffix is the sum of observed values, also shown as a time series and behaves like a counter. These suffixes are together denoted by `_*` in this doc.
 - [Summary](https://prometheus.io/docs/concepts/metric_types/#summary): similar to a histogram, a summary samples observations (usually things like request durations and response sizes). While it also provides a total count of observations and a sum of all observed values, it calculates configurable quantiles over a sliding time window.
 
+This reference lists Pulsar metrics and selected metrics from its dependencies. Enabled components and configuration determine which series are present. Prometheus counters registered through the Java client expose a `_total` sample suffix, even when a collector's base name omits it. Summaries expose quantiles plus `_count` and `_sum`; classic histograms expose `_bucket`, `_count`, and `_sum`. The explicitly named Pulsar `*_le_*` bucket gauges are separate metric families, not classic Prometheus histograms. See [metrics changes when upgrading](administration-upgrade-to-5.0.x-metrics.md).
+
+## Matching the scrape interval to the stats periods
+
+:::important Match the Prometheus scrape interval to the stats periods
+
+Many metrics that brokers and bookies expose to Prometheus are not cumulative. The process computes them over a fixed period, 60 seconds by default, and then starts over. These include topic and namespace rates, latency summaries and buckets, and managed-ledger period statistics.
+
+Cumulative counters can be scraped at any interval. For per-period metrics, match the Prometheus scrape interval to the stats period:
+
+- A scrape interval shorter than the period reads the same values several times. The metrics change only once per period, however often you scrape.
+- A scrape interval longer than the period misses periods. Latency distributions and rates then cover only some of the time.
+
+:::
+
+For finer-grained metrics, such as a 5-second or 10-second scrape during load tests, set the following periods to the scrape interval. All values below are in seconds.
+
+**Broker (`conf/broker.conf`):**
+
+| Setting | Default | Purpose |
+|---|---|---|
+| `statsUpdateFrequencyInSecs` | 60 | Updates topic and namespace rates and latency summaries for each period. |
+| `statsUpdateInitialDelayInSecs` | 60 | Delays the first stats update after startup; set it to the same value as the update period. |
+| `managedLedgerStatsPeriodSeconds` | 60 | Sets the period for managed-ledger statistics (`pulsar_ml_*`), including latency and entry-size buckets. |
+| `managedLedgerPrometheusStatsLatencyRolloverSeconds` | 60 | Sets the rollover period for the BookKeeper client's latency statistics, exposed when `bookkeeperClientExposeStatsToPrometheus=true`. |
+
+**Bookie (`conf/bookkeeper.conf`):**
+
+| Setting | Default | Purpose |
+|---|---|---|
+| `prometheusStatsLatencyRolloverSeconds` | 60 | Sets the rollover period for the bookie's request, journal, and storage latency statistics. |
+
+The default `bookkeeper.conf` does not list `prometheusStatsLatencyRolloverSeconds`, so add it to the file. With the Pulsar Docker image, pass it as the environment variable `PULSAR_PREFIX_prometheusStatsLatencyRolloverSeconds`; the `PULSAR_PREFIX_` form adds keys that are absent from the file. With the Pulsar Helm chart, set this environment variable through `bookie.configData`, as described in [Component configuration](helm-deploy.md#component-configuration).
+
+For example, configure a 10-second scrape interval as follows:
+
+```properties
+# conf/broker.conf
+statsUpdateFrequencyInSecs=10
+statsUpdateInitialDelayInSecs=10
+managedLedgerStatsPeriodSeconds=10
+managedLedgerPrometheusStatsLatencyRolloverSeconds=10
+```
+
+```properties
+# conf/bookkeeper.conf
+prometheusStatsLatencyRolloverSeconds=10
+```
+
+```yaml
+# prometheus.yml
+scrape_configs:
+  - job_name: pulsar
+    scrape_interval: 10s
+    static_configs:
+      - targets: ["broker:8080", "bookie:8000"]
+```
+
+Replace the example targets with your broker and bookie metrics endpoints, or use your existing Prometheus service discovery configuration.
+
+Shorter periods cost more broker CPU because each stats update goes through every topic. On brokers with many topics, keep the default 60-second period for production monitoring and use shorter periods for load tests and troubleshooting.
+
 ## ZooKeeper
 
 The ZooKeeper metrics are exposed under "/metrics" at port `8000`. You can use a different port by configuring the `metricsProvider.httpPort` in `conf/zookeeper.conf`.
@@ -115,6 +177,19 @@ in the `broker.conf` configuration file.
 
 All the metrics exposed by a broker are labeled with `cluster=\$\{pulsar_cluster\}`. The name of Pulsar cluster is the value of `\$\{pulsar_cluster\}`, which you have configured in the `broker.conf` file.
 
+### Metric exposure
+
+`exposeTopicLevelMetricsInPrometheus=true` exports topic and subscription series; setting it to `false` exports namespace aggregates instead. This setting is dynamic:
+
+```shell
+bin/pulsar-admin brokers update-dynamic-config \
+  --config exposeTopicLevelMetricsInPrometheus --value false
+```
+
+Change it back to `true` to restore topic-level series. Review dashboards and scrape cardinality when changing the aggregation level. To remove the dynamic override and use the broker configuration again, run `pulsar-admin brokers delete-dynamic-config --config exposeTopicLevelMetricsInPrometheus`.
+
+For custom topic labels, see [Configure topic metric labels](deploy-monitoring.md#configure-topic-metric-labels).
+
 ### Broker metrics
 All the broker metrics are labeled with the following labels:
 - cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
@@ -133,8 +208,10 @@ All the broker metrics are labeled with the following labels:
 | pulsar_ml_cache_pool_active_allocations_huge                 | Gauge       | The number of currently active huge allocation in direct arena.                                                             |
 | pulsar_ml_cache_pool_active_allocations_normal               | Gauge       | The number of currently active normal allocations in direct arena.                                                          |
 | pulsar_ml_cache_pool_active_allocations_small                | Gauge       | The number of currently active small allocations in direct arena.                                                           |
-| pulsar_ml_cache_pool_allocated                               | Gauge       | The total allocated memory of chunk lists in direct arena.                                                                  |
-| pulsar_ml_cache_pool_used                                    | Gauge       | The total used memory of chunk lists in direct arena.                                                                       |
+| pulsar_ml_cache_pool_allocated                               | Gauge       | Direct memory reserved by the managed-ledger cache allocator, in bytes. |
+| pulsar_ml_cache_pool_used                                    | Gauge       | Direct memory in use by the managed-ledger cache allocator, in bytes. |
+| pulsar_default_pool_allocated | Gauge | Direct memory reserved by the default Pulsar allocator, in bytes. |
+| pulsar_default_pool_used | Gauge | Direct memory in use by the default Pulsar allocator, in bytes. |
 | pulsar_ml_cache_used_size                                    | Gauge       | The size used to store the payloads of entries (in bytes).                                                                  |
 | pulsar_ml_count                                              | Gauge       | The number of currently opened managed ledgers.                                                                             |
 | ~~topic_load_times (deprecated)~~                            | ~~Summary~~ | ~~The topic load latency calculated in milliseconds.~~                                                                      |
@@ -154,6 +231,24 @@ All the broker metrics are labeled with the following labels:
 | pulsar_broker_msg_backlog                                    | Gauge       | The total number of message backlogs in this broker (entries).                                                              |
 | pulsar_storage_backlog_quota_check_duration_seconds          | Histogram   | The duration of the backlog quota check process (in seconds)                                                                |
 | pulsar_broker_storage_backlog_quota_exceeded_evictions_total | Counter     | The number of times a backlog was evicted since it has exceeded its quota. Includes the label `quota_type = (time \| size)` |
+
+The `pulsar_ml_cache_pool_*` metrics describe the separate `ml-cache` allocator, while `pulsar_default_pool_*` describe the `default` allocator. The startup scripts select Netty's adaptive allocator for both. For adaptive and unpooled allocators, active allocation counts are unsupported and reported as `-1`; the `allocated` and `used` byte values both use the allocator's reported direct-memory usage. With the pooled allocator, allocation counts and the distinction between reserved and used pool bytes remain available. Compare these values with `pulsar_ml_cache_used_size`, which measures logical cached entry bytes: it does not include all memory retained by the allocator.
+
+### Additional broker metrics
+
+These metrics are broker-wide. Publish latency is measured in milliseconds; its quantiles describe the stats rollover period, while its count and sum are cumulative.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_broker_publish_latency` | Summary | End-to-end broker publish latency, including broker-side completion. Quantiles: 0, 0.5, 0.95, 0.99, 0.999, 0.9999, and 1. |
+| `pulsar_broker_in_bytes_total` | Gauge | Total bytes received across topics on the broker. |
+| `pulsar_broker_out_bytes_total` | Gauge | Total bytes dispatched across topics on the broker. |
+| `pulsar_broker_storage_read_cache_misses_rate` | Gauge | Storage read operations per second that miss the managed-ledger cache. |
+| `pulsar_broker_pending_bytes_to_dispatch` | Gauge | Bytes loaded in memory and waiting to be dispatched to consumers. |
+| `pulsar_broker_http_rejected_requests_total` | Counter | HTTP requests rejected by request rate limiting. |
+| `pulsar_health` | Gauge | Result of the latest broker health check: 1 for success, 0 for failure, or -1 before a result is available. |
+| `pulsar_version_info` | Gauge | Constant 1, labeled with the Pulsar `version` and `commit`. |
+| `pulsar_broker_load_manager_bundle_assigment` | Summary | Time in milliseconds to select a broker for bundle assignment in the modular load manager. The exported name retains the spelling `assigment`. |
 
 ### BookKeeper client metrics
 
@@ -203,7 +298,7 @@ All the namespace metrics are labeled with the following labels:
 | pulsar_subscription_delayed                             | Gauge     | The total message batches (entries) are delayed for dispatching.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | pulsar_storage_write_latency_le_*                       | Histogram | The entry rate of a namespace that the storage write latency is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_storage_write_latency_le_0_5: &lt;= 0.5ms </li><li>pulsar_storage_write_latency_le_1: &lt;= 1ms</li><li>pulsar_storage_write_latency_le_5: &lt;= 5ms</li><li>pulsar_storage_write_latency_le_10: &lt;= 10ms</li><li>pulsar_storage_write_latency_le_20: &lt;= 20ms</li><li>pulsar_storage_write_latency_le_50: &lt;= 50ms</li><li>pulsar_storage_write_latency_le_100: &lt;= 100ms</li><li>pulsar_storage_write_latency_le_200: &lt;= 200ms</li><li>pulsar_storage_write_latency_le_1000: &lt;= 1s</li><li>pulsar_storage_write_latency_le_overflow: > 1s</li></ul>                                           |
 | pulsar_entry_size_le_*                                  | Histogram | The entry rate of a namespace that the entry size is smaller with a given threshold.<br /> Available thresholds: <br /><ul><li>pulsar_entry_size_le_128: &lt;= 128 bytes </li><li>pulsar_entry_size_le_512: &lt;= 512 bytes</li><li>pulsar_entry_size_le_1_kb: &lt;= 1 KB</li><li>pulsar_entry_size_le_2_kb: &lt;= 2 KB</li><li>pulsar_entry_size_le_4_kb: &lt;= 4 KB</li><li>pulsar_entry_size_le_16_kb: &lt;= 16 KB</li><li>pulsar_entry_size_le_100_kb: &lt;= 100 KB</li><li>pulsar_entry_size_le_1_mb: &lt;= 1 MB</li><li>pulsar_entry_size_le_overflow: > 1 MB</li></ul>                                                                                                                                                                               |
-| pulsar_delayed_message_index_size_bytes                 | Gauge     | The total memory size allocated by `DelayedDeliveryTracker` of the namespace owned by this broker (in bytes).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| pulsar_delayed_message_index_size_bytes                 | Gauge     | The estimated memory size of `DelayedDeliveryTracker` for the namespace owned by this broker (in bytes). The in-memory tracker estimates its bitmap index using serialized size; this is not a measurement of total JVM heap usage.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | pulsar_delayed_message_index_bucket_total               | Gauge     | The number of delayed message index buckets (immutable buckets + LastMutableBucket )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | pulsar_delayed_message_index_loaded                     | Gauge     | The total number of delayed message indexes for in the memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | pulsar_delayed_message_index_bucket_snapshot_size_bytes | Gauge     | The total size of delayed message index bucket snapshot (in bytes).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
@@ -259,12 +354,22 @@ All the topic metrics are labeled with the following labels:
 | pulsar_txn_tb_active_total                              | Gauge     | The number of active transactions on this topic.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | pulsar_txn_tb_aborted_total                             | Counter   | The number of aborted transactions on the topic.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | pulsar_txn_tb_committed_total                           | Counter   | The number of committed transactions on the topic.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| pulsar_delayed_message_index_size_bytes                 | Gauge     | The total memory size allocated by `DelayedDeliveryTracker` of the topic owned by this broker (in bytes).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| pulsar_delayed_message_index_size_bytes                 | Gauge     | The estimated memory size of `DelayedDeliveryTracker` for the topic owned by this broker (in bytes). The in-memory tracker estimates its bitmap index using serialized size; this is not a measurement of total JVM heap usage.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | pulsar_delayed_message_index_bucket_total               | Gauge     | The number of delayed message index buckets (immutable buckets + LastMutableBucket )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | pulsar_delayed_message_index_loaded                     | Gauge     | The total number of delayed message indexes for in the memory.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | pulsar_delayed_message_index_bucket_snapshot_size_bytes | Gauge     | The total size of delayed message index bucket snapshot (in bytes).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | pulsar_delayed_message_index_bucket_op_count            | Counter   | The total number of operation delayed message index bucket snapshots. The `state` label can be `succeed`,`failed`, and`all` (`all` means the total number of all states) and the `type` label can be `create`,`load`,`delete`, and `merge`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
 | pulsar_delayed_message_index_bucket_op_latency_ms       | Histogram | The latency of delayed message index bucket snapshot operation with a given quantile (threshold). The label`type` label can be `create`,`load`,`delete`, and `merge`<br/>The label `quantile` can be:<ul><li>quantile="50" is operation latency between (0ms, 50ms]</li><li>quantile="100" is operation latency between (50ms, 100ms]</li><li>quantile="500" is operation latency between (100ms, 500ms]</li><li>quantile="1000" is operation latency between (500ms, 1s]</li><li>quantile="5000" is operation latency between (1s, 5s]</li><li>quantile="30000" is operation latency between (5s, 30s]</li><li>quantile="60000" is operation latency between (30s, 60s]</li><li>quantile="overflow" is operation latency > 1m</li></ul> |
+
+### Producer metrics
+
+Enable `exposeProducerLevelMetricsInPrometheus` and topic-level metrics to expose producer metrics. Labels include `cluster`, `namespace`, `topic`, `producer_name`, and `producer_id`.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_producer_msg_rate_in` | Gauge | Messages published per second by this producer. |
+| `pulsar_producer_msg_throughput_in` | Gauge | Bytes published per second by this producer. |
+| `pulsar_producer_msg_average_Size` | Gauge | Average published message size in bytes. The capital `S` is part of the exported name. |
 
 ### Replication metrics
 
@@ -283,6 +388,17 @@ All the replication metrics are also labelled with `remoteCluster=\$\{pulsar_rem
 | pulsar_replication_connected_count | Gauge | The count of replication-subscriber up and running to replicate to remote cluster. |
 | pulsar_replication_delay_in_seconds | Gauge | Time in seconds from the time a message was produced to the time when it is about to be replicated. |
 
+### Replicated-subscription snapshots
+
+Snapshot metrics describe cross-cluster replicated-subscription position tracking.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_replicated_subscriptions_pending_snapshots` | Gauge | Counter of currently pending snapshots |
+| `pulsar_replicated_subscriptions_snapshot_ms` | Summary | Time taken to create a consistent snapshot across clusters |
+| `pulsar_replicated_subscriptions_timedout_snapshots_total` | Counter | Counter of timed out snapshots |
+| `pulsar_replication_disconnected_count` | Gauge | Number of disconnected replicators, labeled by namespace and remote cluster. |
+
 ### Topic lookup metrics
 
 | Name | Type | Description |
@@ -294,6 +410,28 @@ All the replication metrics are also labelled with `remoteCluster=\$\{pulsar_rem
 | pulsar_broker_lookup_failures | Gauge | The number of lookup failures. |
 | pulsar_broker_lookup_pending_requests | Gauge | The number of pending lookups in broker. When it is up to the threshold, new requests are rejected. |
 | pulsar_broker_topic_load_pending_requests | Gauge | The load of pending topic operations. |
+
+### Topic loading failures
+
+| Name | Type | Description |
+|---|---|---|
+| topic_load_failed_total | Counter | Persistent topic load failures, labelled by `reason`. |
+| pulsar_topic_load_failed_count | Gauge | Compatibility total across all failure reasons. This is `brk_topic_load_failed_count` in the broker metrics API. |
+
+Each persistent topic-loading operation records at most one failure. The `reason` values are `bundle_unloading`, `failed_load_namespace_policies`, `failed_load_topic_policies`, `failed_load_ml`, `failed_check_ownership`, `failed_access_metadata_store`, `failed_init`, `timeout`, `timeout_load_namespace_policies`, `timeout_load_topic_policies`, `timeout_load_ml`, `timeout_init`, `timeout_dedup`, and `others`. A timeout identifies the pending loading stage when known; `timeout` is the fallback. All reason series are initialized to zero.
+
+Aggregate over `reason` for an overall failure rate, or select a reason to diagnose a particular loading stage. For example:
+
+```promql
+sum without (reason) (rate(topic_load_failed_total[5m]))
+```
+
+### Storage and compaction bucket companions
+
+The `pulsar_storage_write_latency_le_*` and `pulsar_storage_ledger_write_latency_le_*` series contain per-period latency bucket counts. The ledger-write family isolates BookKeeper add-entry latency. Bucket names express upper bounds in milliseconds, while the underlying measurements and `_sum` values use microseconds. Each family also exports `_count`, `_sum`, and `_overflow`; for example, `pulsar_storage_ledger_write_latency_count`, `pulsar_storage_ledger_write_latency_sum`, and `pulsar_storage_ledger_write_latency_overflow`.
+
+The `pulsar_compaction_latency_le_*` family follows the same bucket naming and microsecond sum units, with `pulsar_compaction_latency_count`, `pulsar_compaction_latency_sum`, and `pulsar_compaction_latency_overflow` companions. Its stats refresh when collected. The `pulsar_entry_size_le_*` family measures bytes, with `pulsar_entry_size_count` and `pulsar_entry_size_sum` companions. These bucket families are exported as gauges; do not treat them as cumulative Prometheus histograms.
+
 
 ### ManagedLedger metrics
 All the managedLedger metrics are labeled with the following labels:
@@ -324,6 +462,24 @@ All the managedLedger metrics are labeled with the following labels:
 | pulsar_ml_ReadEntriesSucceeded | Gauge | The number of readEntries requests that succeeded |
 | pulsar_ml_StoredMessagesSize | Gauge | The total size of the messages in active ledgers (accounting for the multiple copies stored) |
 
+### Managed-ledger read cache and permits
+
+Pending-read counters describe reuse of concurrent BookKeeper reads. In-flight byte gauges describe the read limiter and report `-1` when limiting is disabled. These are broker-wide metrics.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_ml_cache_pendingreads_entries_notread_total` | Counter | Total number of entries not read from BK |
+| `pulsar_ml_cache_pendingreads_entries_read_total` | Counter | Total number of entries read from BK |
+| `pulsar_ml_cache_pendingreads_matched_total` | Counter | Pending reads reused with perfect range match |
+| `pulsar_ml_cache_pendingreads_matched_included_total` | Counter | Pending reads reused by attaching to a read with a larger range |
+| `pulsar_ml_cache_pendingreads_matched_overlapping_miss_both_total` | Counter | Pending reads that didn't find a match but they partially overlap with another read |
+| `pulsar_ml_cache_pendingreads_matched_overlapping_miss_left_total` | Counter | Pending reads that didn't find a match but they partially overlap with another read |
+| `pulsar_ml_cache_pendingreads_matched_overlapping_miss_right_total` | Counter | Pending reads that didn't find a match but they partially overlap with another read |
+| `pulsar_ml_cache_pendingreads_missed_total` | Counter | Pending reads that didn't find a match |
+| `pulsar_ml_reads_available_inflight_bytes` | Gauge | Available space for inflight data read from storage or cache |
+| `pulsar_ml_reads_inflight_bytes` | Gauge | Estimated number of bytes retained by data read from storage or cache |
+| `pulsar_ml_ReadEntriesOpsCacheMissesRate` | Gauge | Managed-ledger read operations per second that miss the cache, aggregated by namespace when `exposeManagedLedgerMetricsInPrometheus=true`. |
+
 ### Managed cursor acknowledgment state
 
 The acknowledgment state is persistent to the ledger first. When the acknowledgment state fails to be persistent to the ledger, they are persistent to ZooKeeper. To track the stats of acknowledgment, you can configure the metrics for the managed cursor.
@@ -351,6 +507,8 @@ All the cursor acknowledgment state metrics are labeled with the following label
 
 > Subscription metrics are only exposed when `exposeTopicLevelMetricsInPrometheus` is set to `true`.
 
+To expose subscription backlog age, also set `exposeSubscriptionBacklogAgeInPrometheus=true` in `broker.conf` and restart the broker. It defaults to `false`. When disabled, the broker skips computing subscription backlog age and the topic-stat field `oldestBacklogMessageAgeSeconds` is `-1`; the Prometheus age series is absent. See [Monitor subscription backlog age](deploy-monitoring.md#monitor-subscription-backlog-age).
+
 All the subscription metrics are labeled with the following labels:
 
 - *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
@@ -362,6 +520,7 @@ All the subscription metrics are labeled with the following labels:
 |---|---|---|
 | pulsar_subscription_back_log | Gauge | The number of entries (messages/batched-messages) in unacknowledged state for a subscription |
 | pulsar_subscription_back_log_no_delayed | Gauge | The backlog of a subscription that does not contain the delay messages (entries). |
+| pulsar_subscription_storage_backlog_age_seconds | Gauge | Best-effort age, in seconds, of the oldest unacknowledged message in the subscription storage backlog. Requires `exposeSubscriptionBacklogAgeInPrometheus=true`. Omitted while the age is unavailable. |
 | pulsar_subscription_delayed | Gauge | The total number of messages are delayed to be dispatched for a subscription (messages). |
 | pulsar_subscription_msg_rate_redeliver | Gauge | The total message rate for message being redelivered (message per second). |
 | pulsar_subscription_unacked_messages | Gauge | The number of entries (messages/batched-messages) dispatched to consumers and are still unacknowledged |
@@ -382,12 +541,27 @@ All the subscription metrics are labeled with the following labels:
 | pulsar_subscription_filter_accepted_msg_count | Counter | The number of messages accepted by `EntryFilter`. |
 | pulsar_subscription_filter_rejected_msg_count | Counter | The number of messages rejected by `EntryFilter`. |
 | pulsar_subscription_filter_rescheduled_msg_count | Counter | The number of messages rescheduled by `EntryFilter`. |
-| pulsar_delayed_message_index_size_bytes | Gauge | The total memory size allocated by `DelayedDeliveryTracker` of the subscription owned by this broker (in bytes). |
+| pulsar_delayed_message_index_size_bytes | Gauge | The estimated memory size of `DelayedDeliveryTracker` for the subscription owned by this broker (in bytes). The in-memory tracker estimates its bitmap index using serialized size; this is not a measurement of total JVM heap usage. |
 | pulsar_delayed_message_index_bucket_total | Gauge | The number of delayed message index buckets (immutable buckets + LastMutableBucket ) |
 | pulsar_delayed_message_index_loaded | Gauge | The total number of delayed message indexes for in the memory. |
 | pulsar_delayed_message_index_bucket_snapshot_size_bytes | Gauge | The total size of delayed message index bucket snapshot (in bytes). |
 | pulsar_delayed_message_index_bucket_op_count | Counter | The total number of operation delayed message index bucket snapshots. The `state` label can be `succeed`,`failed`, and`all` (`all` means the total number of all states) and the `type` label can be `create`,`load`,`delete`, and `merge`. |
 | pulsar_delayed_message_index_bucket_op_latency_ms | Histogram | The latency of delayed message index bucket snapshot operation with a given quantile (threshold). The label`type` label can be `create`,`load`,`delete`, and `merge`<br/>The label `quantile` can be:<ul><li>quantile="50" is operation latency between (0ms, 50ms]</li><li>quantile="100" is operation latency between (50ms, 100ms]</li><li>quantile="500" is operation latency between (100ms, 500ms]</li><li>quantile="1000" is operation latency between (500ms, 1s]</li><li>quantile="5000" is operation latency between (1s, 5s]</li><li>quantile="30000" is operation latency between (5s, 30s]</li><li>quantile="60000" is operation latency between (30s, 60s]</li><li>quantile="overflow" is operation latency > 1m</li></ul> |
+
+### Additional topic and subscription metrics
+
+These series use the topic/subscription labels of their corresponding sections. Topic-level series require `exposeTopicLevelMetricsInPrometheus=true`.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_average_msg_size` | Gauge | Average incoming message size in bytes for a topic. |
+| `pulsar_msg_backlog` | Gauge | Backlog summed across subscriptions; emitted at the configured namespace or topic aggregation level. |
+| `pulsar_storage_backlog_quota_limit_time` | Gauge | Topic backlog age quota in seconds. |
+| `pulsar_storage_read_cache_misses_rate` | Gauge | Read operations per second missing the storage cache, at namespace or topic level. |
+| `pulsar_subscription_delayed_message_index_size_bytes` | Gauge | Memory used by the subscription delayed-message index, in bytes. |
+| `pulsar_subscription_dispatch_throttled_msg_events` | Gauge | Cumulative message-rate throttling events. The `reason` label is `subscription`, `topic`, or `broker`. |
+| `pulsar_subscription_dispatch_throttled_bytes_events` | Gauge | Cumulative byte-rate throttling events. The `reason` label is `subscription`, `topic`, or `broker`. |
+| `pulsar_subscription_in_replay` | Gauge | Entries in subscription replay queues, exposed per subscription with topic-level metrics or aggregated by namespace. |
 
 ### Consumer metrics
 
@@ -518,6 +692,8 @@ All the schema metrics are labeled with the following labels:
 
 ### Offload metrics
 
+Offloader collectors retain their `brk_` prefix: they are registered directly in the Prometheus registry. The `brk_` to `pulsar_` conversion applies to generated broker metrics, not these collectors. Topic labels are present only when topic-level offloader metrics are enabled.
+
 All the offload metrics are labeled with the following labels:
 
 - *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you configured in `broker.conf`.
@@ -526,16 +702,24 @@ All the offload metrics are labeled with the following labels:
 
 | Name                                | Type    | Description                                                                     |
 |-------------------------------------|---------|---------------------------------------------------------------------------------|
-| pulsar_ledgeroffloader_offload_error | Counter | The number of failed operations to offload.                                     |
-| pulsar_ledgeroffloader_offload_rate | Gauge   | The rate of offloading(byte per second).                                        |
-| pulsar_ledgeroffloader_read_offload_error | Counter | The number of failed operations to read offload ledgers.                        |
-| pulsar_ledgeroffloader_read_offload_rate | Gauge   | The rate of reading entries from offload ledgers(byte per second).              |
-| pulsar_ledgeroffloader_write_storage_error | Counter | The number of failed operations to write to storage.                            |
-| pulsar_ledgeroffloader_read_offload_index_latency | Summary | The latency of reading index from offload ledgers.                              |
-| pulsar_ledgeroffloader_read_offload_data_latency | Summary | The latency of reading data from offload ledgers.                               |
-| pulsar_ledgeroffloader_read_ledger_latency | Summary | The latency of reading entries from BookKeeper.                                 |
-| pulsar_ledgeroffloader_delete_offload_ops | Counter | The total number of successful and failed operations to delete offload ledgers. |
+| brk_ledgeroffloader_offload_error_total | Counter | The number of failed operations to offload.                                     |
+| brk_ledgeroffloader_offload_rate | Gauge   | The rate of offloading(byte per second).                                        |
+| brk_ledgeroffloader_read_offload_error_total | Counter | The number of failed operations to read offload ledgers.                        |
+| brk_ledgeroffloader_read_offload_rate | Gauge   | The rate of reading entries from offload ledgers(byte per second).              |
+| brk_ledgeroffloader_write_storage_error_total | Counter | The number of failed operations to write to storage.                            |
+| brk_ledgeroffloader_read_offload_index_latency | Summary | The latency of reading index from offload ledgers, in microseconds.                              |
+| brk_ledgeroffloader_read_offload_data_latency | Summary | The latency of reading data from offload ledgers, in microseconds.                               |
+| brk_ledgeroffloader_read_ledger_latency | Summary | The latency of reading entries from BookKeeper, in microseconds.                                 |
+| brk_ledgeroffloader_delete_offload_ops_total | Counter | The total number of successful and failed operations to delete offload ledgers, distinguished by the `status` label. |
 
+
+#### Offload read bytes
+
+Offloader collectors retain the `brk_` prefix on the Prometheus endpoint.
+
+| Name | Type | Description |
+|---|---|---|
+| `brk_ledgeroffloader_read_bytes_total` | Counter | Total bytes read from offloaded storage. Uses the same namespace/topic labels as the other offloader collectors. |
 
 ### Web service executor metrics
 
@@ -562,7 +746,7 @@ All the metadata store metrics are labeled with the following labels:
 
 | Name                                               | Type      | Description                                                                                  |
 |----------------------------------------------------|-----------|----------------------------------------------------------------------------------------------|
-| pulsar_metadata_store_ops_latency                  | Histogram | The latency of getting/deleting/putting data from/to metadata store.                         |
+| pulsar_metadata_store_ops_latency_ms               | Histogram | The latency of getting/deleting/putting data from/to metadata store, in milliseconds.                         |
 | pulsar_metadata_store_put_bytes_total              | Counter   | The number of data put to metadata store.                                                    |
 | pulsar_batch_metadata_store_executor_queue_size    | Gauge     | The number of blocking operations in metadata store executor.                                |
 | pulsar_batch_metadata_store_queue_wait_time_ms     | Histogram | The waiting time of batch operations.                                                        |
@@ -598,6 +782,15 @@ All the metadata store metrics are labeled with the following labels:
 | jvm_memory_pool_collection_max_bytes       | Gauge                                  | Max bytes after the last collection of a given JVM memory pool.                            |
 | jvm_memory_pool_collection_init_bytes      | Gauge                                  | Initial after last collection bytes of a given JVM memory pool.                            |
 | jvm_memory_pool_allocated_bytes_total      | Counter                                | Total bytes allocated in a given JVM memory pool. Only updated after GC, not continuously. |
+
+#### Direct memory metrics
+
+These gauges supplement the JVM memory pool metrics.
+
+| Name | Type | Description |
+|---|---|---|
+| `jvm_memory_direct_bytes_used` | Gauge | Direct memory currently used, in bytes. |
+| `jvm_memory_direct_bytes_max` | Gauge | Maximum direct memory available to the JVM, in bytes. |
 
 #### Buffer Pools Metrics
 | Name                           | Type  | Description                                |
@@ -697,6 +890,8 @@ All the bundleUnloading metrics are labeled with the following labels:
 
 ### Bundle metrics
 
+Set `exposeBundlesMetricsInPrometheus=true` in the broker configuration to expose these metrics; its default is `false`. The extensible load manager also emits all seven bundle metrics below.
+
 All the bundle metrics are labeled with the following labels:
 
 - cluster: cluster=\$\{pulsar_cluster\}. \$\{pulsar_cluster\} is the cluster name that you have configured in the `broker.conf` file.
@@ -745,9 +940,40 @@ All the service unit state channel metrics are labeled with the following labels
 | pulsar_sunit_state_chn_su_tombstone_cleanup_ops_total*            | Counter | The total count of deleted service units (e.g., bundles) tombstone operations.                                    |
 | pulsar_sunit_state_chn_cleanup_ops_total\{result=Failure\}*         | Counter | The total count of cleanup operation failures.                                                                    |
 
+### Additional load-manager diagnostics
+
+These series depend on the configured load manager. Extensible load-manager and service-unit-state values below are exported as gauges, including fields whose names end in `_total`.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_lb_ignored_ack_total` | Gauge | Extensible load-manager ignored-ack diagnostic count. |
+| `pulsar_lb_ignored_send_total` | Gauge | Extensible load-manager ignored-send diagnostic count. |
+| `pulsar_sunit_state_chn_metadata_state` | Gauge | Service-unit channel metadata connection state: 0 (`Stable`), 1 (`Jittery`), or 2 (`Unstable`). |
+| `pulsar_sunit_state_chn_last_metadata_session_event_is_reestablished` | Gauge | 1 if the last metadata session event was session reestablishment; otherwise 0. |
+| `pulsar_sunit_state_chn_last_metadata_session_event_timestamp_ms` | Gauge | Timestamp of the last metadata session event, in epoch milliseconds. |
+| `pulsar_sunit_state_chn_last_metadata_session_event_age_seconds` | Gauge | Seconds since the last metadata session event, or -1 before an event has been recorded. |
+| `pulsar_lb_load_rank` | Gauge | Simple load-manager broker load rank. |
+| `pulsar_lb_quota_pct_bandwidth_in` | Gauge | Simple load-manager bandwidth in quota utilization percentage. |
+| `pulsar_lb_quota_pct_bandwidth_out` | Gauge | Simple load-manager bandwidth out quota utilization percentage. |
+| `pulsar_lb_quota_pct_cpu` | Gauge | Simple load-manager cpu quota utilization percentage. |
+| `pulsar_lb_quota_pct_memory` | Gauge | Simple load-manager memory quota utilization percentage. |
+
+#### Extensible load-manager latency histograms
+
+These collectors also retain `brk_`. They measure milliseconds and expose `_bucket`, `_count`, and `_sum` samples, with `broker` and `metric` labels. Buckets are 1, 10, 100, 200, 1,000 ms, and `+Inf`.
+
+| Name | Type | Description |
+|---|---|---|
+| `brk_lb_unload_latency_ms` | Histogram | Total unload duration on the source broker. |
+| `brk_lb_assign_latency_ms` | Histogram | Time in the assignment state on the destination broker. |
+| `brk_lb_release_latency_ms` | Histogram | Time in the release state on the source broker. |
+| `brk_lb_disconnect_latency_ms` | Histogram | Time in the disconnected state on the source broker. |
+
 ## Pulsar Functions
 
-All the Pulsar Functions metrics are labeled with the following labels:
+Function instance metrics use `tenant`, `namespace`, `name`, `instance_id`, `cluster`, and `fqfn` (fully qualified function name). Worker metrics have their own labels, described below. The main instance table covers Java and Python names; see [Go Functions metric names](#go-functions-metric-names) for runtime differences.
+
+The following labels identify the cluster and namespace:
 
 - *cluster*: `cluster=\$\{pulsar_cluster\}`. `\$\{pulsar_cluster\}` is the cluster name that you have configured in the `broker.conf` file.
 - *namespace*: `namespace=\$\{pulsar_namespace\}`. `\$\{pulsar_namespace\}` is the namespace name.
@@ -766,6 +992,48 @@ All the Pulsar Functions metrics are labeled with the following labels:
 | pulsar_function_received_total                    | Counter | The total number of messages received from source.                        |
 | pulsar_function_received_1min_total               | Counter | The total number of messages received from source in the last 1 minute.   |
 | pulsar_function_user_metric_                      | Summary | The user-defined metrics.                                                 |
+
+### Function exception details
+
+Exception gauges include the exception text in the `error` label in addition to the instance labels.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_function_source_exception` | Gauge | Exception from source. |
+| `pulsar_function_sink_exception` | Gauge | Exception from sink. |
+| `pulsar_function_user_exception` | Gauge | Exception from user code, with an `error` label. |
+| `pulsar_function_system_exception` | Gauge | Exception from system code, with an `error` label. |
+
+### Go Functions metric names
+
+The Go runtime uses the following names for its one-minute gauges. Java and Python use the `_1min_total` names in the main Functions table. These per-minute values reset and should not be treated as lifetime counters.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_function_processed_successfully_total_1min` | Gauge | Messages processed successfully in the current minute. |
+| `pulsar_function_system_exceptions_total_1min` | Gauge | System exceptions in the current minute. |
+| `pulsar_function_user_exceptions_total_1min` | Gauge | User exceptions in the current minute. |
+| `pulsar_function_received_total_1min` | Gauge | Messages received in the current minute. |
+| `pulsar_function_user_metric` | Summary | User-defined observations, distinguished by the `metric` label. |
+
+### Functions worker metrics
+
+Worker metrics use the `cluster` label. Leader-only metrics are emitted by the worker that currently leads scheduling.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_function_worker_drain_execution_time_total_ms` | Summary | Total execution time of a drain in milliseconds. |
+| `pulsar_function_worker_instance_count` | Gauge | Number of instances run by this worker. |
+| `pulsar_function_worker_rebalance_execution_time_total_ms` | Summary | Total execution time of a rebalance in milliseconds. |
+| `pulsar_function_worker_rebalance_strategy_execution_time_ms` | Summary | Execution time of rebalance strategy in milliseconds. |
+| `pulsar_function_worker_schedule_execution_time_total_ms` | Summary | Total execution time of schedule in milliseconds. |
+| `pulsar_function_worker_schedule_strategy_execution_time_ms` | Summary | Execution time of schedule strategy in milliseconds. |
+| `pulsar_function_worker_start_instance_process_time_ms` | Summary | Starting instance process time in milliseconds. |
+| `pulsar_function_worker_start_up_time_ms` | Summary | Worker service startup time in milliseconds. |
+| `pulsar_function_worker_stop_instance_process_time_ms` | Summary | Stopping instance process time in milliseconds. |
+| `pulsar_function_worker_total_function_count` | Gauge | Total registered Functions known to the leader. |
+| `pulsar_function_worker_total_expected_instance_count` | Gauge | Total expected Function instances known to the leader. |
+| `pulsar_function_worker_is_leader` | Gauge | 1 on the leader worker; emitted by the leader. |
 
 ## Connectors
 
@@ -825,6 +1093,20 @@ All the proxy metrics are labeled with the following labels:
 | pulsar_proxy_binary_ops | Counter | Counter of proxy operations. |
 | pulsar_proxy_binary_bytes | Counter | Counter of proxy bytes. |
 
+### Proxy lookup requests
+
+These counters track proxy requests and throttling rejections.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_proxy_get_schema_requests_total` | Counter | Counter of schema requests |
+| `pulsar_proxy_get_topics_of_namespace_requests_total` | Counter | Counter of getTopicsOfNamespace requests |
+| `pulsar_proxy_lookup_requests_total` | Counter | Counter of topic lookup requests |
+| `pulsar_proxy_partitions_metadata_requests_total` | Counter | Counter of partitions metadata requests |
+| `pulsar_proxy_rejected_get_topics_of_namespace_requests_total` | Counter | Counter of getTopicsOfNamespace requests rejected due to throttling |
+| `pulsar_proxy_rejected_lookup_requests_total` | Counter | Counter of topic lookup requests rejected due to throttling |
+| `pulsar_proxy_rejected_partitions_metadata_requests_total` | Counter | Counter of partitions metadata requests rejected due to throttling |
+
 ## Pulsar transaction
 
 All the transaction metrics are labeled with the following labels:
@@ -849,3 +1131,43 @@ All the transaction metrics are labeled with the following labels:
 | pulsar_txn_tp_committed_count_total | Counter | The number of committed transactions for pending ack store. |
 | pulsar_txn_tp_aborted_count_total | Counter | The number of aborted transactions for pending ack store. |
 | pulsar_txn_tp_commit_latency | Summary | The latency of committing transactions for `transaction pending ack handle`. |
+
+## Resource groups
+
+Resource-group counters accumulate reported usage, computed quotas, and management operations. Usage counters are cumulative additions of each interval's usage, not gauges for the most recent interval. Labels are `ResourceGroup`, plus `MonitoringClass` for usage/quota series and `RemoteBroker` for remote usage series. Registration counters are grouped by resource group rather than individual tenant or namespace.
+
+| Name | Type | Description |
+|---|---|---|
+| `pulsar_resource_group_aggregate_usage_secs` | Summary | Time required to aggregate usage of all resource groups, in seconds. |
+| `pulsar_resource_group_bytes_used_total` | Counter | Bytes locally used within this resource group during the last aggregation interval |
+| `pulsar_resource_group_calculate_quota_secs` | Summary | Time required to calculate quota of all resource groups, in seconds. |
+| `pulsar_resource_group_calculated_bytes_quota_total` | Counter | Bytes quota calculated for resource group |
+| `pulsar_resource_group_calculated_messages_quota_total` | Counter | Messages quota calculated for resource group |
+| `pulsar_resource_group_local_usage_reported_total` | Counter | Number of times local usage was reported (vs. suppressed due to negligible change) |
+| `pulsar_resource_group_messages_used_total` | Counter | Messages locally used within this resource group during the last aggregation interval |
+| `pulsar_resource_group_namespace_registers_total` | Counter | Number of registrations of namespaces |
+| `pulsar_resource_group_namespace_unregisters_total` | Counter | Number of un-registrations of namespaces |
+| `pulsar_resource_group_remote_usage_bytes_used_total` | Counter | Bytes used reported about this resource group and monitoring class from a remote broker |
+| `pulsar_resource_group_remote_usage_messages_used_total` | Counter | Messages used reported about this resource group and monitoring class from a remote broker |
+| `pulsar_resource_group_tenant_registers_total` | Counter | Number of registrations of tenants |
+| `pulsar_resource_group_tenant_unregisters_total` | Counter | Number of un-registrations of tenants |
+| `pulsar_resource_group_updates_total` | Counter | Number of update operations on the given resource group |
+
+## Topic-list memory limiting (broker and proxy)
+
+For each suffix below, brokers expose `pulsar_broker_topic_list_` plus the suffix, and proxies expose `pulsar_proxy_topic_list_` plus the suffix. For example, `pulsar_broker_topic_list_heap_memory_used_bytes` and `pulsar_proxy_topic_list_heap_memory_used_bytes` measure heap usage. These metrics have no per-topic labels. Configure limits, queue capacities, and timeouts with the `maxTopicListInFlightHeapMem*` and `maxTopicListInFlightDirectMem*` settings.
+
+| Suffix | Type | Description |
+|---|---|---|
+| `heap_memory_used_bytes` | Gauge | Memory currently reserved by topic-list operations, in bytes. |
+| `heap_memory_limit_bytes` | Gauge | Configured memory limit, in bytes. |
+| `heap_queue_size` | Gauge | Requests waiting for memory permits. |
+| `heap_queue_max_size` | Gauge | Configured maximum waiting queue size. |
+| `heap_wait_time_ms` | Summary | Time waiting for memory permits, in milliseconds. |
+| `heap_timeout_total` | Counter | Memory permit acquisition timeouts. |
+| `direct_memory_used_bytes` | Gauge | Memory currently reserved by topic-list operations, in bytes. |
+| `direct_memory_limit_bytes` | Gauge | Configured memory limit, in bytes. |
+| `direct_queue_size` | Gauge | Requests waiting for memory permits. |
+| `direct_queue_max_size` | Gauge | Configured maximum waiting queue size. |
+| `direct_wait_time_ms` | Summary | Time waiting for memory permits, in milliseconds. |
+| `direct_timeout_total` | Counter | Memory permit acquisition timeouts. |

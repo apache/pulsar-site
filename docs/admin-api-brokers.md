@@ -19,8 +19,8 @@ This page only shows **some frequently used operations**. For the latest and com
 Category|Method|If you want to manage brokers...
 |---|---|---
 [Pulsar CLI](reference-cli-tools.md) |[pulsar-admin](/reference/#/@pulsar:version_reference@/pulsar-admin/), which lists all commands, flags, descriptions, and more.| See the `broker` command
-[Pulsar admin APIs](admin-api-overview.md)| {@inject: rest:REST API:/}, which lists all parameters, responses, samples, and more.|See the `/admin/v2/brokers` endpoint
-[Pulsar admin APIs](admin-api-overview.md)|[Java admin API](@pulsar:javadoc:admin@/), which lists all classes, methods, descriptions, and more.|See the `brokers` method of the `PulsarAdmin` object
+[Pulsar admin APIs](admin-get-started.md)| {@inject: rest:REST API:/}, which lists all parameters, responses, samples, and more.|See the `/admin/v2/brokers` endpoint
+[Pulsar admin APIs](admin-get-started.md)|[Java admin API](@pulsar:javadoc:admin@/), which lists all classes, methods, descriptions, and more.|See the `brokers` method of the `PulsarAdmin` object
 
 ## List active broker
 

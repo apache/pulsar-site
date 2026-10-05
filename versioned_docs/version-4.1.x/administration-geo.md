@@ -99,13 +99,15 @@ In normal cases, when connectivity issues are none, messages are replicated imme
 
 Applications can create producers and consumers in any of the clusters, even when the remote clusters are not reachable (like during a network partition).
 
-Producers and consumers can publish messages to and consume messages from any cluster in a Pulsar instance. However, subscriptions cannot only be local to the cluster where the subscriptions are created but also can be transferred between clusters after the replicated subscription is enabled. Once the replicated subscription is enabled, you can keep the subscription state in synchronization. Therefore, a topic can be asynchronously replicated across multiple geographical regions. In case of failover, a consumer can restart consuming messages from the failure point in a different cluster.
+Producers and consumers can publish messages to and consume messages from any cluster in a Pulsar instance. However, geo-replication replicates topic data, not subscriptions: each subscription is local to the cluster where it is created, and a subscription with the same name in another cluster is a separate subscription with its own cursor, consumers, and backlog. See [Subscriptions and consumers across clusters](concepts-replication.md#subscriptions-and-consumers-across-clusters) for details.
+
+The only subscription-related state that can be synchronized across clusters is the mark-delete position of a [replicated subscription](#replicated-subscriptions). When a replicated subscription is enabled, its state is kept in synchronization, so a consumer can restart consuming messages from the failure point in a different cluster. Because replicated subscriptions are designed for failover and not for active-active consumption, process messages in a single cluster at a time.
 
 ![Geo-replication example with a full-mesh pattern](/assets/geo-replication.png)
 
 In the aforementioned example, the **T1** topic is replicated among three clusters, **Cluster-A**, **Cluster-B**, and **Cluster-C**.
 
-All messages produced in any of the three clusters are delivered to all subscriptions in other clusters. In this case, **C1** and **C2** consumers receive all messages that **P1**, **P2**, and **P3** producers publish. Ordering is still guaranteed on a per-producer basis.
+All messages produced in any of the three clusters are replicated to the other two clusters and are then dispatched to the subscriptions that exist in each cluster. In this case, the **C1** and **C2** consumers each receive all messages that the **P1**, **P2**, and **P3** producers publish, because C1 and C2 belong to separate, independent subscriptions in their own clusters. Ordering is still guaranteed on a per-producer basis.
 
 ## Configure replication
 
@@ -322,7 +324,7 @@ In case of failover, a consumer can restart consuming from the failure point in 
 
 :::note
 
-Replicated subscriptions require [2-way geo-replication](#1-way-and-2-way-geo-replication) to be properly configured between all participating clusters. See [1-way and 2-way geo-replication](#1-way-and-2-way-geo-replication) for configuration requirements.
+Replicated subscriptions require [2-way geo-replication](#1-way-unidirectional-and-2-way-bidirectional-geo-replication) to be properly configured between all participating clusters. See [1-way and 2-way geo-replication](#1-way-unidirectional-and-2-way-bidirectional-geo-replication) for configuration requirements.
 
 :::
 

@@ -107,6 +107,8 @@ The `<X>` segment is looked up in `versions.json` / the REST API version map. `.
 | `@pulsar:version:lts@`       | Current LTS version. Kept in sync with `ltsMajorRelease` in `pulsarVariables.ts`.                                                                         |
 | `@pulsar:version:adapters@`  | Latest `pulsar-adapters` release, sourced from `data/release-pulsar-adapters.js`.                                                                         |
 | `@pulsar:version:python@`    | Version of the Python client that matches the current context.                                                                                            |
+| `@pulsar:version:netty@` | Netty version used by current Pulsar documentation (context-independent). Update `nettyVersion` in `src/config/pulsarVariables.ts` from the Pulsar source `gradle/libs.versions.toml` when it changes. |
+| `@pulsar:version:connectors@` | Latest published stable 4.2.x connector release for current docs, selected from `releases.json`; historical docs use their own Pulsar release. Used with `@pulsar:connector_release_url@`. |
 
 #### Release download URLs
 

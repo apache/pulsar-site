@@ -15,6 +15,16 @@ import { docUrl } from "@site/src/utils/index";
 
 This portal holds a variety of topics, tutorials, guides, and reference material to help you work with Pulsar.
 
+:::tip Preparing to upgrade to Pulsar @pulsar:version:major@?
+
+Quick links:
+
+- [Release highlights and upgrading](release-highlights.md)
+- [Cluster upgrade guide](administration-upgrade.md)
+- [Java client dependency configuration for Pulsar @pulsar:version:major@](pathname:///docs/client-libraries/java-dependency-configuration)
+
+:::
+
 ## Choose your path
 Select one of the content blocks below to begin your Pulsar journey. If you ...
 * Are new to Pulsar, start with **About Pulsar** to learn about features and concepts.

@@ -10,6 +10,22 @@ RewriteRule "^docs/(zh-CN|zh-TW|ja|ko|fr)/(.+)$" "/$1/docs/$2" [R=301,DPI,L]
 RewriteRule "^(zh-CN|zh-TW|ja|ko|fr)/docs/(.+)$" "/docs/$2" [R=301,DPI,L]
 RewriteRule "^docs/(.+)-incubating/(.+)$" "https://pulsar.staged.apache.org/docs/$1-incubating/$2" [R=301,DPI,L]
 
+# Handle moved client pages before the file check: Docusaurus also generates
+# HTML redirect stubs for some old URLs, but Apache should return an HTTP 301.
+# Redirect legacy versioned client-libraries URLs to the unversioned location.
+# The version segment is captured and dropped; the client-libraries- slug prefix is also stripped.
+RewriteRule "^docs/(next|\d+\.\d+\.\d+|\d+\.\d+\.x)/client-libraries-(.+?)/?$" "/docs/client-libraries/$2" [R=301,DPI,L]
+RewriteRule "^docs/(next|\d+\.\d+\.\d+|\d+\.\d+\.x)/client-libraries/?$" "/docs/client-libraries/" [R=301,DPI,L]
+# New canonical path accidentally prefixed with a version segment — strip the version.
+RewriteRule "^docs/(next|\d+\.\d+\.\d+|\d+\.\d+\.x)/client-libraries/(.+?)/?$" "/docs/client-libraries/$2" [R=301,DPI,L]
+# Bare /docs/client-libraries-<slug> (no version) — from very old /docs/en/client-libraries-<slug>
+# URLs normalized above, and from historical unversioned external links.
+RewriteRule "^docs/client-libraries-(.+?)/?$" "/docs/client-libraries/$1" [R=301,DPI,L]
+
+# Release-specific upgrade subpages moved to names containing the release line.
+RewriteRule "^docs/(.+/)?administration-upgrade-configuration/?$" "/docs/$1administration-upgrade-to-5.0.x-configuration/" [R=301,DPI,L]
+RewriteRule "^docs/(.+/)?administration-upgrade-applications/?$" "/docs/$1administration-upgrade-to-5.0.x-applications/" [R=301,DPI,L]
+
 # skip if file exists
 RewriteCond %{REQUEST_FILENAME}\/index\.html -f
 RewriteRule ^ - [L]
@@ -23,24 +39,30 @@ RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/\d+\.\d+\.x/.*|"
 RewriteCond expr "%{REQUEST_URI} !~ m|^/docs/client-libraries|"
 RewriteRule "^docs/(.*)$" "/docs/5.0.x/$1" [R=301,DPI,L]
 
-# Redirect legacy versioned client-libraries URLs to the unversioned location.
-# The version segment is captured and dropped; the client-libraries- slug prefix is also stripped.
-RewriteRule "^docs/(next|\d+\.\d+\.\d+|\d+\.\d+\.x)/client-libraries-(.+?)/?$" "/docs/client-libraries/$2" [R=301,DPI,L]
-RewriteRule "^docs/(next|\d+\.\d+\.\d+|\d+\.\d+\.x)/client-libraries/?$" "/docs/client-libraries/" [R=301,DPI,L]
-# New canonical path accidentally prefixed with a version segment — strip the version.
-RewriteRule "^docs/(next|\d+\.\d+\.\d+|\d+\.\d+\.x)/client-libraries/(.+?)/?$" "/docs/client-libraries/$2" [R=301,DPI,L]
-# Bare /docs/client-libraries-<slug> (no version) — from very old /docs/en/client-libraries-<slug>
-# URLs that line 6 rewrites to this form, and from any historical unversioned external links.
-RewriteRule "^docs/client-libraries-(.+?)/?$" "/docs/client-libraries/$1" [R=301,DPI,L]
-
 # /client-feature-matrix/ moved into the client-libraries plugin.
 RewriteRule "^client-feature-matrix/?$" "/docs/client-libraries/feature-matrix" [R=301,DPI,L]
 
 RewriteRule "^docs/(.+/)?deploy-dcos/?$" "/docs/$1install-deploy-upgrade-landing" [R=301,DPI,L]
 RewriteRule "^docs/(.+/)?develop-binary-protocol/?$" "/docs/$1developing-binary-protocol" [R=301,DPI,L]
 RewriteRule "^docs/(.+/)?administration-dashboard/?$" "/docs/$1administration-pulsar-manager" [R=301,DPI,L]
+# Pulsar Manager is no longer maintained and its page was removed from next, 5.0.x, 4.2.x, 4.1.x and 4.0.x.
+# Older versions that still ship the page are served by the "skip if file exists" rule above.
+RewriteRule "^docs/(.+/)?administration-pulsar-manager/?$" "/docs/administration-ui/" [R=301,DPI,L]
+# The Dekaf UI page was renamed to administration-ui in every version that has it.
+RewriteRule "^docs/(.+/)?administration-dekaf-ui/?$" "/docs/$1administration-ui/" [R=301,DPI,L]
+# Broker rolling restarts are documented as rolling upgrades of brokers.
+RewriteRule "^docs/(.+/)?administration-rolling-restart/?$" "/docs/$1administration-rolling-upgrade" [R=301,DPI,L]
 RewriteRule "^docs/(.+/)?security-tls-keystore/?$" "/docs/$1security-tls-authentication" [R=301,DPI,L]
 RewriteRule "^docs/(.+/)?security-policy-and-supported-versions/?$" "/contribute/release-policy" [R=301,DPI,L]
+# The admin API overview, tools and tutorial pages were folded into the Get started page.
+RewriteRule "^docs/(.+/)?admin-api-overview/?$" "/docs/$1admin-api-get-started" [R=301,DPI,L]
+RewriteRule "^docs/(.+/)?admin-api-tools/?$" "/docs/$1admin-api-get-started" [R=301,DPI,L]
+RewriteRule "^docs/(.+/)?admin-api-tutorial/?$" "/docs/$1admin-api-get-started" [R=301,DPI,L]
+# Also repair links that used the filename instead of the Get started page ID.
+RewriteRule "^docs/(.+/)?admin-get-started/?$" "/docs/$1admin-api-get-started" [R=301,DPI,L]
+# The introductory CLI tutorial was renamed.
+RewriteRule "^docs/(.+/)?reference-cli-get-started/?$" "/docs/$1get-started-pulsar-admin" [R=301,DPI,L]
+RewriteRule "^docs/(.+/)?admin-api-use-cases/?$" "/docs/$1admin-api-features" [R=301,DPI,L]
 RewriteRule "^contribute/version-policy/?$" "/contribute/release-policy" [R=301,DPI,L]
 
 RewriteRule "^coding-guide/?$" "/contribute/develop-coding-conventions" [R=301,DPI,L]

@@ -69,6 +69,18 @@ The target clusters for replication of a message are determined by a hierarchy o
 
 The `clusters` and `allowed-clusters` settings are resolved hierarchically. When the tenant-level `allowed-clusters` is non-empty, all clusters specified in namespace-level `allowed-clusters` must be a subset of it — this is validated when `allowed-clusters` is modified at the namespace level. Namespace-level `allowed-clusters` can further restrict the tenant-level configuration, and topic-level policies can override the namespace-level `clusters` setting for a specific topic.
 
+### Bound replication reads
+
+Persistent replicators honor `dispatcherMaxReadBatchSize` and `dispatcherMaxReadSizeBytes` even when replication rate limiting is disabled. The entry limit is also bounded by `replicationProducerQueueSize`; available rate-limit permits can reduce either limit further. These are storage-read limits, separate from producer message batching. Compare replication backlog, throughput, and read memory when tuning them. See [Broker read and memory tuning](performance-broker.md) for the shared read settings.
+
+### Disconnect idle replication producers
+
+Pulsar can disconnect an idle persistent replicator's producer without deleting its cursor or replication configuration. `brokerReplicationInactiveThresholdSeconds` defaults to **86,400 seconds (24 hours)**. A replicator is eligible only when it is connected, has no backlog, and has not processed entries for replication for longer than the threshold. New replication work reconnects the producer automatically; an idle disconnected producer is therefore not by itself evidence of a replication failure.
+
+The check uses the inactive-topic monitor's interval, `brokerDeleteInactiveTopicsFrequencySeconds`. The broker schedules it at startup when inactive-topic deletion **or** inactive-topic closing is enabled and the replication threshold is positive. This check is separate from deleting or closing a topic. Set the threshold to `0` or a negative value to disable idle replication disconnection. If you enable a monitor that was not scheduled at startup, restart the broker to apply the monitoring configuration.
+
+Monitor backlog and replication progress as well as the connection state when checking replication health. The same idle-producer check also applies to persistent shadow replicators when shadow topics are enabled.
+
 ### 1-way (unidirectional) and 2-way (bidirectional) geo-replication
 
 Geo-replication can be configured as 1-way (unidirectional) or 2-way (bidirectional). The available options depend on whether a shared configuration store is used.
@@ -99,13 +111,15 @@ In normal cases, when connectivity issues are none, messages are replicated imme
 
 Applications can create producers and consumers in any of the clusters, even when the remote clusters are not reachable (like during a network partition).
 
-Producers and consumers can publish messages to and consume messages from any cluster in a Pulsar instance. However, subscriptions cannot only be local to the cluster where the subscriptions are created but also can be transferred between clusters after the replicated subscription is enabled. Once the replicated subscription is enabled, you can keep the subscription state in synchronization. Therefore, a topic can be asynchronously replicated across multiple geographical regions. In case of failover, a consumer can restart consuming messages from the failure point in a different cluster.
+Producers and consumers can publish messages to and consume messages from any cluster in a Pulsar instance. However, geo-replication replicates topic data, not subscriptions: each subscription is local to the cluster where it is created, and a subscription with the same name in another cluster is a separate subscription with its own cursor, consumers, and backlog. See [Subscriptions and consumers across clusters](concepts-replication.md#subscriptions-and-consumers-across-clusters) for details.
+
+The only subscription-related state that can be synchronized across clusters is the mark-delete position of a [replicated subscription](#replicated-subscriptions). When a replicated subscription is enabled, its state is kept in synchronization, so a consumer can restart consuming messages from the failure point in a different cluster. Because replicated subscriptions are designed for failover and not for active-active consumption, process messages in a single cluster at a time.
 
 ![Geo-replication example with a full-mesh pattern](/assets/geo-replication.png)
 
 In the aforementioned example, the **T1** topic is replicated among three clusters, **Cluster-A**, **Cluster-B**, and **Cluster-C**.
 
-All messages produced in any of the three clusters are delivered to all subscriptions in other clusters. In this case, **C1** and **C2** consumers receive all messages that **P1**, **P2**, and **P3** producers publish. Ordering is still guaranteed on a per-producer basis.
+All messages produced in any of the three clusters are replicated to the other two clusters and are then dispatched to the subscriptions that exist in each cluster. In this case, the **C1** and **C2** consumers each receive all messages that the **P1**, **P2**, and **P3** producers publish, because C1 and C2 belong to separate, independent subscriptions in their own clusters. Ordering is still guaranteed on a per-producer basis.
 
 ## Configure replication
 
@@ -322,7 +336,7 @@ In case of failover, a consumer can restart consuming from the failure point in 
 
 :::note
 
-Replicated subscriptions require [2-way geo-replication](#1-way-and-2-way-geo-replication) to be properly configured between all participating clusters. See [1-way and 2-way geo-replication](#1-way-and-2-way-geo-replication) for configuration requirements.
+Replicated subscriptions require [2-way geo-replication](#1-way-unidirectional-and-2-way-bidirectional-geo-replication) to be properly configured between all participating clusters. See [1-way and 2-way geo-replication](#1-way-unidirectional-and-2-way-bidirectional-geo-replication) for configuration requirements.
 
 :::
 

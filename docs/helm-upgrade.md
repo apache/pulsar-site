@@ -6,6 +6,14 @@ description: Learn to upgrade Apache Pulsar Helm to a newer version.
 ---
 
 
+:::important Plan broker availability before upgrading
+
+If your applications cannot tolerate client interruptions, plan a graceful rolling upgrade of brokers before upgrading the cluster. Follow [Rolling upgrade of brokers](administration-rolling-upgrade.md#kubernetes-deployments) to prepare the deployment and choose a rollout procedure that minimizes service disruption.
+
+The Apache Pulsar Helm chart does not contain automation for performing a graceful rolling upgrade of brokers. You must coordinate the procedure yourself, either manually or through automation that implements the steps and checks in that guide.
+
+:::
+
 To upgrade Apache Pulsar Helm to a newer version, complete the following steps.
 
 1. Check the change log for the specific version you would like to upgrade to and read the release notes that might pertain to the new Pulsar Helm Chart version.
@@ -34,4 +42,3 @@ To upgrade Apache Pulsar Helm to a newer version, complete the following steps.
        -f pulsar.yaml \
        --set ...
    ```
-

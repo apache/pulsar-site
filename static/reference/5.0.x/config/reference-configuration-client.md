@@ -121,6 +121,20 @@ Initial backoff interval (in nanosecond).
 
 **Default**: `100000000`
 
+### jcaProvider
+PIP-478: the name of a JCA (material) provider — a java.security.Provider supplying the KeyStore, CertificateFactory and KeyFactory engines that parse the TLS material (e.g. BCFIPS for FIPS, alongside jsseProvider=BCJSSE). A distinct axis from jsseProvider, which supplies the SSLContext: JSSE service types are never taken from this provider. Unset uses the JVM provider search order, i.e. the behaviour of releases before PIP-478.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
+### jsseProvider
+PIP-478: the name of a JSSE (SSLContext) provider — a java.security.Provider that supplies an SSLContext (TLS) implementation (e.g. the BouncyCastle JSSE provider BCJSSE for FIPS, with BCFIPS registered separately as the crypto provider it uses) — used to build the client's TLS SSLContext. A distinct axis from sslProvider (the JDK-vs-OpenSSL engine switch): when set, the default factory builds the JDK Netty engine with this provider as the SSLContext provider, overriding the engine choice. Resolved by preferring a provider already registered in the JVM (Security.getProvider), falling back to the ServiceLoader mechanism, and failing loudly when unresolvable.
+
+**Type**: `java.lang.String`
+
+**Default**: `null`
+
 ### keepAliveIntervalSeconds
 Seconds of keeping alive interval for each client broker connection.
 
@@ -282,20 +296,6 @@ User name of SOCKS5 proxy.
 
 **Default**: `null`
 
-### sslFactoryPlugin
-SSL Factory Plugin class to provide SSLEngine and SSLContext objects. The default class used is DefaultPulsarSslFactory.
-
-**Type**: `java.lang.String`
-
-**Default**: `org.apache.pulsar.common.util.DefaultPulsarSslFactory`
-
-### sslFactoryPluginParams
-SSL Factory plugin configuration parameters.
-
-**Type**: `java.lang.String`
-
-**Default**: ``
-
 ### sslProvider
 The TLS provider used by an internal client to authenticate with other Pulsar brokers.
 
@@ -331,12 +331,26 @@ Set of TLS Ciphers.
 
 **Default**: `[]`
 
+### tlsFactoryClassName
+PIP-478: the class name of a custom PulsarTlsFactory to build the client's TLS engines. An empty value or the literal 'default' selects the built-in file-based factory composed from the tls* fields; any other value is instantiated reflectively via its public no-arg constructor. This is the by-name successor of the removed PIP-337 sslFactoryPlugin.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
+### tlsFactoryConfig
+PIP-478: configuration parameters passed to a custom tlsFactoryClassName as its init params. Accepts a JSON object or a comma-separated key=value list; ignored by the built-in file-based factory.
+
+**Type**: `java.lang.String`
+
+**Default**: ``
+
 ### tlsHostnameVerificationEnable
-Whether the hostname is validated when the client creates a TLS connection with brokers.
+Whether the hostname is validated when the client creates a TLS connection with brokers. Enabled by default since Pulsar 5.0 (PIP-478): a broker whose certificate does not match its hostname/SAN is rejected.
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 ### tlsKeyFilePath
 Path to the TLS key file.

@@ -24,7 +24,6 @@ superUserRoles=client/{clientIp}@EXAMPLE.COM
 - Set up and run a [Key Distribution Center(KDC)](https://en.wikipedia.org/wiki/Key_distribution_center).
 - Install a Kerberos server if your organization doesn't have one. Your Linux vendor might have packages for `Kerberos`. For how to install and configure Kerberos, see [Ubuntu](https://help.ubuntu.com/community/Kerberos) and
 [Redhat](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Managing_Smart_Cards/installing-kerberos.html).
-- If you use Oracle Java, you need to download JCE policy files for your Java version and copy them to the `$JAVA_HOME/jre/lib/security` directory.
 
 ## Enable Kerberos authentication on brokers
 
@@ -137,6 +136,8 @@ In the above example:
 ## Enable Kerberos authentication on proxies
 
 If you want to use proxies between brokers and clients, Pulsar proxies (as a SASL server in Kerberos) will authenticate clients (as a SASL client in Kerberos) before brokers authenticate proxies.
+
+On the brokers, explicitly set `authenticateOriginalAuthData=false` and configure the proxy's authenticated role in `proxyRoles`. Pulsar defaults original-client authentication to enabled, but the client-to-proxy SASL exchange cannot be replayed on the proxy-to-broker connection. The broker trusts the original principal supplied by the authenticated proxy and authorizes both identities. See [Proxy roles](security-authorization.md#proxy-roles).
 
 To enable Kerberos authentication on proxies, complete the following steps.
 

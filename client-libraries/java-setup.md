@@ -5,149 +5,36 @@ sidebar_label: "Set up"
 description: Learn how to set up Java client library in Pulsar.
 ---
 
-To set up Java client in Pulsar, complete the following steps.
+Use the combined Java dependency for applications using the v4 client, v5 client, the admin API, or any combination of them. The combined artifacts require **Java 17 or later**. **Choose Java 25 LTS for running new applications when you have the choice.**
+
+Changing dependencies and changing client APIs are separate choices. Both combined artifacts support the existing v4 API (`org.apache.pulsar.client.api`), the v5 API (`org.apache.pulsar.client.api.v5`), and the admin API. You can update the dependency while keeping your v4 application code. Existing v4 applications using regular topics do not need to change their API or dependencies for a broker upgrade. Use this setup when configuring or updating application dependencies.
 
 ## Step 1: Install Java client library
 
-The Pulsar Java client is published to Maven Central in two lines: the LTS version (**@pulsar:version:lts@**) and the latest version (**@pulsar:version:latest@**). Unless you need recently added features, use the LTS version — it receives long-term support and bug fixes.
+Use **`pulsar-client-v5-all`** by default for new dependency configurations. It is an unshaded aggregate that resolves the client and admin implementations transitively. If conflicts in the unshaded dependency graph cannot be resolved, **`pulsar-client-v5-shaded`** is a fallback with relocated implementation dependencies.
 
-Add the `pulsar-client` artifact to your build configuration as shown below. You can also browse the published artifacts on Maven Central ([LTS](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client/@pulsar:version:lts@/jar), [latest](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client/@pulsar:version:latest@/jar)).
+| Artifact | Dependency graph |
+| --- | --- |
+| `pulsar-client-v5-all` | Unshaded v4 client, v5 client, and admin implementations, with their transitive dependencies |
+| `pulsar-client-v5-shaded` | One JAR containing relocated v4 client, v5 client, and admin implementations and bundled third-party dependencies |
 
-:::tip
+:::info Strongly recommended: align dependencies and exclude conflicting clients
 
-Pulsar publishes both shaded and unshaded client artifacts:
+To avoid classpath conflicts and incompatible libraries:
 
-- **Shaded** ([`pulsar-client`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client), [`pulsar-client-admin`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-admin)) — dependencies (such as Netty) are relocated via the [maven-shade-plugin](https://maven.apache.org/plugins/maven-shade-plugin/) to avoid conflicts. Recommended if you don't want to manage dependency conflicts manually.
-- **Unshaded** ([`pulsar-client-original`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-original), [`pulsar-client-admin-original`](https://search.maven.org/artifact/org.apache.pulsar/pulsar-client-admin-original)) — dependencies are not relocated. Use these if you want to manage dependencies manually; in that case, also import `pulsar-bom` and align Netty versions via `netty-bom`.
-
-:::
-
-### Maven
-
-If you use Maven, add the following information to the `pom.xml` file.
-
-```xml
-<!-- in your <properties> block -->
-<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@ -->
-<pulsar.version>@pulsar:version:lts@</pulsar.version>
-
-<!-- in your <dependencies> block -->
-<dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>pulsar-client</artifactId>
-  <version>${pulsar.version}</version>
-</dependency>
-```
-
-### Gradle
-
-If you use Gradle, add the following information to the `build.gradle` file.
-
-```groovy
-// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@
-def pulsarVersion = '@pulsar:version:lts@'
-
-dependencies {
-	implementation "org.apache.pulsar:pulsar-client:${pulsarVersion}"
-}
-```
-
-### Pulsar BOM
-
-While the above dependencies are sufficient to obtain the Pulsar Java client, it is recommended to also use the [Pulsar BOM](https://github.com/apache/pulsar/blob/master/pip/pip-326.md) to ensure that all Pulsar dependencies are at the same expected version.
-In order to use the BOM, the previous directions are modified slightly as follows:
-
-#### Maven {#pulsar-bom-maven}
-
-:::note
-
-Please notice that when using Spring Boot and the default Maven build, it is necessary to use Spring Boot Maven plugin features to configure the Pulsar version. Please refer to the [Spring Boot using Maven](#spring-boot-maven) section for more details.
+- **Import both the [Pulsar and Netty BOMs](java-dependency-configuration.md#pulsar-bom)** to align dependency versions.
+- **[Remove and exclude conflicting clients](java-dependency-configuration.md#replace-existing-dependencies).** BOMs do not remove duplicate implementations. Never combine `pulsar-client-v5-all` with `pulsar-client-v5-shaded`.
+- **[Verify the runtime dependency graph](java-dependency-configuration.md#verify-netty-alignment)**, including dependencies supplied by frameworks.
 
 :::
 
-If you use Maven, add the following information to the `pom.xml` file.
+### Complete dependency configuration {#pulsar-bom}
 
-```xml
-<!-- in your <properties> block -->
-<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@ -->
-<pulsar.version>@pulsar:version:lts@</pulsar.version>
+For copyable build files with both BOMs and conflict handling, see [Java dependency configuration](java-dependency-configuration.md):
 
-<!-- in your <dependencyManagement>/<dependencies> block -->
-<dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>pulsar-bom</artifactId>
-  <version>${pulsar.version}</version>
-  <type>pom</type>
-  <scope>import</scope>
-</dependency>
-
-<!-- in your <dependencies> block -->
-<dependency>
-  <groupId>org.apache.pulsar</groupId>
-  <artifactId>pulsar-client</artifactId>
-</dependency>
-```
-
-#### Gradle {#pulsar-bom-gradle}
-
-If you use Gradle, add the following information to the `build.gradle` file.
-
-:::note
-
-Please notice that when using Spring Boot and the default Gradle  build with the Spring Dependency Management plugin (`io.spring.dependency-management`), it is necessary to use Spring Dependency Management plugin features to configure the Pulsar version. Please refer to the [Spring Boot using Gradle](#spring-boot-gradle) section for more details.
-
-:::
-
-```groovy
-// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@
-def pulsarVersion = '@pulsar:version:lts@'
-
-dependencies {
-  implementation enforcedPlatform("org.apache.pulsar:pulsar-bom:${pulsarVersion}")
-  implementation 'org.apache.pulsar:pulsar-client'
-}
-```
-
-Note that the version is number for the `pulsar-client` dependency is now omitted as the Pulsar BOM dictates which version is used.
-
-### Spring Boot
-
-You can find more information about using Pulsar with Spring Boot in the [Spring Boot documentation](https://docs.spring.io/spring-boot/reference/messaging/pulsar.html).
-
-#### Spring Boot using Maven {#spring-boot-maven}
-
-The Spring Boot [Dependency Version properties](https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-dependency-versions.html) define `pulsar.version` and `pulsar-reactive.version` for controlling the Pulsar Java client version and Pulsar Reactive client version.
-
-```xml
-<!-- in your <properties> block -->
-<!-- LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@ -->
-<pulsar.version>@pulsar:version:lts@</pulsar.version>
-
-<!-- in your <dependencies> block -->
-<!-- The Pulsar Java client will be automatically added to dependencies as a transitive dependency of the spring-boot-starter-pulsar dependency -->
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-pulsar</artifactId>
-</dependency>
-```
-
-#### Spring Boot using Gradle {#spring-boot-gradle}
-
-Please notice that when using the Spring Dependency Management plugin (`io.spring.dependency-management`) in Gradle, it is necessary to use Spring Dependency Management plugin features to configure the Pulsar version.
-The Spring Boot [Dependency Version properties](https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-dependency-versions.html) define `pulsar.version` and `pulsar-reactive.version` for controlling the Pulsar Java client version and Pulsar Reactive client version.
-
-To use a specific Pulsar version for the Pulsar Java client in a Spring Boot application using Gradle, add the following to your `build.gradle` file in a Spring Boot project:
-
-```groovy
-// Alternatively, you can set the `pulsar.version` property in the `gradle.properties` file.
-// LTS: @pulsar:version:lts@, latest: @pulsar:version:latest@@pulsar:version:current-milestone-suffix@
-ext['pulsar.version'] = '@pulsar:version:lts@'
-
-// The Pulsar Java client will be automatically added to dependencies as a transitive dependency of the spring-boot-starter-pulsar dependency
-dependencies {
-  implementation 'org.springframework.boot:spring-boot-starter-pulsar'
-}
-```
+- [Complete Maven example](java-dependency-configuration.md#maven)
+- [Complete Gradle example](java-dependency-configuration.md#gradle)
+- [Replace existing dependencies](java-dependency-configuration.md#replace-existing-dependencies), [shaded fallback](java-dependency-configuration.md#shaded-fallback), and [Spring Boot](java-dependency-configuration.md#spring-boot)
 
 ## Step 2: Connect to Pulsar cluster
 
@@ -175,9 +62,17 @@ pulsar+ssl://pulsar.us-west.example.com:6651
 
 ### Increasing the memory limit
 
-For high-throughput applications, you can increase the amount of memory with the Java client builder's [`memoryLimit` configuration option](https://pulsar.apache.org/api/client/4.0.x/org/apache/pulsar/client/api/ClientBuilder.html#memoryLimit(long,org.apache.pulsar.client.api.SizeUnit)). The default limit is 64MB which is usually too low for high-throughput applications.
+For high-throughput applications, tune the amount of memory with the v4 Java client builder's [`memoryLimit` configuration option](@pulsar:javadoc:client@/org/apache/pulsar/client/api/ClientBuilder.html#memoryLimit(long,org.apache.pulsar.client.api.SizeUnit)). The default limit is 64 MiB. Choose a limit that fits your workload and the application's available memory. To share a limit across several clients, see [Share resources across client instances](java-initialize.md#share-resources-across-client-instances).
 
 By default Java applications have a limit for direct memory allocations. The allocations are limited by the `-XX:MaxDirectMemorySize` JVM option. In many JVM implementations, this defaults to the maximum heap size unless explicitly set. Allocations happen outside of the Java heap.
+
+### Pending producer queues when the memory limit is disabled
+
+A v4 producer with no explicit message-count limits normally relies on the client memory limit. If you disable that memory limit with `memoryLimit(0, SizeUnit.BYTES)`, an unset `maxPendingMessages` instead resolves to `1000`; an unset `maxPendingMessagesAcrossPartitions` normally resolves to `50000`. These defaults keep producers from silently losing their queue bounds when the memory cap is removed.
+
+An explicit value takes precedence, including `maxPendingMessages(0)`, which removes the message-count bound even when the client memory limit is disabled. An explicitly configured positive across-partition budget can lower the per-partition queue limit to its share of that budget, with at least one pending message per partition. The implicit fallback budget is not divided across partitions and does not lower a per-partition limit that the application explicitly set.
+
+v4 producers fail sends when a queue is full by default; `blockIfQueueFull(true)` makes them wait for capacity. v5 producers use a client memory budget without these v4 pending-message settings; see [Bound pending sends](java-v5.md#bound-pending-sends).
 
 ### Enabling optimized Netty direct memory buffer access
 
@@ -193,8 +88,8 @@ To enable this feature in Java clients since Java 11, you need to add the follow
 
 In addition, you need to add one of the following JVM options:
 
-- `-Dorg.apache.pulsar.shade.io.netty.tryReflectionSetAccessible=true` for the default shaded Pulsar client
-- `-Dio.netty.tryReflectionSetAccessible=true` for the unshaded "original" Pulsar client
+- `-Dorg.apache.pulsar.shade.io.netty.tryReflectionSetAccessible=true` for the shaded client fallback
+- `-Dio.netty.tryReflectionSetAccessible=true` for the unshaded client
 
 ### Enabling optimized checksum calculation when native library loading fails
 
@@ -203,3 +98,10 @@ This only works when `--add-opens java.base/java.util.zip=ALL-UNNAMED` is passed
 The error message will be `Unable to use reflected methods:
 java.lang.reflect.InaccessibleObjectException: Unable to make private static int java.util.zip.CRC32C.updateBytes(int,byte[],int,int) accessible: module java.base does not "opens java.util.zip" to unnamed module` when the required JVM option is missing
 
+## GraalVM native images
+
+The unshaded v4 client and admin implementations embed native-image reflection, resource, and runtime-initialization metadata in `pulsar-client-original` and `pulsar-client-admin-original`. GraalVM Native Image consumes this metadata from the JARs' `META-INF/native-image` directories.
+
+Use the **unshaded** artifacts for this configuration: its class names refer to the unshaded client implementation. The embedded configuration does not establish native-image compatibility for the relocated classes in the shaded artifacts. Follow the dependency-alignment guidance above when using the unshaded clients.
+
+The Pulsar source includes native-image smoke tests for v4 Java string-message production/consumption and admin operations in `tests/pulsar-client-native-image`. Validate the features your application uses, including schemas and authentication plugins; application-specific classes accessed through reflection can require additional reachability metadata.

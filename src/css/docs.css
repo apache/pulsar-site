@@ -11,6 +11,30 @@
   box-shadow: none !important;
 }
 
+/* Give documentation bullets room to scan without changing navigation lists. */
+[class*="docs-doc-page"] .markdown ul > li + li {
+  margin-top: 0.75rem;
+}
+
+[class*="docs-doc-page"] .markdown li > ul {
+  margin-top: 0.5rem;
+}
+
+/* Distinguish benchmark changes in both light and dark themes. */
+.release-highlights-benchmark th:last-child,
+.release-highlights-benchmark td:last-child {
+  background-color: var(--primary-6);
+  color: var(--primary-5-);
+  border-left: 2px solid var(--color-primary);
+}
+
+[data-theme='dark'] .release-highlights-benchmark th:last-child,
+[data-theme='dark'] .release-highlights-benchmark td:last-child {
+  background-color: var(--primary-5-);
+  color: var(--primary-6);
+  border-left-color: var(--color-primary-dark);
+}
+
 /* Use same blue color for NOTE admonition as for INFO */
 [class*="docs-doc-page"] .alert--secondary {
   --ifm-alert-background-color: var( --ifm-color-info-contrast-background );

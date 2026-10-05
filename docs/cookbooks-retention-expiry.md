@@ -22,7 +22,7 @@ In Pulsar, you can modify this behavior, with namespace granularity, in two ways
 * You can persistently store messages that are not within a backlog (because they've been acknowledged by every existing subscription, or because there are no subscriptions) by setting [retention policies](#retention-policies).
 * Messages that are not acknowledged within a specified timeframe can be automatically acknowledged, by specifying the [time to live](#time-to-live-ttl) (TTL).
 
-Pulsar's [admin interface](admin-api-overview.md) enables you to manage both retention policies and TTL with namespace granularity (and thus within a specific tenant and either on a specific cluster or in the [`global`](concepts-architecture-overview.md#clusters) cluster).
+Pulsar's [admin interface](admin-get-started.md) enables you to manage both retention policies and TTL with namespace granularity (and thus within a specific tenant and either on a specific cluster or in the [`global`](concepts-architecture-overview.md#clusters) cluster).
 
 
 > #### Retention and TTL solve two different problems
@@ -354,6 +354,10 @@ By default, you will be prompted to ensure that you want to clear the backlog fo
 By default, Pulsar stores all unacknowledged messages forever. This can lead to heavy disk space usage in cases where a lot of messages are going unacknowledged. If disk space is a concern, you can set a time to live (TTL) that determines how long unacknowledged messages will be retained.
 
 The TTL parameter is like a stopwatch attached to each message that defines the amount of time a message is allowed to stay unacknowledged. When the TTL expires, Pulsar automatically moves the message to the acknowledged state (and thus makes it ready for deletion).
+
+Automatic TTL expiry advances durable subscription cursors. It does not advance non-durable reader cursors past unread retained messages. This does not make readers a retention mechanism: configure a retention policy to keep the data they need.
+
+Changing TTL to a positive value schedules the expiry check in the background. Completion of the policy update does not mean all newly expired messages have already been acknowledged; the periodic expiry monitor also checks them.
 
 The diagram below illustrates the concept of TTL.
 ![Concept of TTL in Pulsar](/assets/ttl.svg)

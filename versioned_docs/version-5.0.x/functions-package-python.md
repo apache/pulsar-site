@@ -37,14 +37,10 @@ To package a Python function into **one Python file**, complete the following st
 2. Install a Python client. The implementation of a Python function depends on the Python client.
 
    ```bash
-   pip install pulsar-client==2.10.0
+   pip install 'pulsar-client==@pulsar:version:python@'
    ```
 
-   And install protobuf tools to generate the proto files:
-
-   ```bash
-   pip install 'protobuf==3.20.*'
-   ```
+   This example does not require generating Protocol Buffers files or installing `protobuf` separately. The Pulsar Docker image already includes the Python function runtime's dependencies.
 
 3. Copy the Python function file to the Pulsar image.
 

@@ -5,6 +5,15 @@ sidebar_label: "Configure thread runtime"
 description: Configure thread runtime for functions in Pulsar.
 ---
 
+:::warning Run only fully trusted code
+
+Pulsar Functions and connectors execute user-provided code by design. This intended capability is not itself a remote code execution (RCE) vulnerability. **Run only code that you fully trust**, because it can modify its execution environment:
+
+- **Thread and process runtimes** can read or modify any files and state accessible to the process they run in.
+- **The Kubernetes runtime** does not, on its own, restrict access to Kubernetes cluster resources. Pulsar provides hooks for custom hardening, but the hardening itself is outside the project.
+
+:::
+
 You can use the default configurations of thread runtime in the `conf/functions_worker.yml` file.
 
 If you want to customize more parameters, such as thread group name, refer to the following example.

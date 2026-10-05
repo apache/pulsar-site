@@ -17,12 +17,6 @@ The Pulsar `master` branch has migrated from Maven to Gradle ([PIP-463](https://
 
 :::
 
-:::caution Draft
-
-The Gradle build steps in this document are a draft. They will be refined and verified when the first release is performed with the Gradle build.
-
-:::
-
 ## Preparation
 
 Open a discussion on dev@pulsar.apache.org to notify others that you volunteer to be the release manager of a specific release. If there are no disagreements, you can start the release process.
@@ -45,7 +39,7 @@ If you haven't already done it, [create and publish the GPG key](create-gpg-keys
 Before you start the next release steps, make sure you have installed these software:
 
 * Amazon Corretto OpenJDK
-  * JDK 21 or 25 for building releases with the Gradle build (`master` branch and release branches created from it)
+  * JDK 21, 25, or 26 for building releases with the Gradle build (`master` branch and release branches created from it)
   * for Maven-based maintenance branches, see the [Maven build steps prerequisites](release-process-maven.md#prerequisites)
 * Zip
 
@@ -64,14 +58,14 @@ To verify the release branch is not broken, you should trigger a Pulsar CI build
 *For &ge;5.x releases*
 
 ```shell
-export VERSION_RC=5.0.0-M1-candidate-1
+export VERSION_RC=5.0.0-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
-export NEXT_VERSION_WITHOUT_RC=5.0.0-M2
-export VERSION_BRANCH=branch-5.0-M1
+export NEXT_VERSION_WITHOUT_RC=5.0.1
+export VERSION_BRANCH=branch-5.0
 # for milestone releases, set the upcoming LTS release version (used in the release announcement)
 export LTS_RELEASE=5.0
 export UPSTREAM_REMOTE=origin
-export SDKMAN_JAVA_VERSION=21
+export SDKMAN_JAVA_VERSION=25
 # set the pulsarIncludeBuildInfo project property for all Gradle invocations in this shell session
 # so that release binaries include the real git commit / build metadata
 export ORG_GRADLE_PROJECT_pulsarIncludeBuildInfo=true
@@ -91,6 +85,7 @@ The properties must be set consistently for every Gradle invocation of the relea
 export VERSION_RC=4.2.3-candidate-1
 export VERSION_WITHOUT_RC=${VERSION_RC%-candidate-*}
 export NEXT_VERSION_WITHOUT_RC=4.2.4
+export PREVIOUS_VERSION=4.2.2
 export VERSION_BRANCH=branch-4.2
 export UPSTREAM_REMOTE=origin
 export SDKMAN_JAVA_VERSION=21
@@ -303,11 +298,7 @@ gpgconf --reload gpg-agent
 
 The src and bin artifacts need to be signed and finally uploaded to the dist SVN repository for staging. This step should not run inside the $PULSAR_PATH.
 
-:::caution Draft
-
-With the Gradle build, the binary distributions are produced under `distribution/*/build/distributions` instead of `distribution/*/target`, and there is no Pulsar IO connectors directory. The `src/stage-release.sh` script will be updated for the Gradle build layout; verify the staged files after running it.
-
-:::
+`src/stage-release.sh` archives the committed `HEAD` as the source release and copies the server, offloaders, and shell distributions from `distribution/*/build/distributions`. Commit all release changes and build those distributions before staging. Pulsar IO connectors are released separately and are not staged by this script. Verify the staged files after running it.
 
 ```shell
 # make sure to run svn mkdir commmand in a different dir(NOT IN $PULSAR_PATH).
@@ -418,7 +409,7 @@ Log in to the ASF Nexus repository at https://repository.apache.org
 
 Click on "Staging Repositories" on the left sidebar and then select the current Pulsar staging repo. This should be called something like `orgapachepulsar-XYZ`.
 
-Add a version string such as "Apache Pulsar 5.0.0-M1-candidate-1" to the clipboard with this command:
+Add a version string such as "Apache Pulsar 5.0.0-candidate-1" to the clipboard with this command:
 
 ```shell
 printf "Apache Pulsar $VERSION_RC" |pbcopy
@@ -735,7 +726,7 @@ Go to check the result:
 
 * https://hub.docker.com/r/apachepulsar/pulsar/tags
 
-for Pulsar &tl;5.0
+For Pulsar &lt;5.0 only
 
 ```shell
 CANDIDATE_TAG=${VERSION_WITHOUT_RC}-$(git rev-parse --short=7 v$VERSION_RC^{})
@@ -756,7 +747,7 @@ This step is for the latest release only.
 regctl image copy apachepulsar/pulsar:$VERSION_WITHOUT_RC apachepulsar/pulsar:latest
 ```
 
-for Pulsar &tl;5.0
+For Pulsar &lt;5.0 only
 
 ```shell
 regctl image copy apachepulsar/pulsar-all:$VERSION_WITHOUT_RC apachepulsar/pulsar-all:latest
@@ -777,6 +768,14 @@ This step is for the latest *LTS* release only
 
 ## Update the document
 
+Before any of the command, go to the directory where you have `apache/pulsar-site` checked out:
+
+```shell
+PULSAR_SITE_PATH=$(pwd)
+cd /tools/pytools
+poetry install
+```
+
 ### Release notes
 
 This step is for every release. Read the specific guide for [writing release notes](release-note-guide.md).
@@ -795,17 +794,12 @@ git checkout v$VERSION_WITHOUT_RC
 PULSAR_PATH=$(pwd)
 ```
 
-:::caution Draft
-
-The Gradle build generates the OpenAPI specs into a different location (`pulsar-broker/build/`) than the Maven build. The `rest-apidoc-generator.py` tooling below may need updating for the Gradle build layout.
-
-:::
+The site generator detects the build system. For Gradle releases it runs `:pulsar-broker:generateOpenApiSpecs` and reads `pulsar-broker/build/openapi`; Maven maintenance releases retain their existing generation path.
 
 Now, run the following script from the main branch of apache/pulsar-site repo:
 
 ```shell
-cd tools/pytools
-poetry install
+cd "${PULSAR_SITE_PATH}/tools/pytools"
 poetry run bin/rest-apidoc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
 ```
 
@@ -814,7 +808,7 @@ poetry run bin/rest-apidoc-generator.py --master-path=$PULSAR_PATH --version=$VE
 # move to pulsar-site root
 cd ../..
 git add -u
-git add static/swagger/$VERSION_WITHOUT_RC
+git add static/{openapi,swagger}/$VERSION_WITHOUT_RC
 git commit -m "update rest-apidoc for $VERSION_WITHOUT_RC"
 ```
 
@@ -831,8 +825,7 @@ This step is for feature releases only, unless you're sure that significant Java
 After publish Java libraries, run the following script from the main branch of apache/pulsar-site repo:
 
 ```shell
-cd tools/pytools
-poetry install
+cd "${PULSAR_SITE_PATH}/tools/pytools"
 poetry run bin/java-apidoc-generator.py $PULSAR_PATH
 ```
 
@@ -862,8 +855,7 @@ You can generate references of config and command-line tool by running the follo
 
 ```shell
 # build Pulsar distributions under /path/to/pulsar-X.Y.Z
-cd tools/pytools
-poetry install
+cd "${PULSAR_SITE_PATH}/tools/pytools"
 # ensure that defaults using Runtime.getRuntime().availableProcessors() will be based on 1 as the number of CPUs
 _JAVA_OPTIONS=-XX:ActiveProcessorCount=1 poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
 ```

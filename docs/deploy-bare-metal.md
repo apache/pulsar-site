@@ -5,6 +5,12 @@ sidebar_label: "Bare metal"
 description: Learn to deploy a Pulsar cluster on bare metal.
 ---
 
+:::warning Network perimeter security required
+
+A Pulsar cluster is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. This requirement can be met by deploying Pulsar in private networks and restricting access to trusted clients and services.
+
+:::
+
 :::tip
 
 1. You can use single-cluster Pulsar installation in most use cases, such as experimenting with Pulsar or using Pulsar in a startup or in a single team. If you need to run a multi-cluster Pulsar instance, see the [guide](deploy-bare-metal-multi-cluster.md).
@@ -41,7 +47,7 @@ To run Pulsar on bare metal, the following configuration is recommended:
 * Broker is only supported on 64-bit JVM.
 * If you do not have enough machines, or you want to test Pulsar in cluster mode (and expand the cluster later), You can fully deploy Pulsar on a node on which ZooKeeper, bookie and broker run.
 * If you do not have a DNS server, you can use the multi-host format in the service URL instead.
-* Each machine in your cluster needs to have the recommended Java version installed (e.g. [Java 17](https://adoptium.net/?variant=openjdk17)). Please refer to [Pulsar Runtime Java Version Recommendation](https://github.com/apache/pulsar/blob/master/README.md#pulsar-runtime-java-version-recommendation) according to your target Pulsar version.
+* Each machine running Pulsar server components needs Java 21 or later. Java 25 is recommended. The Java client libraries retain a Java 17 minimum; use the server requirement for brokers, proxies, and Functions workers.
 
 :::
 
@@ -133,29 +139,28 @@ For a complete list of all available configuration properties, see the [Pulsar C
 
 ### Install Built-in Connectors (optional)
 
-To use `built-in` connectors, you need to download the connectors tarball release on every broker node in one of the following ways :
+To use `built-in` connectors, you need to download the required connector NARs on every node running a Functions worker in one of the following ways :
 
-* by clicking the link below and downloading the release from an Apache mirror:
+* by clicking the link below and downloading the release from the Apache archive:
 
-  * <a href="@pulsar:connector_release_url@" download>Pulsar IO Connectors @pulsar:version@ release</a>
+  * <a href="@pulsar:connector_release_url@" download>Pulsar IO Connectors @pulsar:version:connectors@ release</a>
 
 * from the Pulsar [downloads page](@pulsar:download_page_url@)
-* from the Pulsar [releases page](https://github.com/apache/pulsar/releases/latest)
 * using [wget](https://www.gnu.org/software/wget):
 
   ```shell
-  wget @pulsar:connector_release_url@/{connector}-@pulsar:version@.nar
+  wget @pulsar:connector_release_url@/{connector}-@pulsar:version:connectors@.nar
   ```
 
 Once you download the .nar file, copy the file to directory `connectors` in the pulsar directory.
-For example, if you download the connector file `pulsar-io-aerospike-@pulsar:version@.nar`:
+For example, if you download the connector file `pulsar-io-aerospike-@pulsar:version:connectors@.nar`:
 
 ```bash
 mkdir connectors
-mv pulsar-io-aerospike-@pulsar:version@.nar connectors
+mv pulsar-io-aerospike-@pulsar:version:connectors@.nar connectors
 
 ls connectors
-pulsar-io-aerospike-@pulsar:version@.nar
+pulsar-io-aerospike-@pulsar:version:connectors@.nar
 ...
 ```
 
@@ -287,6 +292,8 @@ Flag | Description
 `--web-service-url-tls` | If you use [TLS](security-tls-transport.md), you also need to specify a TLS web service URL for the cluster. The default port is 8443 (you had better not use a different port).
 `--broker-service-url`* | A broker service URL enabling interaction with the brokers in the cluster. This URL should not use the same DNS name as the web service URL but should use the `pulsar` scheme instead. The default port is 6650 (you had better not use a different port).
 `--broker-service-url-tls` | If you use [TLS](security-tls-transport.md), you also need to specify a TLS web service URL for the cluster as well as a TLS broker service URL for the brokers in the cluster. The default port is 6651 (you had better not use a different port).
+`--default-namespace-bundle-number` | The number of bundles of the `public/default` namespace, 32 by default. Bundles can be split later but not merged; see [Namespace bundles](administration-namespace-bundles.md).
+`--system-namespace-bundle-number` | The number of bundles of the `pulsar/system` namespace, 64 by default. The transaction coordinators are spread across brokers by the bundles of this namespace; raise it if you run more coordinators than the default 16 (`--initial-num-transaction-coordinators`). See [Namespace bundles](administration-namespace-bundles.md).
 
 :::note
 

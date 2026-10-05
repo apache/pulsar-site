@@ -23,36 +23,9 @@ $ pulsar-admin migration start options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
-
-# migration
-
-Operations for metadata store migration
-
-
-```shell
-$ pulsar-admin migration subcommand
-```
-
-
-
-## start
-
-Start metadata store migration to target
-
-**Command:**
-
-```shell
-$ pulsar-admin migration start options
-```
-
-**Options:**
-
-|Flag|Description|Default|
-|---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--target]` | Target metadata store URL (e.g., oxia://host:port/namespace)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## status
@@ -69,6 +42,6 @@ $ pulsar-admin migration status options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 

@@ -100,10 +100,6 @@ When you run Pulsar on bare metal, you can provide the list of nodes to be probe
 
 When you collect time-series statistics, the major problem is to make sure the number of dimensions attached to the data does not explode. Thus you only need to collect time series of metrics aggregated at the namespace level.
 
-### Pulsar per-topic dashboard
-
-The per-topic dashboard instructions are available at [Pulsar manager](administration-pulsar-manager.md).
-
 ### Grafana
 
 You can use Grafana to create a dashboard driven by the data that is stored in Prometheus.

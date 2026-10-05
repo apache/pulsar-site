@@ -82,7 +82,7 @@ class PulsarReleaseReorderer:
                 continue
             
             # Check if line is a release item (starts with '- [')
-            if line.strip().startswith('- [') and current_section:
+            if line.strip().startswith('- ['):
                 pr_number = self.extract_pr_number(line)
                 component, type_tag = self.extract_component_and_type(line)
                 
@@ -92,7 +92,7 @@ class PulsarReleaseReorderer:
                     component=component,
                     type_tag=type_tag
                 )
-                sections[current_section].append(item)
+                sections[current_section or 'Others'].append(item)
         
         return sections
     
@@ -217,9 +217,12 @@ class PulsarReleaseReorderer:
         with open(target_file, 'r', encoding='utf-8') as f:
             original_content = f.read()
         
-        # Extract header (everything before first ###)
-        header_match = re.search(r'^(.*?)(^### )', original_content, re.MULTILINE | re.DOTALL)
-        header = header_match.group(1) if header_match else ""
+        # Preserve the preamble for both sectioned and flat release notes.
+        body_start = re.search(r'^### |^\s*- \[', original_content, re.MULTILINE)
+        header = original_content[:body_start.start()] if body_start else original_content
+        # The changelog link is emitted once, at the end of the reordered notes.
+        header = re.sub(r'^For the complete list.*\n?', '', header, flags=re.MULTILINE)
+        header = header.rstrip() + '\n\n' if header.strip() else ''
         
         # Collect all items from target file
         all_target_items = []
@@ -227,6 +230,8 @@ class PulsarReleaseReorderer:
             all_target_items.extend(section_items)
         
         print(f"Found {len(all_target_items)} items to reorder")
+        if not all_target_items:
+            raise ValueError(f"No release note items found in {target_file}; refusing to overwrite {output_file}")
         
         # Reorganize items by determining their proper sections
         new_sections = {section: [] for section in self.sections}

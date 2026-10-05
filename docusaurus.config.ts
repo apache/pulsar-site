@@ -427,6 +427,10 @@ module.exports = async function createConfigAsync() {
               from: '/client-feature-matrix',
               to: '/docs/client-libraries/feature-matrix',
             },
+            ...(buildVersions.includes("current") ? ["configuration", "applications"] : []).map((page) => ({
+              from: `/docs/next/administration-upgrade-${page}`,
+              to: `/docs/next/administration-upgrade-to-5.0.x-${page}`,
+            })),
             ...clientLibrariesLegacyRedirects(),
           ],
         },
@@ -481,6 +485,14 @@ module.exports = async function createConfigAsync() {
           name: 'custom-webpack-plugin',
           configureWebpack(config, isServer, utils) {
             return {
+              devServer: {
+                historyApiFallback: {
+                  // Only browser navigations should receive the Docusaurus app.
+                  // Docsify fetches Markdown with Accept: */* and relies on 404s
+                  // for missing files to find the parent directory's sidebar.
+                  htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
+                },
+              },
               module: {
                 rules: [
                   {

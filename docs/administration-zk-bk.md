@@ -209,6 +209,49 @@ To change the ZooKeeper root path that BookKeeper uses, use `zkLedgersRootPath=/
 
 For more information about BookKeeper, refer to the official [BookKeeper docs](http://bookkeeper.apache.org).
 
+### Broker-to-bookie TCP keep-alive
+
+Configure TCP keep-alive probing for the broker's BookKeeper client connections through the `bookkeeper_` configuration prefix in `broker.conf`. For example:
+
+```properties
+bookkeeper_tcpKeepIdle=300
+bookkeeper_tcpKeepIntvl=60
+bookkeeper_tcpKeepCnt=5
+```
+
+These example values send the first probe after 300 idle seconds, wait 60 seconds between unanswered probes, and consider the connection dead after five unanswered probes. The BookKeeper default for each option is `-1`, which uses the operating system's setting. Choose values appropriate for your network's idle connection timeouts and failure-detection requirements.
+
+These settings apply to BookKeeper clients created by the broker, including managed-ledger and package-storage clients. They do not configure the Functions worker's distributed-log client or the bookie server's sockets.
+
+Configure the bookie side separately in `bookkeeper.conf`:
+
+```properties
+serverSockKeepalive=true
+serverTcpKeepIdle=300
+serverTcpKeepIntvl=60
+serverTcpKeepCnt=5
+```
+
+`serverSockKeepalive` enables keep-alive on accepted connections and defaults to `true`. The three `serverTcpKeep*` settings have the same units and meaning as the client settings above and default to `-1` (operating-system defaults). Positive values configure accepted sockets when BookKeeper uses the Linux epoll or io_uring transport. With other transports, configure the operating system's keep-alive timing. Broker and bookie settings control their respective ends of the connection independently.
+
+For the Pulsar Helm chart, set these values in `values.yaml` through `broker.configData` and `bookie.configData`:
+
+```yaml
+broker:
+  configData:
+    PULSAR_PREFIX_bookkeeper_tcpKeepIdle: "300"
+    PULSAR_PREFIX_bookkeeper_tcpKeepIntvl: "60"
+    PULSAR_PREFIX_bookkeeper_tcpKeepCnt: "5"
+bookie:
+  configData:
+    PULSAR_PREFIX_serverSockKeepalive: "true"
+    PULSAR_PREFIX_serverTcpKeepIdle: "300"
+    PULSAR_PREFIX_serverTcpKeepIntvl: "60"
+    PULSAR_PREFIX_serverTcpKeepCnt: "5"
+```
+
+The chart passes `configData` entries as environment variables. Keys missing from the image's default `broker.conf` or `bookkeeper.conf` must have the `PULSAR_PREFIX_` prefix so the startup script adds them to the file. The script removes this prefix; for example, `PULSAR_PREFIX_bookkeeper_tcpKeepIdle` becomes `bookkeeper_tcpKeepIdle` in `broker.conf`. The prefix also works for existing keys, so the example uses it consistently. Keep YAML values quoted as strings. See [Helm component configuration](helm-deploy.md#component-configuration) for details.
+
 ### Deploy BookKeeper
 
 BookKeeper provides [persistent message storage](concepts-architecture-overview.md#persistent-storage) for Pulsar. Each Pulsar broker has its own cluster of bookies. The BookKeeper cluster shares a local ZooKeeper quorum with the Pulsar cluster.
@@ -316,14 +359,8 @@ Set `lostBookieRecoveryDelay` in `conf/bookkeeper.conf` to a value greater than 
 To enable Prometheus metrics on a bookie or AutoRecovery node, set the following in `conf/bookkeeper.conf`:
 
 ```properties
-statsProviderClass=org.apache.pulsar.metrics.prometheus.bookkeeper.PrometheusMetricsProvider
+statsProviderClass=org.apache.bookkeeper.stats.prometheus.PrometheusMetricsProvider
 ```
-
-:::note
-
-This Pulsar-specific stats provider class is required since Pulsar 4.2.0 / 4.0.10. See the [Pulsar 4.0.10 release notes](https://pulsar.apache.org/release-notes/versioned/pulsar-4.0.10/) for details.
-
-:::
 
 ## BookKeeper persistence policies
 

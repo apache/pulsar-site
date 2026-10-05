@@ -27,23 +27,24 @@ Before connecting Pulsar to a database, you need to install Pulsar and the desir
 
 Read [Run a standalone Pulsar cluster locally](getting-started-standalone.md) for downloading the Pulsar distribution.
 
-To enable Pulsar connectors, you need to download the connectors' tarball release on [download page](pathname:///download/).
+Pulsar does not bundle IO connector NARs in the server distribution or Docker image. Connectors are maintained separately in [apache/pulsar-connectors](https://github.com/apache/pulsar-connectors). The examples use the latest published 4.2.x connector release, @pulsar:version:connectors@. Download the NARs needed by this tutorial from the [connector archive](@pulsar:connector_release_url@). A connector version does not necessarily match the Pulsar server version. See the [upgrade guide](administration-upgrade-to-5.0.x.md#check-runtime-and-packaging-requirements) for compatible connector releases.
 
-After you download the NAR file, copy the file to the `connectors` directory in the Pulsar directory. For example, if you download the `pulsar-io-aerospike-@pulsar:version@.nar` connector file, enter the following commands:
+After you download the NAR file, copy the file to the `connectors` directory in the Pulsar directory. For example, if you download the `pulsar-io-cassandra-@pulsar:version:connectors@.nar` connector file, enter the following commands:
 
 ```bash
-mkdir connectors
-mv pulsar-io-aerospike-@pulsar:version@.nar connectors
+CONNECTOR_VERSION='@pulsar:version:connectors@'
+mkdir -p connectors
+mv "pulsar-io-cassandra-${CONNECTOR_VERSION}.nar" connectors
 
 ls connectors
-# pulsar-io-aerospike-@pulsar:version@.nar
+# pulsar-io-cassandra-@pulsar:version:connectors@.nar
 # ...
 ```
 
 :::note
 
-* If you are running Pulsar in a bare metal cluster, make sure `connectors` tarball is unzipped in every pulsar directory of the broker (or in every pulsar directory of function-worker if you are running a separate worker cluster for Pulsar Functions).
-* If you are [running Pulsar in Docker](getting-started-docker.md) or deploying Pulsar using a docker image (e.g. [K8S](deploy-kubernetes.md)), you can use the `apachepulsar/pulsar-all` image instead of the `apachepulsar/pulsar` image. The `apachepulsar/pulsar-all` image has already bundled all built-in connectors.
+* Install the required NARs in the `connectors` directory on every Functions worker. For workers running with brokers, this is the broker distribution directory; for a separate worker cluster, use each worker distribution directory.
+* In Docker or Kubernetes, mount the connector NARs into `/pulsar/connectors` on every worker or include them in a custom image based on `apachepulsar/pulsar`. Install them before starting the workers. The `pulsar-all` image is no longer produced.
 
 :::
 
@@ -89,7 +90,7 @@ ls connectors
    ["public/default","public/functions"]
    ```
 
-5. All built-in connectors should be listed as available.
+5. Check that the connectors you installed are listed as available. The response depends on which NARs are present.
 
    ```bash
    curl -s http://localhost:8080/admin/v2/functions/connectors
@@ -611,11 +612,12 @@ In this section, you need to configure a JDBC sink connector.
 You can use the [Connector Admin CLI](/reference/#/@pulsar:version_reference@/pulsar-admin/)
 to create a sink connector and perform other operations on it.
 
-This example creates a sink connector and specifies the desired information.
+This example creates a sink connector and specifies the desired information. Download `pulsar-io-jdbc-postgres-@pulsar:version:connectors@.nar` from the [connector archive](@pulsar:connector_release_url@). The connector version is independent of the Pulsar server version.
 
 ```bash
+CONNECTOR_VERSION='@pulsar:version:connectors@'
 bin/pulsar-admin sinks create \
-    --archive $PWD/connectors/pulsar-io-jdbc-postgres-@pulsar:version@.nar \
+    --archive "$PWD/connectors/pulsar-io-jdbc-postgres-${CONNECTOR_VERSION}.nar" \
     --inputs pulsar-postgres-jdbc-sink-topic \
     --name pulsar-postgres-jdbc-sink \
     --sink-config-file $PWD/connectors/pulsar-postgres-jdbc-sink.yaml \
@@ -630,7 +632,7 @@ This sink connector runs as a Pulsar Function and writes the messages produced i
 
  Flag | Description | Example
  ---|---|---|
- `--archive` | The absolute path to the archive file for the sink. | $PWD/pulsar-io-jdbc-postgres-@pulsar:version@.nar |
+ `--archive` | The absolute path to the archive file for the sink. | `$PWD/connectors/pulsar-io-jdbc-postgres-${CONNECTOR_VERSION}.nar` |
  `--inputs` | The input topic(s) of the sink. <br /><br /> Multiple topics can be specified as a comma-separated list.||
  `--name` | The name of the sink. | pulsar-postgres-jdbc-sink |
  `--sink-config-file` | The absolute path to a YAML config file specifying the configuration of the sink. | $PWD/pulsar-postgres-jdbc-sink.yaml |

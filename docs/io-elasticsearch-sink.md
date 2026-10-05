@@ -183,14 +183,14 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
    bin/pulsar standalone
    ```
 
-   Make sure the NAR file is available at `connectors/pulsar-io-elastic-search-@pulsar:version@.nar`.
+   Make sure the NAR file is available at `connectors/pulsar-io-elastic-search-@pulsar:version:connectors@.nar`.
 
 3. Start the Pulsar Elasticsearch connector in local run mode using one of the following methods.
    * Use the **JSON** configuration as shown previously.
 
        ```bash
        bin/pulsar-admin sinks localrun \
-           --archive $PWD/connectors/pulsar-io-elastic-search-@pulsar:version@.nar \
+           --archive $PWD/connectors/pulsar-io-elastic-search-@pulsar:version:connectors@.nar \
            --tenant public \
            --namespace default \
            --name elasticsearch-test-sink \
@@ -202,7 +202,7 @@ Before using the Elasticsearch sink connector, you need to create a configuratio
 
        ```bash
        bin/pulsar-admin sinks localrun \
-           --archive $PWD/connectors/pulsar-io-elastic-search-@pulsar:version@.nar \
+           --archive $PWD/connectors/pulsar-io-elastic-search-@pulsar:version:connectors@.nar \
            --tenant public \
            --namespace default \
            --name elasticsearch-test-sink \

@@ -38,11 +38,12 @@ testing: lib/                     OK
 testing: lib/libcpu-affinity.so   OK
 ```
 
-Download the Cassandra connector:
+Connectors are maintained separately in [apache/pulsar-connectors](https://github.com/apache/pulsar-connectors) and are not included in the server distribution or Docker image. For the connector checks below, select and install a compatible Cassandra connector NAR; its version need not match the server release:
 
 ```shell
-mkdir connectors
-mv pulsar-io-cassandra-<release>.nar connectors
+CONNECTOR_VERSION='replace-with-connector-version'
+mkdir -p connectors
+mv "pulsar-io-cassandra-${CONNECTOR_VERSION}.nar" connectors
 ```
 
 Download the `*.asc` file and verify the GPG signature:
@@ -53,26 +54,18 @@ gpg --verify apache-pulsar-<release>-bin.tar.gz.asc
 
 ### Download And Verify the source tarball
 
-Before you start to validate the source tarball, make sure you have installed these software:
+For Pulsar source releases, install JDK 21, 25, or 26 and Zip. The source distribution includes the Gradle Wrapper; a separate Maven installation is not needed. Server implementations target Java 21, while client libraries, client CLI tools, and public Functions/IO interfaces target Java 17. Docker images use Java 25.
 
-* Amazon Corretto OpenJDK
-  * JDK 21 for Pulsar version >= 3.3
-    * code will be compiled for Java 17 with Java 21
-    * Pulsar docker images are running Java 21 since 3.3.0
-  * JDK 17 for Pulsar version >= 2.11
-  * JDK 11 for earlier versions
-* Maven 3.9.9 (most recent stable Maven 3.9.x version)
-  * Install using `sdkman i maven 3.9.9`
-* Zip
-
-Please refer to ["Setting up JDKs and Maven using SDKMAN"](setup-buildtools.md) for details on how to install JDKs and Maven using SDKMAN.
-
-Download the source tarball and extract it. The extracted files are in a directory called `apache-pulsar-<release>-src`
+See [Setting up JDKs using SDKMAN](setup-buildtools.md) for installation instructions. Download, verify, and extract the source tarball, then build from its root:
 
 ```shell
 cd apache-pulsar-<release>-src
-mvn clean install -DskipTests
+./gradlew assemble
 ```
+
+This checks compilation and artifact assembly, including the Java client compatibility checks; it does not run the complete test suite. Continue with the runtime checks below using the candidate binary distribution. A source build that succeeds on the build JDK does not by itself verify that client artifacts run on Java 17.
+
+For Maven-based maintenance releases (4.2 and earlier), use the matching [Maven build prerequisites](release-process-maven.md#prerequisites) and `mvn clean install -DskipTests` instead.
 
 ### Validate Pub/Sub and Java Functions
 
@@ -86,7 +79,7 @@ PULSAR_STANDALONE_USE_ZOOKEEPER=1 bin/pulsar standalone
 
 When you start a standalone cluster, there are a few things to check.
 
-1. The standalone cluster is able to locate all the connectors. The following logging information should be displayed.
+1. The standalone cluster is able to locate the connectors you installed. Connector discovery logs vary by release and installed NARs; the following is historical example output.
 
 ```text
 Found connector ConnectorDefinition(name=kinesis, description=Kinesis sink connector, sourceClass=null, sinkClass=org.apache.pulsar.io.kinesis.KinesisSink) from /Users/sijie/tmp/apache-pulsar-2.1.0-incubating/./connectors/pulsar-io-kinesis-2.1.0-incubating.nar
@@ -96,7 +89,7 @@ Found connector ConnectorDefinition(name=cassandra, description=Writes data into
 Found connector ConnectorDefinition(name=aerospike, description=Aerospike database sink, sourceClass=null, sinkClass=org.apache.pulsar.io.aerospike.AerospikeStringSink) from /Users/sijie/tmp/apache-pulsar-2.1.0-incubating/./connectors/pulsar-io-aerospike-2.1.0-incubating.nar
 ```
 
-2. (since Pulsar 2.1 release) The standalone starts bookkeeper table service. The output is similar as follows:
+2. For older releases that start the BookKeeper table service by default, check its startup logs. Skip this check for Pulsar 5.0. Historical output looks like:
 
 ```text
 12:12:26.099 [main] INFO  org.apache.pulsar.zookeeper.LocalBookkeeperEnsemble - 'default' namespace for table service : namespace_name: "default"

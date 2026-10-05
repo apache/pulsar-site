@@ -10,9 +10,9 @@ You can perform the following migrations.
 
 Migration|When to use
 |---|---
-[Migrate from simple to modular](#migrate-from-simple-to-modular-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of OverloadShedder, ThresholdShedder, or UniformLoadShedder.
+[Migrate from simple to modular](#migrate-from-simple-to-modular-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of AvgShedder, OverloadShedder, ThresholdShedder, or UniformLoadShedder.
 [Migrate from modular to extensible](#migrate-from-modular-to-extensible-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of TransferShedder.
-[Migrate from extensible to modular](#migrate-from-modular-to-extensible-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of OverloadShedder, ThresholdShedder, or UniformLoadShedder.
+[Migrate from extensible to modular](#migrate-from-modular-to-extensible-broker-load-balancer)| If you want to use the [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) of AvgShedder, OverloadShedder, ThresholdShedder, or UniformLoadShedder.
 
 :::note
 
@@ -36,6 +36,7 @@ This bundle unloading strategy|is available for this broker load balancer type|i
 OverloadShedder|Modular|1.18 and later
 ThresholdShedder|Modular|2.6 and later
 UniformLoadShedder|Modular|2.10 and later
+AvgShedder|Modular|3.0.6, 3.2.4, 3.3.1 and later
 TransferShedder|Extensible|3.0 and later
 
 ## Migrate from simple to modular broker load balancer
@@ -50,7 +51,7 @@ You can migrate from the simple to the modular broker load balancer, by manually
     vim apache-pulsar-@pulsar:version@/conf/broker.conf
     ``````
 
-2. Change the broker load balancer by setting [loadManagerClassName](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1309C20-L1309C20) to `ModularLoadManagerImpl` in the broker.conf file.
+2. Change the broker load balancer by setting `loadManagerClassName` to `ModularLoadManagerImpl` in the broker.conf file.
 
     ```conf
     loadManagerClassName=org.apache.pulsar.broker.loadbalance.extensions.ModularLoadManagerImpl
@@ -80,9 +81,11 @@ You can migrate from the simple to the modular broker load balancer, by manually
 
 You can migrate from the modular to the extensible broker load balancer, by manually changing settings in the broker.conf file. During the migration, the lookup and assignment will be redirected to the brokers with the extensible load balancer.
 
+For a rolling migration, first [enable lookup redirection](#enable-lookup-redirection-during-a-rolling-migration) on the existing brokers. Introducing the new load manager without that flag leaves the two types handling lookups independently.
+
 :::note
 
-The pulsar-admin tool is not supported for this migration.
+Do not change `loadManagerClassName` through `pulsar-admin brokers update-dynamic-config` for this migration. Although the setting is dynamic, changing it swaps the manager in place without reconfiguring the leader-election and load-reporting tasks initialized at startup or migrating bundle ownership between the two managers. Use `broker.conf` and a [rolling upgrade of brokers](administration-rolling-upgrade.md); use the dynamic API to enable and disable migration redirection.
 
 :::
 
@@ -98,7 +101,7 @@ The pulsar-admin tool is not supported for this migration.
 
 3. Change the following settings in the broker.conf file:
 
-   - Update [broker load balancer](./concepts-broker-load-balancing-overview.md) by setting [loadManagerClassName](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1309C20-L1309C20) to `ExtensibleLoadManagerImpl`. 
+   - Update [broker load balancer](./concepts-broker-load-balancing-overview.md) by setting `loadManagerClassName` to `ExtensibleLoadManagerImpl`.
 
    - Update [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) by setting `loadBalancerLoadSheddingStrategy` to `TransferShedder`. 
 
@@ -121,9 +124,11 @@ The pulsar-admin tool is not supported for this migration.
 
 You can migrate from the extensible to the modular broker load balancer, by manually changing the setting in the broker.conf file. During the migration, the lookup and assignment will be redirected to the brokers with the modular load balancer.
 
+For a rolling migration, first [enable lookup redirection](#enable-lookup-redirection-during-a-rolling-migration) on the existing brokers, including when rolling back a migration.
+
 :::note
 
-The pulsar-admin tool is not supported for this migration.
+Do not change `loadManagerClassName` through `pulsar-admin brokers update-dynamic-config` for this migration. Although the setting is dynamic, changing it swaps the manager in place without reconfiguring the leader-election and load-reporting tasks initialized at startup or migrating bundle ownership between the two managers. Use `broker.conf` and a [rolling upgrade of brokers](administration-rolling-upgrade.md); use the dynamic API to enable and disable migration redirection.
 
 :::
 
@@ -137,14 +142,15 @@ The pulsar-admin tool is not supported for this migration.
 
 2. Change the following settings in the broker.conf file:
    
-   - Update broker load balancer by setting [loadManagerClassName](https://github.com/apache/pulsar/blob/69d7a2bf14555f11a716a9545c5cf391d8179a27/conf/broker.conf#L1309C20-L1309C20) to ModularLoadManagerImpl
+   - Update broker load balancer by setting `loadManagerClassName` to ModularLoadManagerImpl
     
-   - Update [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) to OverloadShedder, ThresholdShedder, or UniformLoadShedder based on your needs.
+   - Update [bundle unloading strategy](./concepts-broker-load-balancing-concepts.md#bundle-unloading-strategies) to AvgShedder (the default of the modular load balancer), OverloadShedder, ThresholdShedder, or UniformLoadShedder based on your needs.
 
     ```
     loadManagerClassName=org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl
 
-    loadBalancerLoadSheddingStrategy=org.apache.pulsar.broker.loadbalance.impl.ThresholdShedder
+    loadBalancerLoadSheddingStrategy=org.apache.pulsar.broker.loadbalance.impl.AvgShedder
+    loadBalancerLoadPlacementStrategy=org.apache.pulsar.broker.loadbalance.impl.AvgShedder
     ```
 
     :::note
@@ -154,6 +160,26 @@ The pulsar-admin tool is not supported for this migration.
     :::
 
 3. Restart the Pulsar cluster. The new settings will take effect after the restart.  
+
+## Enable lookup redirection during a rolling migration
+
+Migration redirection is disabled by default (`loadManagerMigrationEnabled=false`). Before starting the first broker with a different load manager, enable it dynamically on the existing cluster:
+
+```shell
+pulsar-admin brokers update-dynamic-config --config loadManagerMigrationEnabled --value true
+```
+
+Wait for the setting to propagate before introducing the new type. This flag enables lookup redirection; change `loadManagerClassName` and its associated strategy settings in the broker configuration and restart the brokers, as described above. Do not change the load manager type through the dynamic configuration API for this migration.
+
+While both load manager types are running, the most recently started broker determines the load manager type to which lookups are redirected, and each type assigns bundles only to brokers of its own type. The modular and extensible ownership stores remain separate. Plan enough capacity in the new pool for new assignments and expect additional ownership changes during migration. Follow [Rolling upgrade of brokers](administration-rolling-upgrade.md) to pause automatic rebalancing, control bundle movement, and check each replacement before proceeding.
+
+After all brokers use the intended load manager, disable migration redirection:
+
+```shell
+pulsar-admin brokers update-dynamic-config --config loadManagerMigrationEnabled --value false
+```
+
+Pulsar 4.x performs this redirection without the flag. Choosing the extensible load manager's ownership backend (system topic or metadata store) is a separate migration; do not combine it with a load manager type change in the same rollout.
 
 ## Related topics
 

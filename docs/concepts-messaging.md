@@ -939,7 +939,7 @@ Example of the consumer stats part of the topic stats for a subscription:
         } ],
         "address" : "/127.0.0.1:55829",
         "connectedSince" : "2024-10-21T05:39:39.077284+03:00",
-        "clientVersion" : "Pulsar-Java-v4.0.0",
+        "clientVersion" : "Pulsar-Java-v@pulsar:version@",
         "lastAckedTimestamp" : 0,
         "lastConsumedTimestamp" : 1728527979411,
         "lastConsumedFlowTimestamp" : 1728527979106,
@@ -966,7 +966,7 @@ Example of the consumer stats part of the topic stats for a subscription:
         "drainingHashes" : [ ],
         "address" : "/127.0.0.1:55829",
         "connectedSince" : "2024-10-21T05:39:39.294216+03:00",
-        "clientVersion" : "Pulsar-Java-v4.0.0",
+        "clientVersion" : "Pulsar-Java-v@pulsar:version@",
         "lastAckedTimestamp" : 0,
         "lastConsumedTimestamp" : 0,
         "lastConsumedFlowTimestamp" : 1728527979297,
@@ -1205,7 +1205,7 @@ Decisions about routing and subscription modes can be made separately in most ca
 
 There is no difference between partitioned topics and normal topics in terms of how subscription types work, as partitioning only determines what happens between when a message is published by a producer and processed and acknowledged by a consumer.
 
-Partitioned topics need to be explicitly created via the [admin API](admin-api-overview.md). The number of partitions can be specified when creating the topic.
+Partitioned topics need to be explicitly created via the [admin API](admin-get-started.md). The number of partitions can be specified when creating the topic.
 
 ### Routing modes
 

@@ -5,6 +5,12 @@ sidebar_label: "Run Pulsar locally with Docker Compose"
 description: Get started with Apache Pulsar on your local machine using Docker Compose.
 ---
 
+:::warning Network perimeter security required
+
+A Pulsar cluster is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. This requirement can be met by deploying Pulsar in private networks and restricting access to trusted clients and services.
+
+:::
+
 To run Pulsar locally with Docker Compose, follow the steps below.
 
 ## Prerequisites

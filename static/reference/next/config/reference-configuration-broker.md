@@ -152,11 +152,11 @@ When this parameter is not empty, unauthenticated users perform as anonymousUser
 **Category**: Authorization
 
 ### authenticateOriginalAuthData
-If this flag is set then the broker authenticates the original Auth data else it just accepts the originalPrincipal and authorizes it (if required)
+If this flag is set then the broker authenticates the original Auth data else it just accepts the originalPrincipal and authorizes it (if required). Set false for TLS client-certificate authentication through a proxy, since the broker receives the proxy certificate rather than the client certificate. Also set false for SASL authentication through a proxy, since the client-proxy handshake cannot be replayed as a separate client-broker handshake.
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -839,11 +839,11 @@ Direct Memory Resource Usage Weight. Direct memory usage cannot accurately refle
 **Category**: Load Balancer
 
 ### loadBalancerDistributeBundlesEvenlyEnabled
-enable/disable distribute bundles evenly
+Enable/disable distributing bundles evenly across brokers when a bundle is assigned. When enabled, the candidate brokers for a new assignment are first narrowed to those owning the fewest bundles of that namespace, before the placement strategy runs. This overrides load-aware placement and can discard the destination the AvgShedder shedding strategy planned for an unloaded bundle, so it is disabled by default since 5.0.0 (it was enabled before). Bundles of the system namespace are always distributed evenly.
 
 **Type**: `boolean`
 
-**Default**: `true`
+**Default**: `false`
 
 **Dynamic**: `true`
 
@@ -894,22 +894,22 @@ Time to wait before fixing any stuck in-flight service unit states. The leader m
 **Category**: Load Balancer
 
 ### loadBalancerLoadPlacementStrategy
-load balance placement strategy
+load balance placement strategy. Default is AvgShedder since 5.0.0 (LeastLongTermMessageRate before), which binds placement to the AvgShedder shedding strategy so that unloaded bundles land on the broker the shedder chose for them. It only takes effect together with loadBalancerLoadSheddingStrategy=AvgShedder; with any other shedding strategy the broker falls back to LeastLongTermMessageRate placement and logs a warning.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.broker.loadbalance.impl.LeastLongTermMessageRate`
+**Default**: `org.apache.pulsar.broker.loadbalance.impl.AvgShedder`
 
 **Dynamic**: `false`
 
 **Category**: Load Balancer
 
 ### loadBalancerLoadSheddingStrategy
-load balance load shedding strategy (It requires broker restart if value is changed using dynamic config). Default is ThresholdShedder since 2.10.0
+load balance load shedding strategy (It requires broker restart if value is changed using dynamic config). Default is AvgShedder since 5.0.0 (ThresholdShedder was the default from 2.10.0 to 4.x). AvgShedder implements both the shedding and the placement strategy and must be paired with loadBalancerLoadPlacementStrategy=AvgShedder; when a different shedding strategy is configured, an AvgShedder placement strategy falls back to LeastLongTermMessageRate.
 
 **Type**: `java.lang.String`
 
-**Default**: `org.apache.pulsar.broker.loadbalance.impl.ThresholdShedder`
+**Default**: `org.apache.pulsar.broker.loadbalance.impl.AvgShedder`
 
 **Dynamic**: `true`
 
@@ -1303,11 +1303,11 @@ For each uniform balanced unload, the maximum number of bundles that can be unlo
 **Category**: Load Balancer
 
 ### maxUnloadPercentage
-In the UniformLoadShedder and AvgShedder strategy, the maximum unload ratio.For AvgShedder, recommend to set to 0.5, so that it will distribute the load evenly between the highest and lowest brokers.
+In the UniformLoadShedder and AvgShedder strategy, the maximum unload ratio: the share of the load difference between the highest and the lowest loaded broker that is moved in one shedding cycle. Default is 0.5 since 5.0.0 (0.2 before), which lets AvgShedder equalize the load of the two brokers in a single cycle.
 
 **Type**: `double`
 
-**Default**: `0.2`
+**Default**: `0.5`
 
 **Dynamic**: `true`
 
@@ -1419,7 +1419,7 @@ If true, export consumer level metrics otherwise namespace level
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1441,7 +1441,7 @@ If true, export managed cursor metrics
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1452,7 +1452,7 @@ If true, export managed ledger metrics (aggregated by namespace)
 
 **Default**: `true`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1465,7 +1465,7 @@ Enable expose the precise backlog stats.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1476,7 +1476,7 @@ If true, export producer level metrics otherwise namespace level
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1511,7 +1511,7 @@ Enable expose the backlog size for each subscription when generating stats.
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1522,7 +1522,7 @@ If true, export topic level metrics otherwise namespace level
 
 **Default**: `true`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Metrics
 
@@ -1974,13 +1974,26 @@ Time in seconds that a persistent geo-replication replicator may stay idle befor
 **Category**: Policies
 
 ### defaultNumberOfNamespaceBundles
-When a namespace is created without specifying the number of bundle, this value will be used as the default
+When a namespace is created without specifying the number of bundles, this value will be used as the default.
+
+Bundles are the unit of assignment of topics to brokers, so a namespace needs more bundles than there are brokers for its topics to spread across the cluster. Bundles can be split but never merged. Only bundles that have been looked up cost anything (an ownership entry, an entry in the load report and one unload step at broker shutdown); the unused bundles of a small namespace are free. Default is 32 since 5.0.0 (was 4).
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `32`
 
 **Dynamic**: `true`
+
+**Category**: Policies
+
+### defaultNumberOfSystemNamespaceBundles
+Number of bundles for the pulsar/system namespace when the broker creates it (the extensible load manager creates it on start-up if it is missing) or when pulsar standalone creates it. The system namespace holds a small, fixed set of topics (the transaction coordinator partitions, the load balancer's internal topics and the resource usage topic), so it does not follow defaultNumberOfNamespaceBundles. A transaction coordinator is owned by whichever broker owns the bundle of its transaction_coordinator_assign partition, so the bundles decide how far the coordinators can spread: with the default 16 coordinators, 64 is the smallest number of bundles at which every coordinator hashes into its own bundle (16 bundles put them into 8), and bundles that never own a topic cost nothing. The initialize-cluster-metadata and initialize-transaction-coordinator-metadata tools create the namespace with their --system-namespace-bundle-number option, which has the same default.
+
+**Type**: `int`
+
+**Default**: `64`
+
+**Dynamic**: `false`
 
 **Category**: Policies
 
@@ -2493,6 +2506,17 @@ Total entry-bucket budget per scalable topic. Entry-buckets are the unit of key-
 
 **Category**: Policies
 
+### scalableTopicEntryBucketMaxPerSegment
+Hard ceiling on a single segment's entry-bucket count (PIP-486). Bounds both the manual rebucket operation and the controller's auto rebucket-up; a segment's bucket count caps how many consumers can share it.
+
+**Type**: `int`
+
+**Default**: `1024`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### scalableTopicLoadReportIntervalSeconds
 Interval (seconds) at which the segment-owning broker samples its segment topics to report load for auto split/merge. Read at broker start; not dynamic.
 
@@ -2615,6 +2639,17 @@ Hard floor on the number of active segments. Merges stop firing once this is rea
 
 **Category**: Policies
 
+### scalableTopicRebucketCooldownSeconds
+Minimum time (seconds) between automatic entry-bucket rollovers (rebuckets) on a topic. Coalesces consumer-join bursts, like the split cooldown.
+
+**Type**: `int`
+
+**Default**: `60`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### scalableTopicSplitBytesRateInThreshold
 Inbound bytes/second above which a segment is split.
 
@@ -2670,8 +2705,19 @@ Outbound (dispatched) messages/second above which a segment is split.
 
 **Category**: Policies
 
+### scalableTopicSplitVsRebucketMinMsgRateInThreshold
+PIP-486 segments-vs-buckets lever: on consumer-driven scale-up, split only if the busiest segment's inbound msg/s is at or above this floor; below it the controller grows the segment's entry-buckets instead (a low-throughput topic should not materialize physical segments just for consumer count).
+
+**Type**: `double`
+
+**Default**: `1000.0`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### scalableTopicsEnabled
-Enables the scalable-topics V5 API on this broker. When disabled, the broker advertises supports_scalable_topics=false in CommandConnected feature flags and rejects scalable-topic commands from clients.
+Enables the scalable-topics V5 API on this broker. When disabled, the broker advertises supports_scalable_topics=false in CommandConnected feature flags, rejects scalable-topic commands and topic/segment lookups and loads, and does not start scalable-topic services or expose the scalable-topic admin API. Disable before migrating from 4.x to preserve the option to roll back without using scalable topics. Existing scalable-topic data is retained but inaccessible while disabled. Changing this setting requires a broker restart.
 
 **Type**: `boolean`
 
@@ -2770,17 +2816,6 @@ Enable Key_Shared subscription (default is enabled).
 
 **Category**: Policies
 
-### subscriptionKeySharedUseClassicPersistentImplementation
-For persistent Key_Shared subscriptions, enables the use of the classic implementation of the Key_Shared subscription that was used before Pulsar 4.0.0 and PIP-379.
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `true`
-
-**Category**: Policies
-
 ### subscriptionKeySharedUseConsistentHashing
 On KeyShared subscriptions, with default AUTO_SPLIT mode, use splitting ranges or consistent hashing to reassign keys to new consumers (default is consistent hashing)
 
@@ -2809,17 +2844,6 @@ Enable subscription message redelivery tracker to send redelivery count to consu
 **Type**: `boolean`
 
 **Default**: `true`
-
-**Dynamic**: `true`
-
-**Category**: Policies
-
-### subscriptionSharedUseClassicPersistentImplementation
-For persistent Shared subscriptions, enables the use of the classic implementation of the Shared subscription that was used before Pulsar 4.0.0.
-
-**Type**: `boolean`
-
-**Default**: `false`
 
 **Dynamic**: `true`
 
@@ -2943,6 +2967,17 @@ More connections host-to-host lead to better throughput over high-latency links
 **Type**: `int`
 
 **Default**: `16`
+
+**Dynamic**: `false`
+
+**Category**: Replication
+
+### replicationMaxReadProcessingStepsPerTurn
+Maximum read-processing steps per persistent replicator before yielding to the broker executor. A step initiates a read, processes a completed batch, or handles cancellation or rewind; it is not a message limit. Lower values improve fairness between tasks; higher values reduce scheduling overhead. Must be at least 1. Requires a broker restart.
+
+**Type**: `int`
+
+**Default**: `64`
 
 **Dynamic**: `false`
 
@@ -3620,7 +3655,7 @@ Dispatch messages and execute broker side filters in a per-subscription thread
 
 **Type**: `boolean`
 
-**Default**: `true`
+**Default**: `false`
 
 **Dynamic**: `true`
 
@@ -3638,11 +3673,11 @@ Time in milliseconds to delay the new delivery of a message when an EntryFilter 
 **Category**: Server
 
 ### dispatcherMaxReadBatchSize
-Max number of entries to read from bookkeeper. By default it is 100 entries.
+Max number of entries to read from bookkeeper. By default it is 500 entries.
 
 **Type**: `int`
 
-**Default**: `100`
+**Default**: `500`
 
 **Dynamic**: `true`
 
@@ -3782,6 +3817,17 @@ Enable to run bookie autorecovery along with broker
 
 ### enableRunBookieTogether
 Enable to run bookie along with broker
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### enableShadowTopics
+Enable shadow topic creation, loading and replication. Requires a broker restart.
 
 **Type**: `boolean`
 
@@ -4652,7 +4698,7 @@ Amount of seconds to timeout when loading a topic. In situations with many geo-r
 
 **Default**: `60`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Server
 
@@ -5130,11 +5176,11 @@ Enable bookie secondary-isolation group if bookkeeperClientIsolationGroups doesn
 **Category**: Storage (BookKeeper)
 
 ### bookkeeperClientSeparatedIoThreadsEnabled
-Use separated IO threads for BookKeeper client. Default is false, which will use Pulsar IO threads
+Use separated IO threads for BookKeeper client. Default is true, which will use dedicated BookKeeper IO threads
 
 **Type**: `boolean`
 
-**Default**: `false`
+**Default**: `true`
 
 **Dynamic**: `false`
 
@@ -5575,6 +5621,28 @@ If value is NONE, then save the ManagedCursorInfo bytes data directly.
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerAddEntryHandoverMaxBatchBytesSize
+Total size in bytes of the entries after which a batch of add entry requests handed over to the managed ledger's executor thread stops taking more. This keeps a ledger with large entries from occupying the executor thread for as long as a full batch of managedLedgerAddEntryHandoverMaxBatchItems adds would, which would delay add completions, reads and cursor notifications for the ledgers that share the thread. A batch always takes at least one add, even one whose entry is larger than this. Set to 0 to limit batches only by their number of adds. Updates apply to managed ledgers opened after the change; ledgers that are already open keep the value they opened with.
+
+**Type**: `long`
+
+**Default**: `5242880`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerAddEntryHandoverMaxBatchItems
+Maximum number of add entry requests handed over to the managed ledger's executor thread in one batch. Publishing threads queue adds for the ledger's executor, which takes them over in batches of up to this many adds and processes each batch before other tasks on that thread can run. A batch also stops taking adds once their entries add up to managedLedgerAddEntryHandoverMaxBatchBytesSize bytes. A larger value reduces scheduling overhead and contention between publishing threads under high publish rates, but keeps the executor thread occupied for longer per batch, which can delay add completions, reads and cursor notifications for the ledgers that share the thread. A smaller value favors those tasks over add throughput. Set to 0 or 1 to disable batching, so that each add is handed over to the executor as a task of its own. Updates apply to managed ledgers opened after the change; ledgers that are already open keep the value they opened with.
+
+**Type**: `int`
+
+**Default**: `1024`
+
+**Dynamic**: `true`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerAddEntryTimeoutSeconds
 Add entry timeout when broker tries to publish message to bookkeeper.(0 to disable it)
 
@@ -5583,6 +5651,17 @@ Add entry timeout when broker tries to publish message to bookkeeper.(0 to disab
 **Default**: `0`
 
 **Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerBatchReadEnabled
+Enable the BookKeeper batch read API when reading entries from bookkeeper: a single RPC fetches multiple entries, reducing network overhead for sequential reads. Batch read requires the v2 wire protocol (bookkeeperUseV2WireProtocol) and BookKeeper's own batch read flag (bookkeeper_batchReadEnabled), checked on the BookKeeper client when a topic is loaded: regular reads are used otherwise, as well as for striped ledgers (where managedLedgerDefaultEnsembleSize differs from managedLedgerDefaultWriteQuorum) and for bookies without batch read support. Each batch read request is bounded by the size limit of the dispatcher read that triggered it (e.g. dispatcherMaxReadSizeBytes) and by the BookKeeper client's max frame size (maxMessageSize plus padding); a read needing more data is split into sequential batch read requests. Entries read this way are copied when inserted in the entry cache.
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `true`
 
 **Category**: Storage (Managed Ledger)
 
@@ -5628,11 +5707,11 @@ When enabled:
 When disabled:
  - Cache behaves more like a FIFO queue with time-based and size-based eviction
  - Minimum eviction time is managedLedgerCacheEvictionTimeThresholdMillis
-Default is true, to behave like a LRU cache.
+Default is false, to avoid extending cache retention for entries that have already been read.
 
 **Type**: `boolean`
 
-**Default**: `true`
+**Default**: `false`
 
 **Dynamic**: `true`
 
@@ -6165,6 +6244,17 @@ Managed ledger prometheus stats latency rollover seconds
 **Type**: `int`
 
 **Default**: `60`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerReadEntriesCallbackInline
+Allow successful ordinary multi-entry managed-ledger read callbacks to complete on the current thread. Fully cached reads may complete before the read method returns. Set false to restore ledger-executor affinity, including bounded inline completion when already on that executor. False also restores the Exclusive/Failover cache-hit handoff used before PR #26619. The JVM-wide property pulsar.managedLedger.maxReadCompletionDepth limits nested inline callbacks in both modes when callbacks issue another read before returning (default 10, values below 1 use 1); set it at JVM startup. The depth accepts Integer.decode syntax, including hexadecimal and leading-zero octal. At the limit, enabled mode queues to the JVM common ForkJoinPool; disabled mode queues to the ledger executor. If common-pool parallelism is at most 1, both use the ledger executor. Common-pool parallelism normally uses available processors minus one (at least one); override it with -Djava.util.concurrent.ForkJoinPool.common.parallelism. A limit of 1 queues every subsequent completion in a nested cached-read chain. This is not a dynamic setting: the completion policy is captured when a managed ledger opens and does not change for already loaded topics. Failure callbacks, single-entry reads, and replay callbacks are unaffected.
+
+**Type**: `boolean`
+
+**Default**: `true`
 
 **Dynamic**: `false`
 

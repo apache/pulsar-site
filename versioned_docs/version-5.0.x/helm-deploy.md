@@ -5,6 +5,12 @@ sidebar_label: "Deploy"
 description: Learn to deploy a Pulsar cluster on Kubernetes.
 ---
 
+:::warning Network perimeter security required
+
+A Pulsar cluster is not intended to be exposed on the public internet. The security considerations in the current design expect network perimeter security. This requirement can be met by deploying Pulsar in private networks and restricting access to trusted clients and services.
+
+:::
+
 Before deploying a Pulsar cluster, you need to [prepare Kubernetes resources](helm-prepare.md) and then continue with the following steps.
 
 ## Step 1: Select configuration options
@@ -98,8 +104,6 @@ components:
   proxy: true
   # toolset
   toolset: true
-  # pulsar manager
-  pulsar_manager: true
 ```
 
 :::tip Use Oxia as the metadata store
@@ -131,7 +135,7 @@ kube-prometheus-stack:
 
 #### Docker images
 
-The Pulsar Helm Chart is designed to enable controlled upgrades. So it can configure independent image versions for components. You can customize the images by setting individual components.
+The Pulsar Helm Chart lets you configure independent image versions for components. Use the `apachepulsar/pulsar` image. Supply required connector NARs separately as described in [Install Pulsar and built-in connector](io-quickstart.md#install-pulsar-and-built-in-connector). Pin each image tag to the release you are deploying.
 
 ```yaml
 ## Images
@@ -139,33 +143,28 @@ The Pulsar Helm Chart is designed to enable controlled upgrades. So it can confi
 ## Control what images to use for each component
 images:
   zookeeper:
-    repository: apachepulsar/pulsar-all
-    tag: latest
+    repository: apachepulsar/pulsar
+    tag: "@pulsar:version@"
     pullPolicy: IfNotPresent
   bookie:
-    repository: apachepulsar/pulsar-all
-    tag: latest
+    repository: apachepulsar/pulsar
+    tag: "@pulsar:version@"
     pullPolicy: IfNotPresent
   autorecovery:
-    repository: apachepulsar/pulsar-all
-    tag: latest
+    repository: apachepulsar/pulsar
+    tag: "@pulsar:version@"
     pullPolicy: IfNotPresent
   broker:
-    repository: apachepulsar/pulsar-all
-    tag: latest
+    repository: apachepulsar/pulsar
+    tag: "@pulsar:version@"
     pullPolicy: IfNotPresent
   proxy:
-    repository: apachepulsar/pulsar-all
-    tag: latest
+    repository: apachepulsar/pulsar
+    tag: "@pulsar:version@"
     pullPolicy: IfNotPresent
   functions:
-    repository: apachepulsar/pulsar-all
-    tag: latest
-  pulsar_manager:
-    repository: apachepulsar/pulsar-manager
-    tag: v0.3.0
-    pullPolicy: IfNotPresent
-    hasCommand: false
+    repository: apachepulsar/pulsar
+    tag: "@pulsar:version@"
 ```
 
 The Pulsar Helm Chart also lets you specify the image versions used by initialization containers used to coordinate creation and connection of dependent Pulsar resources.
@@ -177,8 +176,8 @@ The Pulsar Helm Chart also lets you specify the image versions used by initializ
 pulsar_metadata:
   component: pulsar-init
   image:
-    repository: apachepulsar/pulsar-all
-    tag: latest
+    repository: apachepulsar/pulsar
+    tag: "@pulsar:version@"
     pullPolicy: IfNotPresent
 ```
 
@@ -305,6 +304,32 @@ To enable authorization, you can include this option in the `helm install` comma
 --set auth.authorization.enabled=true
 ```
 
+#### Component configuration
+
+Set broker and bookie configuration through `broker.configData` and `bookie.configData` in `values.yaml`. The chart exposes these entries as environment variables, and the container's `apply-config-from-env.py` script writes them into `conf/broker.conf` or `conf/bookkeeper.conf` at startup.
+
+If a property is absent from the image's default configuration file, prefix its environment-variable key with **`PULSAR_PREFIX_`**. Without that prefix, the script only updates properties already present in the file, including commented `key=value` entries. Prefixed variables can both add and update properties; the prefix is stripped before writing the configuration.
+
+For example, configure both ends of broker-to-bookie TCP keep-alive:
+
+```yaml
+broker:
+  configData:
+    PULSAR_PREFIX_bookkeeper_tcpKeepIdle: "300"
+    PULSAR_PREFIX_bookkeeper_tcpKeepIntvl: "60"
+    PULSAR_PREFIX_bookkeeper_tcpKeepCnt: "5"
+bookie:
+  configData:
+    PULSAR_PREFIX_serverSockKeepalive: "true"
+    PULSAR_PREFIX_serverTcpKeepIdle: "300"
+    PULSAR_PREFIX_serverTcpKeepIntvl: "60"
+    PULSAR_PREFIX_serverTcpKeepCnt: "5"
+```
+
+Quote values as strings because they become environment-variable values. The `bookkeeper_` portion of the broker keys remains in `broker.conf`: it tells the broker to forward those properties to its BookKeeper client. It is separate from the `PULSAR_PREFIX_` mechanism. Use ordinary environment-variable names for launcher settings such as `PULSAR_MEM`; they are not configuration-file properties.
+
+See [Broker-to-bookie TCP keep-alive](administration-zk-bk.md#broker-to-bookie-tcp-keep-alive) for units, defaults, and transport support. Apply configuration changes through your normal Helm rollout and restart the affected components so startup configuration is regenerated.
+
 #### CPU and RAM resource requirements
 
 By default, the resource requests and the number of replicas for the Pulsar components in the Pulsar Helm Chart are adequate for small production deployment. If you deploy a non-production instance, you can reduce the defaults to fit into a smaller cluster.
@@ -382,7 +407,6 @@ To check the status of the deployment, run the `helm status pulsar` command. It 
 The default values will create a `ClusterIP` for the following resources, which you can use to interact with the cluster.
 
 - Proxy: You can use the IP address to produce and consume messages to the installed Pulsar cluster.
-- Pulsar Manager: You can access the Pulsar Manager UI at `http://<pulsar-manager-ip>:9527`.
 - Grafana Dashboard: You can access the Grafana dashboard at `http://<grafana-dashboard-ip>:3000`.
 
 To find the IP addresses of those components, run the following command:
@@ -391,13 +415,10 @@ To find the IP addresses of those components, run the following command:
 kubectl get service -n <k8s-namespace>
 ```
 
-You can configure the Proxy and the Pulsar Manager as a `NodePort` instead of a `ClusterIP`.
+You can configure the Proxy as a `NodePort` instead of a `ClusterIP`.
 
 ```yaml
 proxy:
-  service:
-    type: NodePort
-pulsar_manager:
   service:
     type: NodePort
 ```

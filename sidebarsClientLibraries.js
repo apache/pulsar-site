@@ -13,7 +13,12 @@ module.exports = {
                     label: "Java client",
                     link: {type: "doc", id: "java"},
                     items: [
-                        "java-setup",
+                        {
+                            type: "category",
+                            label: "Set up",
+                            link: {type: "doc", id: "java-setup"},
+                            items: ["java-dependency-configuration"],
+                        },
                         "java-initialize",
                         "java-use",
                         "java-tracing",

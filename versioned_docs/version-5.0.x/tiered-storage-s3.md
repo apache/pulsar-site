@@ -76,7 +76,7 @@ This example sets the endpoint as `localhost`.
 managedLedgerOffloadServiceEndpoint=http://localhost:9000
 ```
 
-#### Authentication (optional)
+#### Authentication
 
 To be able to access S3-compatible storage, you need to authenticate with S3-compatible storage.
 
@@ -92,6 +92,16 @@ export ACCESS_KEY_SECRET=ded7db27a4558e2ea8bbf0bf37ae0e8521618f366c
 Exporting these environment variables makes them available in the environment of spawned processes.
 
 :::
+
+#### Credentials in offload policies
+
+Pulsar also accepts credentials from the effective offload policy for the `S3` and `aliyun-oss` drivers. The fields are named `s3ManagedLedgerOffloadCredentialId` and `s3ManagedLedgerOffloadCredentialSecret` for **both** drivers. They can be supplied through namespace or topic offload policies, allowing different workloads to use different storage credentials.
+
+For the admin CLI's `set-offload-policies` command, the corresponding options are `--aws-id` and `--aws-secret`, including with `--driver aliyun-oss`. Include the intended bucket, endpoint, and other policy settings when setting a policy; this operation does not just patch the credentials.
+
+When either configured credential field is nonblank, both must be present. Configured credentials take precedence over environment variables; an incomplete configured pair fails rather than falling back. Without a configured pair, the driver uses `ACCESS_KEY_ID` and `ACCESS_KEY_SECRET`, falling back to the corresponding `ALIYUN_OSS_ACCESS_KEY_ID` and `ALIYUN_OSS_ACCESS_KEY_SECRET` variables when the generic values are empty. If you use the Aliyun-specific variables, avoid setting conflicting generic values in the same broker environment.
+
+Policy credentials are stored with the offload policy. Restrict access to policy administration and inspection, and avoid putting literal credentials into shared command histories. After changing credentials, verify both new offloads and reads of previously offloaded ledgers.
 
 ### Run S3 offloader automatically
 

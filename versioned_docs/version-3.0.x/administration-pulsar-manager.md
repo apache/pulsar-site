@@ -8,7 +8,7 @@ Pulsar Manager is a web-based GUI management and monitoring tool that helps admi
 
 :::note
 
-Pulsar Manager has been poorly maintained for a long time. Please take a look at the [Dekaf UI](administration-dekaf-ui.md) as an alternative to Pulsar Manager.
+Pulsar Manager has been poorly maintained for a long time. Please take a look at the [Dekaf UI](administration-ui.md) as an alternative to Pulsar Manager.
 
 :::
 
