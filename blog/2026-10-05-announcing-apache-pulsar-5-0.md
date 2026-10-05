@@ -50,6 +50,8 @@ Choose too few partitions and you create hot partitions and costly migrations; c
 
 Consumer parallelism can grow within a segment, too. Messages in a segment are grouped into **entry buckets** by key hash, and multiple consumers share a segment's buckets while preserving per-key ordering, including when consumers join or leave. When more consumers join, Pulsar can either split a busy segment or give it more buckets. This helps drain backlogs after splits and merges, and lets producers keep batching enabled without choosing a key-based batcher.
 
+**If you have struggled to combine Key_Shared subscriptions with producer batching, this feature addresses it.** With Scalable Topics and v5 stream consumers, you no longer have to choose between per-key ordering across many consumers and the efficiency of batching: producers can keep batching enabled while consumers share the work in key order.
+
 | | Partitioned topic (v4) | Scalable topic |
 | --- | --- | --- |
 | Capacity | Fixed partition count, set at creation | Segments and entry buckets that change at runtime |
@@ -71,6 +73,7 @@ Scalable Topics are delivered in 5.0 by a set of Pulsar Improvement Proposals:
 - **[PIP-466](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-466.md): New Java client API (v5)**: the client API built for Scalable Topics, described below.
 - **[PIP-473](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-473.md): Metadata-driven transactions**: transactions that work across segment splits and merges.
 - **[PIP-475](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-475.md): Regular-to-scalable migration**: in-place conversion of an existing topic, with no data copy.
+- **[PIP-494](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-494.md): Scalable Topics Client Specification**: the language-neutral client contract and its change process, described below.
 
 ### A Java client API built around how you consume
 
@@ -87,6 +90,18 @@ The v5 API also works with existing partitioned and non-partitioned topics, so y
 **One dependency for the v4, v5, and admin clients.** `org.apache.pulsar:pulsar-client-v5-all` contains everything needed to use Pulsar from Java: the Pulsar Java client, with both the v4 and v5 APIs, and the Pulsar Java admin client. It is unshaded, so you can upgrade third-party transitive dependencies yourself, for example to address CVEs, without waiting for a Pulsar release. Because the dependencies are not shaded, your build needs to align them: import both the Pulsar BOM and the Netty BOM so that Pulsar artifacts and Netty modules each resolve to one consistent version. [Java client dependency configuration](/docs/client-libraries/java-dependency-configuration) has complete Maven and Gradle examples, explains the [Pulsar and Netty BOM alignment](/docs/client-libraries/java-dependency-configuration#pulsar-bom), and shows how to exclude conflicting client artifacts.
 
 Changing the dependency doesn't require changing your code. Moving application code from the v4 API to the v5 API is a separate step, covered by the [v4-to-v5 API migration guide](/docs/client-libraries/java-migrate-to-v5), which you can follow when you're ready to use the new consumer models.
+
+### A client specification for every SDK
+
+With Scalable Topics, clients do more than connect to a topic: they track the segment layout as it changes, route each key to the segment that owns it, and follow the controller's consumer assignments. To make every client do this the same way, Pulsar 5.0 ships the **[Scalable Topics Client Specification](https://github.com/apache/pulsar/tree/v5.0.0/spec/scalable-topics) 1.0**, governed by [PIP-494](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-494.md). It is the authoritative, language-neutral description of how a Scalable Topics client behaves:
+
+- **One contract for all languages.** The specification separates the API contract that applications observe from the mechanisms a client implements internally and the exact wire-protocol interactions, documented with sequence diagrams. SDK authors build against the specification rather than reverse-engineering the Java client.
+- **Interoperability by design.** Every conformant client routes keys identically and honors the same ordering and acknowledgment semantics, so producers and consumers written in different languages can work on the same scalable topic.
+- **Stability you can rely on.** The specification is versioned and gives each feature a stability tier. Incompatible changes land only at an LTS boundary, and deprecated features remain available at least until the next LTS release.
+- **A clear definition of support.** A conformance checklist defines what an SDK must implement to claim Scalable Topics support. The Java v5 client is the reference implementation, while the specification is the source of truth.
+- **A controlled change process.** Every normative change goes through a PIP, and the specification edits land together with it, so the contract and its design rationale never drift apart.
+
+**Work is ongoing to bring the client specification, and with it Scalable Topics support, to all Pulsar client SDKs shortly.** Today, the Java v5 client supports Scalable Topics; check each SDK's documentation for its v5 API support.
 
 ### Adopting Scalable Topics
 
