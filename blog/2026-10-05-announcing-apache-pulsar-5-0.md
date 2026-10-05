@@ -4,7 +4,7 @@ author: Matteo Merli, Lari Hotari
 date: 2026-10-05
 ---
 
-The Apache Pulsar community is pleased to announce **Apache Pulsar 5.0.0**, the new long-term support (LTS) release. It follows the [5.0.0-M1](/blog/2026/06/23/announcing-apache-pulsar-5-0-m1) and 5.0.0-M2 milestones and is ready for production use.
+The Apache Pulsar community is pleased to announce **Apache Pulsar 5.0.0**, the new long-term support (LTS) release. It follows the 5.0.0-M1 and 5.0.0-M2 milestones and is ready for production use.
 
 Pulsar 5.0 has two headline items. **Scalable Topics** are a new kind of topic that grows and shrinks with demand while preserving per-key ordering, delivered together with a new Java client API and Oxia as the recommended metadata store for new clusters. Alongside them come **major performance and reliability improvements for the topics and applications you already run**, which you get by upgrading your cluster, with no application changes.
 
@@ -29,19 +29,76 @@ A typical path looks like this:
 
 The [Pulsar 5.0 release highlights](/docs/5.0.x/release-highlights) and the [Pulsar 5.0.x upgrade guide](/docs/5.0.x/administration-upgrade-to-5.0.x) cover each step in detail.
 
-## Scalable Topics
+## Scalable Topics: topics that size themselves
 
-For its whole history, Pulsar has asked application developers an infrastructure question up front: **how many partitions?** Too few creates hot partitions and costly migrations; too many wastes resources. Partitions cannot be removed, and adding them can disrupt per-key ordering.
+A topic should be a **logical concept**: a named stream that applications publish to and consume from. Application developers shouldn't have to think about the infrastructure that makes that stream fast. Yet for its whole history, Pulsar has asked them to answer an infrastructure question up front that has nothing to do with their application: **how many partitions?**
 
-[Scalable Topics](/docs/5.0.x/concepts-scalable-topics) ([PIP-460](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-460.md)) remove that decision. A scalable topic, addressed with the `topic://` scheme, is one logical topic made of key-range segments that split when part of the keyspace gets hot and merge when it cools down ([PIP-483](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-483.md)). Ordering for each key is preserved throughout.
+That number is a guess that is easy to get wrong and hard to undo:
 
-Consumer parallelism can also grow within a segment ([PIP-486](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-486.md)): multiple consumers share a segment while preserving per-key ordering, including when consumers join or leave. This helps drain backlogs after splits and merges, and lets producers keep batching enabled.
+- **You must size capacity in advance.** The partition count is chosen before you know the real traffic, and increasing it is an administrative operation.
+- **You cannot scale down.** A partition count can be increased but never decreased, so a topic sized for a traffic peak stays oversized.
+- **Resizing can break key ordering.** Keys are routed with `hash(key) % partitionCount`, so adding partitions can move keys to different partitions, and consumers may read a key's newer messages before its older ones.
 
-- **Migrate in place.** Existing persistent topics can be [converted to scalable topics](/docs/5.0.x/admin-api-scalable-topics#migrate-a-regular-topic) without copying their data ([PIP-475](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-475.md)), once their producers and consumers use the [v5 client](#a-java-client-api-built-around-how-you-consume). The conversion is one-way.
-- **Transactions** work across segment splits and merges ([PIP-473](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-473.md)) on brokers using Oxia.
-- **Production on Oxia.** In production, Scalable Topics use Oxia. ZooKeeper deployments can try them in test environments.
+Choose too few partitions and you create hot partitions and costly migrations; choose too many and you pay for resources a quiet topic never needed.
 
-Scalable Topics stay behind the `scalableTopicsEnabled` feature gate for as long as you need to retain the rollback path to 4.x. The [administration guide](/docs/5.0.x/admin-api-scalable-topics) covers scaling, configuration, and the transition from regular topics.
+**[Scalable Topics](/docs/5.0.x/concepts-scalable-topics) take that decision away.** A scalable topic, addressed with the new `topic://` scheme, is a single logical stream whose capacity follows its actual load, in both directions:
+
+- **Key-range segments.** Internally, a scalable topic divides the key hash space into segments, each owning a contiguous range and backed by its own internal topic.
+- **Split and merge at runtime.** When part of the key space gets hot, the broker splits that segment's range in two; when adjacent segments go cold, it merges them back. This happens with no downtime and is automatic by default, with thresholds you can tune per broker, namespace, and topic. You can also split and merge manually.
+- **Per-key ordering is preserved.** Keys are routed by range, so a split or merge moves a key to a successor range that still contains it. Ordered consumers drain the predecessor segment before reading its successor, so each key's messages stay in order across every change.
+- **Applications see one stream.** A per-topic controller in the broker manages the segment layout and pushes changes to clients. Applications never handle segments or react to resizing.
+
+Consumer parallelism can grow within a segment, too. Messages in a segment are grouped into **entry buckets** by key hash, and multiple consumers share a segment's buckets while preserving per-key ordering, including when consumers join or leave. When more consumers join, Pulsar can either split a busy segment or give it more buckets. This helps drain backlogs after splits and merges, and lets producers keep batching enabled without choosing a key-based batcher.
+
+| | Partitioned topic (v4) | Scalable topic |
+| --- | --- | --- |
+| Capacity | Fixed partition count, set at creation | Segments and entry buckets that change at runtime |
+| Scale up | Increase the partition count manually | Hot segments split automatically |
+| Scale down | Not possible | Cold segments merge automatically |
+| Key ordering when resized | Keys can move between partitions | Preserved across splits and merges for ordered consumers |
+| Layout visible to applications | Partition count and indexes | None; managed by the broker |
+
+The goal is for one topic type to be the right choice across use cases, out of the box: you model your application around the topics that fit your domain, and Pulsar adapts them to how they are actually used, without capacity planning or re-sharding.
+
+### Built from a family of proposals
+
+Scalable Topics are delivered in 5.0 by a set of Pulsar Improvement Proposals:
+
+- **[PIP-460](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-460.md): Scalable Topics**: the overall model, with the segment graph, range-based key routing, and design principles.
+- **[PIP-468](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-468.md): Scalable Topic Controller**: the broker-side controller that runs splits and merges, coordinates consumers, and pushes the live layout to clients.
+- **[PIP-483](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-483.md): Auto Split/Merge**: automatic splitting of hot segments and merging of cold ones, tunable per broker, namespace, and topic.
+- **[PIP-486](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-486.md): Key-shared consumption**: multiple consumers per segment through entry buckets, preserving per-key ordering.
+- **[PIP-466](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-466.md): New Java client API (v5)**: the client API built for Scalable Topics, described below.
+- **[PIP-473](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-473.md): Metadata-driven transactions**: transactions that work across segment splits and merges.
+- **[PIP-475](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-475.md): Regular-to-scalable migration**: in-place conversion of an existing topic, with no data copy.
+
+### A Java client API built around how you consume
+
+Scalable Topics are used through the new [v5 Java client API](/docs/client-libraries/java-v5). Over more than a decade, Pulsar's client API grew one feature at a time, accumulating options, overloads, and subtle inconsistencies. The v5 API is a clean-slate redesign that distills the lessons learned from users running Pulsar in production into a focused API.
+
+Consumption is the clearest example. The v4 client offers a single `Consumer` shaped by one of four subscription types (Exclusive, Failover, Shared, and Key_Shared), plus a separate `Reader`, with behavior that shifts as options are combined. The v5 API replaces them with three purpose-built consumers, each exposing only the operations that make sense for it:
+
+- **Stream consumers** for ordered consumption with cumulative acknowledgment, including key-shared processing across consumers.
+- **Queue consumers** for parallel work-queue processing with individual and negative acknowledgments and dead-letter handling.
+- **Checkpoint consumers** for stream-processing engines such as Flink and Spark that track their own position, with no subscription or acknowledgment.
+
+The v5 API also works with existing partitioned and non-partitioned topics, so you can adopt it before converting any topic, and a consumer can [subscribe across a namespace](/docs/client-libraries/java-v5#consume-a-namespace), selecting topics by their properties. Producer and receive-buffer backpressure, non-blocking asynchronous receives, and reduced acknowledgment overhead help applications handle bursts.
+
+**One dependency for the v4, v5, and admin clients.** `org.apache.pulsar:pulsar-client-v5-all` contains everything needed to use Pulsar from Java: the Pulsar Java client, with both the v4 and v5 APIs, and the Pulsar Java admin client. It is unshaded, so you can upgrade third-party transitive dependencies yourself, for example to address CVEs, without waiting for a Pulsar release. Because the dependencies are not shaded, your build needs to align them: import both the Pulsar BOM and the Netty BOM so that Pulsar artifacts and Netty modules each resolve to one consistent version. [Java client dependency configuration](/docs/client-libraries/java-dependency-configuration) has complete Maven and Gradle examples, explains the [Pulsar and Netty BOM alignment](/docs/client-libraries/java-dependency-configuration#pulsar-bom), and shows how to exclude conflicting client artifacts.
+
+Changing the dependency doesn't require changing your code. Moving application code from the v4 API to the v5 API is a separate step, covered by the [v4-to-v5 API migration guide](/docs/client-libraries/java-migrate-to-v5), which you can follow when you're ready to use the new consumer models.
+
+### Adopting Scalable Topics
+
+- **New applications** are encouraged to build on Scalable Topics and the v5 API when the [requirements and limitations](/docs/5.0.x/concepts-scalable-topics#requirements) fit.
+- **Existing applications** can keep using partitioned and non-partitioned topics, which remain fully supported, with no requirement to migrate. When you're ready, existing persistent topics can be [migrated in place](/docs/5.0.x/admin-api-scalable-topics#migrate-a-regular-topic) without copying their data, once their producers and consumers use the v5 client. The conversion is one-way.
+- **Requirements:** Scalable Topics require a client with v5 API support; v4 clients cannot use `topic://` topics. In production, Scalable Topics use [Oxia](#oxia-for-new-clusters-continuity-for-zookeeper-deployments); ZooKeeper deployments can try them in test environments. [Transactions](/docs/5.0.x/txn-use#transactions-on-scalable-topics) work across segment splits and merges on brokers using Oxia.
+- **Limitations:** geo-replication and replicated subscriptions are not supported for Scalable Topics in 5.0. Use partitioned or non-partitioned topics for applications that need them.
+- **Rollback to 4.x:** Scalable Topics and the v5 API stay behind the `scalableTopicsEnabled` feature gate for as long as you need to retain the rollback path. The v5 API needs scalable-topic services enabled on the brokers, even for regular topics.
+
+The existing client API and topic types remain fully supported throughout the 5.0 LTS line. Longer term, Scalable Topics are designed to cover all of Pulsar's use cases, and the v5 API is the direction Pulsar is heading; according to [PIP-460](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-460.md), any deprecation of the existing API would be planned for a later LTS release.
+
+To get started, read the [Scalable Topics concepts](/docs/5.0.x/concepts-scalable-topics), the [v5 Java client guide](/docs/client-libraries/java-v5), and [Manage scalable topics](/docs/5.0.x/admin-api-scalable-topics).
 
 ## Performance and reliability for existing workloads
 
@@ -103,22 +160,6 @@ Many fixes in 5.0 address stalls and recovery problems in features that applicat
 ## More new capabilities
 
 These capabilities are also available once your cluster runs 5.0. Like Scalable Topics, most of them are opt-in, so you can adopt them when they suit your applications.
-
-### A Java client API built around how you consume
-
-The [v5 Java client API](/docs/client-libraries/java-v5) ([PIP-466](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-466.md)) is a clean-slate design based on more than a decade of experience with Pulsar's client API. Instead of a single consumer shaped by subscription types, it offers three focused consumption models:
-
-- **Stream consumers** for ordered consumption with cumulative acknowledgment.
-- **Queue consumers** for parallel processing with individual acknowledgments and dead-letter handling.
-- **Checkpoint consumers** for applications, such as stream processors, that manage their own processing position.
-
-The v5 API works with both Scalable Topics and existing persistent topics, and can [subscribe across a namespace](/docs/client-libraries/java-v5#consume-a-namespace), selecting topics by their properties. Producer and receive-buffer backpressure, non-blocking asynchronous receives, and reduced acknowledgment overhead help applications handle bursts.
-
-The v5 API requires scalable-topic services to be enabled on the brokers, including for regular topics. The v4 API works either way, so application migration can follow the cluster upgrade separately.
-
-**One dependency for the v4, v5, and admin clients.** `org.apache.pulsar:pulsar-client-v5-all` contains everything needed to use Pulsar from Java: the Pulsar Java client, with both the v4 and v5 APIs, and the Pulsar Java admin client. It is unshaded, so you can upgrade third-party transitive dependencies yourself, for example to address CVEs, without waiting for a Pulsar release. Because the dependencies are not shaded, your build needs to align them: import both the Pulsar BOM and the Netty BOM so that Pulsar artifacts and Netty modules each resolve to one consistent version. [Java client dependency configuration](/docs/client-libraries/java-dependency-configuration) has complete Maven and Gradle examples, explains the [Pulsar and Netty BOM alignment](/docs/client-libraries/java-dependency-configuration#pulsar-bom), and shows how to exclude conflicting client artifacts.
-
-Changing the dependency doesn't require changing your code. Moving application code from the v4 API to the v5 API is a separate step, covered by the [v4-to-v5 API migration guide](/docs/client-libraries/java-migrate-to-v5), which you can follow when you're ready to use the new consumer models.
 
 ### Oxia for new clusters, continuity for ZooKeeper deployments
 
