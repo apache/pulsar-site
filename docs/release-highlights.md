@@ -107,7 +107,7 @@ The results describe this workload, not general broker capacity: run the scenari
 
 ### Seek by timestamp in offloaded topics with fewer object store requests {#seek-by-timestamp-in-offloaded-topics}
 
-Topics that keep a long history, such as logs retained for a year, hold most of it in [tiered storage](tiered-storage-overview.md). Seeking such a topic to a timestamp runs a binary search over its offloaded ledgers, but their index records only the first entry of each data block, so reaching any other entry meant scanning the block from its start, one ranged read at a time. Pulsar 5.0 remembers the entry offsets it finds and makes use of the indexed block starts, so a search sends about **90% fewer requests** to the object store and downloads correspondingly less data:
+Topics with long retention, for example 1 year, hold most of their history in [tiered storage](tiered-storage-overview.md). Seeking such a topic to a timestamp runs a binary search over its offloaded ledgers, but their index records only the first entry of each data block, so reaching any other entry meant scanning the block from its start, one ranged read at a time. Pulsar 5.0 remembers the entry offsets it finds and makes use of the indexed block starts, so a search sends about **90% fewer requests** to the object store and downloads correspondingly less data:
 
 <div className="release-highlights-benchmark">
 
@@ -119,14 +119,14 @@ Topics that keep a long history, such as logs retained for a year, hold most of 
 
 </div>
 
-A **cold search** runs with no entry offset cached; a **warm search** follows it and seeks 200 entries earlier, as when a consumer seeks again nearby. **Before** is Pulsar 4.0.13 and 4.2.4. The first of the three changes, reusing scanned entry offsets, is also in the next 4.0 and 4.2 maintenance releases.
+A **cold search** runs with no entry offset cached; a **warm search** follows it and seeks 200 entries earlier, as when a consumer seeks again nearby. **Before** is Pulsar 4.0.13 and 4.2.4.
 
 ![Ranged reads sent to the object store per search by timestamp on offloaded ledgers, before the changes and after each of the three changes, for cold and warm searches in separate panels with the same axis](/assets/release-highlights-5.0/seek-by-timestamp-offloaded-ranged-reads.svg)
 
 The figures count requests and bytes, not latency, which depends on your object store. See [read performance for object storage](tiered-storage-overview.md#read-performance-for-object-storage) for the settings involved, and the [message position search metrics](reference-metrics-opentelemetry.md#message-position-search-metrics) to observe searches on a running broker.
 
 <details className="details-plain">
-<summary>What each change contributes and how it was measured</summary>
+<summary>Offloaded-ledger seek improvements in detail and how they were measured</summary>
 
 What each change contributes:
 
