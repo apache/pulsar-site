@@ -105,6 +105,44 @@ How it was measured:
 
 The results describe this workload, not general broker capacity: run the scenario on your own hardware to compare with your application. Consumers still need enough processing capacity to keep up with producers.
 
+### Seek by timestamp in offloaded topics with fewer object store requests {#seek-by-timestamp-in-offloaded-topics}
+
+Topics with long retention, for example 1 year, hold most of their history in [tiered storage](tiered-storage-overview.md). Seeking such a topic to a timestamp runs a binary search over its offloaded ledgers, but their index records only the first entry of each data block, so reaching any other entry meant scanning the block from its start, one ranged read at a time. Pulsar 5.0 remembers the entry offsets it finds and makes use of the indexed block starts, so a search sends about **90% fewer requests** to the object store and downloads correspondingly less data:
+
+<div className="release-highlights-benchmark">
+
+| Ranged reads per search, 1 MiB each | Before | 5.0.0 | Change |
+| --- | ---: | ---: | ---: |
+| **Cold search, mean of 16 searches** | **428** | **44** | **−90%** |
+| Warm search, mean of 16 searches | 223 | 9 | −96% |
+| Cold search, maximum | 738 | 70 | −91% |
+
+</div>
+
+A **cold search** runs with no entry offset cached; a **warm search** follows it and seeks 200 entries earlier, as when a consumer seeks again nearby. **Before** is Pulsar 4.0.13 and 4.2.4.
+
+![Ranged reads sent to the object store per search by timestamp on offloaded ledgers, before the changes and after each of the three changes, for cold and warm searches in separate panels with the same axis](/assets/release-highlights-5.0/seek-by-timestamp-offloaded-ranged-reads.svg)
+
+The figures count requests and bytes, not latency, which depends on your object store. See [read performance for object storage](tiered-storage-overview.md#read-performance-for-object-storage) for the settings involved, and the [message position search metrics](reference-metrics-opentelemetry.md#message-position-search-metrics) to observe searches on a running broker.
+
+<details className="details-plain">
+<summary>Offloaded-ledger seek improvements in detail and how they were measured</summary>
+
+What each change contributes:
+
+- **Entry offsets found while scanning are reused:** a scan caches the offset of every entry it passes, and a later read starts from a nearby cached offset instead of the start of the block. Cold searches go from 428 to 156 ranged reads, and warm searches from 223 to 14.
+- **The search reads the first entry of data blocks:** when the first entry of a data block is close to the midpoint of the search range, the search reads that entry instead, with a single ranged read. Cold searches go from 156 to 61, and warm searches from 14 to 9.
+- **Offsets are remembered for each open ledger:** scans keep offsets about 1 MiB apart for as long as the offloaded ledger stays open, and later reads in the same data block resume from the nearest one. Cold searches go from 61 to 44, and warm searches stay at 9.
+
+How it was measured:
+
+- The topic held about 130,000 entries of 2 to 6 KiB in two offloaded ledgers of about 250 MiB each, with 64 MiB data blocks and a 1 MiB read buffer.
+- [`OffloadedLedgerFindPositionTest`](https://github.com/apache/pulsar/blob/master/tiered-storage/jcloud/src/test/java/org/apache/bookkeeper/mledger/offload/jcloud/impl/OffloadedLedgerFindPositionTest.java) ran before the first change and after each change, with its data set to this layout. As committed, the test uses 16 MiB data blocks and one ledger to stay small.
+- The object store was in memory, and the broker entry cache was disabled so that every entry read reached the offloaded ledger.
+- The 16 searched positions are spread over both ledgers and over the positions within their data blocks. Each search covers both ledgers; a seek first narrows the search to the ledgers that can contain the timestamp.
+
+</details>
+
 ### Less work per message {#less-work-per-message}
 
 The efficiency improvements reach across the messaging path:
