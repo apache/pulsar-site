@@ -106,8 +106,8 @@ module.exports = async function createConfigAsync() {
         announcementBar: {
           id: "summit",
           content: renderAnnouncementBar(
-            "✨ Apache Pulsar 5.0.0-M1 is here! ✨",
-            "/blog/2026/06/23/announcing-apache-pulsar-5-0-m1/"
+            "✨ Apache Pulsar 5.0 is here! ✨",
+            "/blog/2026/10/05/announcing-apache-pulsar-5-0/"
           ),
           backgroundColor: "#282826",
           textColor: "#fff",
