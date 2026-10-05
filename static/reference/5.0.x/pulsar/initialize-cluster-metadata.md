@@ -1,3 +1,4 @@
+2026-10-05T12:29:10,595-0700 [main] INFO  org.apache.bookkeeper.meta.MetadataDrivers - BookKeeper metadata driver manager initialized
 # initialize-cluster-metadata
 
 
@@ -9,7 +10,8 @@ $ pulsar initialize-cluster-metadata options
 |Flag|Description|Default|
 |---|---|---|
 | `-c, --cluster` | Cluster name|null|
-| `-bn, --default-namespace-bundle-number` | The bundle numbers for the default namespaces(public/default), default is 16|0|
+| `-bn, --default-namespace-bundle-number` | The bundle numbers for the default namespaces(public/default), default is 32|0|
+| `-sbn, --system-namespace-bundle-number` | The bundle numbers for the system namespace (pulsar/system), default is 64|0|
 | `-uw, --web-service-url` | Web-service URL for new cluster|null|
 | `-tw, --web-service-url-tls` | Web-service URL for new cluster with TLS encryption|null|
 | `-ub, --broker-service-url` | Broker-service URL for new cluster|null|

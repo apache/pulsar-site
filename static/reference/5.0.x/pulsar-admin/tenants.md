@@ -23,8 +23,8 @@ $ pulsar-admin tenants list options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get
@@ -41,8 +41,8 @@ $ pulsar-admin tenants get options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## create
@@ -59,8 +59,10 @@ $ pulsar-admin tenants create options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--admin-roles, -r]` | Comma separated list of auth principal allowed to administrate the tenant|null|
+| `[--allowed-clusters, -c]` | Comma separated allowed clusters. If empty, the tenant will have access to all clusters|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## update
@@ -77,8 +79,10 @@ $ pulsar-admin tenants update options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--admin-roles, -r]` | Comma separated list of auth principal allowed to administrate the tenant. If empty the current set of roles won't be modified|null|
+| `[--allowed-clusters, -c]` | Comma separated allowed clusters. If omitted, the current set of clusters will be preserved|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## delete
@@ -95,6 +99,7 @@ $ pulsar-admin tenants delete options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-f, --force]` | Delete a tenant forcefully by deleting all namespaces under it.|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
