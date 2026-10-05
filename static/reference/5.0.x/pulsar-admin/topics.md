@@ -23,8 +23,12 @@ $ pulsar-admin topics list options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-td, --topic-domain]` | Allowed topic domain (persistent, non_persistent).|null|
+| `[-b, --bundle]` | Namespace bundle to get list of topics|null|
+| `[-ist, --include-system-topic]` | Include system topic|false|
+| `[--property, -p]` | key value pair properties(-p a=b -p c=d) for customized topic listing plugin|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## list-partitioned-topics
@@ -41,8 +45,9 @@ $ pulsar-admin topics list-partitioned-topics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ist, --include-system-topic]` | Include system topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## permissions
@@ -59,8 +64,8 @@ $ pulsar-admin topics permissions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## grant-permission
@@ -77,8 +82,10 @@ $ pulsar-admin topics grant-permission options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-r, --role]` | Client role to which grant permissions|null|
+| `[-a, --actions]` | Actions to be granted (produce,consume,sources,sinks,functions,packages)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## revoke-permission
@@ -95,8 +102,9 @@ $ pulsar-admin topics revoke-permission options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-r, --role]` | Client role to which revoke permissions|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## lookup
@@ -113,8 +121,8 @@ $ pulsar-admin topics lookup options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## partitioned-lookup
@@ -131,8 +139,9 @@ $ pulsar-admin topics partitioned-lookup options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --sort-by-broker]` | Sort partitioned-topic by Broker Url|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## bundle-range
@@ -149,8 +158,8 @@ $ pulsar-admin topics bundle-range options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## delete
@@ -167,8 +176,11 @@ $ pulsar-admin topics delete options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-f, --force]` | Close all producer/consumer/replicator and delete topic forcefully|false|
+| `[-r, regex]` | Use a regex expression to match multiple topics for deletion.|false|
+| `[--from-file]` | Read a list of topics from a file for deletion.|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## truncate
@@ -186,8 +198,8 @@ $ pulsar-admin topics truncate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## unload
@@ -204,8 +216,8 @@ $ pulsar-admin topics unload options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## subscriptions
@@ -222,8 +234,8 @@ $ pulsar-admin topics subscriptions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## unsubscribe
@@ -240,8 +252,10 @@ $ pulsar-admin topics unsubscribe options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-f, --force]` | Disconnect and close all consumers and delete subscription forcefully|false|
+| `[-s, --subscription]` | Subscription to be deleted|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## create-subscription
@@ -258,8 +272,12 @@ $ pulsar-admin topics create-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Name of subscription to be created|null|
+| `[-m, --messageId]` | messageId where to create the subscription. It can be either 'latest', 'earliest' or (ledgerId:entryId)|latest|
+| `[-r, --replicated]` | replicated subscriptions|false|
+| `[--property, -p]` | key value pair properties(-p a=b -p c=d)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## update-subscription-properties
@@ -276,8 +294,11 @@ $ pulsar-admin topics update-subscription-properties options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription to update|null|
+| `[--property, -p]` | key value pair properties(-p a=b -p c=d)|null|
+| `[--clear, -c]` | Remove all properties|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-subscription-properties
@@ -294,8 +315,9 @@ $ pulsar-admin topics get-subscription-properties options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription to describe|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## stats
@@ -312,8 +334,11 @@ $ pulsar-admin topics stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-gpb, --get-precise-backlog]` | Set true to get precise backlog|false|
+| `[-sbs, --get-subscription-backlog-size]` | Set true to get backlog size for each subscription, locking required. If set to false, the attribute 'backlogSize' in the response will be -1|true|
+| `[-etb, --get-earliest-time-in-backlog]` | Set true to get earliest time in backlog|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## stats-internal
@@ -330,8 +355,9 @@ $ pulsar-admin topics stats-internal options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --metadata]` | Flag to include ledger metadata|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## info-internal
@@ -348,8 +374,8 @@ $ pulsar-admin topics info-internal options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## partitioned-stats
@@ -366,8 +392,12 @@ $ pulsar-admin topics partitioned-stats options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--per-partition]` | Get per partition stats|false|
+| `[-gpb, --get-precise-backlog]` | Set true to get precise backlog|false|
+| `[-sbs, --get-subscription-backlog-size]` | Set true to get backlog size for each subscription, locking required.|true|
+| `[-etb, --get-earliest-time-in-backlog]` | Set true to get earliest time in backlog|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## partitioned-stats-internal
@@ -384,8 +414,8 @@ $ pulsar-admin topics partitioned-stats-internal options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## skip
@@ -402,8 +432,10 @@ $ pulsar-admin topics skip options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription to be skip messages on|null|
+| `[-n, --count]` | Number of messages to skip|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## clear-backlog
@@ -420,8 +452,9 @@ $ pulsar-admin topics clear-backlog options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription to be cleared|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## expire-messages
@@ -438,8 +471,12 @@ $ pulsar-admin topics expire-messages options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription to be skip messages on|null|
+| `[-t, --expireTime]` | Expire messages older than time in seconds (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)|-1|
+| `[--position, -p]` | message position to reset back to (ledgerId:entryId)|null|
+| `[-e, --exclude-reset-position]` | Exclude the reset position, start consume messages from the next position.|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## expire-messages-all-subscriptions
@@ -456,8 +493,9 @@ $ pulsar-admin topics expire-messages-all-subscriptions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-t, --expireTime]` | Expire messages older than time in seconds (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## create-partitioned-topic
@@ -474,8 +512,10 @@ $ pulsar-admin topics create-partitioned-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-p, --partitions]` | Number of partitions for the topic|0|
+| `[--metadata, -m]` | key value pair properties(a=a,b=b,c=c)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## create-missed-partitions
@@ -492,8 +532,8 @@ $ pulsar-admin topics create-missed-partitions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## create
@@ -510,8 +550,9 @@ $ pulsar-admin topics create options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--metadata, -m]` | key value pair properties(a=a,b=b,c=c)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## update-partitioned-topic
@@ -528,8 +569,11 @@ $ pulsar-admin topics update-partitioned-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-p, --partitions]` | Number of partitions for the topic|0|
+| `[-ulo, --update-local-only]` | Update partitions number for topic in local cluster only|false|
+| `[-f, --force]` | Update forcefully without validating existing partitioned topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-partitioned-topic-metadata
@@ -546,8 +590,8 @@ $ pulsar-admin topics get-partitioned-topic-metadata options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-properties
@@ -564,8 +608,8 @@ $ pulsar-admin topics get-properties options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## update-properties
@@ -582,8 +626,9 @@ $ pulsar-admin topics update-properties options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--property, -p]` | key value pair properties(-p a=b -p c=d)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-properties
@@ -600,8 +645,9 @@ $ pulsar-admin topics remove-properties options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--key, -k]` | The key to remove in the properties of topic|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## delete-partitioned-topic
@@ -618,8 +664,9 @@ $ pulsar-admin topics delete-partitioned-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-f, --force]` | Close all producer/consumer/replicator and delete topic forcefully|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## peek-messages
@@ -636,8 +683,12 @@ $ pulsar-admin topics peek-messages options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription to get messages from|null|
+| `[-n, --count]` | Number of messages (default 1)|1|
+| `[-ssm, --show-server-marker]` | Enables the display of internal server write markers.|false|
+| `[-til, --transaction-isolation-level]` | Sets the isolation level for peeking messages within transactions. 'READ_COMMITTED' allows peeking only committed transactional messages. 'READ_UNCOMMITTED' allows peeking all messages, even transactional messages which have been aborted.|READ_COMMITTED|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## examine-messages
@@ -654,8 +705,10 @@ $ pulsar-admin topics examine-messages options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-i, --initialPosition]` | Relative start position to examine message.It can be 'latest' or 'earliest', default is latest|latest|
+| `[-m, --messagePosition]` | The position of messages (default 1)|1|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-message-by-id
@@ -672,8 +725,10 @@ $ pulsar-admin topics get-message-by-id options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-l, --ledgerId]` | ledger id pointing to the desired ledger|0|
+| `[-e, --entryId]` | entry id pointing to the desired entry|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-message-id
@@ -690,8 +745,9 @@ $ pulsar-admin topics get-message-id options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-d, --datetime]` | datetime at or before this messageId. This datetime is in format of ISO_OFFSET_DATE_TIME, e.g. 2021-06-28T16:53:08Z or 2021-06-28T16:53:08.123456789+08:00|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## reset-cursor
@@ -708,8 +764,12 @@ $ pulsar-admin topics reset-cursor options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription to reset position on|null|
+| `[--time, -t]` | time in minutes to reset back to (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w)|null|
+| `[--messageId, -m]` | messageId to reset back to ('latest', 'earliest', or 'ledgerId:entryId')|null|
+| `[-e, --exclude-reset-position]` | Exclude the reset position, start consume messages from the next position.|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## terminate
@@ -726,8 +786,8 @@ $ pulsar-admin topics terminate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## partitioned-terminate
@@ -744,8 +804,8 @@ $ pulsar-admin topics partitioned-terminate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## compact
@@ -762,8 +822,8 @@ $ pulsar-admin topics compact options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## compaction-status
@@ -780,8 +840,9 @@ $ pulsar-admin topics compaction-status options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-w, --wait-complete]` | Wait for compaction to complete|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## offload
@@ -798,8 +859,9 @@ $ pulsar-admin topics offload options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --size-threshold]` | Maximum amount of data to keep in BookKeeper for the specified topic (e.g. 10M, 5G).|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## offload-status
@@ -816,8 +878,9 @@ $ pulsar-admin topics offload-status options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-w, --wait-complete]` | Wait for offloading to complete|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## last-message-id
@@ -834,8 +897,8 @@ $ pulsar-admin topics last-message-id options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-backlog-quotas
@@ -852,8 +915,9 @@ $ pulsar-admin topics get-backlog-quotas options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-backlog-quota
@@ -870,8 +934,12 @@ $ pulsar-admin topics set-backlog-quota options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-l, --limit]` | Size limit (eg: 10M, 16G)|-1|
+| `[-lt, --limitTime]` | Time limit in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), non-positive number for disabling time limit.|-1|
+| `[-p, --policy]` | Retention policy to enforce when the limit is reached. Valid options are: [producer_request_hold, producer_exception, consumer_backlog_eviction]|null|
+| `[-t, --type]` | Backlog quota type to set. Valid options are: destination_storage and message_age. destination_storage limits backlog by size (in bytes). message_age limits backlog by time, that is, message timestamp (broker or publish timestamp). You can set size or time to control the backlog, or combine them together to control the backlog. |destination_storage|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-backlog-quota
@@ -888,8 +956,9 @@ $ pulsar-admin topics remove-backlog-quota options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-t, --type]` | Backlog quota type to remove|destination_storage|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-message-ttl
@@ -906,8 +975,9 @@ $ pulsar-admin topics get-message-ttl options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-message-ttl
@@ -924,8 +994,9 @@ $ pulsar-admin topics set-message-ttl options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-t, --ttl]` | Message TTL for topic in second (or minutes, hours, days, weeks eg: 100m, 3h, 2d, 5w), allowed range from 1 to Integer.MAX_VALUE|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-message-ttl
@@ -942,8 +1013,8 @@ $ pulsar-admin topics remove-message-ttl options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-retention
@@ -960,8 +1031,9 @@ $ pulsar-admin topics get-retention options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-retention
@@ -978,8 +1050,10 @@ $ pulsar-admin topics set-retention options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--time, -t]` | Retention time with optional time unit suffix. For example, 100m, 3h, 2d, 5w. If the time unit is not specified, the default unit is seconds. For example, -t 120 will set retention to 2 minutes. 0 means no retention and -1 means infinite time retention.|null|
+| `[--size, -s]` | Retention size limit with optional size unit suffix. For example, 4096, 10M, 16G, 3T.  The size unit suffix character can be k/K, m/M, g/G, or t/T.  If the size unit suffix is not specified, the default unit is bytes. 0 or less than 1MB means no retention and -1 means infinite size retention|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-retention
@@ -996,8 +1070,8 @@ $ pulsar-admin topics remove-retention options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## enable-deduplication
@@ -1014,8 +1088,8 @@ $ pulsar-admin topics enable-deduplication options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## disable-deduplication
@@ -1032,8 +1106,8 @@ $ pulsar-admin topics disable-deduplication options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-deduplication-enabled
@@ -1050,8 +1124,8 @@ $ pulsar-admin topics get-deduplication-enabled options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-deduplication
@@ -1068,8 +1142,10 @@ $ pulsar-admin topics set-deduplication options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable, -e]` | Enable deduplication|false|
+| `[--disable, -d]` | Disable deduplication|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-deduplication
@@ -1086,8 +1162,8 @@ $ pulsar-admin topics get-deduplication options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-deduplication
@@ -1104,8 +1180,8 @@ $ pulsar-admin topics remove-deduplication options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-deduplication-snapshot-interval
@@ -1122,8 +1198,8 @@ $ pulsar-admin topics get-deduplication-snapshot-interval options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-deduplication-snapshot-interval
@@ -1140,8 +1216,9 @@ $ pulsar-admin topics set-deduplication-snapshot-interval options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-i, --interval]` | Deduplication snapshot interval for topic in second, allowed range from 0 to Integer.MAX_VALUE|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-deduplication-snapshot-interval
@@ -1158,8 +1235,8 @@ $ pulsar-admin topics remove-deduplication-snapshot-interval options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-delayed-delivery
@@ -1176,8 +1253,9 @@ $ pulsar-admin topics get-delayed-delivery options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-delayed-delivery
@@ -1194,8 +1272,12 @@ $ pulsar-admin topics set-delayed-delivery options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable, -e]` | Enable delayed delivery messages|false|
+| `[--disable, -d]` | Disable delayed delivery messages|false|
+| `[--time, -t]` | The tick time for when retrying on delayed delivery messages, affecting the accuracy of the delivery time compared to the scheduled time. (eg: 1s, 10s, 1m, 5h, 3d)|1000|
+| `[--maxDelay, -md]` | The max allowed delay for delayed delivery. (eg: 1s, 10s, 1m, 5h, 3d)|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-delayed-delivery
@@ -1212,8 +1294,8 @@ $ pulsar-admin topics remove-delayed-delivery options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-persistence
@@ -1230,8 +1312,8 @@ $ pulsar-admin topics get-persistence options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-persistence
@@ -1248,8 +1330,13 @@ $ pulsar-admin topics set-persistence options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-e, --bookkeeper-ensemble]` | Number of bookies to use for a topic|2|
+| `[-w, --bookkeeper-write-quorum]` | How many writes to make of each entry|2|
+| `[-a, --bookkeeper-ack-quorum]` | Number of acks (guaranteed copies) to wait for each entry|2|
+| `[-r, --ml-mark-delete-max-rate]` | Throttling rate of mark-delete operation (0 means no throttle, -1 means unset which will use the configuration from namespace or broker)|-1.0|
+| `[-c, --ml-storage-class]` | Managed ledger storage class name|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-persistence
@@ -1266,8 +1353,8 @@ $ pulsar-admin topics remove-persistence options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-offload-policies
@@ -1284,8 +1371,9 @@ $ pulsar-admin topics get-offload-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-offload-policies
@@ -1302,8 +1390,22 @@ $ pulsar-admin topics set-offload-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-d, --driver]` | ManagedLedger offload driver|null|
+| `[-r, --region]` | ManagedLedger offload region, s3 and google-cloud-storage requires this parameter|null|
+| `[-b, --bucket]` | ManagedLedger offload bucket, s3 and google-cloud-storage requires this parameter|null|
+| `[-e, --endpoint]` | ManagedLedger offload service endpoint, only s3 requires this parameter|null|
+| `[-i, --aws-id]` | AWS Credential Id to use when using driver S3 or aws-s3|null|
+| `[-s, --aws-secret]` | AWS Credential Secret to use when using driver S3 or aws-s3|null|
+| `[--ro, --s3-role]` | S3 Role used for STSAssumeRoleSessionCredentialsProvider|null|
+| `[--s3-role-session-name, -rsn]` | S3 role session name used for STSAssumeRoleSessionCredentialsProvider|null|
+| `[-m, --maxBlockSizeInBytes, --maxBlockSize, -mbs]` | Max block size (eg: 32M, 64M), default is 64MBs3 and google-cloud-storage requires this parameter|67108864|
+| `[-rb, --readBufferSizeInBytes, --readBufferSize, -rbs]` | Read buffer size (eg: 1M, 5M), default is 1MBs3 and google-cloud-storage requires this parameter|1048576|
+| `[-t, --offloadThresholdInBytes, --offloadAfterThreshold, -oat]` | Offload after threshold size (eg: 1M, 5M)|null|
+| `[-ts, --offloadThresholdInSeconds, --offloadAfterThresholdInSeconds, -oats]` | Offload after threshold seconds (or minutes,hours,days,weeks eg: 100m, 3h, 2d, 5w).|null|
+| `[-dl, --offloadDeletionLagInMillis, --offloadAfterElapsed, -oae]` | Delay time in Millis for deleting the bookkeeper ledger after offload (or seconds,minutes,hours,days,weeks eg: 10s, 100m, 3h, 2d, 5w).|null|
+| `[--offloadedReadPriority, -orp]` | Read priority for offloaded messages. By default, once messages are offloaded to long-term storage, brokers read messages from long-term storage, but messages can still exist in BookKeeper for a period depends on your configuration. For messages that exist in both long-term storage and BookKeeper, you can set where to read messages from with the option `tiered-storage-first` or `bookkeeper-first`.|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-offload-policies
@@ -1320,8 +1422,8 @@ $ pulsar-admin topics remove-offload-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-dispatch-rate
@@ -1338,8 +1440,9 @@ $ pulsar-admin topics get-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-dispatch-rate
@@ -1356,8 +1459,12 @@ $ pulsar-admin topics set-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--msg-dispatch-rate, -md]` | message-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--byte-dispatch-rate, -bd]` | byte-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--dispatch-rate-period, -dt]` | dispatch-rate-period in second type (default 1 second will be overwrite if not passed)|1|
+| `[--relative-to-publish-rate, -rp]` | dispatch rate relative to publish-rate (if publish-relative flag is enabled then broker will apply throttling value to (publish-rate + dispatch rate))|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-dispatch-rate
@@ -1374,8 +1481,8 @@ $ pulsar-admin topics remove-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-subscription-dispatch-rate
@@ -1392,8 +1499,9 @@ $ pulsar-admin topics get-subscription-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-subscription-dispatch-rate
@@ -1410,8 +1518,12 @@ $ pulsar-admin topics set-subscription-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--msg-dispatch-rate, -md]` | message-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--byte-dispatch-rate, -bd]` | byte-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--dispatch-rate-period, -dt]` | dispatch-rate-period in second type(default 1 second will be overwrite if not passed)|1|
+| `[--relative-to-publish-rate, -rp]` | dispatch rate relative to publish-rate (if publish-relative flag is enabled then broker will apply throttling value to (publish-rate + dispatch rate))|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-subscription-dispatch-rate
@@ -1428,8 +1540,8 @@ $ pulsar-admin topics remove-subscription-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-replicator-dispatch-rate
@@ -1446,8 +1558,9 @@ $ pulsar-admin topics get-replicator-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-replicator-dispatch-rate
@@ -1464,8 +1577,12 @@ $ pulsar-admin topics set-replicator-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--msg-dispatch-rate, -md]` | message-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--byte-dispatch-rate, -bd]` | byte-dispatch-rate (default -1 will be overwrite if not passed)|-1|
+| `[--dispatch-rate-period, -dt]` | dispatch-rate-period in second type (default 1 second will be overwrite if not passed)|1|
+| `[--relative-to-publish-rate, -rp]` | dispatch rate relative to publish-rate (if publish-relative flag is enabled then broker will apply throttling value to (publish-rate + dispatch rate))|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-replicator-dispatch-rate
@@ -1482,8 +1599,8 @@ $ pulsar-admin topics remove-replicator-dispatch-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-compaction-threshold
@@ -1500,8 +1617,9 @@ $ pulsar-admin topics get-compaction-threshold options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-compaction-threshold
@@ -1518,8 +1636,9 @@ $ pulsar-admin topics set-compaction-threshold options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--threshold, -t]` | Maximum number of bytes in a topic backlog before compaction is triggered (eg: 10M, 16G, 3T). 0 disables automatic compaction|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-compaction-threshold
@@ -1536,8 +1655,8 @@ $ pulsar-admin topics remove-compaction-threshold options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-unacked-messages-on-consumer
@@ -1554,8 +1673,9 @@ $ pulsar-admin topics get-max-unacked-messages-on-consumer options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-unacked-messages-on-consumer
@@ -1572,8 +1692,9 @@ $ pulsar-admin topics set-max-unacked-messages-on-consumer options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --maxNum]` | max unacked messages num on consumer|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-unacked-messages-on-consumer
@@ -1590,8 +1711,8 @@ $ pulsar-admin topics remove-max-unacked-messages-on-consumer options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-unacked-messages-on-subscription
@@ -1608,8 +1729,9 @@ $ pulsar-admin topics get-max-unacked-messages-on-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-unacked-messages-on-subscription
@@ -1626,8 +1748,9 @@ $ pulsar-admin topics set-max-unacked-messages-on-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --maxNum]` | max unacked messages num on subscription|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-unacked-messages-on-subscription
@@ -1644,8 +1767,8 @@ $ pulsar-admin topics remove-max-unacked-messages-on-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-unacked-messages-per-consumer
@@ -1662,8 +1785,9 @@ $ pulsar-admin topics get-max-unacked-messages-per-consumer options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-unacked-messages-per-consumer
@@ -1680,8 +1804,9 @@ $ pulsar-admin topics set-max-unacked-messages-per-consumer options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --maxNum]` | max unacked messages num on consumer|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-unacked-messages-per-consumer
@@ -1698,8 +1823,8 @@ $ pulsar-admin topics remove-max-unacked-messages-per-consumer options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-unacked-messages-per-subscription
@@ -1716,8 +1841,9 @@ $ pulsar-admin topics get-max-unacked-messages-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-unacked-messages-per-subscription
@@ -1734,8 +1860,9 @@ $ pulsar-admin topics set-max-unacked-messages-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-m, --maxNum]` | max unacked messages num on subscription|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-unacked-messages-per-subscription
@@ -1752,8 +1879,8 @@ $ pulsar-admin topics remove-max-unacked-messages-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-publish-rate
@@ -1770,8 +1897,8 @@ $ pulsar-admin topics get-publish-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-publish-rate
@@ -1788,8 +1915,10 @@ $ pulsar-admin topics set-publish-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--msg-publish-rate, -m]` | message-publish-rate (default -1 will be overwrite if not passed)|-1|
+| `[--byte-publish-rate, -b]` | byte-publish-rate (default -1 will be overwrite if not passed)|-1|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-publish-rate
@@ -1806,8 +1935,8 @@ $ pulsar-admin topics remove-publish-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-subscription-types-enabled
@@ -1824,8 +1953,9 @@ $ pulsar-admin topics set-subscription-types-enabled options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--types, -t]` | Subscription types enabled list (comma separated values). Possible values: (Exclusive, Shared, Failover, Key_Shared).|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-subscription-types-enabled
@@ -1842,8 +1972,8 @@ $ pulsar-admin topics get-subscription-types-enabled options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-subscription-types-enabled
@@ -1860,8 +1990,8 @@ $ pulsar-admin topics remove-subscription-types-enabled options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-maxProducers
@@ -1878,8 +2008,9 @@ $ pulsar-admin topics get-maxProducers options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-maxProducers
@@ -1896,8 +2027,9 @@ $ pulsar-admin topics set-maxProducers options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-producers, -p]` | Max producers for a topic|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-maxProducers
@@ -1914,8 +2046,8 @@ $ pulsar-admin topics remove-maxProducers options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-producers
@@ -1932,8 +2064,9 @@ $ pulsar-admin topics get-max-producers options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-producers
@@ -1950,8 +2083,9 @@ $ pulsar-admin topics set-max-producers options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-producers, -p]` | Max producers for a topic|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-producers
@@ -1968,8 +2102,8 @@ $ pulsar-admin topics remove-max-producers options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-subscriptions
@@ -1986,8 +2120,8 @@ $ pulsar-admin topics get-max-subscriptions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-subscriptions
@@ -2004,8 +2138,9 @@ $ pulsar-admin topics set-max-subscriptions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-subscriptions-per-topic, -m]` | Maximum subscription limit for a topic|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-subscriptions
@@ -2022,8 +2157,8 @@ $ pulsar-admin topics remove-max-subscriptions options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-message-size
@@ -2040,8 +2175,8 @@ $ pulsar-admin topics get-max-message-size options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-message-size
@@ -2058,8 +2193,9 @@ $ pulsar-admin topics set-max-message-size options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-message-size, -m]` | Max message size for a topic|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-message-size
@@ -2076,8 +2212,8 @@ $ pulsar-admin topics remove-max-message-size options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-consumers-per-subscription
@@ -2094,8 +2230,8 @@ $ pulsar-admin topics get-max-consumers-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-consumers-per-subscription
@@ -2112,8 +2248,9 @@ $ pulsar-admin topics set-max-consumers-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-consumers-per-subscription, -c]` | maxConsumersPerSubscription for a namespace|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-consumers-per-subscription
@@ -2130,8 +2267,8 @@ $ pulsar-admin topics remove-max-consumers-per-subscription options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-inactive-topic-policies
@@ -2148,8 +2285,9 @@ $ pulsar-admin topics get-inactive-topic-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-inactive-topic-policies
@@ -2166,8 +2304,12 @@ $ pulsar-admin topics set-inactive-topic-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable-delete-while-inactive, -e]` | Enable delete while inactive|false|
+| `[--disable-delete-while-inactive, -d]` | Disable delete while inactive|false|
+| `[--max-inactive-duration, -t]` | Max duration of topic inactivity in seconds, topics that are inactive for longer than this value will be deleted (eg: 1s, 10s, 1m, 5h, 3d)|null|
+| `[--delete-mode, -m]` | Mode of delete inactive topic, Valid options are: [delete_when_no_subscriptions, delete_when_subscriptions_caught_up]|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-inactive-topic-policies
@@ -2184,8 +2326,8 @@ $ pulsar-admin topics remove-inactive-topic-policies options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-max-consumers
@@ -2202,8 +2344,9 @@ $ pulsar-admin topics get-max-consumers options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-max-consumers
@@ -2220,8 +2363,9 @@ $ pulsar-admin topics set-max-consumers options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--max-consumers, -c]` | Max consumers for a topic|0|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-max-consumers
@@ -2238,8 +2382,8 @@ $ pulsar-admin topics remove-max-consumers options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-subscribe-rate
@@ -2256,8 +2400,9 @@ $ pulsar-admin topics get-subscribe-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-subscribe-rate
@@ -2274,8 +2419,10 @@ $ pulsar-admin topics set-subscribe-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--subscribe-rate, -sr]` | subscribe-rate (default -1 will be overwrite if not passed)|-1|
+| `[--subscribe-rate-period, -st]` | subscribe-rate-period in second type (default 30 second will be overwrite if not passed)|30|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-subscribe-rate
@@ -2292,8 +2439,8 @@ $ pulsar-admin topics remove-subscribe-rate options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-replicated-subscription-status
@@ -2310,8 +2457,11 @@ $ pulsar-admin topics set-replicated-subscription-status options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription name to enable or disable replication|null|
+| `[--enable, -e]` | Enable replication|false|
+| `[--disable, -d]` | Disable replication|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-replicated-subscription-status
@@ -2328,8 +2478,9 @@ $ pulsar-admin topics get-replicated-subscription-status options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription name|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-backlog-size
@@ -2346,8 +2497,9 @@ $ pulsar-admin topics get-backlog-size options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--messageId, -m]` | messageId used to calculate backlog size. It can be (ledgerId:entryId).|-1:-1|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## analyze-backlog
@@ -2364,8 +2516,13 @@ $ pulsar-admin topics analyze-backlog options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-s, --subscription]` | Subscription to be analyzed|null|
+| `[--position, -p]` | Message position to start the scan from (ledgerId:entryId)|null|
+| `[--backlog-scan-max-entries, -b]` | The maximum number of backlog entries the client will scan before terminating its loop|null|
+| `[--quiet, -q]` | Disable analyze-backlog progress reporting|false|
+| `[--plain]` | Plain(Non-pretty) print backlog results as NDJSON|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-replication-clusters
@@ -2382,8 +2539,9 @@ $ pulsar-admin topics get-replication-clusters options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-replication-clusters
@@ -2400,8 +2558,9 @@ $ pulsar-admin topics set-replication-clusters options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--clusters, -c]` | Replication Cluster Ids list (comma separated values)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-replication-clusters
@@ -2418,8 +2577,8 @@ $ pulsar-admin topics remove-replication-clusters options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-shadow-topics
@@ -2436,8 +2595,8 @@ $ pulsar-admin topics get-shadow-topics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-shadow-topics
@@ -2454,8 +2613,9 @@ $ pulsar-admin topics set-shadow-topics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--topics, -t]` | Shadow topic list (comma separated values)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## remove-shadow-topics
@@ -2472,8 +2632,8 @@ $ pulsar-admin topics remove-shadow-topics options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## create-shadow-topic
@@ -2490,8 +2650,10 @@ $ pulsar-admin topics create-shadow-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--source, -s]` | source topic name|null|
+| `[--properties, -p]` | key value pair properties(eg: a=a,b=b,c=c)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-shadow-source
@@ -2508,8 +2670,8 @@ $ pulsar-admin topics get-shadow-source options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-schema-validation-enforce
@@ -2526,8 +2688,9 @@ $ pulsar-admin topics get-schema-validation-enforce options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-ap, --applied]` | Get the applied policy of the topic|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## set-schema-validation-enforce
@@ -2544,8 +2707,9 @@ $ pulsar-admin topics set-schema-validation-enforce options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--enable, -e]` | Enable schema validation enforced|false|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## trim-topic
@@ -2562,8 +2726,8 @@ $ pulsar-admin topics trim-topic options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
 
 ## get-message-id-by-index
@@ -2580,6 +2744,7 @@ $ pulsar-admin topics get-message-id-by-index options
 
 |Flag|Description|Default|
 |---|---|---|
-| `[-h, --help]` | Show this help message and exit.|null||
-| `[-v, --version]` | Print version information and exit.|null||
+| `[--index, -i]` | Index to get message id for the topic|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
 
