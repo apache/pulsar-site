@@ -107,19 +107,11 @@ The results describe this workload, not general broker capacity: run the scenari
 
 ### Seek by timestamp in offloaded topics with fewer object store requests {#seek-by-timestamp-in-offloaded-topics}
 
-Topics that keep a long history, such as logs retained for a year, hold most of it in [tiered storage](tiered-storage-overview.md). When a consumer seeks to a timestamp in that history, the broker runs a binary search that reads one entry per step, and the index of an offloaded ledger records only the first entry of each data block. Reaching any other entry meant scanning the block from its start, one ranged read at a time. Pulsar 5.0 reduces that scanning, so that a search sends fewer requests to the object store and downloads less data.
-
-A benchmark counted the ranged reads that searches by timestamp send to the object store, before and after three changes to how the jclouds offloader and the search read offloaded ledgers:
-
-- A topic holds about **130,000 entries of 2 to 6 KiB** in **two offloaded ledgers of about 250 MiB each**, with 64 MiB data blocks and a 1 MiB read buffer.
-- A **cold search** runs right after the topic is loaded, with no entry offset cached.
-- A **warm search** follows each cold search and looks for a position 200 entries earlier, as when a consumer seeks again nearby.
-
-The results:
+Topics that keep a long history, such as logs retained for a year, hold most of it in [tiered storage](tiered-storage-overview.md). Seeking such a topic to a timestamp runs a binary search over its offloaded ledgers, but their index records only the first entry of each data block, so reaching any other entry meant scanning the block from its start, one ranged read at a time. Pulsar 5.0 remembers the entry offsets it finds and makes use of the indexed block starts, so a search sends about **90% fewer requests** to the object store and downloads correspondingly less data:
 
 <div className="release-highlights-benchmark">
 
-| Ranged reads per search | Before | 5.0.0 | Change |
+| Ranged reads per search, 1 MiB each | Before | 5.0.0 | Change |
 | --- | ---: | ---: | ---: |
 | **Cold search, mean of 16 searches** | **428** | **44** | **−90%** |
 | Warm search, mean of 16 searches | 223 | 9 | −96% |
@@ -127,7 +119,14 @@ The results:
 
 </div>
 
-Each ranged read requests 1 MiB, so the same figures are the MiB downloaded per search. **Before** is the code without any of the three changes below, as in Pulsar 4.0.13 and 4.2.4. The first change is also in the 4.0 and 4.2 maintenance branches for their next releases.
+A **cold search** runs with no entry offset cached; a **warm search** follows it and seeks 200 entries earlier, as when a consumer seeks again nearby. **Before** is Pulsar 4.0.13 and 4.2.4. The first of the three changes, reusing scanned entry offsets, is also in the next 4.0 and 4.2 maintenance releases.
+
+![Ranged reads sent to the object store per search by timestamp on offloaded ledgers, before the changes and after each of the three changes, for cold and warm searches in separate panels with the same axis](/assets/release-highlights-5.0/seek-by-timestamp-offloaded-ranged-reads.svg)
+
+The figures count requests and bytes, not latency, which depends on your object store. See [read performance for object storage](tiered-storage-overview.md#read-performance-for-object-storage) for the settings involved, and the [message position search metrics](reference-metrics-opentelemetry.md#message-position-search-metrics) to observe searches on a running broker.
+
+<details className="details-plain">
+<summary>What each change contributes and how it was measured</summary>
 
 What each change contributes:
 
@@ -135,18 +134,13 @@ What each change contributes:
 - **The search reads the first entry of data blocks:** when the first entry of a data block is close to the midpoint of the search range, the search reads that entry instead, with a single ranged read. Cold searches go from 156 to 61, and warm searches from 14 to 9.
 - **Offsets are remembered for each open ledger:** scans keep offsets about 1 MiB apart for as long as the offloaded ledger stays open, and later reads in the same data block resume from the nearest one. Cold searches go from 61 to 44, and warm searches stay at 9.
 
-Ranged reads per search before the changes and after each change, cold and warm searches each in a panel of their own with the same axis:
+How it was measured:
 
-![Ranged reads sent to the object store per search by timestamp on offloaded ledgers, before the changes and after each of the three changes, for cold and warm searches in separate panels with the same axis](/assets/release-highlights-5.0/seek-by-timestamp-offloaded-ranged-reads.svg)
-
-<details className="details-plain">
-<summary>How it was measured</summary>
-
-- [`OffloadedLedgerFindPositionTest`](https://github.com/apache/pulsar/blob/master/tiered-storage/jcloud/src/test/java/org/apache/bookkeeper/mledger/offload/jcloud/impl/OffloadedLedgerFindPositionTest.java) ran before the first change and after each of the three changes, with its data set to 64 MiB data blocks and two offloaded ledgers of 64,997 entries. As committed, the test uses 16 MiB data blocks and one ledger to stay small.
-- The object store was in memory, so the benchmark counts requests and bytes, not latency. The broker entry cache was disabled so that every entry read reached the offloaded ledger.
+- The topic held about 130,000 entries of 2 to 6 KiB in two offloaded ledgers of about 250 MiB each, with 64 MiB data blocks and a 1 MiB read buffer.
+- [`OffloadedLedgerFindPositionTest`](https://github.com/apache/pulsar/blob/master/tiered-storage/jcloud/src/test/java/org/apache/bookkeeper/mledger/offload/jcloud/impl/OffloadedLedgerFindPositionTest.java) ran before the first change and after each change, with its data set to this layout. As committed, the test uses 16 MiB data blocks and one ledger to stay small.
+- The object store was in memory, and the broker entry cache was disabled so that every entry read reached the offloaded ledger.
 - The 16 searched positions are spread over both ledgers and over the positions within their data blocks. Each search covers both ledgers; a seek first narrows the search to the ledgers that can contain the timestamp.
 
-The results describe this data layout, not seek latency: each ranged read is a request to your object store, and its latency and cost depend on that store. [Read performance for object storage](tiered-storage-overview.md#read-performance-for-object-storage) describes the settings involved, and the [message position search metrics](reference-metrics-opentelemetry.md#message-position-search-metrics) show how long searches take and how much they read on a running broker.
 </details>
 
 ### Less work per message {#less-work-per-message}
