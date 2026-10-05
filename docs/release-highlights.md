@@ -139,13 +139,15 @@ Ranged reads per search before the changes and after each change, cold and warm 
 
 ![Ranged reads sent to the object store per search by timestamp on offloaded ledgers, before the changes and after each of the three changes, for cold and warm searches in separate panels with the same axis](/assets/release-highlights-5.0/seek-by-timestamp-offloaded-ranged-reads.svg)
 
-How it was measured:
+<details className="details-plain">
+<summary>How it was measured</summary>
 
 - [`OffloadedLedgerFindPositionTest`](https://github.com/apache/pulsar/blob/master/tiered-storage/jcloud/src/test/java/org/apache/bookkeeper/mledger/offload/jcloud/impl/OffloadedLedgerFindPositionTest.java) ran before the first change and after each of the three changes, with its data set to 64 MiB data blocks and two offloaded ledgers of 64,997 entries. As committed, the test uses 16 MiB data blocks and one ledger to stay small.
 - The object store was in memory, so the benchmark counts requests and bytes, not latency. The broker entry cache was disabled so that every entry read reached the offloaded ledger.
 - The 16 searched positions are spread over both ledgers and over the positions within their data blocks. Each search covers both ledgers; a seek first narrows the search to the ledgers that can contain the timestamp.
 
 The results describe this data layout, not seek latency: each ranged read is a request to your object store, and its latency and cost depend on that store. [Read performance for object storage](tiered-storage-overview.md#read-performance-for-object-storage) describes the settings involved, and the [message position search metrics](reference-metrics-opentelemetry.md#message-position-search-metrics) show how long searches take and how much they read on a running broker.
+</details>
 
 ### Less work per message {#less-work-per-message}
 
