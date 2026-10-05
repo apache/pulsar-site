@@ -108,18 +108,14 @@ The improvements in this section apply to regular topics and v4 applications. Th
 
 Consider a typical IoT deployment: many devices connect to hundreds of gateways, and each gateway publishes the devices' telemetry to Pulsar. Messages are keyed by device ID so that each device's messages are processed in order, and for that reason they are often not batched. In Pulsar 4.x, broker queueing and contention in this kind of workload could make consumers fall behind, even when they were fast enough to keep up.
 
-A benchmark compared Pulsar 4.0.13 and 5.0.0 on a simplified version of this use case: **500 publishers** sending keyed, unbatched 128-byte messages to one regular persistent topic, consumed by **20 consumers** on one Key_Shared subscription. Each publisher and consumer had its own client and connection, and both versions used the same client.
+A benchmark compared Pulsar 4.0.13 and 5.0.0 on a simplified version of this use case: **500 publishers** sending keyed, unbatched 128-byte messages to one regular persistent topic, consumed by **20 consumers** on one Key_Shared subscription. Each publisher and consumer had its own client and connection, and both versions used the same client. The table shows the means of three runs.
 
-| Means of 3 runs | 4.0.13 | 5.0.0 | Change |
-| --- | ---: | ---: | ---: |
-| Consuming rate during publishing, messages/s | 131 | 106,875 | ×816 |
-| **Backlog growth rate during publishing, messages/s** | **128,585** | **173** | **−99.9%** |
-| **Maximum backlog, messages** | **3,990,044** | **12,729** | **−99.7%** |
-| End-to-end latency, p99 | 202.3 s | 1.08 s | −99.5% |
-| Time the consumers needed after publishing ended | 202–205 s | 0 s | |
-| Publishing rate, messages/s | 128,716 | 107,048 | −16.8% |
-
-With 4.0.13, the consumers received almost nothing while the publishers were sending, and needed more than 200 seconds afterwards to drain the backlog. With 5.0.0, they received messages as fast as they were published, about one second after publishing at p99. 4.0.13 published faster only because its broker was hardly delivering anything at the same time, while the 5.0.0 broker did both.
+| | 4.0.13 | 5.0.0 |
+| --- | ---: | ---: |
+| Consuming rate during publishing, messages/s | 131 | 106,875 |
+| Publishing rate, messages/s | 128,716 | 107,048 |
+| Consume + Publish rate, messages/s | 128,847 | 213,923 |
+| **Pulsar 5.0.0 is about 1.7× faster when comparing the total consume+publish work performed by the broker.** | | |
 
 ![Throughput of Pulsar 4.0.13 and 5.0.0: published and consumed messages per second, in separate panels with the same axes](/assets/release-highlights-5.0/throughput-4.0.13-vs-5.0.0-separate.svg)
 
