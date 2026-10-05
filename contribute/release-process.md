@@ -808,7 +808,7 @@ poetry run bin/rest-apidoc-generator.py --master-path=$PULSAR_PATH --version=$VE
 # move to pulsar-site root
 cd ../..
 git add -u
-git add static/{openapi,swagger}/$VERSION_WITHOUT_RC
+git add static/openapi/$VERSION_WITHOUT_RC/* static/swagger/$VERSION_WITHOUT_RC/*
 git commit -m "update rest-apidoc for $VERSION_WITHOUT_RC"
 ```
 
@@ -857,6 +857,7 @@ You can generate references of config and command-line tool by running the follo
 # build Pulsar distributions under /path/to/pulsar-X.Y.Z
 cd "${PULSAR_SITE_PATH}/tools/pytools"
 # ensure that defaults using Runtime.getRuntime().availableProcessors() will be based on 1 as the number of CPUs
+# do "rm -rf ../../static/reference/[major.minor.x]" if this fails since the directory needs to be empty 
 _JAVA_OPTIONS=-XX:ActiveProcessorCount=1 poetry run bin/reference-doc-generator.py --master-path=$PULSAR_PATH --version=$VERSION_WITHOUT_RC
 ```
 
