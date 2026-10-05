@@ -1,0 +1,1478 @@
+{
+    "components": {
+        "schemas": {
+            "CursorStats": {
+                "properties": {
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "cursorLedger": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "cursorLedgerLastEntry": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "individuallyDeletedMessages": {
+                        "type": "string"
+                    },
+                    "lastLedgerSwitchTimestamp": {
+                        "type": "string"
+                    },
+                    "markDeletePosition": {
+                        "type": "string"
+                    },
+                    "messagesConsumedCounter": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "numberOfEntriesSinceFirstNotAckedMessage": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "pendingReadOps": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "properties": {
+                        "additionalProperties": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "type": "object"
+                    },
+                    "readPosition": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "subscriptionHavePendingRead": {
+                        "type": "boolean"
+                    },
+                    "subscriptionHavePendingReplayRead": {
+                        "type": "boolean"
+                    },
+                    "totalNonContiguousDeletedMessagesRange": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "waitingReadOp": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "LedgerInfo": {
+                "properties": {
+                    "entries": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "ledgerId": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "metadata": {
+                        "type": "string"
+                    },
+                    "offloaded": {
+                        "type": "boolean"
+                    },
+                    "properties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "size": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "underReplicated": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "ManagedLedgerInternalStats": {
+                "properties": {
+                    "currentLedgerEntries": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "currentLedgerSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "cursors": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/CursorStats"
+                        },
+                        "type": "object"
+                    },
+                    "entriesAddedCounter": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastConfirmedEntry": {
+                        "type": "string"
+                    },
+                    "lastLedgerCreatedTimestamp": {
+                        "type": "string"
+                    },
+                    "lastLedgerCreationFailureTimestamp": {
+                        "type": "string"
+                    },
+                    "ledgers": {
+                        "items": {
+                            "$ref": "#/components/schemas/LedgerInfo"
+                        },
+                        "type": "array"
+                    },
+                    "numberOfEntries": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "pendingAddEntriesCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "properties": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "totalSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "waitingCursorsCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "PositionInPendingAckStats": {
+                "properties": {
+                    "state": {
+                        "enum": [
+                            "PendingAck",
+                            "MarkDelete",
+                            "NotInPendingAck",
+                            "PendingAckNotReady",
+                            "InvalidPosition"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SegmentStats": {
+                "properties": {
+                    "lastTxnID": {
+                        "type": "string"
+                    },
+                    "persistentPosition": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "SegmentsStats": {
+                "properties": {
+                    "currentSegmentCapacity": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastTookSnapshotSegmentTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "segmentStats": {
+                        "items": {
+                            "$ref": "#/components/schemas/SegmentStats"
+                        },
+                        "type": "array"
+                    },
+                    "segmentsSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "unsealedAbortTxnIDSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SnapshotSystemTopicInternalStats": {
+                "properties": {
+                    "managedLedgerInternalStats": {
+                        "$ref": "#/components/schemas/ManagedLedgerInternalStats"
+                    },
+                    "managedLedgerName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionBufferInternalStats": {
+                "properties": {
+                    "segmentIndexInternalStats": {
+                        "$ref": "#/components/schemas/SnapshotSystemTopicInternalStats"
+                    },
+                    "segmentInternalStats": {
+                        "$ref": "#/components/schemas/SnapshotSystemTopicInternalStats"
+                    },
+                    "singleSnapshotSystemTopicInternalStats": {
+                        "$ref": "#/components/schemas/SnapshotSystemTopicInternalStats"
+                    },
+                    "snapshotType": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionBufferStats": {
+                "properties": {
+                    "lastSnapshotTimestamps": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lowWaterMarks": {
+                        "additionalProperties": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "type": "object"
+                    },
+                    "maxReadPosition": {
+                        "type": "string"
+                    },
+                    "ongoingTxnSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "recoverEndTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "recoverStartTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "segmentsStats": {
+                        "$ref": "#/components/schemas/SegmentsStats"
+                    },
+                    "snapshotType": {
+                        "type": "string"
+                    },
+                    "state": {
+                        "type": "string"
+                    },
+                    "totalAbortedTransactions": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionCoordinatorInfo": {
+                "properties": {
+                    "brokerServiceUrl": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionCoordinatorInternalStats": {
+                "properties": {
+                    "transactionLogStats": {
+                        "$ref": "#/components/schemas/TransactionLogStats"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionCoordinatorStats": {
+                "properties": {
+                    "leastSigBits": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lowWaterMark": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "ongoingTxnSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "recoverEndTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "recoverStartTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "state": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionInBufferStats": {
+                "properties": {
+                    "aborted": {
+                        "type": "boolean"
+                    },
+                    "startPosition": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionInPendingAckStats": {
+                "properties": {
+                    "cumulativeAckPosition": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionLogStats": {
+                "properties": {
+                    "managedLedgerInternalStats": {
+                        "$ref": "#/components/schemas/ManagedLedgerInternalStats"
+                    },
+                    "managedLedgerName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionMetadata": {
+                "properties": {
+                    "ackedPartitions": {
+                        "additionalProperties": {
+                            "additionalProperties": {
+                                "$ref": "#/components/schemas/TransactionInPendingAckStats"
+                            },
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "openTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "owner": {
+                        "type": "string"
+                    },
+                    "producedPartitions": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/TransactionInBufferStats"
+                        },
+                        "type": "object"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "timeoutAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "txnId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionPendingAckInternalStats": {
+                "properties": {
+                    "pendingAckLogStats": {
+                        "$ref": "#/components/schemas/TransactionLogStats"
+                    }
+                },
+                "type": "object"
+            },
+            "TransactionPendingAckStats": {
+                "properties": {
+                    "lowWaterMarks": {
+                        "additionalProperties": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "type": "object"
+                    },
+                    "ongoingTxnSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "recoverEndTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "recoverStartTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "state": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "info": {
+        "description": "This provides the REST API for Pulsar Transactions operations",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "title": "Pulsar Transactions REST API",
+        "version": "v3"
+    },
+    "openapi": "3.0.1",
+    "paths": {
+        "/admin/v3/transactions/abortTransaction/{mostSigBits}/{leastSigBits}": {
+            "post": {
+                "operationId": "abortTransaction",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "mostSigBits",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "leastSigBits",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "401": {
+                        "description": "This operation requires super-user access"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic or coordinator or transaction doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Abort transaction",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/coordinatorInternalStats/{coordinatorId}": {
+            "get": {
+                "operationId": "getCoordinatorInternalStats",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "coordinatorId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "metadata",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionCoordinatorInternalStats"
+                                }
+                            }
+                        },
+                        "description": "Get coordinator internal stats."
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Transaction coordinator not found"
+                    },
+                    "405": {
+                        "description": "Broker doesn't use MLTransactionMetadataStore!"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Get coordinator internal stats.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/coordinatorStats": {
+            "get": {
+                "operationId": "getCoordinatorStats",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "coordinatorId",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionCoordinatorStats"
+                                }
+                            }
+                        },
+                        "description": "Get transaction coordinator stats."
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Transaction coordinator not found"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Get transaction coordinator stats.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/coordinators": {
+            "get": {
+                "operationId": "listCoordinators",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/TransactionCoordinatorInfo"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "List transaction coordinators."
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "List transaction coordinators.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/pendingAckInternalStats/{tenant}/{namespace}/{topic}/{subName}": {
+            "get": {
+                "operationId": "getPendingAckInternalStats",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "subName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "metadata",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionPendingAckInternalStats"
+                                }
+                            }
+                        },
+                        "description": "Get transaction pending ack internal stats."
+                    },
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic or subscription name doesn't exist"
+                    },
+                    "405": {
+                        "description": "Pending ack handle doesn't use managedLedger!"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Get transaction pending ack internal stats.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/pendingAckStats/{tenant}/{namespace}/{topic}/{subName}": {
+            "get": {
+                "operationId": "getPendingAckStats",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "subName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "lowWaterMarks",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionPendingAckStats"
+                                }
+                            }
+                        },
+                        "description": "Get transaction pending ack stats in topic."
+                    },
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic or subName doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Get transaction pending ack stats in topic.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/positionStatsInPendingAck/{tenant}/{namespace}/{topic}/{subName}/{ledgerId}/{entryId}": {
+            "get": {
+                "operationId": "getPositionStatsInPendingAck",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "subName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "ledgerId",
+                        "required": true,
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "entryId",
+                        "required": true,
+                        "schema": {
+                            "format": "int64",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "batchIndex",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PositionInPendingAckStats"
+                                }
+                            }
+                        },
+                        "description": "Get position stats in pending ack."
+                    },
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic or subscription name doesn't exist"
+                    },
+                    "405": {
+                        "description": "Pending ack handle doesn't use managedLedger!"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Get position stats in pending ack.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/slowTransactions/{timeout}": {
+            "get": {
+                "operationId": "getSlowTransactions",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "timeout",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "coordinatorId",
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "$ref": "#/components/schemas/TransactionMetadata"
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Get slow transactions."
+                    },
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic or coordinator or transaction doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Get slow transactions.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/transactionBufferInternalStats/{tenant}/{namespace}/{topic}": {
+            "get": {
+                "operationId": "getTransactionBufferInternalStats",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "metadata",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionBufferInternalStats"
+                                }
+                            }
+                        },
+                        "description": "Get transaction buffer internal stats."
+                    },
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Transaction buffer doesn't use managedLedger!"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker does not have transactions enabled"
+                    }
+                },
+                "summary": "Get transaction buffer internal stats.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/transactionBufferStats/{tenant}/{namespace}/{topic}": {
+            "get": {
+                "operationId": "getTransactionBufferStats",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "lowWaterMarks",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "segmentStats",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionBufferStats"
+                                }
+                            }
+                        },
+                        "description": "Get transaction buffer stats in topic."
+                    },
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Get transaction buffer stats in topic.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/transactionCoordinator/replicas": {
+            "post": {
+                "operationId": "scaleTransactionCoordinators",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "format": "int32",
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "401": {
+                        "description": "This operation requires super-user access"
+                    },
+                    "406": {
+                        "description": "The number of replicas should be more than the current number of transaction coordinator replicas"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/transactionInBufferStats/{tenant}/{namespace}/{topic}/{mostSigBits}/{leastSigBits}": {
+            "get": {
+                "operationId": "getTransactionInBufferStats",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "mostSigBits",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "leastSigBits",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionInBufferStats"
+                                }
+                            }
+                        },
+                        "description": "Get transaction state in transaction buffer."
+                    },
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Get transaction state in transaction buffer.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/transactionInPendingAckStats/{tenant}/{namespace}/{topic}/{subName}/{mostSigBits}/{leastSigBits}": {
+            "get": {
+                "operationId": "getTransactionInPendingAckStats",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "mostSigBits",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "leastSigBits",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "subName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionInPendingAckStats"
+                                }
+                            }
+                        },
+                        "description": "Get transaction state in pending ack."
+                    },
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Get transaction state in pending ack.",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        },
+        "/admin/v3/transactions/transactionMetadata/{mostSigBits}/{leastSigBits}": {
+            "get": {
+                "operationId": "getTransactionMetadata",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "mostSigBits",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "leastSigBits",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TransactionMetadata"
+                                }
+                            }
+                        },
+                        "description": "Get transaction metadata"
+                    },
+                    "307": {
+                        "description": "Topic is not owned by this broker!"
+                    },
+                    "400": {
+                        "description": "Topic is not a persistent topic!"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic or coordinator or transaction doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "503": {
+                        "description": "This Broker is not configured with transactionCoordinatorEnabled=true."
+                    }
+                },
+                "summary": "Get transaction metadata",
+                "tags": [
+                    "transactions"
+                ]
+            }
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080"
+        }
+    ],
+    "tags": [
+        {
+            "description": "Transactions admin apis",
+            "name": "transactions"
+        }
+    ]
+}
