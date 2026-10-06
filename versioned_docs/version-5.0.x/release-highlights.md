@@ -20,11 +20,11 @@ Pulsar 5.0 introduces **Scalable Topics** for applications that need to grow bey
 
 **Adopt new capabilities on your schedule.** The v5 client API, Scalable Topics, and Oxia are separate choices. Upgrade your cluster first, then introduce the capabilities that suit your applications.
 
-**Keep a planned path back to 4.x.** The [upgrade guide](administration-upgrade-to-5.0.x.md#preserve-and-rehearse-rollback) explains how to prepare and rehearse rollback to your tested 4.x release. Apply the rollback settings before the first 5.0 broker starts and retain the existing feature set during the rollback window.
+**Keep a planned path back to 4.x.** The [upgrade guide](administration-upgrade-to-5.0.x.md) explains how to prepare and rehearse rollback to your tested 4.x release. Apply the rollback settings before the first 5.0 broker starts and retain the existing feature set during the rollback window.
 
 :::
 
-[Download Pulsar](pathname:///download) · [Plan your upgrade](administration-upgrade-to-5.0.x.md) · [Explore Scalable Topics](concepts-scalable-topics.md)
+[Download Pulsar](pathname:///download) · [Upgrading to Pulsar 5.0.x](administration-upgrade-to-5.0.x.md) · [Explore Scalable Topics](concepts-scalable-topics.md)
 
 ## Changelog {#detailed-changes}
 
