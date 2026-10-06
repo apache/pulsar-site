@@ -173,7 +173,7 @@ byte[] state = consumer.checkpoint().toByteArray();   // persist externally
 // resume later with: .startPosition(Checkpoint.fromByteArray(state))
 ```
 
-Without a group, each checkpoint consumer independently reads every segment. Set `.consumerGroup("processing-job")` to distribute segments and entry buckets across consumers with the same group name. The group coordinates live assignments; it does not persist a cursor or retain backlog. Each consumer must supply its own checkpoint on restart. A checkpoint advances as messages are received, so persist it only after the corresponding application processing is included in your recovery state. Configure [retention](pathname:///docs/concepts-scalable-topics#retention-across-layout-changes) to cover checkpoint recovery and replay.
+Without a group, each checkpoint consumer independently reads every segment. Set `.consumerGroup("processing-job")` to distribute segments across consumers with the same group name: each segment is read by one member, and members beyond the number of segments stay idle. Unlike an ungrouped consumer, a group does not preserve per-key order across splits and merges. The group coordinates live assignments; it does not persist a cursor or retain backlog. Each consumer must supply its own checkpoint on restart. A checkpoint advances as messages are received, so persist it only after the corresponding application processing is included in your recovery state. Configure [retention](pathname:///docs/concepts-scalable-topics#retention-across-layout-changes) to cover checkpoint recovery and replay.
 
 ### Initial positions and replay
 
