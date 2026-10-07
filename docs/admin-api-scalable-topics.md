@@ -157,7 +157,7 @@ Auto split/merge is **on by default**: each topic's controller splits any segmen
 
 An override only sets the fields it changes; unset fields inherit from the level above.
 
-Stream and grouped checkpoint consumer counts also drive scale-up. Below `scalableTopicSplitVsRebucketMinMsgRateInThreshold`, or when the topic reaches its segment ceiling, the controller increases entry-bucket capacity instead of adding physical segments. Queue consumer counts do not drive this behavior. Automatic merges preserve the parallelism currently used by these coordinated consumers, subject to the per-segment bucket ceiling.
+Stream and grouped checkpoint consumer counts also drive scale-up. Below `scalableTopicSplitVsRebucketMinMsgRateInThreshold`, or when the topic reaches its segment ceiling, the controller increases entry-bucket capacity for stream consumers instead of adding physical segments; grouped checkpoint consumers drive only splits, because each member reads whole segments. Queue consumer counts do not drive this behavior. Automatic merges preserve the entry-bucket parallelism that stream consumers currently use, subject to the per-segment bucket ceiling. A checkpoint consumer group uses at most one member per segment, so a merge can leave one of its members idle.
 
 ### Broker defaults (`broker.conf`)
 
@@ -170,7 +170,7 @@ Stream and grouped checkpoint consumer counts also drive scale-up. Below `scalab
 | `scalableTopicEntryBucketMaxPerSegment` | Maximum entry-bucket count per segment, for automatic and manual rebucketing. | `1024` |
 | `scalableTopicMaxDagDepth` | Maximum merges in a segment's lineage; bounds split/merge flip-flopping (limits merges only -- splits are unaffected). | `10` |
 | `scalableTopicSplitCooldownSeconds` | Minimum time between automatic splits on a topic (short -- only coalesces a burst of near-simultaneous triggers). | `60` |
-| `scalableTopicSplitVsRebucketMinMsgRateInThreshold` | Inbound messages/second at or above which consumer-driven scale-up can split the busiest segment; below it, scale up entry buckets. | `1000` |
+| `scalableTopicSplitVsRebucketMinMsgRateInThreshold` | Inbound messages/second at or above which consumer-driven scale-up can split the busiest segment; below it, scale up entry buckets for stream consumers. | `1000` |
 | `scalableTopicRebucketCooldownSeconds` | Minimum time between automatic rebuckets on a topic. | `60` |
 | `scalableTopicMergeCooldownSeconds` | Minimum time between automatic merges on a topic. | `300` |
 | `scalableTopicMergeWindowSeconds` | How long a segment must stay continuously below every merge threshold before it becomes merge-eligible. | `300` |
