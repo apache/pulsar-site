@@ -1,4 +1,3 @@
-2026-10-05T12:29:10,595-0700 [main] INFO  org.apache.bookkeeper.meta.MetadataDrivers - BookKeeper metadata driver manager initialized
 # initialize-cluster-metadata
 
 
