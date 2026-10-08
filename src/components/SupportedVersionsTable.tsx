@@ -154,6 +154,10 @@ export function buildSupportedVersionList(): SupportedVersionData[] {
     const released = release.released
     const last = lodash.last(supportedVersionList)
     if (last && isSameFeatureRelease(last.version, release.version)) {
+      if (release.milestone && !last.milestone) {
+        // milestones preceding a stable release don't count towards its release date
+        continue
+      }
       // early patch release - the support period is counted from the first patch release
       last.released = release.released
       if (!last.milestone) {

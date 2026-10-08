@@ -19,8 +19,9 @@ This portal holds a variety of topics, tutorials, guides, and reference material
 
 Quick links:
 
+- [Blog: Apache Pulsar 5.0 LTS: Scalable Topics and Faster Existing Workloads](pathname:///blog/2026/10/05/announcing-apache-pulsar-5-0)
 - [Release highlights and upgrading](release-highlights.md)
-- [Cluster upgrade guide](administration-upgrade.md)
+- [Upgrading to Pulsar 5.0.x](administration-upgrade-to-5.0.x.md)
 - [Java client dependency configuration for Pulsar @pulsar:version:major@](pathname:///docs/client-libraries/java-dependency-configuration)
 
 :::

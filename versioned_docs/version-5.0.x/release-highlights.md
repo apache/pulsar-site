@@ -9,22 +9,22 @@ import ReleaseSeriesNotes from '@site/src/components/ReleaseSeriesNotes';
 
 Pulsar 5.0 introduces **Scalable Topics** for applications that need to grow beyond a fixed partition count, alongside **major performance and reliability improvements for existing workloads**. Scale topics and consumers as demand changes, benefit from more efficient brokers, and keep the applications and topics you already run.
 
-- **Scalable Topics: grow beyond a fixed partition count.** Traditional partitions cannot shrink, and adding partitions can disrupt per-key ordering. Sizing too generously wastes resources; sizing too narrowly creates hot partitions and costly migrations. Scalable Topics let you split and merge key ranges and scale consumers while preserving per-key ordering and producer batching.
-- **More performance from existing workloads.** Fewer thread handoffs, less contention, and batched storage reads reduce the work behind each message. In one [many-publisher benchmark](#keep-consumers-at-the-tail-with-many-publishers), backlog growth during publishing fell from **128,585 to 173 messages/s (−99.9%)**, and the maximum backlog fell by **99.7%**. In this workload, consumers stayed at the tail with hundreds of publishers without accumulating a sustained backlog.
+- **Scalable Topics: topics that size themselves.** Instead of choosing a partition count up front, a scalable topic splits hot key-range segments and merges cold ones at runtime, while preserving per-key ordering and producer batching.
+- **More performance from existing workloads.** Fewer thread handoffs, less contention, and batched storage reads reduce the work behind each message. In a [benchmark with 500 publishers](#keep-consumers-at-the-tail-with-many-publishers), consumers stayed at the tail instead of stalling behind the producers, the broker sustained about **1.7× the total load**, published plus consumed, and p99 end-to-end latency fell from **202.3 s to 1.08 s**.
 - **More dependable delivery.** Fixes across geo-replication, subscriptions, delayed delivery, and acknowledgment recovery address stalls in the features applications use every day.
 - **Easier operation at scale.** Better load distribution, coordinated rolling-upgrade guidance, structured logs, and the ability to close idle topics without deleting their data give operators more control.
 
 :::tip Upgrade with confidence
 
-**Keep your applications and topics.** Existing partitioned and non-partitioned topics, subscription types, and the existing Java client—now called the **v4 client**—remain supported. Your v4 applications can keep their client dependency and API when you upgrade the cluster. With Scalable Topics disabled, all previously available features remain fully supported in production on ZooKeeper.
+**Keep your applications and topics.** Existing partitioned and non-partitioned topics, subscription types, and the existing Java client—now called the **v4 client**—remain supported. Your v4 applications can keep their client dependency and API when you upgrade the cluster. ZooKeeper remains fully supported as the metadata store.
 
 **Adopt new capabilities on your schedule.** The v5 client API, Scalable Topics, and Oxia are separate choices. Upgrade your cluster first, then introduce the capabilities that suit your applications.
 
-**Keep a planned path back to 4.x.** The [upgrade guide](administration-upgrade-to-5.0.x.md#preserve-and-rehearse-rollback) explains how to prepare and rehearse rollback to your tested 4.x release. Apply the rollback settings before the first 5.0 broker starts and retain the existing feature set during the rollback window.
+**Keep a planned path back to 4.x.** The [upgrade guide](administration-upgrade-to-5.0.x.md) explains how to prepare and rehearse rollback to your tested 4.x release. Apply the rollback settings before the first 5.0 broker starts and retain the existing feature set during the rollback window.
 
 :::
 
-[Download Pulsar](pathname:///download) · [Plan your upgrade](administration-upgrade-to-5.0.x.md) · [Explore Scalable Topics](concepts-scalable-topics.md)
+[Download Pulsar](pathname:///download) · [Upgrading to Pulsar 5.0.x](administration-upgrade-to-5.0.x.md) · [Explore Scalable Topics](concepts-scalable-topics.md)
 
 ## Changelog {#detailed-changes}
 
@@ -32,17 +32,66 @@ Pulsar 5.0 introduces **Scalable Topics** for applications that need to grow bey
 
 <!-- Release-note links update automatically. Retain this page's stable document ID. -->
 
-## Scalable Topics {#scalable-topics}
+## Scalable Topics: topics that size themselves {#scalable-topics}
 
-[Scalable Topics](concepts-scalable-topics.md) give applications a logical topic that can grow as demand changes. Key-range segments can split and merge, so applications use a `topic://` address without managing a partition count.
+A topic should be a **logical concept**: a named stream that applications publish to and consume from. Yet for its whole history, Pulsar has asked application developers to answer an infrastructure question up front: **how many partitions?** That number is a guess that is easy to get wrong and hard to undo. It is chosen before you know the real traffic, it can be increased but never decreased, and because keys are routed with `hash(key) % partitionCount`, increasing it moves keys to different partitions, so consumers may read a key's newer messages before its older ones. Choose too few partitions and you create hot partitions and costly migrations; choose too many and you pay for resources a quiet topic never needed.
 
-Consumer parallelism can grow within each segment, too. Multiple consumers share the work while preserving per-key ordering, including when consumers join or leave. This helps drain backlogs left in segments after they split or merge and lets applications keep producer batching enabled without selecting a key-based batcher for this consumption mode.
+**[Scalable Topics](concepts-scalable-topics.md) take that decision away.** A scalable topic, addressed with the new `topic://` scheme, is a single logical stream whose capacity follows its actual load, in both directions:
 
-Existing persistent topics can be [migrated in place](admin-api-scalable-topics.md#migrate-a-regular-topic), without copying their data, after their producers and consumers move to the v5 client. [Transactions](txn-use.md#transactions-on-scalable-topics) work across segment splits and merges when enabled on brokers using Oxia. In production, Scalable Topics use Oxia; ZooKeeper deployments can try them in test environments. The [administration guide](admin-api-scalable-topics.md) covers scaling, configuration, and the one-way transition from regular to Scalable Topics.
+- **Key-range segments.** The key hash space is divided into segments, each owning a contiguous range and backed by its own internal topic.
+- **Split and merge at runtime.** The broker splits hot segments and merges adjacent cold ones with no downtime. This is automatic by default, with thresholds you can tune per broker, namespace, and topic, and you can also split and merge manually.
+- **Per-key ordering is preserved.** A split or merge moves a key to a successor range that still contains it, and stream consumers drain the predecessor segment before reading its successor.
+- **Applications see one stream.** A per-topic controller in the broker manages the segment layout and pushes changes to clients, so applications never handle segments or react to resizing.
 
-Operators can keep Scalable Topics behind a feature gate during the upgrade by setting `scalableTopicsEnabled=false` on every target broker before the first 5.0 broker starts. Together with the other [rollback prerequisites](administration-upgrade-to-5.0.x.md#preserve-and-rehearse-rollback), this preserves a safe path back to the tested 4.x release if problems arise during the 5.x upgrade. Enable the feature in production when you are ready, after validating the upgraded cluster and closing the rollback window.
+Consumer parallelism can grow within a segment, too. Messages are grouped into **entry buckets** by key hash, and multiple stream consumers share a segment's buckets in key order, including when consumers join or leave. When more consumers join, Pulsar can split a busy segment or give it more buckets, and after a split or merge, consumers share the sealed segment's buckets to drain its backlog. **If you have struggled to combine Key_Shared subscriptions with producer batching, this addresses it:** producers keep batching enabled, without a key-based batcher, while stream consumers share the work in key order.
 
-## Performance and reliability {#performance-and-reliability}
+| | Partitioned topic (v4) | Scalable topic |
+| --- | --- | --- |
+| Capacity | Partition count chosen at creation | Segments and entry buckets that change at runtime |
+| Scale up | Increase the partition count manually | Hot segments split automatically |
+| Scale down | Not possible | Cold segments merge automatically |
+| Key ordering when resized | Keys can move between partitions | Preserved across splits and merges for stream consumers |
+| Layout visible to applications | Partition count and indexes | None; managed by the broker |
+
+The goal is for one topic type to be the right choice across use cases, out of the box: you model your application around the topics that fit your domain, and Pulsar adapts them to how they are actually used, without capacity planning or re-sharding.
+
+Scalable Topics are delivered by a family of Pulsar Improvement Proposals:
+
+- **[PIP-460](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-460.md)**: Scalable Topics, the overall model
+- **[PIP-468](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-468.md)**: the per-topic controller
+- **[PIP-483](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-483.md)**: automatic split and merge
+- **[PIP-486](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-486.md)**: key-shared consumption with entry buckets
+- **[PIP-466](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-466.md)**: the v5 Java client API
+- **[PIP-473](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-473.md)**: transactions across splits and merges
+- **[PIP-475](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-475.md)**: in-place migration of regular topics, with no data copy
+- **[PIP-494](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-494.md)**: the client specification and its change process
+- **[PIP-496](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-496.md)**: Functions and IO connectors on Scalable Topics
+
+### A client specification for every SDK {#scalable-topics-client-specification}
+
+With Scalable Topics, clients do more than connect to a topic: they track the segment layout as it changes, route each key to the segment that owns it, and follow the controller's consumer assignments. To make every client behave the same way, Pulsar 5.0 ships the **[Scalable Topics Client Specification](https://github.com/apache/pulsar/tree/v5.0.0/spec/scalable-topics) 1.0**, the authoritative, language-neutral contract for Scalable Topics clients:
+
+- **One contract for all languages.** It separates the API contract that applications observe from a client's internal mechanisms and the exact wire-protocol interactions, documented with sequence diagrams. Conformant clients route keys identically and share ordering and acknowledgment semantics, so producers and consumers written in different languages can work on the same scalable topic.
+- **Stable and versioned.** Each feature has a stability tier. Incompatible changes land only at an LTS boundary, deprecated features remain available at least until the next LTS release, and every normative change goes through a PIP together with its specification edits.
+- **A clear definition of support.** A conformance checklist defines what an SDK must implement to claim Scalable Topics support. The Java v5 client is the reference implementation, while the specification is the source of truth.
+
+Today, the Java [v5 client](#v5-java-client) supports Scalable Topics, and work is ongoing to bring that support to the other Pulsar client SDKs.
+
+### Adopting Scalable Topics {#adopting-scalable-topics}
+
+- **New applications** are encouraged to build on Scalable Topics and the v5 API when the [requirements and limitations](concepts-scalable-topics.md#requirements) fit.
+- **Existing applications** can keep their partitioned and non-partitioned topics, with no requirement to migrate. When you're ready, existing persistent topics can be [migrated in place](admin-api-scalable-topics.md#migrate-a-regular-topic), without copying their data, once their producers and consumers use the v5 client. The conversion is one-way.
+- **Requirements:** a client with v5 API support, since v4 clients cannot use `topic://` topics, and scalable-topic services enabled on the brokers, which the v5 API needs even for regular topics. Scalable Topics work with ZooKeeper and Oxia, with Oxia recommended, and support [transactions](txn-use.md#transactions-on-scalable-topics) across segment splits and merges.
+- **Functions and IO connectors:** Java Functions and IO connectors switch to the v5 client automatically when their topics are `topic://` topics. Python and Go Functions keep the v4 client and cannot use `topic://` topics.
+- **Limitations:** geo-replication and replicated subscriptions are not supported for Scalable Topics in 5.0. Use partitioned or non-partitioned topics for applications that need them.
+
+Operators can keep Scalable Topics behind a feature gate during the upgrade by setting `scalableTopicsEnabled=false` (the default is `true`) on every target broker before the first 5.0 broker starts. Together with the other [rollback prerequisites](administration-upgrade-to-5.0.x.md#preserve-and-rehearse-rollback), this preserves a safe path back to the tested 4.x release if problems arise during the 5.x upgrade. Enable the feature in production when you are ready, after validating the upgraded cluster and closing the rollback window.
+
+The v4 API and existing topic types remain fully supported throughout the 5.0 LTS line. Longer term, Scalable Topics are designed to cover all of Pulsar's use cases, and the v5 API is the direction Pulsar is heading; according to [PIP-460](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-460.md), any deprecation of the existing API would be planned for a later LTS release.
+
+To get started, read the [Scalable Topics concepts](concepts-scalable-topics.md), the [v5 Java client guide](pathname:///docs/client-libraries/java-v5), and [Manage scalable topics](admin-api-scalable-topics.md).
+
+## Performance and reliability for existing workloads {#performance-and-reliability}
 
 :::tip
 
@@ -50,70 +99,43 @@ The performance and reliability improvements in Pulsar 5.0 apply to existing app
 
 :::
 
-### Keep consumers at the tail with 100s of publishers {#keep-consumers-at-the-tail-with-many-publishers}
+### Consumers keep up with hundreds of publishers {#keep-consumers-at-the-tail-with-many-publishers}
 
-In a typical IoT deployment, hundreds of thousands of devices connect to hundreds of gateways, and each gateway publishes the devices' telemetry to Pulsar, which serves as the message bus for the applications that process it. The messages are keyed by device ID, so that each device's messages are processed in order, and for that reason they usually aren't batched. Pulsar 5.0 reduces the broker queueing and contention that could make the consuming applications fall behind even when they were fast enough to keep up.
+In a typical IoT deployment, devices connect to hundreds of gateways that publish the devices' telemetry to Pulsar. Messages are keyed by device ID so that each device's messages are processed in order, and for that reason they are often not batched.
 
-A benchmark compared Pulsar 4.0.13 and 5.0.0 in a simplified version of this use case:
+A benchmark compared Pulsar 4.0.13 and 5.0.0 on a simplified version of this use case: **500 publishers** sent keyed, unbatched 128-byte messages, as fast as the broker accepted them, to one regular persistent topic, consumed by **20 consumers** on one Key_Shared subscription. Each publisher and consumer had its own client and connection, and both versions were driven by the same 5.0.0 Java client. The table shows the means of three runs.
 
-- **500 gateways** publish keyed, unbatched 128-byte messages to one shared topic, as fast as the cluster accepts them.
-- **20 instances of a message-processing application** consume them from that topic on one Key_Shared subscription, which delivers each key's messages in order to one instance at a time.
-- Each gateway and each application instance has its own Pulsar client and TCP connection.
+| | 4.0.13 | 5.0.0 |
+| --- | ---: | ---: |
+| Publishing rate, messages/s | 128,716 | 107,048 |
+| Consuming rate during publishing, messages/s | 131 | 106,875 |
+| Published + consumed, messages/s | 128,847 | 213,923 |
+| End-to-end latency, p99 | 202.3 s | 1.08 s |
 
-The results:
+Once the broker reached its CPU limit, contention between threads in 4.0.13 left the consumers stalled behind the producers: they received almost nothing until publishing ended, and the backlog grew to almost 4 million messages. 4.0.13 accepted messages faster only because it was barely delivering any. Pulsar 5.0.0 shares the broker fairly between publishing and dispatch, so consumers stay at the tail and it sustains about **1.7× the total load**, published plus consumed.
 
-<div className="release-highlights-benchmark">
+![Throughput of one run of Pulsar 4.0.13 and of 5.0.0: published and consumed messages per second, in separate panels with the same axes](/assets/release-highlights-5.0/throughput-4.0.13-vs-5.0.0-separate.svg)
 
-| Means of 3 runs | 4.0.13 | 5.0.0 | Change |
-| --- | ---: | ---: | ---: |
-| Publishing rate, messages/s | 128,716 | 107,048 | −16.8% |
-| Consuming rate during publishing, messages/s | 131 | 106,875 | ×816 |
-| **Backlog growth rate during publishing, messages/s** | **128,585** | **173** | **−99.9%** |
-| Delivered throughput, until the last message arrived, messages/s | 17,038 | 106,658 | +526% |
-| Time the consumers needed after publishing ended | 202–205 s | 0 s | |
-| **Maximum backlog, messages** | **3,990,044** | **12,729** | **−99.7%** |
-| End-to-end latency, p99 | 202.3 s | 1.08 s | −99.5% |
-
-</div>
-
-**Backlog growth rate during publishing** is **publishing rate − consumption rate during publishing**, or equivalently **(messages published − messages consumed by the time all publishers finished) ÷ publishing duration in seconds**. A lower value means consumers keep closer to the publishers.
-
-**Delivered throughput** is calculated for each run as **4,000,000 messages ÷ elapsed seconds from the start of publishing until the last message was consumed**, including any time spent draining the backlog after publishing ended. The table reports the mean of the three runs.
-
-What the results show:
-
-- **4.0.13's consumers fell behind:** they received almost nothing while the producers published, and needed more than 200 s afterwards to catch up.
-- **5.0.0's consumers kept up:** they received the messages as fast as they were published, about 1 s after publishing at p99.
-- **4.0.13 published faster** because its broker was hardly delivering anything at the same time, while 5.0.0's broker did both.
-
-Throughput of one run of each version, each in a panel of its own with the same axes. With 4.0.13, consumption (the solid line) stays near zero until publishing ends, then drains the backlog at about 20,000 messages/s for more than 200 s; with 5.0.0, it follows publishing (the dashed line):
-
-![Throughput of Pulsar 4.0.13 and 5.0.0: published and consumed messages per second, in separate panels with the same axes](/assets/release-highlights-5.0/throughput-4.0.13-vs-5.0.0-separate.svg)
-
-Publish and end-to-end latency by percentile, on a logarithmic scale. The publish latencies are similar, about 1 s, while 4.0.13's end-to-end latency reaches about 200 s:
-
-![Latency by percentile of Pulsar 4.0.13 and 5.0.0 on a logarithmic scale, in separate panels with the same axes](/assets/release-highlights-5.0/latency-percentiles-log-4.0.13-vs-5.0.0-separate.svg)
-
-For these **tailing reads**—consuming newly published messages near the end of the topic—fewer thread handoffs and batched publish submission let dispatch keep moving instead of waiting behind one executor task per entry.
+The gains come mainly from fewer thread handoffs and batched publish submission, which keep dispatch moving instead of waiting behind one executor task per entry. These results describe this workload, not general broker capacity. Consumers still need enough processing capacity to keep up with producers.
 
 How it was measured:
 
-- [Pulsar's performance testing framework](https://github.com/apache/pulsar/tree/master/tests/performance) ran its [`iot-telemetry-max-rate`](https://github.com/apache/pulsar/blob/master/tests/performance/scenarios/iot-telemetry-max-rate.yaml) scenario, with single-copy ledgers on three bookies, on one 8-core host at a fixed 2.4 GHz.
+- [Pulsar's performance testing framework](https://github.com/apache/pulsar/tree/v5.0.0/tests/performance) ran its [`iot-telemetry-max-rate`](https://github.com/apache/pulsar/blob/v5.0.0/tests/performance/scenarios/iot-telemetry-max-rate.yaml) scenario, with single-copy ledgers on three bookies, on one 8-core host at a fixed 2.4 GHz. You can run the scenario on your own hardware to compare with your application.
 - Each run measured 4 million messages after a warmup. With 4.0.13, publishing took about 31 s and the last message arrived after about 235 s; with 5.0.0, both took about 37 s.
-- The topic was a regular persistent topic, not a Scalable Topic, so that both versions ran the same kind of topic and the comparison with 4.0.13 is like for like.
-- 4.0.13 ran with its own defaults, and both versions used the same 5.0.0 client. Every run delivered every message without duplicates or ordering violations.
-
-The results describe this workload, not general broker capacity: run the scenario on your own hardware to compare with your application. Consumers still need enough processing capacity to keep up with producers.
+- The topic was a regular persistent topic, not a Scalable Topic, so that both versions ran the same kind of topic and the comparison with 4.0.13 is like for like. 4.0.13 ran with its own defaults. Every run delivered every message without duplicates or ordering violations.
+- **Consuming rate during publishing** counts the messages consumed by the time all publishers finished, divided by the publishing duration. **Published + consumed** is the sum of the publishing rate and the consuming rate during publishing, the total message load the broker handled while publishing.
 
 ### Less work per message {#less-work-per-message}
 
-The efficiency improvements reach across the messaging path:
+- **Publishing and dispatch:** batched handovers reduce executor contention, producers on a topic with deduplication enabled no longer contend on a topic-wide lock, and Shared and Key_Shared dispatch use fewer synchronization and lookup operations.
+- **Storage and memory:** [BookKeeper batch reads](https://bookkeeper.apache.org/bps/BP-62-new-API-for-batched-reads/) fetch multiple entries per request when draining backlogs of small entries, cache-owned copies and Netty's adaptive allocator improve buffer use, and deferred metadata parsing reduces work when publishing.
+- **Acknowledgments and client scheduling:** compact bitmaps, reused acknowledgment data, and coalesced listener notifications reduce allocation and scheduling overhead; the client-side changes take effect with the 5.0 client library.
 
-- **Publishing and dispatch:** batched handovers reduce executor contention, independent producers avoid a topic-wide deduplication lock, and Shared and Key_Shared dispatch use fewer synchronization and lookup operations.
-- **Storage and memory:** BookKeeper batch reads fetch multiple entries per request using [BP-62 New API for batched reads](https://bookkeeper.apache.org/bps/BP-62-new-API-for-batched-reads/). Cache-owned copies and the [Netty adaptive allocator](https://netty.io/wiki/analyzing-memory-allocator-behavior.html) improve buffer use for small entries. Deferred metadata parsing reduces work on the publishing path, and tiered-storage reads reuse discovered entry offsets.
-- **Acknowledgments and client scheduling:** compact bitmaps, reused acknowledgment data, fewer temporary objects, and coalesced listener notifications reduce allocation and scheduling overhead.
+The [broker performance guide](performance-broker.md) covers the related settings and how to tune them. The [configuration comparison](administration-upgrade-to-5.0.x-configuration.md) helps operators review changed defaults against their own workloads.
 
-The [broker performance guide](performance-broker.md) explains the improvements and tuning options. The [configuration comparison](administration-upgrade-to-5.0.x-configuration.md) helps operators review changed defaults against their own workloads.
+### Seek by timestamp on offloaded topics with fewer object-store requests {#seek-by-timestamp-in-offloaded-topics}
+
+Seeking a topic in [tiered storage](tiered-storage-overview.md) to a timestamp previously meant scanning offloaded data blocks from their start, one ranged read at a time. Pulsar 5.0 remembers the entry offsets it discovers and uses the indexed block starts. Compared with 4.0.13 and 4.2.4, a cold search in the benchmark sent about **90% fewer requests** to the object store (44 ranged reads instead of 428) and a nearby follow-up search about 96% fewer, which also means less data downloaded; the offset reuse is also in 4.0.14 and 4.2.5. The latency gain depends on your object store. New OpenTelemetry [message position search metrics](reference-metrics-opentelemetry.md#message-position-search-metrics) let you observe these searches on a running broker. See [read performance for object storage](tiered-storage-overview.md#read-performance-for-object-storage) for the settings involved.
 
 ### More reliable delivery and recovery {#more-reliable-delivery-and-recovery}
 
@@ -124,7 +146,7 @@ Reliability improvements strengthen the features existing applications use every
 - **Delayed delivery** fixes preserve message indexes through snapshot trimming and tracker recovery, and prevent premature replay.
 - **Acknowledgments and transactions** retain batch acknowledgment state and cursor properties during recovery, prevent already acknowledged messages from reaching dead-letter topics, and keep transactional and non-transactional messages in separate batches.
 
-Assignment and ownership cleanup fixes also improve recovery in the extensible load manager.
+Assignment and ownership cleanup fixes also improve recovery in the extensible load manager. Most of these fixes are also in the 4.0.14 and 4.2.5 maintenance releases.
 
 ## New capabilities {#new-capabilities}
 
@@ -134,23 +156,25 @@ Assignment and ownership cleanup fixes also improve recovery in the extensible l
 
 ### A Java client API built around how you consume {#v5-java-client}
 
-The [v5 Java client API](pathname:///docs/client-libraries/java-v5) gives applications three focused consumption models:
+Scalable Topics are used through the new [v5 Java client API](pathname:///docs/client-libraries/java-v5). Over more than a decade, Pulsar's client API grew one feature at a time, accumulating options, overloads, and subtle inconsistencies; the v5 API is a clean-slate redesign that distills the lessons from production use into a focused API.
 
-- **Stream consumers** for ordered consumption with cumulative acknowledgment.
-- **Queue consumers** for parallel processing with individual acknowledgments and dead-letter handling.
-- **Checkpoint consumers** for applications that manage their own processing position.
+Consumption is the clearest example. The v4 client offers a single `Consumer` shaped by one of four subscription types (Exclusive, Failover, Shared, and Key_Shared), plus a separate `Reader`, with behavior that shifts as options are combined. The v5 API replaces them with three purpose-built consumers, each exposing only the operations that make sense for it:
 
-The API supports Scalable Topics and existing persistent topics. Applications can also [subscribe across a namespace](pathname:///docs/client-libraries/java-v5#consume-a-namespace), selecting topics by properties. Producer and receive-buffer backpressure, non-blocking asynchronous receives, and reduced acknowledgment overhead help applications handle bursts efficiently.
+- **Stream consumers** for ordered consumption with cumulative acknowledgment, including key-shared processing across consumers.
+- **Queue consumers** for parallel work-queue processing with individual and negative acknowledgments and dead-letter handling.
+- **Checkpoint consumers** for stream-processing engines such as Flink and Spark that track their own position, with no subscription or acknowledgment.
 
-**One dependency for the v4, v5, and admin clients.** For new applications or dependency updates, `org.apache.pulsar:pulsar-client-v5-all` provides all three through a single unshaded dependency with transitive dependencies. You can adopt it while continuing to use only the v4 API. See [Pulsar Java client dependency configuration](pathname:///docs/client-libraries/java-dependency-configuration) for complete Maven and Gradle examples, BOM alignment, and conflict exclusions, and the [API migration guide](pathname:///docs/client-libraries/java-migrate-to-v5) when you are ready to use the new consumer models.
+The v5 API also works with existing partitioned and non-partitioned persistent topics, so you can adopt it before converting any topic. Stream and queue consumers can also [subscribe to all scalable topics in a namespace](pathname:///docs/client-libraries/java-v5#consume-a-namespace), selecting them by their properties. Producer and receive-buffer backpressure, non-blocking asynchronous receives, and reduced acknowledgment overhead help applications handle bursts.
+
+**One dependency for the v4, v5, and admin clients.** `org.apache.pulsar:pulsar-client-v5-all` contains the Java client, with both the v4 and v5 APIs, and the Java admin client. It is unshaded, so you can upgrade third-party dependencies yourself, for example to address CVEs, without waiting for a Pulsar release; import the Pulsar and Netty BOMs to keep their versions aligned, as described in [Java client dependency configuration](pathname:///docs/client-libraries/java-dependency-configuration#pulsar-bom). Switching to it doesn't require changes to code that uses only Pulsar's public APIs, and moving code to the v5 API is a separate step, covered by the [migration guide](pathname:///docs/client-libraries/java-migrate-to-v5).
 
 The v5 API requires scalable-topic services to be enabled on the brokers, including for regular topics. The v4 API works whether those services are enabled or disabled, so application migration can follow the cluster upgrade on its own schedule.
 
 ### Oxia for new clusters, continuity for ZooKeeper deployments {#oxia-and-metadata-migration}
 
-[Oxia](https://oxia-db.github.io/) is fully open source under the [Apache-2.0 license](https://github.com/oxia-db/oxia/blob/main/LICENSE) and has been accepted into CNCF at the [Sandbox maturity level](https://www.cncf.io/projects/oxia/). It is the recommended metadata store for new clusters and the supported choice for Scalable Topics in production. Existing ZooKeeper deployments can continue running their workloads: with Scalable Topics disabled, all previously available features remain fully supported in production configurations with ZooKeeper.
+[Oxia](https://oxia-db.github.io/) is fully open source under the [Apache-2.0 license](https://github.com/oxia-db/oxia/blob/main/LICENSE) and has been accepted into CNCF at the [Sandbox maturity level](https://www.cncf.io/projects/oxia/). It is the recommended metadata store for new Pulsar clusters and for Scalable Topics.
 
-When you choose to move to Oxia, the [metadata-store migration framework](administration-metadata-store-migration.md) copies metadata while publishing and consuming continue, with a planned cutover and validation procedure. You can schedule this separately from the software upgrade. ZooKeeper can also be used to test Scalable Topics in Pulsar 5.0.0; some scalable-topic features, including transactions, require Oxia.
+Existing ZooKeeper deployments can keep running unchanged. When you choose to move to Oxia, the [metadata store migration framework](administration-metadata-store-migration.md) ([PIP-454](https://github.com/apache/pulsar/blob/v5.0.0/pip/pip-454.md)) copies metadata while existing producers and consumers keep running; metadata changes such as topic creation and ledger rollovers pause during the copy. A planned cutover and validation procedure completes the move, which you can schedule separately from the software upgrade.
 
 [Topic policies can now be stored directly in the metadata store](administration-metadata-store.md#store-topic-policies-in-the-metadata-store). Topics whose policies are stored in system topics keep using them, allowing operators to plan that transition separately as well.
 
