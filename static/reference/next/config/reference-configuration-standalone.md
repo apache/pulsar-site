@@ -2706,7 +2706,7 @@ Outbound (dispatched) messages/second above which a segment is split.
 **Category**: Policies
 
 ### scalableTopicSplitVsRebucketMinMsgRateInThreshold
-PIP-486 segments-vs-buckets lever: on consumer-driven scale-up, split only if the busiest segment's inbound msg/s is at or above this floor; below it the controller grows the segment's entry-buckets instead (a low-throughput topic should not materialize physical segments just for consumer count).
+PIP-486 segments-vs-buckets lever: on consumer-driven scale-up, split only if the busiest segment's inbound msg/s is at or above this floor; below it the controller grows the segment's entry-buckets instead (a low-throughput topic should not materialize physical segments just for consumer count). Checkpoint consumer groups drive splits only: they read whole segments, so more buckets would not serve them.
 
 **Type**: `double`
 
