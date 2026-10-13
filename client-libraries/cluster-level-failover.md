@@ -67,6 +67,8 @@ private PulsarClient getAutoFailoverClient() throws PulsarClientException {
         .secondaryAuthentication(secondaryAuthentications)
         .build();
 
+    // Note: PulsarClient.builder().build() automatically initializes the failover provider;
+    // do NOT call provider.initialize(pulsarClient) manually (deprecated since it happens implicitly).
     PulsarClient pulsarClient = PulsarClient.builder()
         .serviceUrlProvider(failover)
         .authentication(primaryAuthentication)
@@ -113,6 +115,8 @@ public PulsarClient getControlledFailoverClient() throws IOException {
                     .urlProviderHeader(header)
                     .build();
 
+    // Note: PulsarClient.builder().build() automatically initializes the provider;
+    // do NOT call provider.initialize(pulsarClient) manually (it is redundant and will throw if re-invoked).
     PulsarClient pulsarClient =
             PulsarClient.builder()
                     .serviceUrlProvider(provider)
