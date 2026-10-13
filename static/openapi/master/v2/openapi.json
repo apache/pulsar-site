@@ -3985,6 +3985,9 @@
                     "autoScalePolicy": {
                         "$ref": "#/components/schemas/AutoScalePolicyOverride"
                     },
+                    "deleted": {
+                        "type": "boolean"
+                    },
                     "epoch": {
                         "format": "int64",
                         "type": "integer"
@@ -37574,6 +37577,9 @@
                 "responses": {
                     "204": {
                         "description": "Scalable topic deleted successfully"
+                    },
+                    "307": {
+                        "description": "Current broker is not the controller leader for this topic"
                     },
                     "401": {
                         "description": "Don't have permission to administrate resources on this tenant"

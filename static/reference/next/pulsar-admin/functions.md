@@ -67,10 +67,10 @@ $ pulsar-admin functions localrun options
 | `[--sliding-interval-duration-ms]` | The time duration after which the window slides|null|Java|
 | `[--auto-ack]` | Whether or not the framework acknowledges messages automatically|null|Java, Python, Go|
 | `[--timeout-ms]` | The message timeout in milliseconds|null|Java, Python|
-| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java|
+| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java, Python|
 | `[--custom-runtime-options]` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null|Java|
 | `[--secrets]` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null|Java, Python|
-| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java|
+| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java, Python|
 | `[--runtime-flags]` | Any flags that you want to pass to a runtime (for process & Kubernetes runtime only).|null||
 | `[--state-storage-service-url]` | The URL for the state storage service (the default is Apache BookKeeper)|null|Java, Python|
 | `[--broker-service-url]` | The URL for Pulsar broker|null|Java, Python, Go|
@@ -148,10 +148,10 @@ $ pulsar-admin functions create options
 | `[--sliding-interval-duration-ms]` | The time duration after which the window slides|null|Java|
 | `[--auto-ack]` | Whether or not the framework acknowledges messages automatically|null|Java, Python, Go|
 | `[--timeout-ms]` | The message timeout in milliseconds|null|Java, Python|
-| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java|
+| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java, Python|
 | `[--custom-runtime-options]` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null|Java|
 | `[--secrets]` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null|Java, Python|
-| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java|
+| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java, Python|
 | `[--runtime-flags]` | Any flags that you want to pass to a runtime (for process & Kubernetes runtime only).|null||
 | `[-h, --help]` | Show this help message and exit.|false||
 | `[-v, --version]` | Print version information and exit.|false||
@@ -237,10 +237,10 @@ $ pulsar-admin functions update options
 | `[--sliding-interval-duration-ms]` | The time duration after which the window slides|null|Java|
 | `[--auto-ack]` | Whether or not the framework acknowledges messages automatically|null|Java, Python, Go|
 | `[--timeout-ms]` | The message timeout in milliseconds|null|Java, Python|
-| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java|
+| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java, Python|
 | `[--custom-runtime-options]` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null|Java|
 | `[--secrets]` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null|Java, Python|
-| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java|
+| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java, Python|
 | `[--runtime-flags]` | Any flags that you want to pass to a runtime (for process & Kubernetes runtime only).|null||
 | `[--update-auth-data]` | Whether or not to update the auth data|false|Java, Python|
 | `[-h, --help]` | Show this help message and exit.|false||
