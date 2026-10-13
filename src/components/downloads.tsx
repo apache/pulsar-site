@@ -268,8 +268,8 @@ export function CppReleasesDownloadTable(): JSX.Element {
             const tarPath = `${url}apache-pulsar-client-cpp-${version}.tar.gz`
             return {
                 release: version,
-                link: url,
-                linkText: `apache-pulsar-cpp-${version}`,
+                link: tarPath,
+                linkText: `apache-pulsar-client-cpp-${version}.tar.gz`,
                 asc: `${tarPath}.asc`,
                 sha512: `${tarPath}.sha512`
             }
