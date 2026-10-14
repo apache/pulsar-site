@@ -305,6 +305,13 @@ module.exports = {
       ]
     },
     {
+      "name": "Cong Zhao",
+      "apacheId": "zhaocong",
+      "githubUsername": [
+        "coderzc"
+      ]
+    },
+    {
       "name": "Zike Yang",
       "apacheId": "zike",
       "githubUsername": [
@@ -579,11 +586,9 @@ module.exports = {
       ]
     },
     {
-      "name": "Cong Zhao",
-      "apacheId": "zhaocong",
-      "githubUsername": [
-        "coderzc"
-      ]
+      "name": "Zhuohan Zhou",
+      "apacheId": "zhouzhuohan",
+      "githubUsername": []
     }
   ]
 };
