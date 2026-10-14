@@ -17,6 +17,8 @@ function resolveActiveSupport(ver, released) {
 
 function getSupportedVersionBranches(releases) {
   const releaseList = releases
+    // skip pre-releases such as v5.0.0-M1, which semver.coerce would turn into 5.0.0
+    .filter(r => !semver.prerelease(r.tagName))
     .map(r => ({
       version: semver.coerce(r.tagName),
       released: moment(r.publishedAt)
