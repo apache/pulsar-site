@@ -1,6 +1,8 @@
 // @ts-check
 
 const _ = require("lodash");
+const fs = require("fs");
+const path = require("path");
 const { renderAnnouncementBar } = require("./src/components/ui/renderAnnouncementBar");
 const versions = require("./versions.json");
 const latestVersion = versions[0];
@@ -62,6 +64,16 @@ const {
   baseUrl,
   restApiBaseUrlMapping,
 } = require("./site-baseurls");
+
+// Edit links of versioned docs point to the unversioned page in docs/ when it
+// exists, since that's where changes are made first, and to the versioned
+// page otherwise.
+function docsEditUrl({ versionDocsDirPath, docPath }) {
+  const docsDirPath = fs.existsSync(path.join(__dirname, "docs", docPath))
+    ? "docs"
+    : versionDocsDirPath;
+  return `${githubSiteUrl}/edit/main/${docsDirPath}/${docPath}`;
+}
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = async function createConfigAsync() {
@@ -375,7 +387,7 @@ module.exports = async function createConfigAsync() {
           docs: {
             path: "docs",
             sidebarPath: require.resolve("./sidebars.js"),
-            editUrl: `${githubSiteUrl}/edit/main`,
+            editUrl: docsEditUrl,
             beforeDefaultRemarkPlugins: [
               [(await import('./src/server/remarkPlugins/swagger')).default, {baseDir: __dirname, restApiBaseUrlMapping: restApiBaseUrlMapping}],
             ],

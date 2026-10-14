@@ -3,7 +3,7 @@ import ThumbDown from './thumbs-down.svg';
 import ThumbUp from './thumbs-up.svg';
 import s from './ArticleThumb.module.css';
 
-const ArticleThumb = () => {
+const ArticleThumb = ({ editUrl }) => {
   const [activeKey, setActiveKey] = useState();
   const handleThumbClick = (val) => {
     if (!activeKey) {
@@ -51,6 +51,15 @@ const ArticleThumb = () => {
       </div>
 
       <div className={s.Actions}>
+        {editUrl && (
+          <a
+            target='_blank'
+            className={s.Action}
+            href={editUrl}
+          >
+            ✏️ Edit this page
+          </a>
+        )}
         <a
           target='_blank'
           className={s.Action}
