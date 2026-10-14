@@ -1,0 +1,60 @@
+<svg viewBox="0 0 720 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bbt bbd">
+  <title id="bbt">Brokers and bookies in a Pulsar cluster</title>
+  <desc id="bbd">A producer and consumer connect to one of three brokers; the serving broker fans out to five bookies for storage. An Oxia metadata store sits alongside within the Pulsar cluster.</desc>
+  <defs>
+    <linearGradient id="bx" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f2f8fe"/><stop offset="0.5" stop-color="#cfe0f6"/>
+      <stop offset="0.5" stop-color="#aecbef"/><stop offset="1" stop-color="#6b9bd8"/>
+    </linearGradient>
+    <marker id="g" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#8893a5"/></marker>
+  </defs>
+
+  <rect x="16" y="104" width="688" height="310" rx="12" fill="none" stroke="#333333" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="694" y="404" text-anchor="end" font-family="sans-serif" font-size="17" font-style="italic" font-weight="700" fill="#2f5aa6">Pulsar Cluster</text>
+
+  <!-- Producer / Consumer -->
+  <rect x="232" y="12" width="124" height="48" rx="7" fill="url(#bx)" stroke="#4d7cbe"/>
+  <text x="294" y="42" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#34425c">Producer</text>
+  <rect x="372" y="12" width="124" height="48" rx="7" fill="url(#bx)" stroke="#4d7cbe"/>
+  <text x="434" y="42" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#34425c">Consumer</text>
+
+  <!-- Brokers -->
+  <rect x="46" y="150" width="170" height="72" rx="8" fill="url(#bx)" stroke="#4d7cbe"/>
+  <text x="131" y="192" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#34425c">Broker 1</text>
+  <rect x="258" y="150" width="170" height="72" rx="8" fill="url(#bx)" stroke="#4d7cbe"/>
+  <text x="343" y="192" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#34425c">Broker 2</text>
+  <rect x="470" y="150" width="170" height="72" rx="8" fill="url(#bx)" stroke="#4d7cbe"/>
+  <text x="555" y="192" text-anchor="middle" font-family="sans-serif" font-size="17" fill="#34425c">Broker 3</text>
+
+  <!-- Metadata store (was ZK) -->
+  <rect x="566" y="250" width="120" height="52" rx="8" fill="url(#bx)" stroke="#4d7cbe"/>
+  <text x="626" y="282" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="600" fill="#34425c">Oxia</text>
+
+  <!-- Bookies -->
+  <g font-family="sans-serif" font-size="13" fill="#34425c" text-anchor="middle">
+    <rect x="42" y="320" width="118" height="74" rx="8" fill="url(#bx)" stroke="#4d7cbe"/>
+    <text x="101" y="352">Bookie</text><text x="101" y="372">1</text>
+    <rect x="174" y="320" width="118" height="74" rx="8" fill="url(#bx)" stroke="#4d7cbe"/>
+    <text x="233" y="352">Bookie</text><text x="233" y="372">2</text>
+    <rect x="306" y="320" width="118" height="74" rx="8" fill="url(#bx)" stroke="#4d7cbe"/>
+    <text x="365" y="352">Bookie</text><text x="365" y="372">3</text>
+    <rect x="438" y="320" width="118" height="74" rx="8" fill="url(#bx)" stroke="#4d7cbe"/>
+    <text x="497" y="352">Bookie</text><text x="497" y="372">4</text>
+    <rect x="570" y="320" width="118" height="74" rx="8" fill="url(#bx)" stroke="#4d7cbe"/>
+    <text x="629" y="352">Bookie</text><text x="629" y="372">5</text>
+  </g>
+
+  <!-- Broker 2 -> bookies -->
+  <g fill="none" stroke="#8893a5" stroke-width="1.5">
+    <path d="M335,224 L110,318" marker-end="url(#g)"/>
+    <path d="M339,224 L240,318" marker-end="url(#g)"/>
+    <path d="M343,224 L365,316" marker-end="url(#g)"/>
+    <path d="M347,224 L490,318" marker-end="url(#g)"/>
+    <path d="M351,224 L620,318" marker-end="url(#g)"/>
+  </g>
+
+  <!-- Producer -> Broker 2 (down) -->
+  <polygon points="314,64 336,64 336,116 352,116 325,147 298,116 314,116" fill="#f9d2a8" stroke="#e0702c" stroke-width="1.5"/>
+  <!-- Broker 2 -> Consumer (up) -->
+  <polygon points="420,64 447,95 431,95 431,147 409,147 409,95 393,95" fill="#f9d2a8" stroke="#e0702c" stroke-width="1.5"/>
+</svg>

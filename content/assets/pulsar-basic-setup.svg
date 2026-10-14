@@ -1,0 +1,46 @@
+<svg viewBox="0 0 560 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="bttl bdsc">
+  <title id="bttl">Basic setup of a Pulsar cluster</title>
+  <desc id="bdsc">Connecting clients reach a single DNS name that fronts a Pulsar cluster of broker plus bookie nodes; those nodes coordinate through a metadata store, with Oxia as the recommended option.</desc>
+  <defs>
+    <marker id="a" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6f7e95"/></marker>
+  </defs>
+
+  <rect x="24" y="24" width="512" height="392" rx="10" fill="#ffffff" stroke="#2b2b2b" stroke-width="2"/>
+  <text x="52" y="64" font-family="sans-serif" font-size="22" font-weight="700" fill="#222">Pulsar cluster</text>
+
+  <!-- Metadata store node (stacked) -->
+  <rect x="70" y="150" width="150" height="108" rx="6" fill="#fafafa" stroke="#9a9a9a"/>
+  <rect x="78" y="158" width="150" height="108" rx="6" fill="#f4f4f4" stroke="#949494"/>
+  <rect x="86" y="166" width="150" height="108" rx="6" fill="#eef0f2" stroke="#8a8a8a"/>
+  <text x="161" y="214" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="700" fill="#555">Metadata store</text>
+  <text x="161" y="236" text-anchor="middle" font-family="sans-serif" font-size="15" font-weight="700" fill="#235aa8">Oxia</text>
+
+  <!-- Broker + bookie node (stacked) -->
+  <rect x="330" y="120" width="168" height="188" rx="8" fill="#fbfbfb" stroke="#9aa0a6"/>
+  <rect x="322" y="128" width="168" height="188" rx="8" fill="#fdfdfd" stroke="#9aa0a6"/>
+  <rect x="314" y="136" width="168" height="188" rx="8" fill="#ffffff" stroke="#9aa0a6"/>
+  <rect x="339" y="162" width="118" height="60" rx="14" fill="#eaf4ff" stroke="#2f9fe0" stroke-width="2"/>
+  <text x="398" y="187" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1f6fb0">Pulsar</text>
+  <text x="398" y="206" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1f6fb0">broker</text>
+  <rect x="339" y="236" width="118" height="60" rx="14" fill="#fdf0e0" stroke="#d98a3a" stroke-width="2"/>
+  <text x="398" y="261" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#c0782a">BookKeeper</text>
+  <text x="398" y="280" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#c0782a">bookie</text>
+
+  <!-- broker/bookie -> metadata store -->
+  <path d="M314,214 L240,214" fill="none" stroke="#6f7e95" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- DNS name box -->
+  <rect x="140" y="382" width="300" height="72" rx="4" fill="#f8e6a8" stroke="#d9b24a" stroke-width="1.5"/>
+  <text x="290" y="410" text-anchor="middle" font-family="sans-serif" font-size="15" fill="#5a4a1a">DNS name</text>
+  <text x="290" y="436" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700" fill="#3a3000">pulsar-cluster.acme.com</text>
+
+  <!-- DNS -> broker/bookie -->
+  <path d="M366,382 L366,352 L398,352 L398,326" fill="none" stroke="#6f7e95" stroke-width="2" marker-end="url(#a)"/>
+
+  <!-- Connecting clients -->
+  <rect x="150" y="520" width="280" height="90" rx="2" fill="#ffffff" stroke="#2b2b2b" stroke-width="1.5"/>
+  <text x="290" y="571" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#222">Connecting clients</text>
+
+  <!-- clients -> DNS -->
+  <path d="M290,520 L290,456" fill="none" stroke="#6f7e95" stroke-width="2" marker-end="url(#a)"/>
+</svg>
