@@ -13,10 +13,10 @@ import ArticleThumb from "@site/src/components/ui/ArticleThumb/ArticleThumb";
 // This prevents TOCInline/TOCCollapsible getting highlighted by mistake
 const LINK_CLASS_NAME = 'table-of-contents__link toc-highlight';
 const LINK_ACTIVE_CLASS_NAME = 'table-of-contents__link--active';
-export default function TOC({className, ...props}) {
+export default function TOC({className, editUrl, ...props}) {
   return (
     <div className={clsx(styles.tableOfContents, 'thin-scrollbar', className)}>
-        <ArticleThumb/>
+        <ArticleThumb editUrl={editUrl}/>
       <TOCItems
         {...props}
         linkClassName={LINK_CLASS_NAME}
