@@ -4,8 +4,9 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Link from '@docusaurus/Link';
 import Translate from '@docusaurus/Translate';
 import {
+  useActiveDocContext,
   useActivePlugin,
-  useDocVersionSuggestions,
+  useVersions,
 } from '@docusaurus/plugin-content-docs/client';
 import {ThemeClassNames} from '@docusaurus/theme-common';
 import {
@@ -13,10 +14,11 @@ import {
   useDocsVersion,
 } from '@docusaurus/plugin-content-docs/client';
 import BrowserOnly from "@docusaurus/BrowserOnly";
+import { getSupportedVersions } from '../../utils/supportedVersions';
 let versions = require("../../../versions.json");
 const _latestVersion = versions[0];
 const _ltsVersion = '4.0.x';
-const _maintainedVersions = ['4.2.x', '4.0.x', '3.0.x'];
+const _maintainedVersions = getSupportedVersions();
 function UnreleasedVersionLabel({siteTitle, versionMetadata}) {
   return (
     <Translate
@@ -56,7 +58,7 @@ function UnmaintainedVersionLabel({ siteTitle, versionMetadata }) {
       }}
     >
       {
-        "This is documentation for Pulsar {versionLabel}, which is no longer actively maintained."
+        "This is documentation for Pulsar {versionLabel}, which is no longer supported. This documentation is no longer updated and may be outdated or inaccurate."
       }
     </Translate>
   );
@@ -81,28 +83,43 @@ function BannerLabel(props) {
   //   BannerLabelComponents[props.versionMetadata.banner];
   return <BannerLabelComponent {...props} />;
 }
-function LatestVersionSuggestionLabel({ versionLabel, to, onClick }) {
+function VersionLink({ version, to, onClick }) {
+  return (
+    <b>
+      <Link to={to} onClick={onClick}>
+        {version}
+      </Link>
+    </b>
+  );
+}
+// Joins links as "A", "A or B", or "A, B, or C".
+function joinWithOr(items) {
+  return items.map((item, i) => (
+    <React.Fragment key={i}>
+      {i > 0 && (i === items.length - 1 ? (items.length > 2 ? ", or " : " or ") : ", ")}
+      {item}
+    </React.Fragment>
+  ));
+}
+function LatestVersionSuggestionLabel({ versionLink }) {
   return (
     <Translate
       id="theme.docs.versions.latestVersionSuggestionLabel"
       description="The label used to tell the user to check the latest version"
-      values={{
-        versionLabel,
-        latestVersionLink: (
-          <b>
-            <Link to={to} onClick={onClick}>
-              {/* <Translate
-                id="theme.docs.versions.latestVersionLinkLabel"
-                description="The label used for the latest version suggestion link label"
-              > */}
-              {versionLabel}
-              {/* </Translate> */}
-            </Link>
-          </b>
-        ),
-      }}
+      values={{ latestVersionLink: versionLink }}
     >
       {"We recommend that you use the {latestVersionLink} documentation."}
+    </Translate>
+  );
+}
+function SupportedVersionsSuggestionLabel({ versionLinks }) {
+  return (
+    <Translate
+      id="theme.docs.versions.supportedVersionsSuggestionLabel"
+      description="The label used to point the user to the documentation of supported versions"
+      values={{ supportedVersionLinks: <>{joinWithOr(versionLinks)}</> }}
+    >
+      {"For maintained documentation, see the {supportedVersionLinks} documentation."}
     </Translate>
   );
 }
@@ -111,19 +128,32 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
     siteConfig: { title: siteTitle },
   } = useDocusaurusContext();
   const { pluginId } = useActivePlugin({ failfast: true });
-  const getVersionMainDoc = (version) =>
-    version.docs.find((doc) => doc.id === version.mainDocId);
   const { savePreferredVersionName } = useDocsPreferredVersion(pluginId);
-  const { latestDocSuggestion, latestVersionSuggestion } =
-    useDocVersionSuggestions(pluginId);
-  // Try to link to same doc in latest version (not always possible), falling
-  // back to main doc of latest version
-  const latestVersionSuggestedDoc =
-    latestDocSuggestion ?? getVersionMainDoc(latestVersionSuggestion);
-
-  let path = latestVersionSuggestedDoc.path;
-  let reg = new RegExp("/" + versionMetadata.version + "/");
-  path = path.replace(reg, "/");
+  const { alternateDocVersions } = useActiveDocContext(pluginId);
+  const availableVersions = useVersions(pluginId);
+  // Link to the same doc in the target version when it exists, falling back to
+  // the main doc of that version
+  const versionLink = (version) => {
+    const versionData = availableVersions.find((v) => v.name === version);
+    const doc =
+      alternateDocVersions[version] ??
+      versionData?.docs.find((d) => d.id === versionData.mainDocId);
+    const to = doc?.path ?? `/docs/${version}/`;
+    return (
+      <VersionLink
+        key={version}
+        version={version}
+        to={to}
+        onClick={() => {
+          savePreferredVersionName(version);
+          window.location.href = to;
+        }}
+      />
+    );
+  };
+  const isUnmaintained =
+    versionMetadata.version !== "current" &&
+    !_maintainedVersions.includes(versionMetadata.version);
   return (
     <div
       className={clsx(
@@ -137,14 +167,13 @@ function DocVersionBannerEnabled({ className, versionMetadata }) {
         <BannerLabel siteTitle={siteTitle} versionMetadata={versionMetadata} />
       </div>
       <div className="margin-top--md">
-        <LatestVersionSuggestionLabel
-          versionLabel={_latestVersion}
-          to={path}
-          onClick={() => {
-            savePreferredVersionName(latestVersionSuggestion.name);
-            window.location.href = path;
-          }}
-        />
+        {isUnmaintained ? (
+          <SupportedVersionsSuggestionLabel
+            versionLinks={_maintainedVersions.map(versionLink)}
+          />
+        ) : (
+          <LatestVersionSuggestionLabel versionLink={versionLink(_latestVersion)} />
+        )}
       </div>
     </div>
   );
