@@ -3134,7 +3134,7 @@ Whether to allow legacy Jackson JsonSchema format for SchemaType.JSON schema def
 **Category**: Schema
 
 ### schemaRegistryCompatibilityCheckers
-The list compatibility checkers to be used in schema registry
+The compatibility checker classes used by the schema registry. For opt-in PROTOBUF_NATIVE field checks, replace ProtobufNativeSchemaCompatibilityCheck with org.apache.pulsar.broker.service.schema.ProtobufNativeSchemaAdvancedCompatibilityCheck. Configure only one PROTOBUF_NATIVE checker and use the same selection on all brokers that can own a topic. Changes require a broker restart. Review retained history and consumer schemas before activation: reconnecting consumers can be rejected, even with an unchanged schema, when another selected historical version is incompatible or unsupported. A configured checker that cannot be instantiated fails broker startup. Restore the default entry before downgrading broker binaries. Advanced checks allow up to 100,000 work units per historical version and direction, with a lower limit for smaller descriptor graphs. Even a compatible optional-field addition under BACKWARD can exceed the cap for a flat message around 14,500 fields or a referenced enum around 16,700 values; the threshold depends on the descriptor graph. Check representative large schemas in staging before activation; the cap is not configurable.
 
 **Type**: `java.util.Set`
 
