@@ -636,6 +636,8 @@ type jsonExampleStruct struct {
 
 ### ProtobufNative
 
+The default `PROTOBUF_NATIVE` compatibility checker compares root message names. Brokers can opt into stricter field-level checks; see [Protobuf native schema compatibility](schema-protobuf-native.md) for version requirements and configuration.
+
 ````mdx-code-block
 <Tabs groupId="api-choice"
   defaultValue="Java"
