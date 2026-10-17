@@ -37980,6 +37980,12 @@
                     "204": {
                         "description": "Segments merged successfully"
                     },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
                     "404": {
                         "description": "Scalable topic or segment doesn't exist"
                     },
@@ -38063,6 +38069,233 @@
                 ]
             }
         },
+        "/admin/v2/scalable/{tenant}/{namespace}/{topic}/permissions": {
+            "get": {
+                "description": "Retrieve the effective permissions for a scalable topic. These permissions are defined by the permissions set at the namespace level combined (union) with any eventual specific permission set on the topic, and apply to every segment of the topic. Returns a map structure: Map<String, Set<AuthAction>>.",
+                "operationId": "getPermissions_1",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "items": {
+                                            "enum": [
+                                                "produce",
+                                                "consume",
+                                                "functions",
+                                                "sources",
+                                                "sinks",
+                                                "packages"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "type": "array",
+                                        "uniqueItems": true
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Get permissions on a scalable topic."
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant, namespace or scalable topic doesn't exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Get permissions on a scalable topic.",
+                "tags": [
+                    "scalable topic"
+                ]
+            }
+        },
+        "/admin/v2/scalable/{tenant}/{namespace}/{topic}/permissions/{role}": {
+            "delete": {
+                "description": "Revoke the permissions granted to a role on the topic itself. Permissions granted at the namespace level are not affected.",
+                "operationId": "revokePermissions",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Client role to which revoke permissions",
+                        "in": "path",
+                        "name": "role",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant, namespace or scalable topic doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Revoke permissions on a scalable topic.",
+                "tags": [
+                    "scalable topic"
+                ]
+            },
+            "post": {
+                "description": "The permission applies to every segment of the topic.",
+                "operationId": "grantPermissions",
+                "parameters": [
+                    {
+                        "description": "Specify the tenant",
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify the namespace",
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Specify topic name",
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Client role to which grant permissions",
+                        "in": "path",
+                        "name": "role",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "enum": [
+                                    "produce",
+                                    "functions",
+                                    "consume"
+                                ],
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "description": "Actions to be granted (produce,functions,consume)"
+                },
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant, namespace or scalable topic doesn't exist"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Grant a new permission to a role on a scalable topic.",
+                "tags": [
+                    "scalable topic"
+                ]
+            }
+        },
         "/admin/v2/scalable/{tenant}/{namespace}/{topic}/rebucket/{segmentId}": {
             "post": {
                 "operationId": "rebucketSegment",
@@ -38118,6 +38351,12 @@
                 "responses": {
                     "204": {
                         "description": "Segment rebucketed successfully"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
                     },
                     "404": {
                         "description": "Scalable topic doesn't exist"
@@ -38264,6 +38503,12 @@
                 "responses": {
                     "204": {
                         "description": "Segment split successfully"
+                    },
+                    "401": {
+                        "description": "Don't have permission to administrate resources on this tenant"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
                     },
                     "404": {
                         "description": "Scalable topic or segment doesn't exist"
