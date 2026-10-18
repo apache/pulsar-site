@@ -296,6 +296,9 @@
                     "producerConfig": {
                         "$ref": "#/components/schemas/ProducerConfig"
                     },
+                    "pulsarClientMemoryLimit": {
+                        "$ref": "#/components/schemas/MemoryLimit"
+                    },
                     "py": {
                         "type": "string"
                     },
@@ -656,6 +659,19 @@
                     "numRunning": {
                         "format": "int32",
                         "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "MemoryLimit": {
+                "properties": {
+                    "limitInBytes": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "percentOfMaxDirectMemory": {
+                        "format": "double",
+                        "type": "number"
                     }
                 },
                 "type": "object"
