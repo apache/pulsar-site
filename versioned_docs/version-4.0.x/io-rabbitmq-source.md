@@ -99,7 +99,7 @@ configs:
       replacement: 'item:$1'
 ```
 
-For example, `status.ready` maps to `status`, and `item.123.updated` maps to `item:123`. The first rule whose regex matches the entire routing key wins. Replacements use Java regex group references such as `$1`. If no rule matches, the routing key remains the message key. A matching rule can also produce an empty message key.
+For example, `status.ready` maps to `status`, and `item.123.updated` maps to `item:123`. The first rule whose regex matches the entire routing key wins. Replacements use Java regex group references such as `$1`. If no rule matches, the routing key remains the message key. If a matching rule produces an empty string, that empty string is used as the Pulsar message key.
 
 The connector also adds the original RabbitMQ routing key to the `__rabbitmq_routing_key` message property for both matched and unmatched keys.
 
