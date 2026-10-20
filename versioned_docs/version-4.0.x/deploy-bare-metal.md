@@ -191,6 +191,28 @@ tiered-storage-jcloud-@pulsar:version@.nar
 
 For more details of how to configure tiered storage feature, you can refer to the [Tiered storage cookbook](cookbooks-tiered-storage.md)
 
+### Configure the NAR extraction directory
+
+Pulsar extracts NAR packages, such as tiered storage offloaders, connectors and protocol handlers, to `java.io.tmpdir` (usually `/tmp`) by default and loads classes from the extracted files while the process runs. On many Linux distributions, OS services such as `systemd-tmpfiles` periodically delete files in `/tmp` that haven't been accessed recently. If they delete extracted files of a running broker, proxy or functions worker, the process fails with `ClassNotFoundException` or `NoClassDefFoundError` errors until it is restarted.
+
+To avoid this, set `narExtractionDirectory` to a dedicated directory that isn't cleaned up automatically and that the user running Pulsar can write to:
+
+Component | Configuration file
+:---------|:------------------
+Broker | `conf/broker.conf`
+Proxy | `conf/proxy.conf`
+Functions worker | `conf/functions_worker.yml`
+
+For example, in `conf/broker.conf`:
+
+```properties
+narExtractionDirectory=/var/lib/pulsar/extracted-nars
+```
+
+Alternatively, set the default for all components by adding `-Dnar.extraction.tmpdir=/var/lib/pulsar/extracted-nars` to `PULSAR_EXTRA_OPTS` in `conf/pulsar_env.sh`.
+
+Pulsar doesn't remove extracted files of earlier NAR versions. To reclaim disk space, delete the contents of the directory only while all Pulsar processes that use it are stopped.
+
 
 ## Step 1: Deploy a ZooKeeper cluster
 
