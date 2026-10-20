@@ -217,3 +217,60 @@ $ pulsar-admin scalable-topics clear-backlog options
 | `[-h, --help]` | Show this help message and exit.|false|
 | `[-v, --version]` | Print version information and exit.|false|
 
+
+## permissions
+
+Get the permissions on a scalable topic: the permissions set at the namespace level combined (union) with any eventual specific permission set on the topic
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics permissions options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
+
+
+## grant-permission
+
+Grant a new permission to a client role on a scalable topic. The permission applies to every segment of the topic
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics grant-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-r, --role]` | Client role to which grant permissions|null|
+| `[-a, --actions]` | Actions to be granted (produce,consume,sources,sinks,functions,packages)|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
+
+
+## revoke-permission
+
+Revoke the permissions granted to a client role on a scalable topic. Permissions granted at the namespace level are not affected
+
+**Command:**
+
+```shell
+$ pulsar-admin scalable-topics revoke-permission options
+```
+
+**Options:**
+
+|Flag|Description|Default|
+|---|---|---|
+| `[-r, --role]` | Client role to which revoke permissions|null|
+| `[-h, --help]` | Show this help message and exit.|false|
+| `[-v, --version]` | Print version information and exit.|false|
+

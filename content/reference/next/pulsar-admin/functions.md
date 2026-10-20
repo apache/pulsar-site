@@ -57,6 +57,8 @@ $ pulsar-admin functions localrun options
 | `[--subs-position]` | Pulsar source subscription position if user wants to consume messages from the specified location|null|Java|
 | `[--skip-to-latest]` | Whether or not the consumer skip to latest message upon function instance restart|null||
 | `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|Java|
+| `[--client-memory-limit]` | The max memory the Pulsar client of each function instance can use (eg: 32M, 64M)|null|Java(Process & K8s)|
+| `[--client-memory-limit-percent]` | The max memory the Pulsar client of each function instance can use, as a percentage of the instance JVM max direct memory. If --client-memory-limit is also set, the smaller of the two limits is used|null|Java(Process & K8s)|
 | `[--parallelism]` | The parallelism factor of a Pulsar Function (i.e. the number of function instances to run)|null|Java|
 | `[--cpu]` | The cpu in cores that need to be allocated per function instance(applicable only to docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `[--ram]` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
@@ -138,6 +140,8 @@ $ pulsar-admin functions create options
 | `[--subs-position]` | Pulsar source subscription position if user wants to consume messages from the specified location|null|Java|
 | `[--skip-to-latest]` | Whether or not the consumer skip to latest message upon function instance restart|null||
 | `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|Java|
+| `[--client-memory-limit]` | The max memory the Pulsar client of each function instance can use (eg: 32M, 64M)|null|Java(Process & K8s)|
+| `[--client-memory-limit-percent]` | The max memory the Pulsar client of each function instance can use, as a percentage of the instance JVM max direct memory. If --client-memory-limit is also set, the smaller of the two limits is used|null|Java(Process & K8s)|
 | `[--parallelism]` | The parallelism factor of a Pulsar Function (i.e. the number of function instances to run)|null|Java|
 | `[--cpu]` | The cpu in cores that need to be allocated per function instance(applicable only to docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `[--ram]` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
@@ -227,6 +231,8 @@ $ pulsar-admin functions update options
 | `[--subs-position]` | Pulsar source subscription position if user wants to consume messages from the specified location|null|Java|
 | `[--skip-to-latest]` | Whether or not the consumer skip to latest message upon function instance restart|null||
 | `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|Java|
+| `[--client-memory-limit]` | The max memory the Pulsar client of each function instance can use (eg: 32M, 64M)|null|Java(Process & K8s)|
+| `[--client-memory-limit-percent]` | The max memory the Pulsar client of each function instance can use, as a percentage of the instance JVM max direct memory. If --client-memory-limit is also set, the smaller of the two limits is used|null|Java(Process & K8s)|
 | `[--parallelism]` | The parallelism factor of a Pulsar Function (i.e. the number of function instances to run)|null|Java|
 | `[--cpu]` | The cpu in cores that need to be allocated per function instance(applicable only to docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `[--ram]` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
