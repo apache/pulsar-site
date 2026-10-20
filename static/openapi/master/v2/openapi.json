@@ -196,6 +196,26 @@
                 },
                 "type": "object"
             },
+            "AutoScaleStats": {
+                "properties": {
+                    "blockedReason": {
+                        "type": "string"
+                    },
+                    "lastMergeAt": {
+                        "type": "string"
+                    },
+                    "lastRebucketAt": {
+                        "type": "string"
+                    },
+                    "lastSplitAt": {
+                        "type": "string"
+                    },
+                    "policy": {
+                        "$ref": "#/components/schemas/AutoScalePolicyOverride"
+                    }
+                },
+                "type": "object"
+            },
             "AutoSubscriptionCreationOverride": {
                 "properties": {
                     "allowAutoSubscriptionCreation": {
@@ -1107,6 +1127,33 @@
                 },
                 "type": "object"
             },
+            "LayoutOperationStats": {
+                "properties": {
+                    "at": {
+                        "type": "string"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "operation": {
+                        "type": "string"
+                    },
+                    "segmentIds": {
+                        "items": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "trigger": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "LayoutSegment": {
                 "properties": {
                     "childIds": {
@@ -1116,9 +1163,15 @@
                         },
                         "type": "array"
                     },
+                    "createdAt": {
+                        "type": "string"
+                    },
                     "entryBuckets": {
                         "format": "int32",
                         "type": "integer"
+                    },
+                    "load": {
+                        "$ref": "#/components/schemas/SegmentLoadStats"
                     },
                     "name": {
                         "type": "string"
@@ -1133,8 +1186,14 @@
                         },
                         "type": "array"
                     },
+                    "sealedAt": {
+                        "type": "string"
+                    },
                     "state": {
                         "type": "string"
+                    },
+                    "terminated": {
+                        "type": "boolean"
                     }
                 },
                 "type": "object"
@@ -1144,6 +1203,9 @@
                     "epoch": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "lastOperation": {
+                        "$ref": "#/components/schemas/LayoutOperationStats"
                     },
                     "segments": {
                         "additionalProperties": {
@@ -4013,6 +4075,9 @@
             },
             "ScalableTopicStats": {
                 "properties": {
+                    "autoScale": {
+                        "$ref": "#/components/schemas/AutoScaleStats"
+                    },
                     "averageMsgSize": {
                         "format": "double",
                         "type": "number"
@@ -4028,6 +4093,9 @@
                     "byteRateOut": {
                         "format": "double",
                         "type": "number"
+                    },
+                    "controllerBroker": {
+                        "type": "string"
                     },
                     "layout": {
                         "$ref": "#/components/schemas/LayoutStats"
@@ -4136,17 +4204,49 @@
                 },
                 "type": "object"
             },
+            "SegmentLoadStats": {
+                "properties": {
+                    "ageSeconds": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "byteRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "byteRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            },
             "SegmentSubscriptionStats": {
                 "properties": {
                     "backlogSize": {
                         "format": "int64",
                         "type": "integer"
                     },
+                    "blocked": {
+                        "type": "boolean"
+                    },
                     "byteRateOut": {
                         "format": "double",
                         "type": "number"
                     },
                     "consumerCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "drainingBuckets": {
                         "format": "int32",
                         "type": "integer"
                     },
@@ -4217,6 +4317,9 @@
                             "$ref": "#/components/schemas/SubscriptionStats"
                         },
                         "type": "object"
+                    },
+                    "terminated": {
+                        "type": "boolean"
                     },
                     "topicCreationTime": {
                         "type": "string"
@@ -4340,6 +4443,13 @@
                     "unackedMessages": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "uncoveredSegmentIds": {
+                        "items": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "type": "array"
                     }
                 },
                 "type": "object"
@@ -5452,6 +5562,7 @@
         },
         "/admin/v2/clusters": {
             "get": {
+                "description": "This operation requires Pulsar superuser privileges.",
                 "operationId": "getClusters",
                 "responses": {
                     "200": {
@@ -5467,6 +5578,9 @@
                             }
                         },
                         "description": "Return a list of clusters."
+                    },
+                    "403": {
+                        "description": "Don't have admin permission."
                     },
                     "500": {
                         "description": "Internal server error."
