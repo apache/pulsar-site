@@ -13,6 +13,24 @@ It is the responsibility of the security vulnerability handling project team (Ap
 Please subscribe to the [users@pulsar.apache.org mailing list](https://lists.apache.org/list.html?users@pulsar.apache.org) to receive Apache Pulsar security advisories when they are published.
 For instructions on how to subscribe, please see https://pulsar.apache.org/contact/.
 
+### 2026
+
+* 2026-10-21 [CVE-2026-105869](CVE-2026-105869.md) Apache Pulsar: MultiRolesTokenAuthorizationProvider uses roles from unverified tokens for HTTP requests that fall back to the anonymous user role (🔴 severity: critical / 9.2)
+* 2026-10-21 [CVE-2026-105944](CVE-2026-105944.md) Apache Pulsar Manager: Missing authentication and authorization and disclosure of the Pulsar admin credential; end of life (🔴 severity: critical / 10.0)
+* 2026-10-21 [CVE-2026-105934](CVE-2026-105934.md) Apache Pulsar: Missing tenant admin authorization check when truncating a partitioned topic (🟠 severity: high / 7.2)
+* 2026-10-21 [CVE-2026-105937](CVE-2026-105937.md) Apache Pulsar: Missing authorization of the shadow topic source allows cross-tenant message disclosure and deletion of source topic data (🟠 severity: high / 8.7)
+* 2026-10-21 [CVE-2026-105942](CVE-2026-105942.md) Apache Pulsar: Original principal of proxied requests authorized with the proxy's authentication data, allowing privilege escalation (🟠 severity: high / 7.7)
+* 2026-10-21 [CVE-2026-105945](CVE-2026-105945.md) Apache Pulsar: Improper Validation of Package Name Components Allows Cross-Tenant Package Access in Filesystem Package Storage (🟠 severity: high / 7.7)
+* 2026-10-21 [CVE-2026-105926](CVE-2026-105926.md) Apache Pulsar: Missing Topic Authorization on Binary Protocol GetSchema and GetOrCreateSchema Commands (🟡 severity: medium / 5.3)
+* 2026-10-21 [CVE-2026-105930](CVE-2026-105930.md) Apache Pulsar: Improper Authorization of Function, Source and Sink Package URLs Allows Cross-Tenant Package Download (🟡 severity: medium / 6.0)
+* 2026-10-21 [CVE-2026-105935](CVE-2026-105935.md) Apache Pulsar: Function trigger publishes to the input topic without checking the caller's produce permission (🟡 severity: medium / 4.9)
+* 2026-10-21 [CVE-2026-105936](CVE-2026-105936.md) Apache Pulsar: Functions connectors list endpoint does not apply the super-user check of the worker connectors endpoint (🟡 severity: medium / 5.3)
+* 2026-10-21 [CVE-2026-105927](CVE-2026-105927.md) Apache Pulsar: Improper authorization of WebSocket consumer dead letter topic allows writes without PRODUCE permission (🟢 severity: low / 2.3)
+* 2026-10-21 [CVE-2026-105931](CVE-2026-105931.md) Apache Pulsar: Missing authorization on transaction admin endpoints exposes transaction coordinator and transaction statistics of other tenants (🟢 severity: low / 2.3)
+* 2026-10-21 [CVE-2026-105932](CVE-2026-105932.md) Apache Pulsar: Missing topic policy authorization on non-persistent topic entry filter endpoints (🟢 severity: low / 2.3)
+* 2026-10-21 [CVE-2026-105933](CVE-2026-105933.md) Apache Pulsar: Namespace encryption requirement not enforced after a failure during topic initialization (🟢 severity: low / 2.3)
+* 2026-10-21 [CVE-2026-105938](CVE-2026-105938.md) Apache Pulsar: Subscription authorization policies not enforced by namespace-level backlog and unsubscribe operations and by topic expire-all (🟢 severity: low / 2.3)
+
 ### 2025
 
 * 2024-04-09 [CVE-2025-30677](CVE-2025-30677.md) Apache Pulsar IO Kafka Connector, Apache Pulsar IO Kafka Connect Adaptor: Sensitive information logged in Pulsar's Apache Kafka Connectors
