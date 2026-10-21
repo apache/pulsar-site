@@ -30,7 +30,7 @@ $ pulsar-perf produce [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2095054848|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `--client-api` | Client API to use: V4, V5. Defaults to V5 for topic:// (scalable) topics and to V4 for persistent://, non-persistent:// and unprefixed topics. Use V5 to drive a persistent:// topic with the V5 client.|null|
 | `-threads, --num-test-threads` | Number of test threads|1|
@@ -110,7 +110,7 @@ $ pulsar-perf consume [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2095054848|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `--client-api` | Client API to use: V4, V5. Defaults to V5 for topic:// (scalable) topics and to V4 for persistent://, non-persistent:// and unprefixed topics. Use V5 to drive a persistent:// topic with the V5 client.|null|
 | `-n, --num-consumers` | Number of consumers (per subscription), only one consumer is allowed when subscriptionType is Exclusive|1|
@@ -184,7 +184,7 @@ $ pulsar-perf transaction [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2095054848|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `--client-api` | Client API to use: V4, V5. Defaults to V5 for topic:// (scalable) topics and to V4 for persistent://, non-persistent:// and unprefixed topics. Use V5 to drive a persistent:// topic with the V5 client.|null|
 | `--topics-c` | All topics that need ack for a transaction|[test-consume]|
 | `--topics-p` | All topics that need produce for a transaction|[test-produce]|
@@ -251,7 +251,7 @@ $ pulsar-perf read [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2095054848|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `--client-api` | Client API to use: V4, V5. Defaults to V5 for topic:// (scalable) topics and to V4 for persistent://, non-persistent:// and unprefixed topics. Use V5 to drive a persistent:// topic with the V5 client.|null|
 | `-r, --rate` | Simulate a slow message reader (rate in msg/s)|0.0|
