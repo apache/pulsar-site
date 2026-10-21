@@ -1017,7 +1017,7 @@ Metadata store session timeout in milliseconds.
 **Category**: Server
 
 ### narExtractionDirectory
-The directory where nar Extraction happens
+The directory where nar packages are extracted. Default is java.io.tmpdir. Outside of Kubernetes, OS cleanup of /tmp (for example, by systemd-tmpfiles) can delete extracted files while the proxy is running, which causes ClassNotFoundException or NoClassDefFoundError errors. In that case, set this to a dedicated directory that isn't cleaned up automatically.
 
 **Type**: `java.lang.String`
 

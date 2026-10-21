@@ -4094,7 +4094,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1998`
+**Default**: `1999`
 
 **Dynamic**: `true`
 
@@ -4464,7 +4464,7 @@ Number of threads to use for HTTP requests processing Default is set to `2 * Run
 **Category**: Server
 
 ### numIOThreads
-Number of threads to use for Netty IO. Default is set to `2 * Runtime.getRuntime().availableProcessors()`
+Number of threads to use for Netty IO. Default is set to half the available processors, but no fewer than 8 unless that exceeds twice the available processors: `Math.min(2 * n, Math.max(8, n / 2))` for n available processors. Increase it when the busiest pulsar-io thread stays busy and consumers' backlogs grow
 
 **Type**: `int`
 
@@ -5474,7 +5474,7 @@ The threshold to triggering automatic offload to long term storage
 **Category**: Storage (Ledger Offloading)
 
 ### narExtractionDirectory
-The directory where nar Extraction of offloaders happens
+The directory where nar packages are extracted. Default is java.io.tmpdir. Outside of Kubernetes, OS cleanup of /tmp (for example, by systemd-tmpfiles) can delete extracted files while the broker is running, which causes ClassNotFoundException or NoClassDefFoundError errors. In that case, set this to a dedicated directory that isn't cleaned up automatically.
 
 **Type**: `java.lang.String`
 
