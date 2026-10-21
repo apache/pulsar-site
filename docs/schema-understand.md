@@ -302,19 +302,19 @@ The table below outlines the possible scenarios when this connection attempt occ
 
 The purpose of schema compatibility check is to ensure that existing consumers can process the introduced messages.
 
-When receiving a `SchemaInfo` from producers, brokers recognize the schema type and deploy the schema compatibility checker ([`schemaRegistryCompatibilityCheckers`](https://github.com/apache/pulsar/blob/bf194b557c48e2d3246e44f1fc28876932d8ecb8/pulsar-broker-common/src/main/java/org/apache/pulsar/broker/ServiceConfiguration.java)) for that schema type to check if the `SchemaInfo` is compatible with the schema of the topic by applying the configured compatibility check strategy.
+When receiving a `SchemaInfo` from producers, brokers recognize the schema type and deploy the schema compatibility checker ([`schemaRegistryCompatibilityCheckers`](/reference/#/@pulsar:version_reference@/config/reference-configuration-broker?id=schemaregistrycompatibilitycheckers)) for that schema type to check if the `SchemaInfo` is compatible with the schema of the topic by applying the configured compatibility check strategy.
 
 The default value of `schemaRegistryCompatibilityCheckers` in the `conf/broker.conf` file is as follows.
 
 ```properties
-schemaRegistryCompatibilityCheckers=org.apache.pulsar.broker.service.schema.JsonSchemaCompatibilityCheck,org.apache.pulsar.broker.service.schema.AvroSchemaCompatibilityCheck,org.apache.pulsar.broker.service.schema.ProtobufNativeSchemaCompatibilityCheck
+schemaRegistryCompatibilityCheckers=org.apache.pulsar.broker.service.schema.JsonSchemaCompatibilityCheck,org.apache.pulsar.broker.service.schema.AvroSchemaCompatibilityCheck,org.apache.pulsar.broker.service.schema.ProtobufNativeSchemaCompatibilityCheck,org.apache.pulsar.broker.service.schema.ExternalSchemaCompatibilityCheck
 ```
 
-Each schema type corresponds to one instance of the schema compatibility checker. Avro, JSON, and Protobuf schemas have their own compatibility checkers, while all the other schema types share the default compatibility checker that disables the schema evolution.
+Each schema type has one selected checker; checkers for the same type do not form a validation chain. For `PROTOBUF_NATIVE`, the default checker compares root message names. To enable field-level checks, see [Protobuf native schema compatibility](schema-protobuf-native.md), including version requirements, activation, and rollback.
 
 #### Schema compatibility check strategy
 
-Suppose that you have a topic containing three schemas (V1, V2, and V3). V1 is the oldest and V3 is the latest. The following table outlines 8 schema compatibility strategies and how it works.
+Suppose that you have a topic containing three schemas (V1, V2, and V3). V1 is the oldest and V3 is the latest. The following table outlines 8 schema compatibility strategies and how it works. The allowed changes depend on the schema type and selected checker; for `PROTOBUF_NATIVE`, see the [directional compatibility rules](schema-protobuf-native.md#compatibility-rules).
 
 |  Compatibility check strategy  |   Definition  |   Changes allowed  |   Check against which schema  |
 | --- | --- | --- | --- |
