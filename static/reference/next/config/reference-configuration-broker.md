@@ -6262,6 +6262,17 @@ Managed ledger prometheus stats latency rollover seconds
 
 **Category**: Storage (Managed Ledger)
 
+### managedLedgerReadAheadEnabled
+Read ahead for cursors that read ranges of entries, such as subscriptions catching up with a backlog: when a cursor reads a range, the managed ledger also reads the next range of the same ledger into the entry cache, unless it's cached, so that the cursor's next read finds it in the cache or joins the read in progress instead of waiting for the storage. A cursor has at most one read ahead in progress; a read ahead takes no permits of managedLedgerMaxReadsInFlightSizeInMB that reads are waiting for, nor ones that would leave more than 70 % of the limit in use, and is skipped when the entry cache is at its eviction watermark (managedLedgerCacheEvictionWatermark). Set to false to disable it
+
+**Type**: `boolean`
+
+**Default**: `true`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
 ### managedLedgerReadEntriesCallbackInline
 Allow successful ordinary multi-entry managed-ledger read callbacks to complete on the current thread. Fully cached reads may complete before the read method returns. Set false to restore ledger-executor affinity, including bounded inline completion when already on that executor. False also restores the Exclusive/Failover cache-hit handoff used before PR #26619. The JVM-wide property pulsar.managedLedger.maxReadCompletionDepth limits nested inline callbacks in both modes when callbacks issue another read before returning (default 10, values below 1 use 1); set it at JVM startup. The depth accepts Integer.decode syntax, including hexadecimal and leading-zero octal. At the limit, enabled mode queues to the JVM common ForkJoinPool; disabled mode queues to the ledger executor. If common-pool parallelism is at most 1, both use the ledger executor. Common-pool parallelism normally uses available processors minus one (at least one); override it with -Djava.util.concurrent.ForkJoinPool.common.parallelism. A limit of 1 queues every subsequent completion in a nested cached-read chain. This is not a dynamic setting: the completion policy is captured when a managed ledger opens and does not change for already loaded topics. Failure callbacks, single-entry reads, and replay callbacks are unaffected.
 
