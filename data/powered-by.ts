@@ -133,6 +133,11 @@ const users: PoweredByUser[] = [
     logo: "https://uploads-ssl.webflow.com/62a1bf609247c3abc6b62738/62a1c3b4294f88b6a9d748f9_vivy-logo.svg",
   },
   {
+    name: "Wordfully",
+    url: "https://wordfully.ai",
+    logo: "/img/wordfully.svg",
+  },
+  {
     name: "IoTium",
     url: "https://www.iotium.io/",
     logo: "https://www.iotium.io/site/wp-content/uploads/2018/04/IoTium-logo.jpg",
