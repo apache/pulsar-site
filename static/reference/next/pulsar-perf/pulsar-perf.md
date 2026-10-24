@@ -17,6 +17,13 @@ $ pulsar-perf produce [options]
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--use-keystore-tls` | Use KeyStore TLS|false|
+| `--truststore-type` | Type of the truststore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--truststore-path` | Path to the truststore.||
+| `--truststore-pass` | Password to the truststore.||
+| `--keystore-type` | Type of the keystore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--keystore-path` | Path to the keystore.||
+| `--keystore-pass` | Password to the keystore.||
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
@@ -97,6 +104,13 @@ $ pulsar-perf consume [options]
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--use-keystore-tls` | Use KeyStore TLS|false|
+| `--truststore-type` | Type of the truststore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--truststore-path` | Path to the truststore.||
+| `--truststore-pass` | Password to the truststore.||
+| `--keystore-type` | Type of the keystore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--keystore-path` | Path to the keystore.||
+| `--keystore-pass` | Password to the keystore.||
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
@@ -171,6 +185,13 @@ $ pulsar-perf transaction [options]
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--use-keystore-tls` | Use KeyStore TLS|false|
+| `--truststore-type` | Type of the truststore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--truststore-path` | Path to the truststore.||
+| `--truststore-pass` | Password to the truststore.||
+| `--keystore-type` | Type of the keystore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--keystore-path` | Path to the keystore.||
+| `--keystore-pass` | Password to the keystore.||
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
@@ -238,6 +259,13 @@ $ pulsar-perf read [options]
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--use-keystore-tls` | Use KeyStore TLS|false|
+| `--truststore-type` | Type of the truststore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--truststore-path` | Path to the truststore.||
+| `--truststore-pass` | Password to the truststore.||
+| `--keystore-type` | Type of the keystore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--keystore-path` | Path to the keystore.||
+| `--keystore-pass` | Password to the keystore.||
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
