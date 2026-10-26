@@ -15,12 +15,21 @@
 # specific language governing permissions and limitations
 # under the License.
 
-import os
+import re
 from pathlib import Path
 
 from command import run
 from constant import site_path
 from execute import pulsar_build
+
+LOG_LINE = re.compile(
+    r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2},\d{3}\S* \[[^\]]*\] (TRACE|DEBUG|INFO|WARN|ERROR|FATAL) .*\n?',
+    re.MULTILINE)
+
+
+def remove_log_lines(document: str) -> str:
+    """Remove log4j console output that some commands print to stdout with the generated document."""
+    return LOG_LINE.sub('', document)
 
 
 def execute(basedir: Path, version: str):
@@ -50,10 +59,13 @@ def execute(basedir: Path, version: str):
         p = (reference / f'{command[0]}.md')
         p.parent.mkdir(exist_ok=True, parents=True)
         with p.open('w') as f:
-            run(str(pulsar.absolute()), *command, codes={0, 255}, stdout=f, env={
-                'PULSAR_BROKER_CONF': 'conf/broker.conf',
-                'PULSAR_WORKER_CONF': 'conf/functions_worker.yml',
-                'PULSAR_PROXY_CONF': 'conf/proxy.conf',
-                'PULSAR_STANDALONE_CONF': 'conf/standalone.conf',
-                **os.environ,
-            }, cwd=basedir)
+            run(str(pulsar.absolute()), *command, codes={0, 255}, stdout=f, env=pulsar_build.doc_generator_env(
+                PULSAR_BROKER_CONF='conf/broker.conf',
+                PULSAR_WORKER_CONF='conf/functions_worker.yml',
+                PULSAR_PROXY_CONF='conf/proxy.conf',
+                PULSAR_STANDALONE_CONF='conf/standalone.conf',
+            ), cwd=basedir)
+        document = p.read_text()
+        cleaned = remove_log_lines(document)
+        if cleaned != document:
+            p.write_text(cleaned)

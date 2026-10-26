@@ -107,7 +107,9 @@ def execute(master: Path, version: str):
         p = (reference / config.type / config.filename)
         p.parent.mkdir(exist_ok=True, parents=True)
         with p.open('w') as f:
-            run(java, '-cp', classpath, config.generator, '-c', config.classname, stdout=f)
+            # Defaults derived from java.io.tmpdir would otherwise contain the generating machine's temp directory
+            run(java, '-Djava.io.tmpdir=/tmp', '-cp', classpath, config.generator, '-c', config.classname, stdout=f,
+                env=pulsar_build.doc_generator_env())
 
     shutil.copy2(
         reference / 'config' / 'reference-configuration-broker.md',

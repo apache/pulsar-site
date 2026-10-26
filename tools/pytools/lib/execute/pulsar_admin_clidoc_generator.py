@@ -15,7 +15,6 @@
 # specific language governing permissions and limitations
 # under the License.
 
-import os
 import re
 from pathlib import Path
 
@@ -81,9 +80,7 @@ def execute(basedir: Path, version: str):
         p = (reference / f'{command}.md')
         p.parent.mkdir(exist_ok=True, parents=True)
         with p.open('w') as f:
-            run(str(admin.absolute()), 'documents', 'generate', command, stdout=f, env={
-                **os.environ,
-            })
+            run(str(admin.absolute()), 'documents', 'generate', command, stdout=f, env=pulsar_build.doc_generator_env())
         document = p.read_text()
         cleaned = remove_cumulative_output(document, command)
         if cleaned != document:

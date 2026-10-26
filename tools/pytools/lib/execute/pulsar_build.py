@@ -16,6 +16,7 @@
 # under the License.
 
 import enum
+import os
 from pathlib import Path
 
 from command import run
@@ -41,6 +42,19 @@ def detect(master: Path) -> BuildSystem:
         f'Cannot determine pulsar build system in {master}: '
         f'no gradlew/build.gradle(.kts) or pom.xml found.'
     )
+
+
+# JVM options for the reference doc generators, so that generated defaults derived from
+# the heap size or Runtime.availableProcessors() don't depend on the generating machine.
+# They're passed in _JAVA_OPTIONS because the JVM applies it after the command line, so it
+# also overrides PULSAR_MEM set by the bin/ scripts. An existing _JAVA_OPTIONS comes after
+# these options and takes precedence.
+DOC_GENERATOR_JAVA_OPTIONS = '-Xms2g -Xmx2g -XX:ActiveProcessorCount=1'
+
+
+def doc_generator_env(**env: str) -> dict:
+    java_options = f"{DOC_GENERATOR_JAVA_OPTIONS} {os.environ.get('_JAVA_OPTIONS', '')}".strip()
+    return {**env, **os.environ, '_JAVA_OPTIONS': java_options}
 
 
 def server_classpath_file(master: Path, build: BuildSystem) -> Path:
