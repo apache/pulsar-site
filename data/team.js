@@ -386,13 +386,22 @@ module.exports = {
     {
       "name": "Tao Jiuming",
       "apacheId": "daojun",
-      "githubUsername": []
+      "githubUsername": [
+        "dao-jun"
+      ]
     },
     {
       "name": "davidkj",
       "apacheId": "davekj",
       "githubUsername": [
         "david-streamlio"
+      ]
+    },
+    {
+      "name": "Sinan Liu",
+      "apacheId": "denovo1998",
+      "githubUsername": [
+        "Denovo1998"
       ]
     },
     {
