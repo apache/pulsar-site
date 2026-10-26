@@ -1,0 +1,38 @@
+---
+id: client-java-5.0.1
+title: Client Java 5.0.1
+sidebar_label: Client Java 5.0.1
+---
+
+- [improve][build] Upgrade Netty to 4.2.19.Final ([#26831](https://github.com/apache/pulsar/pull/26831))
+- [fix][client] Apply layout changes that arrive while a V5 producer or consumer is created ([#26854](https://github.com/apache/pulsar/pull/26854))
+- [fix][client] Apply topic changes that arrive while a V5 namespace consumer is created ([#26840](https://github.com/apache/pulsar/pull/26840))
+- [fix][client] Avoid duplicate reconcile retries and queue layout stalls in V5 consumers ([#26874](https://github.com/apache/pulsar/pull/26874))
+- [fix][client] chunked message uuid-queue never removes entries on successful processing ([#26658](https://github.com/apache/pulsar/pull/26658))
+- [fix][client] Complete a TableView refresh waiting for a message that could not be applied ([#26986](https://github.com/apache/pulsar/pull/26986))
+- [fix][client] Don't apply an older segment assignment after a newer one in V5 consumer groups ([#26858](https://github.com/apache/pulsar/pull/26858))
+- [fix][client] Don't retry a Pulsar Admin request after its request timeout has elapsed ([#26881](https://github.com/apache/pulsar/pull/26881))
+- [fix][client] Don't skip the first messages of new segments in a V5 checkpoint consumer started at latest ([#26844](https://github.com/apache/pulsar/pull/26844))
+- [fix][client] Fix message leaks and size and permit accounting races when clearing the consumer's incoming queue ([#21767](https://github.com/apache/pulsar/pull/21767))
+- [fix][client] Fix retry logic for BinaryProtoLookupService.getTopicsUnderNamespace method ([#24974](https://github.com/apache/pulsar/pull/24974))
+- [fix][client] Fix the embedded native image configuration and make its smoke test run ([#26990](https://github.com/apache/pulsar/pull/26990))
+- [fix][client] Fix ZeroQueueConsumer stuck on pending receiveAsync after reconnection ([#26814](https://github.com/apache/pulsar/pull/26814))
+- [fix][client] Include segments without received messages in V5 checkpoints ([#26839](https://github.com/apache/pulsar/pull/26839))
+- [fix][client] Keep per-key order of V5 async sends across scalable topic layout changes ([#26820](https://github.com/apache/pulsar/pull/26820))
+- [fix][client] Make chunking inert on non-persistent topics, including the message-size checks ([#26550](https://github.com/apache/pulsar/pull/26550))
+- [fix][client] Preserve per-key order across splits and merges in the V5 checkpoint consumer ([#26837](https://github.com/apache/pulsar/pull/26837))
+- [fix][client] Prevent chunk message ID leaks after seek ([#26909](https://github.com/apache/pulsar/pull/26909))
+- [fix][client] Release connections on partition metadata rejection ([#26912](https://github.com/apache/pulsar/pull/26912))
+- [fix][client] Release the output buffer when a compression codec fails to decode ([#26889](https://github.com/apache/pulsar/pull/26889))
+- [fix][client] Retry failed initial topic attaches and drop topics removed while attaching in V5 namespace consumers ([#26848](https://github.com/apache/pulsar/pull/26848))
+- [fix][client] Return flow-control permit when client seek by messageID ([#26726](https://github.com/apache/pulsar/pull/26726))
+- [fix][client] Schedule TableView tail-read retries instead of sleeping on the callback thread ([#26672](https://github.com/apache/pulsar/pull/26672))
+- [fix][client] Serialize chunked-message bookkeeping to fix use-after-free and count/queue drift ([#26084](https://github.com/apache/pulsar/pull/26084))
+- [fix][client] Skip zero-queue permits for completed async receives ([#27001](https://github.com/apache/pulsar/pull/27001))
+- [fix][client] Stop V5 namespace stream consumers from recreating deleted topics ([#26851](https://github.com/apache/pulsar/pull/26851))
+- [fix][client] Surface V5 client failures as the typed exception of their error category ([#26950](https://github.com/apache/pulsar/pull/26950))
+- [improve][client] Don't start a batch receive on an internal consumer without queued messages ([#26966](https://github.com/apache/pulsar/pull/26966))
+- [improve][client] Flush consumers' grouped acks with one task per event loop, only for consumers with new acks ([#26947](https://github.com/apache/pulsar/pull/26947))
+- [improve][client] Keep only its own topic in the configuration of a multi-topic consumer's internal consumer ([#26923](https://github.com/apache/pulsar/pull/26923))
+- [improve][client] Make Consumer.resume() eagerly top up the broker's permit window ([#26919](https://github.com/apache/pulsar/pull/26919))
+- [improve][doc] add missing .enableRetry(true) in DeadLetterPolicy examples ([#26892](https://github.com/apache/pulsar/pull/26892))
