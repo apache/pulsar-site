@@ -41,6 +41,13 @@ module.exports = {
       ]
     },
     {
+      "name": "Tao Jiuming",
+      "apacheId": "daojun",
+      "githubUsername": [
+        "dao-jun"
+      ]
+    },
+    {
       "name": "David Jensen",
       "apacheId": "djensen",
       "githubUsername": [
@@ -381,13 +388,6 @@ module.exports = {
       "apacheId": "crossoverjie",
       "githubUsername": [
         "crossoverjie"
-      ]
-    },
-    {
-      "name": "Tao Jiuming",
-      "apacheId": "daojun",
-      "githubUsername": [
-        "dao-jun"
       ]
     },
     {
