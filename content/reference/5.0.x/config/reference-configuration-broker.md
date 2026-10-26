@@ -2706,7 +2706,7 @@ Outbound (dispatched) messages/second above which a segment is split.
 **Category**: Policies
 
 ### scalableTopicSplitVsRebucketMinMsgRateInThreshold
-PIP-486 segments-vs-buckets lever: on consumer-driven scale-up, split only if the busiest segment's inbound msg/s is at or above this floor; below it the controller grows the segment's entry-buckets instead (a low-throughput topic should not materialize physical segments just for consumer count).
+PIP-486 segments-vs-buckets lever: on consumer-driven scale-up, split only if the busiest segment's inbound msg/s is at or above this floor; below it the controller grows the segment's entry-buckets instead (a low-throughput topic should not materialize physical segments just for consumer count). Checkpoint consumer groups drive splits only: they read whole segments, so more buckets would not serve them.
 
 **Type**: `double`
 
@@ -3134,7 +3134,7 @@ Whether to allow legacy Jackson JsonSchema format for SchemaType.JSON schema def
 **Category**: Schema
 
 ### schemaRegistryCompatibilityCheckers
-The list compatibility checkers to be used in schema registry
+The compatibility checker classes used by the schema registry. For opt-in PROTOBUF_NATIVE field checks, replace ProtobufNativeSchemaCompatibilityCheck with org.apache.pulsar.broker.service.schema.ProtobufNativeSchemaAdvancedCompatibilityCheck. Configure only one PROTOBUF_NATIVE checker and use the same selection on all brokers that can own a topic. Changes require a broker restart. Review retained history and consumer schemas before activation: reconnecting consumers can be rejected, even with an unchanged schema, when another selected historical version is incompatible or unsupported. A configured checker that cannot be instantiated fails broker startup. Restore the default entry before downgrading broker binaries. Advanced checks allow up to 100,000 work units per historical version and direction, with a lower limit for smaller descriptor graphs. Even a compatible optional-field addition under BACKWARD can exceed the cap for a flat message around 14,500 fields or a referenced enum around 16,700 values; the threshold depends on the descriptor graph. Check representative large schemas in staging before activation; the cap is not configurable.
 
 **Type**: `java.util.Set`
 
@@ -4094,7 +4094,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `4454`
+**Default**: `989`
 
 **Dynamic**: `true`
 
@@ -4464,7 +4464,7 @@ Number of threads to use for HTTP requests processing Default is set to `2 * Run
 **Category**: Server
 
 ### numIOThreads
-Number of threads to use for Netty IO. Default is set to `2 * Runtime.getRuntime().availableProcessors()`
+Number of threads to use for Netty IO. Default is set to half the available processors, but no fewer than 8 unless that exceeds twice the available processors: `Math.min(2 * n, Math.max(8, n / 2))` for n available processors. Increase it when the busiest pulsar-io thread stays busy and consumers' backlogs grow
 
 **Type**: `int`
 
@@ -5474,11 +5474,11 @@ The threshold to triggering automatic offload to long term storage
 **Category**: Storage (Ledger Offloading)
 
 ### narExtractionDirectory
-The directory where nar Extraction of offloaders happens
+The directory where nar packages are extracted. Default is java.io.tmpdir. Outside of Kubernetes, OS cleanup of /tmp (for example, by systemd-tmpfiles) can delete extracted files while the broker is running, which causes ClassNotFoundException or NoClassDefFoundError errors. In that case, set this to a dedicated directory that isn't cleaned up automatically.
 
 **Type**: `java.lang.String`
 
-**Default**: `/var/folders/gt/xywq0qwd4cvdqfhy7t7js7b00000gn/T/`
+**Default**: `/tmp`
 
 **Dynamic**: `false`
 
@@ -5622,7 +5622,7 @@ If value is NONE, then save the ManagedCursorInfo bytes data directly.
 **Category**: Storage (Managed Ledger)
 
 ### managedLedgerAddEntryHandoverMaxBatchBytesSize
-Total size in bytes of the entries after which a batch of add entry requests handed over to the managed ledger's executor thread stops taking more. This keeps a ledger with large entries from occupying the executor thread for as long as a full batch of managedLedgerAddEntryHandoverMaxBatchItems adds would, which would delay add completions, reads and cursor notifications for the ledgers that share the thread. A batch always takes at least one add, even one whose entry is larger than this. Set to 0 to limit batches only by their number of adds. Updates apply to managed ledgers opened after the change; ledgers that are already open keep the value they opened with.
+Maximum total entry size in bytes of a batch of add entry requests handed over to the managed ledger's executor thread. This keeps a ledger with large entries from occupying the executor thread for as long as a full batch of managedLedgerAddEntryHandoverMaxBatchItems adds would, which would delay add completions, reads and cursor notifications for the ledgers that share the thread. An entry larger than this runs in a batch of its own. Set to 0 to limit batches only by their number of adds. Updates apply to managed ledgers opened after the change; ledgers that are already open keep the value they opened with.
 
 **Type**: `long`
 
@@ -5633,7 +5633,7 @@ Total size in bytes of the entries after which a batch of add entry requests han
 **Category**: Storage (Managed Ledger)
 
 ### managedLedgerAddEntryHandoverMaxBatchItems
-Maximum number of add entry requests handed over to the managed ledger's executor thread in one batch. Publishing threads queue adds for the ledger's executor, which takes them over in batches of up to this many adds and processes each batch before other tasks on that thread can run. A batch also stops taking adds once their entries add up to managedLedgerAddEntryHandoverMaxBatchBytesSize bytes. A larger value reduces scheduling overhead and contention between publishing threads under high publish rates, but keeps the executor thread occupied for longer per batch, which can delay add completions, reads and cursor notifications for the ledgers that share the thread. A smaller value favors those tasks over add throughput. Set to 0 or 1 to disable batching, so that each add is handed over to the executor as a task of its own. Updates apply to managed ledgers opened after the change; ledgers that are already open keep the value they opened with.
+Maximum number of add entry requests handed over to the managed ledger's executor thread in one batch. Publishing threads queue adds for the ledger's executor, which takes them over in batches of up to this many adds and processes each batch before other tasks on that thread can run. A batch also stops before taking an entry that would exceed managedLedgerAddEntryHandoverMaxBatchBytesSize bytes. A larger value reduces scheduling overhead and contention between publishing threads under high publish rates, but keeps the executor thread occupied for longer per batch, which can delay add completions, reads and cursor notifications for the ledgers that share the thread. A smaller value favors those tasks over add throughput. Set to 0 or 1 to disable batching, so that each add is handed over to the executor as a task of its own. Updates apply to managed ledgers opened after the change; ledgers that are already open keep the value they opened with.
 
 **Type**: `int`
 
@@ -5666,7 +5666,13 @@ Enable the BookKeeper batch read API when reading entries from bookkeeper: a sin
 **Category**: Storage (Managed Ledger)
 
 ### managedLedgerCacheCopyEntries
-Whether we should make a copy of the entry payloads when inserting in cache
+Whether we should make a copy of the entry payloads when inserting in cache. Without a copy, a cached entry keeps the buffer that it was received in allocated
+while it stays in the cache. That is a buffer of the Netty connection that the entry arrived on, from
+a client or from a bookie, such as a receive buffer or one that the TLS handler or the frame decoder
+allocated, and it can be much larger than the entry. The cache size limit counts only
+the entry's own size, so size-based eviction doesn't bound that memory, and
+managedLedgerCacheEvictionExtendTTLOfEntriesWithRemainingExpectedReadsMaxTimes extends how long it
+stays allocated.
 
 **Type**: `boolean`
 
@@ -5686,7 +5692,14 @@ This helps optimize cache efficiency for scenarios like:
 - Consumers temporarily falling behind the tail
 Entries with remaining expected reads will have their TTL extended up to this many times
 before being eligible for eviction. The TTL will be extended by
-managedLedgerCacheEvictionTimeThresholdMillis each time.
+managedLedgerCacheEvictionTimeThresholdMillis each time. When the cache needs memory, size-based
+eviction overrides this protection after requeuing an entry at most once per eviction pass. Both this
+protection and the one of managedLedgerCacheEvictionExtendTTLOfRecentlyAccessed apply only in a
+pass's first cycle through the cache's entries; after it, the pass removes entries in their order in
+the queue. Entries added while a pass is running are past its first cycle, so that pass doesn't
+requeue them.
+Without managedLedgerCacheCopyEntries, a cached entry keeps the larger buffer that it was received in
+allocated while its time to live is extended, so consider enabling copying before raising this value.
 Default is 5.
 
 **Type**: `int`
@@ -5775,7 +5788,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `1781`
+**Default**: `395`
 
 **Dynamic**: `true`
 
@@ -6244,6 +6257,17 @@ Managed ledger prometheus stats latency rollover seconds
 **Type**: `int`
 
 **Default**: `60`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerReadAheadEnabled
+Read ahead for cursors that read ranges of entries, such as subscriptions catching up with a backlog: when a cursor reads a range, the managed ledger also reads the next range of the same ledger into the entry cache, unless it's cached, so that the cursor's next read finds it in the cache or joins the read in progress instead of waiting for the storage. A cursor has at most one read ahead in progress; a read ahead takes no permits of managedLedgerMaxReadsInFlightSizeInMB that reads are waiting for, nor ones that would leave more than 70 % of the limit in use, and is skipped when the entry cache is at its eviction watermark (managedLedgerCacheEvictionWatermark). Set to false to disable it
+
+**Type**: `boolean`
+
+**Default**: `true`
 
 **Dynamic**: `false`
 

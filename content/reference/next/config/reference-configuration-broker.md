@@ -4094,7 +4094,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1999`
+**Default**: `1998`
 
 **Dynamic**: `true`
 
@@ -6257,6 +6257,17 @@ Managed ledger prometheus stats latency rollover seconds
 **Type**: `int`
 
 **Default**: `60`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Managed Ledger)
+
+### managedLedgerReadAheadEnabled
+Read ahead for cursors that read ranges of entries, such as subscriptions catching up with a backlog: when a cursor reads a range, the managed ledger also reads the next range of the same ledger into the entry cache, unless it's cached, so that the cursor's next read finds it in the cache or joins the read in progress instead of waiting for the storage. A cursor has at most one read ahead in progress; a read ahead takes no permits of managedLedgerMaxReadsInFlightSizeInMB that reads are waiting for, nor ones that would leave more than 70 % of the limit in use, and is skipped when the entry cache is at its eviction watermark (managedLedgerCacheEvictionWatermark). Set to false to disable it
+
+**Type**: `boolean`
+
+**Default**: `true`
 
 **Dynamic**: `false`
 

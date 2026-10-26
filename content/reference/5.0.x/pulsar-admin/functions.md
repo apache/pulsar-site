@@ -57,6 +57,8 @@ $ pulsar-admin functions localrun options
 | `[--subs-position]` | Pulsar source subscription position if user wants to consume messages from the specified location|null|Java|
 | `[--skip-to-latest]` | Whether or not the consumer skip to latest message upon function instance restart|null||
 | `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|Java|
+| `[--client-memory-limit]` | The max memory the Pulsar client of each function instance can use (eg: 32M, 64M)|null|Java(Process & K8s)|
+| `[--client-memory-limit-percent]` | The max memory the Pulsar client of each function instance can use, as a percentage of the instance JVM max direct memory. If --client-memory-limit is also set, the smaller of the two limits is used|null|Java(Process & K8s)|
 | `[--parallelism]` | The parallelism factor of a Pulsar Function (i.e. the number of function instances to run)|null|Java|
 | `[--cpu]` | The cpu in cores that need to be allocated per function instance(applicable only to docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `[--ram]` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
@@ -67,10 +69,10 @@ $ pulsar-admin functions localrun options
 | `[--sliding-interval-duration-ms]` | The time duration after which the window slides|null|Java|
 | `[--auto-ack]` | Whether or not the framework acknowledges messages automatically|null|Java, Python, Go|
 | `[--timeout-ms]` | The message timeout in milliseconds|null|Java, Python|
-| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java|
+| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java, Python|
 | `[--custom-runtime-options]` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null|Java|
 | `[--secrets]` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null|Java, Python|
-| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java|
+| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java, Python|
 | `[--runtime-flags]` | Any flags that you want to pass to a runtime (for process & Kubernetes runtime only).|null||
 | `[--state-storage-service-url]` | The URL for the state storage service (the default is Apache BookKeeper)|null|Java, Python|
 | `[--broker-service-url]` | The URL for Pulsar broker|null|Java, Python, Go|
@@ -138,6 +140,8 @@ $ pulsar-admin functions create options
 | `[--subs-position]` | Pulsar source subscription position if user wants to consume messages from the specified location|null|Java|
 | `[--skip-to-latest]` | Whether or not the consumer skip to latest message upon function instance restart|null||
 | `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|Java|
+| `[--client-memory-limit]` | The max memory the Pulsar client of each function instance can use (eg: 32M, 64M)|null|Java(Process & K8s)|
+| `[--client-memory-limit-percent]` | The max memory the Pulsar client of each function instance can use, as a percentage of the instance JVM max direct memory. If --client-memory-limit is also set, the smaller of the two limits is used|null|Java(Process & K8s)|
 | `[--parallelism]` | The parallelism factor of a Pulsar Function (i.e. the number of function instances to run)|null|Java|
 | `[--cpu]` | The cpu in cores that need to be allocated per function instance(applicable only to docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `[--ram]` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
@@ -148,10 +152,10 @@ $ pulsar-admin functions create options
 | `[--sliding-interval-duration-ms]` | The time duration after which the window slides|null|Java|
 | `[--auto-ack]` | Whether or not the framework acknowledges messages automatically|null|Java, Python, Go|
 | `[--timeout-ms]` | The message timeout in milliseconds|null|Java, Python|
-| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java|
+| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java, Python|
 | `[--custom-runtime-options]` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null|Java|
 | `[--secrets]` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null|Java, Python|
-| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java|
+| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java, Python|
 | `[--runtime-flags]` | Any flags that you want to pass to a runtime (for process & Kubernetes runtime only).|null||
 | `[-h, --help]` | Show this help message and exit.|false||
 | `[-v, --version]` | Print version information and exit.|false||
@@ -227,6 +231,8 @@ $ pulsar-admin functions update options
 | `[--subs-position]` | Pulsar source subscription position if user wants to consume messages from the specified location|null|Java|
 | `[--skip-to-latest]` | Whether or not the consumer skip to latest message upon function instance restart|null||
 | `[--client-api]` | Pulsar client API that the Java runtime uses for the component's topics: V4, V5. Defaults to V5 when the topics are topic:// (scalable) topics and to V4 otherwise. Use V5 to drive persistent:// topics with the V5 client|null|Java|
+| `[--client-memory-limit]` | The max memory the Pulsar client of each function instance can use (eg: 32M, 64M)|null|Java(Process & K8s)|
+| `[--client-memory-limit-percent]` | The max memory the Pulsar client of each function instance can use, as a percentage of the instance JVM max direct memory. If --client-memory-limit is also set, the smaller of the two limits is used|null|Java(Process & K8s)|
 | `[--parallelism]` | The parallelism factor of a Pulsar Function (i.e. the number of function instances to run)|null|Java|
 | `[--cpu]` | The cpu in cores that need to be allocated per function instance(applicable only to docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
 | `[--ram]` | The ram in bytes that need to be allocated per function instance(applicable only to process/docker runtime)|null|Java(Process & K8s),Python(K8s),Go(K8s)|
@@ -237,10 +243,10 @@ $ pulsar-admin functions update options
 | `[--sliding-interval-duration-ms]` | The time duration after which the window slides|null|Java|
 | `[--auto-ack]` | Whether or not the framework acknowledges messages automatically|null|Java, Python, Go|
 | `[--timeout-ms]` | The message timeout in milliseconds|null|Java, Python|
-| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java|
+| `[--max-message-retries]` | How many times should we try to process a message before giving up|null|Java, Python|
 | `[--custom-runtime-options]` | A string that encodes options to customize the runtime, see docs for configured runtime for details|null|Java|
 | `[--secrets]` | The map of secretName to an object that encapsulates how the secret is fetched by the underlying secrets provider|null|Java, Python|
-| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java|
+| `[--dead-letter-topic]` | The topic where messages that are not processed successfully are sent to|null|Java, Python|
 | `[--runtime-flags]` | Any flags that you want to pass to a runtime (for process & Kubernetes runtime only).|null||
 | `[--update-auth-data]` | Whether or not to update the auth data|false|Java, Python|
 | `[-h, --help]` | Show this help message and exit.|false||

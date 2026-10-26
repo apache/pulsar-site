@@ -17,6 +17,13 @@ $ pulsar-perf produce [options]
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--use-keystore-tls` | Use KeyStore TLS|false|
+| `--truststore-type` | Type of the truststore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--truststore-path` | Path to the truststore.||
+| `--truststore-pass` | Password to the truststore.||
+| `--keystore-type` | Type of the keystore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--keystore-path` | Path to the keystore.||
+| `--keystore-pass` | Password to the keystore.||
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
@@ -30,7 +37,7 @@ $ pulsar-perf produce [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2095054848|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `--client-api` | Client API to use: V4, V5. Defaults to V5 for topic:// (scalable) topics and to V4 for persistent://, non-persistent:// and unprefixed topics. Use V5 to drive a persistent:// topic with the V5 client.|null|
 | `-threads, --num-test-threads` | Number of test threads|1|
@@ -97,6 +104,13 @@ $ pulsar-perf consume [options]
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--use-keystore-tls` | Use KeyStore TLS|false|
+| `--truststore-type` | Type of the truststore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--truststore-path` | Path to the truststore.||
+| `--truststore-pass` | Password to the truststore.||
+| `--keystore-type` | Type of the keystore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--keystore-path` | Path to the keystore.||
+| `--keystore-pass` | Password to the keystore.||
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
@@ -110,7 +124,7 @@ $ pulsar-perf consume [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2095054848|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `--client-api` | Client API to use: V4, V5. Defaults to V5 for topic:// (scalable) topics and to V4 for persistent://, non-persistent:// and unprefixed topics. Use V5 to drive a persistent:// topic with the V5 client.|null|
 | `-n, --num-consumers` | Number of consumers (per subscription), only one consumer is allowed when subscriptionType is Exclusive|1|
@@ -171,6 +185,13 @@ $ pulsar-perf transaction [options]
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--use-keystore-tls` | Use KeyStore TLS|false|
+| `--truststore-type` | Type of the truststore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--truststore-path` | Path to the truststore.||
+| `--truststore-pass` | Password to the truststore.||
+| `--keystore-type` | Type of the keystore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--keystore-path` | Path to the keystore.||
+| `--keystore-pass` | Password to the keystore.||
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
@@ -184,7 +205,7 @@ $ pulsar-perf transaction [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2095054848|
 | `--client-api` | Client API to use: V4, V5. Defaults to V5 for topic:// (scalable) topics and to V4 for persistent://, non-persistent:// and unprefixed topics. Use V5 to drive a persistent:// topic with the V5 client.|null|
 | `--topics-c` | All topics that need ack for a transaction|[test-consume]|
 | `--topics-p` | All topics that need produce for a transaction|[test-produce]|
@@ -238,6 +259,13 @@ $ pulsar-perf read [options]
 | `--auth-plugin` | Authentication plugin class name|null|
 | `--auth-params` | Authentication parameters, whose format is determined by the implementation of method `configure` in authentication plugin class, for example "key1:val1,key2:val2" or "{"key1":"val1","key2":"val2"}".|null|
 | `--trust-cert-file` | Path for the trusted TLS certificate file||
+| `--use-keystore-tls` | Use KeyStore TLS|false|
+| `--truststore-type` | Type of the truststore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--truststore-path` | Path to the truststore.||
+| `--truststore-pass` | Password to the truststore.||
+| `--keystore-type` | Type of the keystore, PKCS12 or JKS. The default is JKS.|JKS|
+| `--keystore-path` | Path to the keystore.||
+| `--keystore-pass` | Password to the keystore.||
 | `--tls-allow-insecure` | Allow insecure TLS connection|null|
 | `--tls-enable-hostname-verification` | Enable TLS hostname verification|null|
 | `--jsse-provider` | PIP-478: JSSE (SSLContext) java.security.Provider name, e.g. BCJSSE for FIPS. Also readable from client.conf.|null|
@@ -251,7 +279,7 @@ $ pulsar-perf read [options]
 | `-mlr, --max-lookup-request` | Maximum number of lookup requests allowed on each broker connection to prevent overloading a broker|50000|
 | `--proxy-url` | Proxy-server URL to which to connect.|null|
 | `--proxy-protocol` | Proxy protocol to select type of routing at proxy.|null|
-| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2096103424|
+| `-ml, --memory-limit` | Configure the Pulsar client memory limit (eg: 32M, 64M). Defaults to half of the JVM's max direct memory. Use 0 to disable the limit.|2095054848|
 | `-t, --num-topics, --num-topic` | Number of topics.  Must matchthe given number of topic arguments.|1|
 | `--client-api` | Client API to use: V4, V5. Defaults to V5 for topic:// (scalable) topics and to V4 for persistent://, non-persistent:// and unprefixed topics. Use V5 to drive a persistent:// topic with the V5 client.|null|
 | `-r, --rate` | Simulate a slow message reader (rate in msg/s)|0.0|
