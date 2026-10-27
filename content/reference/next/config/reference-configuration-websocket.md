@@ -678,7 +678,7 @@ Number of connections per broker in Pulsar client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -700,7 +700,7 @@ Number of IO threads in Pulsar client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `1`
 
 **Dynamic**: `false`
 

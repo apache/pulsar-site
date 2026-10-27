@@ -4094,7 +4094,7 @@ Max memory size for broker handling messages sending from producers.
 
 **Type**: `int`
 
-**Default**: `1998`
+**Default**: `989`
 
 **Dynamic**: `true`
 
@@ -4446,7 +4446,7 @@ Number of threads to use for pulsar broker service. The executor in thread pool 
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -4468,7 +4468,7 @@ Number of threads to use for Netty IO. Default is set to half the available proc
 
 **Type**: `int`
 
-**Default**: `8`
+**Default**: `2`
 
 **Dynamic**: `false`
 
@@ -4707,7 +4707,7 @@ Number of worker threads to serve topic ordered executor
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -5099,7 +5099,7 @@ Number of BookKeeper client IO threads. Default is Runtime.getRuntime().availabl
 
 **Type**: `int`
 
-**Default**: `8`
+**Default**: `2`
 
 **Dynamic**: `false`
 
@@ -5110,7 +5110,7 @@ Number of BookKeeper client worker threads. Default is Runtime.getRuntime().avai
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -5788,7 +5788,7 @@ This memory is allocated from JVM direct memory and it's shared across all the t
 
 **Type**: `int`
 
-**Default**: `799`
+**Default**: `395`
 
 **Dynamic**: `true`
 
@@ -6221,7 +6221,7 @@ Number of threads to be used for managed ledger scheduled tasks
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -6595,7 +6595,7 @@ Number of threads to use for pulsar transaction replay PendingAckStore or Transa
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -6793,7 +6793,7 @@ Number of connections per Broker in Pulsar Client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `1`
 
 **Dynamic**: `false`
 
@@ -6815,7 +6815,7 @@ Number of IO threads in Pulsar Client used in WebSocket proxy
 
 **Type**: `int`
 
-**Default**: `4`
+**Default**: `1`
 
 **Dynamic**: `false`
 
