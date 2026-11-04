@@ -4,6 +4,9 @@ SetEnv CSP_PROJECT_DOMAINS "https://*.algolia.net/ https://*.algolianet.com/ htt
 
 RewriteEngine On
 
+# Apache Pulsar support for Spring only has a reference site for now
+RewriteRule "^pulsar-spring/?$" "/pulsar-spring/reference/" [R=301,DPI,L]
+
 RewriteRule "^en/(.+)$" "/$1" [R=301,DPI,L]
 RewriteRule "^docs/en/(.+)$" "/docs/$1" [R=301,DPI,L]
 RewriteRule "^docs/(zh-CN|zh-TW|ja|ko|fr)/(.+)$" "/$1/docs/$2" [R=301,DPI,L]
