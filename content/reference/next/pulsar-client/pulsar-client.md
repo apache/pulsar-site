@@ -112,6 +112,8 @@ $ pulsar-client consume [options]
 
 |Flag|Description|Default|
 |---|---|---|
+| `[--read-compacted]` | Read from the compacted topic. Requires a persistent topic and an Exclusive or Failover subscription; binary protocol only.|null|
+|
 | `[-stp, --start-timestamp]` | Start timestamp for consuming messages|null|
 |
 | `[-mc, --max_chunked_msg]` | Max pending chunk messages|null|
@@ -166,6 +168,8 @@ $ pulsar-client read [options]
 
 |Flag|Description|Default|
 |---|---|---|
+| `[--read-compacted]` | Read from the compacted topic. Requires a persistent topic over the binary protocol.|null|
+|
 | `[-i, --start-message-id-inclusive]` | Whether to include the position specified by -m option.|null|
 |
 | `[-q, --queue-size]` | Reader receiver queue size.|null|

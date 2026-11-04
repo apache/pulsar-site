@@ -5672,13 +5672,13 @@ a client or from a bookie, such as a receive buffer or one that the TLS handler 
 allocated, and it can be much larger than the entry. The cache size limit counts only
 the entry's own size, so size-based eviction doesn't bound that memory, and
 managedLedgerCacheEvictionExtendTTLOfEntriesWithRemainingExpectedReadsMaxTimes extends how long it
-stays allocated.
+stays allocated. Dynamic updates apply to subsequent cache insertions; existing cached entries keep their original buffers and are not cleared.
 
 **Type**: `boolean`
 
 **Default**: `false`
 
-**Dynamic**: `false`
+**Dynamic**: `true`
 
 **Category**: Storage (Managed Ledger)
 

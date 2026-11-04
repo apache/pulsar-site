@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring Boot Auto-configuration :: Apache Pulsar support for Spring</title>
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <script>
+!function (theme, navWidth) {
+  if (theme === 'dark') document.documentElement.classList.add('dark-theme')
+  if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
+  localStorage && localStorage.getItem('nav-width'))
+    </script>
+    <link rel="stylesheet" href="./_/css/site.css">
+    <link rel="stylesheet" href="./_/css/vendor/search.css">
+    <link rel="stylesheet" href="./_/css/vendor/page-search.css">
+    <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
+
+    <link rel="stylesheet" href="./_/css/pulsar.css">
+    <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://pulsar.apache.org/">
+        <img id="pulsarlogo" class="block" src="./_/img/logo-black.svg" alt="Apache Pulsar" />
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://pulsar.apache.org/docs/">Pulsar Docs</a>
+        <a class="navbar-item" href="https://pulsar.apache.org/community/">Community</a>
+        <a class="navbar-item" href="https://github.com/apache/pulsar-spring">GitHub</a>
+        <a class="navbar-item pulsar-download" href="https://pulsar.apache.org/download/">Download</a>
+      </div>
+    </div>
+    <div class="pulsar-search">
+      <input id="search-input" type="search" placeholder="Search" aria-label="Search the documentation" autocomplete="off" />
+    </div>
+    <label class="theme-toggler">
+      <input type="checkbox" id="switch-theme-checkbox" name="switch-theme-checkbox" aria-label="Dark theme" />
+      <span class="icon">
+        <svg class="sun" aria-hidden="true" viewBox="0 0 16 16">
+          <circle cx="8" cy="8" r="3.5" fill="currentColor"></circle>
+          <path d="M8 0v2.5M8 13.5V16M0 8h2.5M13.5 8H16M2.3 2.3l1.8 1.8M11.9 11.9l1.8 1.8M2.3 13.7l1.8-1.8M11.9 4.1l1.8-1.8" stroke="currentColor" stroke-width="1.5"></path>
+        </svg>
+        <svg class="moon" aria-hidden="true" viewBox="0 0 16 16">
+          <path d="M13 11A6.5 6.5 0 0 1 5 3a6.5 6.5 0 1 0 8 8z" fill="currentColor"></path>
+        </svg>
+      </span>
+      <span class="text">Theme</span>
+    </label>
+  </nav>
+</header>
+<script>
+document.getElementById('switch-theme-checkbox').parentElement.classList.toggle('active', document.documentElement.classList.contains('dark-theme'))
+</script>
+<div class="body">
+<div class="nav-container" data-component="pulsar" data-version="3.0.0-M1">
+  <aside class="nav">
+    <div class="panels">
+      <div class="nav-panel-menu is-active" data-panel="menu">
+        <nav class="nav-menu">
+<div class="context">
+  <span class="title">Apache Pulsar support for Spring</span>
+  <span class="version">3.0.0-M1-SNAPSHOT</span>
+  <button class="browse-version" id="browse-version">
+    <svg
+      height="24px"
+      id="Layer_1"
+      style="enable-background:new 0 0 512 512;"
+      version="1.1"
+      viewBox="0 0 512 512"
+      width="24px"
+      xml:space="preserve"
+    ><g><path
+          d="M256,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S273.7,224,256,224L256,224z"
+        ></path><path
+          d="M128.4,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S146,224,128.4,224L128.4,224z"
+        ></path><path
+          d="M384,224c-17.7,0-32,14.3-32,32s14.3,32,32,32s32-14.3,32-32S401.7,224,384,224L384,224z"
+        ></path></g></svg>
+  </button>
+  </div><ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="whats-new.html">What&#8217;s new?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="migration.html">Migration from Spring&#8217;s Pulsar support</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link"  href="intro.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="intro/system-requirements.html">System Requirements</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="intro/building.html">Building the Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="intro/getting-help.html">Getting Help</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link"  href="pulsar.html">Using Apache Pulsar support for Spring</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/quick-tour.html">Quick Tour</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/pulsar-client.html">Pulsar Client</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/message-production.html">Message Production</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/message-consumption.html">Message Consumption</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/publishing-consuming-partitioned-topics.html">Publishing and Consuming Partitioned Topics</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/transactions.html">Transactions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="tombstones.html">Null Payloads and Log Compaction of 'Tombstone' Records</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link"  href="spring-boot.html">Spring Boot Auto-configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="topic-resolution.html">Topic Resolution</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="default-tenant-namespace.html">Default Tenant / Namespace</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="custom-object-mapper.html">Custom Object Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="pulsar-admin.html">Pulsar Administration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="pulsar-function.html">Pulsar Functions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="observability.html">Observability</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="cloud-stream-binder.html">Spring Cloud Stream Binder for Apache Pulsar</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="other-resources.html">Other Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Appendices</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/configuration-properties.html">Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/snapshot-versions.html">Snapshot Versions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/native-image.html">GraalVM Native Image Support</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+          <div class="toggle-sm">
+            <button id="nav-toggle-2" class="nav-toggle"></button>
+          </div>
+        </nav>
+      </div>
+      <div class="nav-collapse">
+        <button id="nav-collapse-toggle"><span></span></button>        
+      </div>
+    </div>
+    <div class="nav-resize"></div>
+  </aside>
+</div>
+<script>
+!function (sidebar) {
+  if (sidebar) {
+    document.body.classList.add('nav-sm')
+  }
+}(localStorage && localStorage.getItem('sidebar') === 'close')
+</script><main class="article">
+<div class="toolbar" role="navigation">
+  <button id="nav-toggle-1" class="nav-toggle"></button>
+</div>
+  <div class="content">
+<aside class="sidebar">
+  <div class="content">
+    <div
+      class="toc"
+      data-title="Spring Boot Auto-configuration"
+      data-levels="2"
+    >
+      <div class="toc-menu"></div>
+    </div>
+    <div class="sidebar-links">
+        <a href="https://github.com/apache/pulsar-spring/edit/main/pulsar-spring-docs/src/main/antora/modules/ROOT/pages/spring-boot.adoc">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          ><path
+              d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"
+            ></path></svg>
+          Edit this Page
+        </a>
+              <a href="https://github.com/apache/pulsar-spring" title="GitHub">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="512px"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 512 512"
+            width="512px"
+          ><style type="text/css"><![CDATA[
+              .st0{fill-rule:evenodd;clip-rule:evenodd;} ]]></style><g><path
+                class="st0"
+                d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"
+              ></path></g></svg>
+          GitHub Project
+        </a>
+    </div>
+  </div>
+</aside>
+<article class="doc">
+<div class="breadcrumbs-container">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Apache Pulsar support for Spring</a></li>
+      <li>Reference</li>
+      <li><a href="spring-boot.html">Spring Boot Auto-configuration</a></li>
+    </ul>
+  </nav>
+</div><h1 id="page-title" class="page">Spring Boot Auto-configuration</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#boot.connecting">1. Connecting to Pulsar</a>
+<ul class="sectlevel2">
+<li><a href="#boot.connecting.auth">1.1. Authentication</a></li>
+<li><a href="#boot.connecting.ssl">1.2. SSL</a></li>
+</ul>
+</li>
+<li><a href="#boot.admin">2. Connecting to Pulsar Administration</a>
+<ul class="sectlevel2">
+<li><a href="#boot.admin.auth">2.1. Authentication</a></li>
+</ul>
+</li>
+<li><a href="#boot.sending">3. Sending a Message</a></li>
+<li><a href="#boot.receiving">4. Receiving a Message</a></li>
+<li><a href="#boot.reading">5. Reading a Message</a></li>
+<li><a href="#boot.transactions">6. Transaction Support</a></li>
+<li><a href="#boot.additional-properties">7. Additional Pulsar Properties</a></li>
+</ul>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>pulsar-spring-boot-autoconfigure</code> module provides Spring Boot auto-configuration for Apache Pulsar support for Spring.</p>
+</div>
+<div class="paragraph">
+<p>Spring Boot will auto-configure and register the Apache Pulsar support for Spring components when <code>org.apache.pulsar:pulsar-spring</code> is on the classpath.</p>
+</div>
+<div class="paragraph">
+<p>There is the <code>pulsar-spring-boot-starter</code> starter for conveniently collecting the dependencies for use.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="boot.connecting"><a class="anchor" href="#boot.connecting"></a>1. Connecting to Pulsar</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you use the Pulsar starter, Spring Boot will auto-configure and register a <a href="https://pulsar.apache.org/api/client/4.2.x/org/apache/pulsar/client/api/PulsarClient.html" class="apiref"><code>PulsarClient</code></a> bean.</p>
+</div>
+<div class="paragraph">
+<p>By default, the application tries to connect to a local Pulsar instance at <code>pulsar://localhost:6650</code>.
+This can be adjusted by setting the <code>spring.pulsar.client.service-url</code> property to a different value.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The value must be a valid <a href="https://pulsar.apache.org/docs/client-libraries-java/#connection-urls">Pulsar Protocol</a> URL
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>You can configure the client by specifying any of the <code>spring.pulsar.client.*</code> prefixed application properties.</p>
+</div>
+<div class="paragraph">
+<p>If you need more control over the configuration, consider registering one or more <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarClientBuilderCustomizer.html" class="apiref"><code>PulsarClientBuilderCustomizer</code></a> beans.</p>
+</div>
+<div class="sect2">
+<h3 id="boot.connecting.auth"><a class="anchor" href="#boot.connecting.auth"></a>1.1. Authentication</h3>
+<div class="paragraph">
+<p>To connect to a Pulsar cluster that requires authentication, you need to specify which authentication plugin to use by setting the <code>pluginClassName</code> and any parameters required by the plugin.
+You can set the parameters as a map of parameter names to parameter values.
+The following example shows how to configure the <code>AuthenticationOAuth2</code> plugin.</p>
+</div>
+<div id="_tabs_1" class="openblock tabs is-sync is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_1_properties" class="tab">
+<p>Properties</p>
+</li>
+<li id="_tabs_1_yaml" class="tab">
+<p>YAML</p>
+</li>
+</ul>
+</div>
+<div id="_tabs_1_properties--panel" class="tabpanel" aria-labelledby="_tabs_1_properties">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">spring.pulsar.client.authentication.plugin-class-name=org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2
+spring.pulsar.client.authentication.param.issuerUrl=https://auth.server.cloud/
+spring.pulsar.client.authentication.param.privateKey=file:///Users/some-key.json
+spring.pulsar.client.authentication.param.audience=urn:sn:acme:dev:my-instance</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_1_yaml--panel" class="tabpanel" aria-labelledby="_tabs_1_yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spring:
+  pulsar:
+    client:
+      authentication:
+        plugin-class-name: org.apache.pulsar.client.impl.auth.oauth2.AuthenticationOAuth2
+        param:
+          issuerUrl: https://auth.server.cloud/
+          privateKey: file:///Users/some-key.json
+          audience: urn:sn:acme:dev:my-instance</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You need to ensure that names defined under <code>spring.pulsar.client.authentication.param.*</code> exactly match those expected by your auth plugin (which is typically camel cased).
+Spring Boot will not attempt any kind of relaxed binding for these entries.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you want to configure the issuer url for the <code>AuthenticationOAuth2</code> auth plugin you must use <code>spring.pulsar.client.authentication.param.issuerUrl</code>.
+If you use other forms, such as <code>issuerurl</code> or <code>issuer-url</code>, the setting will not be applied to the plugin.</p>
+</div>
+<div class="paragraph">
+<p>This lack of relaxed binding also makes using environment variables for authentication parameters problematic because the case sensitivity is lost during translation.
+If you use environment variables for the parameters then you will need to follow <a href="pulsar/pulsar-client.html#client-authentication-env-vars" class="xref page">these steps</a> for it to work properly.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="boot.connecting.ssl"><a class="anchor" href="#boot.connecting.ssl"></a>1.2. SSL</h3>
+<div class="paragraph">
+<p>By default, Pulsar clients communicate with Pulsar services in plain text.
+You can follow <a href="pulsar/pulsar-client.html#tls-encryption" class="xref page">these steps</a> to enable TLS encryption.</p>
+</div>
+<div class="paragraph">
+<p>For complete details on the client and authentication see <a href="pulsar/pulsar-client.html" class="xref page">Pulsar Client</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="boot.admin"><a class="anchor" href="#boot.admin"></a>2. Connecting to Pulsar Administration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache Pulsar support for Spring&#8217;s <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarAdministration.html" class="apiref"><code>PulsarAdministration</code></a> client is also auto-configured.</p>
+</div>
+<div class="paragraph">
+<p>By default, the application tries to connect to a local Pulsar instance at <code>http://localhost:8080</code>.
+This can be adjusted by setting the <code>spring.pulsar.admin.service-url</code> property to a different value in the form <code>(http|https)://&lt;host&gt;:&lt;port&gt;</code>.</p>
+</div>
+<div class="paragraph">
+<p>If you need more control over the configuration, consider registering one or more <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarAdminBuilderCustomizer.html" class="apiref"><code>PulsarAdminBuilderCustomizer</code></a> beans.</p>
+</div>
+<div class="sect2">
+<h3 id="boot.admin.auth"><a class="anchor" href="#boot.admin.auth"></a>2.1. Authentication</h3>
+<div class="paragraph">
+<p>When accessing a Pulsar cluster that requires authentication, the admin client requires the same security configuration as the regular Pulsar client.
+You can use the aforementioned <a href="#boot.connecting.auth">authentication configuration</a> by replacing <code>spring.pulsar.client.authentication</code> with <code>spring.pulsar.admin.authentication</code>.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To create a topic on startup, add a bean of type <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarTopic.html" class="apiref"><code>PulsarTopic</code></a>.
+If the topic already exists, the bean is ignored.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="boot.sending"><a class="anchor" href="#boot.sending"></a>3. Sending a Message</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Spring&#8217;s <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarTemplate.html" class="apiref"><code>PulsarTemplate</code></a> is auto-configured, and you can use it to send messages, as shown in the following example:</p>
+</div>
+<div id="_tabs_2" class="openblock tabs is-sync is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_2_java" class="tab">
+<p>Java</p>
+</li>
+<li id="_tabs_2_kotlin" class="tab">
+<p>Kotlin</p>
+</li>
+</ul>
+</div>
+<div id="_tabs_2_java--panel" class="tabpanel" aria-labelledby="_tabs_2_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><span class="fold-block is-hidden-folded">import org.apache.pulsar.spring.core.PulsarTemplate;
+
+import org.springframework.stereotype.Component;
+
+</span><span class="fold-block">@Component
+public class MyBean {
+
+	private final PulsarTemplate&lt;String&gt; pulsarTemplate;
+
+	public MyBean(PulsarTemplate&lt;String&gt; pulsarTemplate) {
+		this.pulsarTemplate = pulsarTemplate;
+	}
+
+	public void someMethod() {
+		this.pulsarTemplate.send("someTopic", "Hello");
+	}
+
+}</span></code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_2_kotlin--panel" class="tabpanel" aria-labelledby="_tabs_2_kotlin">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="kotlin"><span class="fold-block is-hidden-folded">import org.apache.pulsar.client.api.PulsarClientException
+import org.apache.pulsar.spring.core.PulsarTemplate
+import org.springframework.stereotype.Component
+
+</span><span class="fold-block">@Component
+class MyBean(private val pulsarTemplate: PulsarTemplate&lt;String&gt;) {
+
+	@Throws(PulsarClientException::class)
+	fun someMethod() {
+		pulsarTemplate.send("someTopic", "Hello")
+	}
+
+}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarTemplate.html" class="apiref"><code>PulsarTemplate</code></a> relies on a <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarProducerFactory.html" class="apiref"><code>PulsarProducerFactory</code></a> to create the underlying Pulsar producer.
+Spring Boot auto-configuration also provides this producer factory, which by default, caches the producers that it creates.
+You can configure the producer factory and cache settings by specifying any of the <code>spring.pulsar.producer.*</code> and <code>spring.pulsar.producer.cache.*</code> prefixed application properties.</p>
+</div>
+<div class="paragraph">
+<p>If you need more control over the producer factory configuration, consider registering one or more <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/ProducerBuilderCustomizer.html" class="apiref"><code>ProducerBuilderCustomizer</code></a> beans.
+These customizers are applied to all created producers.
+You can also pass in a <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/ProducerBuilderCustomizer.html" class="apiref"><code>ProducerBuilderCustomizer</code></a> when sending a message to only affect the current producer.</p>
+</div>
+<div class="paragraph">
+<p>If you need more control over the message being sent, you can pass in a <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/TypedMessageBuilderCustomizer.html" class="apiref"><code>TypedMessageBuilderCustomizer</code></a> when sending a message.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="boot.receiving"><a class="anchor" href="#boot.receiving"></a>4. Receiving a Message</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When the Apache Pulsar infrastructure is present, any bean can be annotated with <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarListener.html" class="apiref"><code>@PulsarListener</code></a> to create a listener endpoint.
+The following component creates a listener endpoint on the <code>someTopic</code> topic:</p>
+</div>
+<div id="_tabs_3" class="openblock tabs is-sync is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_3_java" class="tab">
+<p>Java</p>
+</li>
+<li id="_tabs_3_kotlin" class="tab">
+<p>Kotlin</p>
+</li>
+</ul>
+</div>
+<div id="_tabs_3_java--panel" class="tabpanel" aria-labelledby="_tabs_3_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><span class="fold-block is-hidden-folded">import org.apache.pulsar.spring.annotation.PulsarListener;
+
+import org.springframework.stereotype.Component;
+
+</span><span class="fold-block">@Component
+public class MyBean {
+
+	@PulsarListener(topics = "someTopic")
+	public void processMessage(String content) {
+		// ...
+	}
+
+}</span></code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_3_kotlin--panel" class="tabpanel" aria-labelledby="_tabs_3_kotlin">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="kotlin"><span class="fold-block is-hidden-folded">import org.apache.pulsar.spring.annotation.PulsarListener
+import org.springframework.stereotype.Component
+
+</span><span class="fold-block">@Component
+class MyBean {
+
+	@PulsarListener(topics = ["someTopic"])
+	fun processMessage(content: String?) {
+		// ...
+	}
+
+}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Spring Boot auto-configuration provides all the components necessary for <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarListener.html" class="apiref"><code>PulsarListener</code></a>, such as the <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/config/PulsarListenerContainerFactory.html" class="apiref"><code>PulsarListenerContainerFactory</code></a> and the consumer factory it uses to construct the underlying Pulsar consumers.
+You can configure these components by specifying any of the <code>spring.pulsar.listener.*</code> and <code>spring.pulsar.consumer.*</code> prefixed application properties.</p>
+</div>
+<div class="paragraph">
+<p>If you need more control over the configuration of the consumer factory, consider registering one or more <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/ConsumerBuilderCustomizer.html" class="apiref"><code>ConsumerBuilderCustomizer</code></a> beans.
+These customizers are applied to all consumers created by the factory, and therefore all <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarListener.html" class="apiref"><code>@PulsarListener</code></a> instances.
+You can also customize a single listener by setting the <code>consumerCustomizer</code> attribute of the <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarListener.html" class="apiref"><code>@PulsarListener</code></a> annotation.</p>
+</div>
+<div class="paragraph">
+<p>If you need more control over the actual container factory configuration, consider registering one or more <code>PulsarContainerFactoryCustomizer&lt;ConcurrentPulsarListenerContainerFactory&lt;?&gt;&gt;</code> beans.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="boot.reading"><a class="anchor" href="#boot.reading"></a>5. Reading a Message</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Pulsar reader interface enables applications to manually manage cursors.
+When you use a reader to connect to a topic you need to specify which message the reader begins reading from when it connects to a topic.</p>
+</div>
+<div class="paragraph">
+<p>When the Apache Pulsar infrastructure is present, any bean can be annotated with <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarReader.html" class="apiref"><code>@PulsarReader</code></a> to consume messages using a reader.
+The following component creates a reader endpoint that starts reading messages from the beginning of the <code>someTopic</code> topic:</p>
+</div>
+<div id="_tabs_4" class="openblock tabs is-sync is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_4_java" class="tab">
+<p>Java</p>
+</li>
+<li id="_tabs_4_kotlin" class="tab">
+<p>Kotlin</p>
+</li>
+</ul>
+</div>
+<div id="_tabs_4_java--panel" class="tabpanel" aria-labelledby="_tabs_4_java">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java"><span class="fold-block is-hidden-folded">import org.apache.pulsar.spring.annotation.PulsarReader;
+
+import org.springframework.stereotype.Component;
+
+</span><span class="fold-block">@Component
+public class MyBean {
+
+	@PulsarReader(topics = "someTopic", startMessageId = "earliest")
+	public void processMessage(String content) {
+		// ...
+	}
+
+}</span></code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_4_kotlin--panel" class="tabpanel" aria-labelledby="_tabs_4_kotlin">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-kotlin hljs" data-lang="kotlin"><span class="fold-block is-hidden-folded">import org.apache.pulsar.spring.annotation.PulsarReader
+import org.springframework.stereotype.Component
+
+</span><span class="fold-block">@Component
+class MyBean {
+
+	@PulsarReader(topics = ["someTopic"], startMessageId = "earliest")
+	fun processMessage(content: String?) {
+		// ...
+	}
+
+}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>The <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarReader.html" class="apiref"><code>@PulsarReader</code></a> relies on a <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarReaderFactory.html" class="apiref"><code>PulsarReaderFactory</code></a> to create the underlying Pulsar reader.
+Spring Boot auto-configuration provides this reader factory which can be customized by setting any of the <code>spring.pulsar.reader.*</code> prefixed application properties.</p>
+</div>
+<div class="paragraph">
+<p>If you need more control over the configuration of the reader factory, consider registering one or more <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/ReaderBuilderCustomizer.html" class="apiref"><code>ReaderBuilderCustomizer</code></a> beans.
+These customizers are applied to all readers created by the factory, and therefore all <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarReader.html" class="apiref"><code>@PulsarReader</code></a> instances.
+You can also customize a single listener by setting the <code>readerCustomizer</code> attribute of the <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarReader.html" class="apiref"><code>@PulsarReader</code></a> annotation.</p>
+</div>
+<div class="paragraph">
+<p>If you need more control over the actual container factory configuration, consider registering one or more <code>PulsarContainerFactoryCustomizer&lt;DefaultPulsarReaderContainerFactory&lt;?&gt;&gt;</code> beans.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For more details on any of the above components and to discover other available features, see the <a href="index.html" class="xref page">reference documentation</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="boot.transactions"><a class="anchor" href="#boot.transactions"></a>6. Transaction Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache Pulsar support for Spring provides transaction support when using <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarTemplate.html" class="apiref"><code>PulsarTemplate</code></a> and <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarListener.html" class="apiref"><code>@PulsarListener</code></a>.</p>
+</div>
+<div class="paragraph">
+<p>Setting the <code>spring.pulsar.transaction.enabled</code> property to <code>true</code> will:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Configure a <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/transaction/PulsarTransactionManager.html" class="apiref"><code>PulsarTransactionManager</code></a> bean</p>
+</li>
+<li>
+<p>Enable transaction support for <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarTemplate.html" class="apiref"><code>PulsarTemplate</code></a></p>
+</li>
+<li>
+<p>Enable transaction support for <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarListener.html" class="apiref"><code>@PulsarListener</code></a> methods</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>transactional</code> attribute of <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/annotation/PulsarListener.html" class="apiref"><code>@PulsarListener</code></a> can be used to fine-tune when transactions should be used with listeners.</p>
+</div>
+<div class="paragraph">
+<p>For more control of the Apache Pulsar support for Spring transaction features you should define your own <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/core/PulsarTemplate.html" class="apiref"><code>PulsarTemplate</code></a> and/or <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/config/ConcurrentPulsarListenerContainerFactory.html" class="apiref"><code>ConcurrentPulsarListenerContainerFactory</code></a> beans.
+You can also define a <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/transaction/PulsarAwareTransactionManager.html" class="apiref"><code>PulsarAwareTransactionManager</code></a> bean if the default auto-configured <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/transaction/PulsarTransactionManager.html" class="apiref"><code>PulsarTransactionManager</code></a> is not suitable.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="boot.additional-properties"><a class="anchor" href="#boot.additional-properties"></a>7. Additional Pulsar Properties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The properties supported by auto-configuration are shown in the <a href="appendix/configuration-properties.html" class="xref page">Configuration Properties</a> appendix.
+Note that, for the most part, these properties (hyphenated or camelCase) map directly to the Apache Pulsar configuration properties.
+See the Apache Pulsar documentation for details.</p>
+</div>
+<div class="paragraph">
+<p>Only a subset of the properties supported by Pulsar are available directly through the <a href="https://pulsar.apache.org/pulsar-spring/api/org/apache/pulsar/spring/boot/autoconfigure/PulsarProperties.html" class="apiref"><code>PulsarProperties</code></a> class.
+If you wish to tune the auto-configured components with additional properties that are not directly supported, you can use the customizer supported by each aforementioned component.</p>
+</div>
+</div>
+</div>
+</article>  </div>
+</main>
+<div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true">
+            <main class="modal__content" id="modal-versions-content">
+              <button data-micromodal-close class="modal-versions-close">
+                <svg width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1h{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title/><g id="cross"><line class="cls-1h" x1="7" x2="25" y1="7" y2="25"/><line class="cls-1h" x1="7" x2="25" y1="25" y2="7"/></g></svg>
+              </button>
+              <div class="colset">
+                <div class="col-left">
+
+                  <ul class="nav-versions">
+                      <li class="component">
+                        <div>
+                          <a class="title" href="index.html">Apache Pulsar support for Spring</a>
+                        </div>                        <div class="version-item">
+                          <div>
+                            <button class="version-toggle" type="button">
+                              <span></span>
+                              Snapshot
+                            </button>
+                          </div>
+                          <ul class="versions">
+  <li class="version">
+    <a href="index.html">
+      3.0.0-M1-SNAPSHOT
+    </a>
+  </li>
+</ul>                        </div>
+                        
+                      </li>
+                  </ul>
+                </div>
+                <div class="col-right">
+                  <ul class="projects">
+  <li>
+    Related Documentation
+    <ul class="projects-list">
+      <li><a href="https://pulsar.apache.org/docs/">Apache Pulsar</a></li>
+      <li><a href="https://docs.spring.io/spring-framework/reference/">Spring Framework</a></li>
+      <li><a href="https://docs.spring.io/spring-boot/">Spring Boot</a></li>
+      <li><a href="https://docs.spring.io/spring-cloud-stream/reference/">Spring Cloud Stream</a></li>
+    </ul>
+  </li>
+</ul>
+                </div>
+              </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+</div>
+<footer class="footer pulsar-footer">
+  <div class="pulsar-footer-inner">
+    <div class="pulsar-footer-brand">
+      <img src="./_/img/pulsar-white.svg" alt="Apache Pulsar" width="127" />
+      <nav class="pulsar-footer-links">
+        <a href="https://pulsar.apache.org/">Apache Pulsar</a>
+        <a href="https://pulsar.apache.org/docs/">Pulsar Docs</a>
+        <a href="https://github.com/apache/pulsar-spring">GitHub</a>
+      </nav>
+    </div>
+    <div class="pulsar-footer-copyright">
+      <div class="pulsar-footer-asf">
+        <img src="./_/img/feather-logo-white.svg" alt="" width="20" />
+        <span>The Apache Software Foundation</span>
+      </div>
+      <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation. Spring is a trademark of Broadcom Inc. and/or its subsidiaries.</p>
+    </div>
+  </div>
+</footer>
+<script src="./_/js/vendor/lunr.js"></script>
+<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
+<script async src="./search-index.js"></script>
+<script src="./_/js/vendor/import.js"></script>
+<script src="./_/js/site.js"></script>
+<script async src="./_/js/vendor/highlight.js"></script>
+<script async src="./_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
+  </body>
+</html>

@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring Cloud Stream Binder for Apache Pulsar :: Apache Pulsar support for Spring</title>
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <script>
+!function (theme, navWidth) {
+  if (theme === 'dark') document.documentElement.classList.add('dark-theme')
+  if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
+  localStorage && localStorage.getItem('nav-width'))
+    </script>
+    <link rel="stylesheet" href="./_/css/site.css">
+    <link rel="stylesheet" href="./_/css/vendor/search.css">
+    <link rel="stylesheet" href="./_/css/vendor/page-search.css">
+    <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
+
+    <link rel="stylesheet" href="./_/css/pulsar.css">
+    <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://pulsar.apache.org/">
+        <img id="pulsarlogo" class="block" src="./_/img/logo-black.svg" alt="Apache Pulsar" />
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://pulsar.apache.org/docs/">Pulsar Docs</a>
+        <a class="navbar-item" href="https://pulsar.apache.org/community/">Community</a>
+        <a class="navbar-item" href="https://github.com/apache/pulsar-spring">GitHub</a>
+        <a class="navbar-item pulsar-download" href="https://pulsar.apache.org/download/">Download</a>
+      </div>
+    </div>
+    <div class="pulsar-search">
+      <input id="search-input" type="search" placeholder="Search" aria-label="Search the documentation" autocomplete="off" />
+    </div>
+    <label class="theme-toggler">
+      <input type="checkbox" id="switch-theme-checkbox" name="switch-theme-checkbox" aria-label="Dark theme" />
+      <span class="icon">
+        <svg class="sun" aria-hidden="true" viewBox="0 0 16 16">
+          <circle cx="8" cy="8" r="3.5" fill="currentColor"></circle>
+          <path d="M8 0v2.5M8 13.5V16M0 8h2.5M13.5 8H16M2.3 2.3l1.8 1.8M11.9 11.9l1.8 1.8M2.3 13.7l1.8-1.8M11.9 4.1l1.8-1.8" stroke="currentColor" stroke-width="1.5"></path>
+        </svg>
+        <svg class="moon" aria-hidden="true" viewBox="0 0 16 16">
+          <path d="M13 11A6.5 6.5 0 0 1 5 3a6.5 6.5 0 1 0 8 8z" fill="currentColor"></path>
+        </svg>
+      </span>
+      <span class="text">Theme</span>
+    </label>
+  </nav>
+</header>
+<script>
+document.getElementById('switch-theme-checkbox').parentElement.classList.toggle('active', document.documentElement.classList.contains('dark-theme'))
+</script>
+<div class="body">
+<div class="nav-container" data-component="pulsar" data-version="3.0.0-M1">
+  <aside class="nav">
+    <div class="panels">
+      <div class="nav-panel-menu is-active" data-panel="menu">
+        <nav class="nav-menu">
+<div class="context">
+  <span class="title">Apache Pulsar support for Spring</span>
+  <span class="version">3.0.0-M1-SNAPSHOT</span>
+  <button class="browse-version" id="browse-version">
+    <svg
+      height="24px"
+      id="Layer_1"
+      style="enable-background:new 0 0 512 512;"
+      version="1.1"
+      viewBox="0 0 512 512"
+      width="24px"
+      xml:space="preserve"
+    ><g><path
+          d="M256,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S273.7,224,256,224L256,224z"
+        ></path><path
+          d="M128.4,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S146,224,128.4,224L128.4,224z"
+        ></path><path
+          d="M384,224c-17.7,0-32,14.3-32,32s14.3,32,32,32s32-14.3,32-32S401.7,224,384,224L384,224z"
+        ></path></g></svg>
+  </button>
+  </div><ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="whats-new.html">What&#8217;s new?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="migration.html">Migration from Spring&#8217;s Pulsar support</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link"  href="intro.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="intro/system-requirements.html">System Requirements</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="intro/building.html">Building the Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="intro/getting-help.html">Getting Help</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link"  href="pulsar.html">Using Apache Pulsar support for Spring</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/quick-tour.html">Quick Tour</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/pulsar-client.html">Pulsar Client</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/message-production.html">Message Production</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/message-consumption.html">Message Consumption</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/publishing-consuming-partitioned-topics.html">Publishing and Consuming Partitioned Topics</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/transactions.html">Transactions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="tombstones.html">Null Payloads and Log Compaction of 'Tombstone' Records</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="spring-boot.html">Spring Boot Auto-configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="topic-resolution.html">Topic Resolution</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="default-tenant-namespace.html">Default Tenant / Namespace</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="custom-object-mapper.html">Custom Object Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="pulsar-admin.html">Pulsar Administration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="pulsar-function.html">Pulsar Functions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="observability.html">Observability</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link"  href="cloud-stream-binder.html">Spring Cloud Stream Binder for Apache Pulsar</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="other-resources.html">Other Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Appendices</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/configuration-properties.html">Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/snapshot-versions.html">Snapshot Versions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/native-image.html">GraalVM Native Image Support</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+          <div class="toggle-sm">
+            <button id="nav-toggle-2" class="nav-toggle"></button>
+          </div>
+        </nav>
+      </div>
+      <div class="nav-collapse">
+        <button id="nav-collapse-toggle"><span></span></button>        
+      </div>
+    </div>
+    <div class="nav-resize"></div>
+  </aside>
+</div>
+<script>
+!function (sidebar) {
+  if (sidebar) {
+    document.body.classList.add('nav-sm')
+  }
+}(localStorage && localStorage.getItem('sidebar') === 'close')
+</script><main class="article">
+<div class="toolbar" role="navigation">
+  <button id="nav-toggle-1" class="nav-toggle"></button>
+</div>
+  <div class="content">
+<aside class="sidebar">
+  <div class="content">
+    <div
+      class="toc"
+      data-title="Spring Cloud Stream Binder for Apache Pulsar"
+      data-levels="2"
+    >
+      <div class="toc-menu"></div>
+    </div>
+    <div class="sidebar-links">
+        <a href="https://github.com/apache/pulsar-spring/edit/main/pulsar-spring-docs/src/main/antora/modules/ROOT/pages/cloud-stream-binder.adoc">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          ><path
+              d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"
+            ></path></svg>
+          Edit this Page
+        </a>
+              <a href="https://github.com/apache/pulsar-spring" title="GitHub">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="512px"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 512 512"
+            width="512px"
+          ><style type="text/css"><![CDATA[
+              .st0{fill-rule:evenodd;clip-rule:evenodd;} ]]></style><g><path
+                class="st0"
+                d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"
+              ></path></g></svg>
+          GitHub Project
+        </a>
+    </div>
+  </div>
+</aside>
+<article class="doc">
+<div class="breadcrumbs-container">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+    <ul>
+      <li><a href="index.html">Apache Pulsar support for Spring</a></li>
+      <li>Reference</li>
+      <li><a href="cloud-stream-binder.html">Spring Cloud Stream Binder for Apache Pulsar</a></li>
+    </ul>
+  </nav>
+</div><h1 id="page-title" class="page">Spring Cloud Stream Binder for Apache Pulsar</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#usage">1. Usage</a></li>
+<li><a href="#overview">2. Overview</a></li>
+<li><a href="#message-conversion-in-binder-based-applications">3. Message Conversion in Binder-based Applications</a>
+<ul class="sectlevel2">
+<li><a href="#using-native-conversion-in-pulsar-using-pulsar-schema">3.1. Using Native Conversion in Pulsar using Pulsar Schema</a></li>
+<li><a href="#message-header-conversion">3.2. Message Header Conversion</a>
+<ul class="sectlevel3">
+<li><a href="#custom-header-mapper">3.2.1. Custom Header Mapper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#using-pulsar-properties-in-the-binder">4. Using Pulsar Properties in the Binder</a>
+<ul class="sectlevel2">
+<li><a href="#pulsar-properties-links">4.1. Resources for Pulsar Binder Properties</a></li>
+</ul>
+</li>
+<li><a href="#pulsar-topic-provisioner">5. Pulsar Topic Provisioner</a>
+<ul class="sectlevel2">
+<li><a href="#specifying-partition-count-when-creating-the-topic">5.1. Specifying partition count when creating the topic</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache Pulsar support for Spring provides a binder for Spring Cloud Stream that we can use to build event-driven microservices using pub-sub paradigms.
+In this section, we will go through the basic details of this binder.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="usage"><a class="anchor" href="#usage"></a>1. Usage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We need to include the following dependency on your application to use Apache Pulsar binder for Spring Cloud Stream.</p>
+</div>
+<div id="_tabs_1" class="openblock tabs is-sync is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="_tabs_1_maven" class="tab">
+<p>Maven</p>
+</li>
+<li id="_tabs_1_gradle" class="tab">
+<p>Gradle</p>
+</li>
+</ul>
+</div>
+<div id="_tabs_1_maven--panel" class="tabpanel" aria-labelledby="_tabs_1_maven">
+<div class="listingblock primary">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.pulsar&lt;/groupId&gt;
+        &lt;artifactId&gt;pulsar-spring-cloud-stream-binder&lt;/artifactId&gt;
+        &lt;version&gt;3.0.0-M1-SNAPSHOT&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre>
+</div>
+</div>
+</div>
+<div id="_tabs_1_gradle--panel" class="tabpanel" aria-labelledby="_tabs_1_gradle">
+<div class="listingblock secondary">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">dependencies {
+    implementation 'org.apache.pulsar:pulsar-spring-cloud-stream-binder:3.0.0-M1-SNAPSHOT'
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="anchor" href="#overview"></a>2. Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Spring Cloud Stream binder for Apache Pulsar allows the applications to focus on business logic rather than dealing with the lower-level details of managing and maintaining Pulsar.
+The binder takes care of all those details for the application developer.
+Spring Cloud Stream brings a powerful programming model based on <a href="https://spring.io/projects/spring-cloud-function">Spring Cloud Function</a> that allows the app developer to write complex event-driven applications using a functional style.
+Applications can start from a middleware-neutral manner and then map Pulsar topics as destinations in Spring Cloud Stream through Spring Boot configuration properties.
+Spring Cloud Stream is built on top of Spring Boot, and when writing an event-driven microservice using Spring Cloud Stream, you are essentially writing a Boot application.
+Here is a straightforward Spring Cloud Stream application.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@SpringBootApplication
+public class PulsarSpringBinderSampleApp {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	public static void main(String[] args) {
+		SpringApplication.run(PulsarSpringBinderSampleApp.class, args);
+	}
+
+	@Bean
+	public Supplier&lt;Time&gt; timeSupplier() {
+		return () -&gt; new Time(String.valueOf(System.currentTimeMillis()));
+	}
+
+	@Bean
+	public Function&lt;Time, EnhancedTime&gt; timeProcessor() {
+		return (time) -&gt; {
+			EnhancedTime enhancedTime = new EnhancedTime(time, "5150");
+			this.logger.info("PROCESSOR: {} --&gt; {}", time, enhancedTime);
+			return enhancedTime;
+		};
+	}
+
+	@Bean
+	public Consumer&lt;EnhancedTime&gt; timeLogger() {
+		return (time) -&gt; this.logger.info("SINK:      {}", time);
+	}
+
+	record Time(String time) {
+	}
+
+	record EnhancedTime(Time time, String extra) {
+	}
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above sample application, a full-blown Spring Boot application, deserves a few explanations. However, on a first pass, you can see that this is just plain Java and a few Spring and Spring Boot annotations.
+We have three <code>Bean</code> methods here - a <code>java.util.function.Supplier</code>, a <code>java.util.function.Function</code>, and finally, a <code>java.util.function.Consumer</code>.
+The supplier produces the current time in milliseconds, the function takes this time and then enhances it by adding some random data, and then the consumer logs the enhanced time.</p>
+</div>
+<div class="paragraph">
+<p>We omitted all the imports for brevity, but nothing Spring Cloud Stream specific in the entire application.
+How does it become a Spring Cloud Stream application that interacts with Apache Pulsar?
+You must include the above dependency for the binder in the application.
+Once that dependency is added, you must provide the following configuration properties.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spring:
+  cloud:
+    function:
+      definition: timeSupplier;timeProcessor;timeLogger;
+    stream:
+      bindings:
+        timeProcessor-in-0:
+          destination: timeSupplier-out-0
+        timeProcessor-out-0:
+          destination: timeProcessor-out-0
+        timeLogger-in-0:
+          destination: timeProcessor-out-0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this, the above Spring Boot application has become an end-to-end event-driven application based on Spring Cloud Stream.
+Because we have the Pulsar binder on the classpath, the application interacts with Apache Pulsar.
+If there is only one function in the application, then we don&#8217;t need to tell Spring Cloud Stream to activate the function for execution since it does that by default.
+If there is more than one such function in the application, as in our example, we need to instruct Spring Cloud Stream which functions we would like to activate.
+In our case, we need all of them to be activated, and we do that through the <code>spring.cloud.function.definition</code> property.
+The bean name becomes part of the Spring Cloud Stream binding name by default.
+A binding is a fundamentally abstract concept in Spring Cloud Stream, using which the framework communicates with the middleware destination.
+Almost everything that Spring Cloud Stream does occurs over a concrete binding.
+A supplier has only an output binding; functions have input and output bindings, and consumers have only input binding.
+Let&#8217;s take as an example our supplier bean - <code>timeSupplier.</code>
+The default binding name for this supplier will be <code>timeSupplier-out-0</code>.
+Similarly, the default binding names for the <code>timeProcessor</code> function will be <code>timeProcessor-in-0</code> on the inbound and <code>timeProcessor-out-0</code> on the outbound.
+Please refer to the <a href="https://docs.spring.io/spring-cloud-stream/reference/">Spring Cloud Stream reference docs</a> for details on how you can change the default binding names.
+In most situations, using the default binding names is enough.
+We set the destination on the binding names, as shown above.
+If a destination is not provided, the binding name becomes the value for the destination as in the case of <code>timeSupplier-out-0</code>.</p>
+</div>
+<div class="paragraph">
+<p>When running the above app, you should see that the supplier executes every second, which is then consumed by the function and enhances the time consumed by the logger consumer.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+See the <a href="https://github.com/apache/pulsar-spring/tree/main/pulsar-spring-sample-apps/sample-pulsar-binder">binder sample application</a> for a complete, runnable example.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="message-conversion-in-binder-based-applications"><a class="anchor" href="#message-conversion-in-binder-based-applications"></a>3. Message Conversion in Binder-based Applications</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In the above sample application, we provided no schema information for message conversion.
+That is because, by default, Spring Cloud Stream uses its message conversion mechanism using the messaging support established in Spring Framework through the Spring Messaging project.
+Unless specified, Spring Cloud Stream uses <code>application/json</code> as the <code>content-type</code> for message conversion on both inbound and outbound bindings.
+On the outbound, the data is serialized as <code>byte[],</code> and the Pulsar binder then uses <code>Schema.BYTES</code> to send it over the wire to the Pulsar topic.
+Similarly, on the inbound, the data is consumed as <code>byte[]</code> from the Pulsar topic and then converted into the target type using the proper message converter.</p>
+</div>
+<div class="sect2">
+<h3 id="using-native-conversion-in-pulsar-using-pulsar-schema"><a class="anchor" href="#using-native-conversion-in-pulsar-using-pulsar-schema"></a>3.1. Using Native Conversion in Pulsar using Pulsar Schema</h3>
+<div class="paragraph">
+<p>Although the default is to use the framework-provided message conversion, Spring Cloud Stream allows each binder to determine how the message should be converted.
+Suppose the application chooses to go this route. In that case, Spring Cloud Stream steers clear of using any Spring-provided message conversion facility and passes around the data it receives or produces.
+This feature in Spring Cloud Stream is known as native encoding on the producer side and native decoding on the consumer side. This means that the encoding and decoding natively occur on the target middleware, in our case, on Apache Pulsar.
+For the above application, we can use the following configuration to bypass the framework conversion and uses native encoding and decoding.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spring:
+  cloud:
+    stream:
+      bindings:
+        timeSupplier-out-0:
+          producer:
+            use-native-encoding: true
+        timeProcessor-in-0:
+          destination: timeSupplier-out-0
+          consumer:
+            use-native-decoding: true
+        timeProcessor-out-0:
+          destination: timeProcessor-out-0
+          producer:
+            use-native-encoding: true
+        timeLogger-in-0:
+          destination: timeProcessor-out-0
+          consumer:
+            use-native-decoding: true
+      pulsar:
+        bindings:
+          timeSupplier-out-0:
+            producer:
+              schema-type: JSON
+              message-type: org.apache.pulsar.spring.sample.binder.PulsarSpringBinderSampleApp.Time
+          timeProcessor-in-0:
+            consumer:
+              schema-type: JSON
+              message-type: org.apache.pulsar.spring.sample.binder.PulsarSpringBinderSampleApp.Time
+          timeProcessor-out-0:
+            producer:
+              schema-type: AVRO
+              message-type: org.apache.pulsar.spring.sample.binder.PulsarSpringBinderSampleApp.EnhancedTime
+          timeLogger-in-0:
+            consumer:
+              schema-type: AVRO
+              message-type: org.apache.pulsar.spring.sample.binder.PulsarSpringBinderSampleApp.EnhancedTime</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The property to enable native encoding on the producer side is a binding level property from the core Spring Cloud Stream.
+You set it on the producer binding - <code>spring.cloud.stream.bindings.&lt;binding-name&gt;.producer.use-native-encoding</code> and set this to <code>true.</code>
+Similarly, use - <code>spring.cloud.stream.bindings.&lt;binding-name&gt;.consumer.use-native-decoding</code> for consumer bindings and set it to <code>true.</code>
+If we decide to use native encoding and decoding, in the case of Pulsar, we need to set the corresponding schema and the underlying message type information.
+This information is provided as extended binding properties.
+As you can see above in the configuration, the properties are - <code>spring.cloud.stream.pulsar.bindings.&lt;binding-name&gt;.producer|consumer.schema-type</code> for schema information and <code>spring.cloud.stream.pulsar.bindings.&lt;binding-name&gt;.producer|consumer.message-type</code> for the actual target type.
+If you have both keys and values on the message, you can use <code>message-key-type</code> and <code>message-type</code> to specify their target types.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+Any configured custom schema mappings will be consulted when the <code>schema-type</code> property is omitted.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-header-conversion"><a class="anchor" href="#message-header-conversion"></a>3.2. Message Header Conversion</h3>
+<div class="paragraph">
+<p>Each message typically has header information that needs to be carried along as the message traverses between Pulsar and Spring Messaging via Spring Cloud Stream input and output bindings.
+To support this traversal, the framework handles the necessary message header conversion.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="pulsar/message-consumption.html#pulsar-headers" class="xref page">Pulsar Headers</a> for more details.</p>
+</div>
+<div class="sect3">
+<h4 id="custom-header-mapper"><a class="anchor" href="#custom-header-mapper"></a>3.2.1. Custom Header Mapper</h4>
+<div class="paragraph">
+<p>The Pulsar binder is configured with a default header mapper that can be overridden by providing your own <code>PulsarHeaderMapper</code> bean.</p>
+</div>
+<div class="paragraph">
+<p>In the following example, a JSON header mapper is configured that:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>maps all inbound headers (except those with keys &#8220;top&#8221; or &#8220;secret&#8221;)</p>
+</li>
+<li>
+<p>maps outbound headers (except those with keys &#8220;id&#8221;, &#8220;timestamp&#8221;, or &#8220;userId&#8221;)</p>
+</li>
+<li>
+<p>only trusts objects in the &#8220;com.acme&#8221; package for outbound deserialization</p>
+</li>
+<li>
+<p>de/serializes any &#8220;com.acme.Money&#8221; header values w/ simple <code>toString()</code> encoding</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Bean
+public PulsarHeaderMapper customPulsarHeaderMapper() {
+    return JsonPulsarHeaderMapper.builder()
+            .inboundPatterns("!top", "!secret", "*")
+            .outboundPatterns("!id", "!timestamp", "!userId", "*")
+            .trustedPackages("com.acme")
+            .toStringClasses("com.acme.Money")
+            .build();
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="using-pulsar-properties-in-the-binder"><a class="anchor" href="#using-pulsar-properties-in-the-binder"></a>4. Using Pulsar Properties in the Binder</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The binder uses basic components from Apache Pulsar support for Spring to build its producer and consumer bindings.
+Since binder-based applications are Spring Boot applications, binder, by default, uses the Spring Boot autoconfiguration for Apache Pulsar support for Spring.
+Therefore, all Pulsar Spring Boot properties available at the core framework level are also available through the binder.
+For example, you can use properties with the prefix <code>spring.pulsar.producer&#8230;&#8203;</code>, <code>spring.pulsar.consumer&#8230;&#8203;</code> etc.
+In addition, you can also set these Pulsar properties at the binder level.
+For instance, this will also work - <code>spring.cloud.stream.pulsar.binder.producer&#8230;&#8203;</code> or <code>spring.cloud.stream.pulsar.binder.consumer&#8230;&#8203;</code>.</p>
+</div>
+<div class="paragraph">
+<p>Either of the above approaches is fine, but when using properties like these, it is applied to the whole application.
+If you have multiple functions in the application, they all get the same properties.
+You can also set these Pulsar properties at the extended binding properties level to address this.
+Extended binding properties are applied at the binding itself.
+For instance, if you have an input and output binding, and both require a separate set of Pulsar properties, you must set them on the extended binding.
+The pattern for producer binding is <code>spring.cloud.stream.pulsar.bindings.&lt;output-binding-name&gt;.producer&#8230;&#8203;</code>.
+Similarly, for consumer binding, the pattern is <code>spring.cloud.stream.pulsar.bindings.&lt;input-binding-name&gt;.consumer&#8230;&#8203;</code>.
+This way, you can have a separate set of Pulsar properties applied for different bindings in the same application.</p>
+</div>
+<div class="paragraph">
+<p>The highest precedence is for extended binding properties.
+The precedence order of applying the properties in the binder is <code>extended binding properties &#8594; binder properties &#8594; Spring Boot properties.</code> (going from highest to lowest).</p>
+</div>
+<div class="sect2">
+<h3 id="pulsar-properties-links"><a class="anchor" href="#pulsar-properties-links"></a>4.1. Resources for Pulsar Binder Properties</h3>
+<div class="paragraph">
+<p>Following are some resources to rely upon for finding more about the properties available through the Pulsar binder.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring-cloud-stream-binder/src/main/java/org/apache/pulsar/spring/cloud/stream/binder/properties/ProducerConfigProperties.java">Pulsar producer binding configuration</a>.
+These properties need the <code>spring.cloud.stream.pulsar.bindings.&lt;binding-name&gt;.producer</code> prefix.
+All the Spring Boot provided <a href="appendix/configuration-properties.html" class="xref page">Pulsar producer properties</a> are also available through this configuration class.</p>
+</div>
+<div class="paragraph">
+<p><a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring-cloud-stream-binder/src/main/java/org/apache/pulsar/spring/cloud/stream/binder/properties/ConsumerConfigProperties.java">Pulsar consumer binding configuration</a>.
+These properties need the <code>spring.cloud.stream.pulsar.bindings.&lt;binding-name&gt;.consumer</code> prefix.
+All the Spring Boot provided <a href="appendix/configuration-properties.html" class="xref page">Pulsar consumer properties</a> are also available through this configuration class.</p>
+</div>
+<div class="paragraph">
+<p>For common Pulsar binder specific configuration properties, see <a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring-cloud-stream-binder/src/main/java/org/apache/pulsar/spring/cloud/stream/binder/properties/PulsarBinderConfigurationProperties.java">this</a>. These properties require a prefix of <code>spring.cloud.stream.pulsar.binder</code>.
+The above specified producer and consumer properties (including the Spring Boot ones) can be used at the binder using the <code>spring.cloud.stream.pulsar.binder.producer</code> or <code>spring.cloud.stream.pulsar.binder.consumer</code> prefix.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pulsar-topic-provisioner"><a class="anchor" href="#pulsar-topic-provisioner"></a>5. Pulsar Topic Provisioner</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Spring Cloud Stream binder for Apache Pulsar comes with an out-of-the-box provisioner for Pulsar topics.
+When running an application, if the necessary topics are absent, Pulsar will create the topics for you.
+However, this is a basic non-partitioned topic, and if you want advanced features like creating a partitioned topic, you can rely on the topic provisioner in the binder.
+Pulsar topic provisioner uses <code>PulsarAdministration</code> from the framework, which uses the <code>PulsarAdminBuilder.</code>
+For this reason, you need to set the <code>spring.pulsar.admin.service-url</code> property unless you are running Pulsar on the default server and port.</p>
+</div>
+<div class="sect2">
+<h3 id="specifying-partition-count-when-creating-the-topic"><a class="anchor" href="#specifying-partition-count-when-creating-the-topic"></a>5.1. Specifying partition count when creating the topic</h3>
+<div class="paragraph">
+<p>When creating the topic, you can set the partition count in two ways.
+First, you can set it at the binder level using the property <code>spring.cloud.stream.pulsar.binder.partition-count</code>.
+As we saw above, doing this way will make all the topics created by the application inherit this property.
+Suppose you want granular control at the binding level for setting partitions.
+In that case, you can set the <code>partition-count</code> property per binding using the format <code>spring.cloud.stream.pulsar.bindings.&lt;binding-name&gt;.producer|consumer.partition-count</code>.
+This way, various topics created by different functions in the same application will have different partitions based on the application requirements.</p>
+</div>
+</div>
+</div>
+</div>
+</article>  </div>
+</main>
+<div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true">
+            <main class="modal__content" id="modal-versions-content">
+              <button data-micromodal-close class="modal-versions-close">
+                <svg width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1h{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title/><g id="cross"><line class="cls-1h" x1="7" x2="25" y1="7" y2="25"/><line class="cls-1h" x1="7" x2="25" y1="25" y2="7"/></g></svg>
+              </button>
+              <div class="colset">
+                <div class="col-left">
+
+                  <ul class="nav-versions">
+                      <li class="component">
+                        <div>
+                          <a class="title" href="index.html">Apache Pulsar support for Spring</a>
+                        </div>                        <div class="version-item">
+                          <div>
+                            <button class="version-toggle" type="button">
+                              <span></span>
+                              Snapshot
+                            </button>
+                          </div>
+                          <ul class="versions">
+  <li class="version">
+    <a href="index.html">
+      3.0.0-M1-SNAPSHOT
+    </a>
+  </li>
+</ul>                        </div>
+                        
+                      </li>
+                  </ul>
+                </div>
+                <div class="col-right">
+                  <ul class="projects">
+  <li>
+    Related Documentation
+    <ul class="projects-list">
+      <li><a href="https://pulsar.apache.org/docs/">Apache Pulsar</a></li>
+      <li><a href="https://docs.spring.io/spring-framework/reference/">Spring Framework</a></li>
+      <li><a href="https://docs.spring.io/spring-boot/">Spring Boot</a></li>
+      <li><a href="https://docs.spring.io/spring-cloud-stream/reference/">Spring Cloud Stream</a></li>
+    </ul>
+  </li>
+</ul>
+                </div>
+              </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+</div>
+<footer class="footer pulsar-footer">
+  <div class="pulsar-footer-inner">
+    <div class="pulsar-footer-brand">
+      <img src="./_/img/pulsar-white.svg" alt="Apache Pulsar" width="127" />
+      <nav class="pulsar-footer-links">
+        <a href="https://pulsar.apache.org/">Apache Pulsar</a>
+        <a href="https://pulsar.apache.org/docs/">Pulsar Docs</a>
+        <a href="https://github.com/apache/pulsar-spring">GitHub</a>
+      </nav>
+    </div>
+    <div class="pulsar-footer-copyright">
+      <div class="pulsar-footer-asf">
+        <img src="./_/img/feather-logo-white.svg" alt="" width="20" />
+        <span>The Apache Software Foundation</span>
+      </div>
+      <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation. Spring is a trademark of Broadcom Inc. and/or its subsidiaries.</p>
+    </div>
+  </div>
+</footer>
+<script src="./_/js/vendor/lunr.js"></script>
+<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
+<script async src="./search-index.js"></script>
+<script src="./_/js/vendor/import.js"></script>
+<script src="./_/js/site.js"></script>
+<script async src="./_/js/vendor/highlight.js"></script>
+<script async src="./_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
+  </body>
+</html>

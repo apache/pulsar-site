@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configuration Properties :: Apache Pulsar support for Spring</title>
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <script>
+!function (theme, navWidth) {
+  if (theme === 'dark') document.documentElement.classList.add('dark-theme')
+  if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
+  localStorage && localStorage.getItem('nav-width'))
+    </script>
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../_/css/vendor/search.css">
+    <link rel="stylesheet" href="../_/css/vendor/page-search.css">
+    <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
+
+    <link rel="stylesheet" href="../_/css/pulsar.css">
+    <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://pulsar.apache.org/">
+        <img id="pulsarlogo" class="block" src="../_/img/logo-black.svg" alt="Apache Pulsar" />
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://pulsar.apache.org/docs/">Pulsar Docs</a>
+        <a class="navbar-item" href="https://pulsar.apache.org/community/">Community</a>
+        <a class="navbar-item" href="https://github.com/apache/pulsar-spring">GitHub</a>
+        <a class="navbar-item pulsar-download" href="https://pulsar.apache.org/download/">Download</a>
+      </div>
+    </div>
+    <div class="pulsar-search">
+      <input id="search-input" type="search" placeholder="Search" aria-label="Search the documentation" autocomplete="off" />
+    </div>
+    <label class="theme-toggler">
+      <input type="checkbox" id="switch-theme-checkbox" name="switch-theme-checkbox" aria-label="Dark theme" />
+      <span class="icon">
+        <svg class="sun" aria-hidden="true" viewBox="0 0 16 16">
+          <circle cx="8" cy="8" r="3.5" fill="currentColor"></circle>
+          <path d="M8 0v2.5M8 13.5V16M0 8h2.5M13.5 8H16M2.3 2.3l1.8 1.8M11.9 11.9l1.8 1.8M2.3 13.7l1.8-1.8M11.9 4.1l1.8-1.8" stroke="currentColor" stroke-width="1.5"></path>
+        </svg>
+        <svg class="moon" aria-hidden="true" viewBox="0 0 16 16">
+          <path d="M13 11A6.5 6.5 0 0 1 5 3a6.5 6.5 0 1 0 8 8z" fill="currentColor"></path>
+        </svg>
+      </span>
+      <span class="text">Theme</span>
+    </label>
+  </nav>
+</header>
+<script>
+document.getElementById('switch-theme-checkbox').parentElement.classList.toggle('active', document.documentElement.classList.contains('dark-theme'))
+</script>
+<div class="body">
+<div class="nav-container" data-component="pulsar" data-version="3.0.0-M1">
+  <aside class="nav">
+    <div class="panels">
+      <div class="nav-panel-menu is-active" data-panel="menu">
+        <nav class="nav-menu">
+<div class="context">
+  <span class="title">Apache Pulsar support for Spring</span>
+  <span class="version">3.0.0-M1-SNAPSHOT</span>
+  <button class="browse-version" id="browse-version">
+    <svg
+      height="24px"
+      id="Layer_1"
+      style="enable-background:new 0 0 512 512;"
+      version="1.1"
+      viewBox="0 0 512 512"
+      width="24px"
+      xml:space="preserve"
+    ><g><path
+          d="M256,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S273.7,224,256,224L256,224z"
+        ></path><path
+          d="M128.4,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S146,224,128.4,224L128.4,224z"
+        ></path><path
+          d="M384,224c-17.7,0-32,14.3-32,32s14.3,32,32,32s32-14.3,32-32S401.7,224,384,224L384,224z"
+        ></path></g></svg>
+  </button>
+  </div><ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="../index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="../whats-new.html">What&#8217;s new?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="../migration.html">Migration from Spring&#8217;s Pulsar support</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link"  href="../intro.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../intro/system-requirements.html">System Requirements</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../intro/building.html">Building the Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../intro/getting-help.html">Getting Help</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link"  href="../pulsar.html">Using Apache Pulsar support for Spring</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="../pulsar/quick-tour.html">Quick Tour</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="../pulsar/pulsar-client.html">Pulsar Client</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="../pulsar/message-production.html">Message Production</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="../pulsar/message-consumption.html">Message Consumption</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="../pulsar/publishing-consuming-partitioned-topics.html">Publishing and Consuming Partitioned Topics</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="../pulsar/transactions.html">Transactions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="../tombstones.html">Null Payloads and Log Compaction of 'Tombstone' Records</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../spring-boot.html">Spring Boot Auto-configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../topic-resolution.html">Topic Resolution</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../default-tenant-namespace.html">Default Tenant / Namespace</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../custom-object-mapper.html">Custom Object Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../pulsar-admin.html">Pulsar Administration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../pulsar-function.html">Pulsar Functions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../observability.html">Observability</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../cloud-stream-binder.html">Spring Cloud Stream Binder for Apache Pulsar</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="../other-resources.html">Other Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Appendices</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link"  href="configuration-properties.html">Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="snapshot-versions.html">Snapshot Versions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="native-image.html">GraalVM Native Image Support</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+          <div class="toggle-sm">
+            <button id="nav-toggle-2" class="nav-toggle"></button>
+          </div>
+        </nav>
+      </div>
+      <div class="nav-collapse">
+        <button id="nav-collapse-toggle"><span></span></button>        
+      </div>
+    </div>
+    <div class="nav-resize"></div>
+  </aside>
+</div>
+<script>
+!function (sidebar) {
+  if (sidebar) {
+    document.body.classList.add('nav-sm')
+  }
+}(localStorage && localStorage.getItem('sidebar') === 'close')
+</script><main class="article">
+<div class="toolbar" role="navigation">
+  <button id="nav-toggle-1" class="nav-toggle"></button>
+</div>
+  <div class="content">
+<aside class="sidebar">
+  <div class="content">
+    <div
+      class="toc"
+      data-title="Configuration Properties"
+      data-levels="2"
+    >
+      <div class="toc-menu"></div>
+    </div>
+    <div class="sidebar-links">
+        <a href="https://github.com/apache/pulsar-spring/edit/main/pulsar-spring-docs/src/main/antora/modules/ROOT/pages/appendix/configuration-properties.adoc">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          ><path
+              d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"
+            ></path></svg>
+          Edit this Page
+        </a>
+              <a href="https://github.com/apache/pulsar-spring" title="GitHub">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="512px"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 512 512"
+            width="512px"
+          ><style type="text/css"><![CDATA[
+              .st0{fill-rule:evenodd;clip-rule:evenodd;} ]]></style><g><path
+                class="st0"
+                d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"
+              ></path></g></svg>
+          GitHub Project
+        </a>
+    </div>
+  </div>
+</aside>
+<article class="doc">
+<div class="breadcrumbs-container">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Apache Pulsar support for Spring</a></li>
+      <li>Appendices</li>
+      <li><a href="configuration-properties.html">Configuration Properties</a></li>
+    </ul>
+  </nav>
+</div><h1 id="page-title" class="page">Configuration Properties</h1>
+<div class="paragraph">
+<p>The following application properties are supported by the <a href="../spring-boot.html" class="xref page">Spring Boot auto-configuration</a>.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 36.3636%;">
+<col style="width: 45.4545%;">
+<col style="width: 18.1819%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.admin.authentication.param</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authentication parameter(s) as a map of parameter names to parameter values.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.admin.authentication.plugin-class-name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fully qualified class name of the authentication plugin.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.admin.connection-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duration to wait for a connection to server to be established.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1m</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.admin.read-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Server response read time out for any request.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1m</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.admin.request-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Server request time out for any request.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>5m</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.admin.service-url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pulsar web URL for the admin endpoint in the format '(http|https)://host:port'.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>http://localhost:8080</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.authentication.param</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Authentication parameter(s) as a map of parameter names to parameter values.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.authentication.plugin-class-name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fully qualified class name of the authentication plugin.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.connection-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duration to wait for a connection to a broker to be established.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>10s</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.failover.backup-clusters</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of backup clusters. The backup cluster is chosen in the sequence of the given list. If all backup clusters are available, the Pulsar client chooses the first backup cluster.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.failover.check-interval</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frequency of performing a probe task.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.failover.delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delay before the Pulsar client switches from the primary cluster to the backup cluster.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.failover.policy</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cluster failover policy.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>order</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.failover.switch-back-delay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Delay before the Pulsar client switches from the backup cluster to the primary cluster.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.lookup-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client lookup timeout.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.operation-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Client operation timeout.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30s</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.service-url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pulsar service URL in the format '(pulsar|pulsar+ssl)://host:port'.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pulsar://localhost:6650</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.threads.io</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of threads to be used for handling connections to brokers.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.client.threads.listener</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of threads to be used for message listeners.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.dead-letter-policy.dead-letter-topic</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the dead topic where the failing messages will be sent.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.dead-letter-policy.initial-subscription-name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the initial subscription of the dead letter topic. When not set, the initial subscription will not be created. However, when the property is set then the broker&#8217;s 'allowAutoSubscriptionCreation' must be enabled or the DLQ producer will fail.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.dead-letter-policy.max-redeliver-count</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum number of times that a message will be redelivered before being sent to the dead letter queue.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.dead-letter-policy.retry-letter-topic</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the retry topic where the failing messages will be sent.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Consumer name to identify a particular consumer from the topic stats.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.priority-level</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Priority level for shared subscription consumers.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>0</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.read-compacted</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to read messages from the compacted topic rather than the full message backlog.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.retry-enable</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to auto retry messages.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.subscription.initial-position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Position where to initialize a newly created subscription.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>latest</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.subscription.mode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subscription mode to be used when subscribing to the topic.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>durable</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.subscription.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subscription name for the consumer.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.subscription.topics-mode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines which type of topics (persistent, non-persistent, or all) the consumer should be subscribed to when using pattern subscriptions.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>persistentonly</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.subscription.type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subscription type to be used when subscribing to a topic.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exclusive</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.topics</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Topics the consumer subscribes to.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.consumer.topics-pattern</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pattern for topics the consumer subscribes to.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.defaults.topic.enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to enable default tenant and namespace support for topics.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.defaults.topic.namespace</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default namespace to use when producing or consuming messages against a non-fully-qualified topic URL.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>default</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.defaults.topic.tenant</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default tenant to use when producing or consuming messages against a non-fully-qualified topic URL.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>public</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.defaults.type-mappings</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of mappings from message type to topic name and schema info to use as a defaults when a topic name and/or schema is not explicitly specified when producing or consuming messages of the mapped type.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.function.enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to enable function support.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.function.fail-fast</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to stop processing further function creates/updates when a failure occurs.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.function.propagate-failures</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to throw an exception if any failure is encountered during server startup while creating/updating functions.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.function.propagate-stop-failures</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to throw an exception if any failure is encountered during server shutdown while enforcing stop policy on functions.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.listener.concurrency</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of threads used by listener container.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.listener.observation-enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to record observations for when the Observations API is available and the client supports it.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.listener.schema-type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SchemaType of the consumed messages.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.access-mode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type of access to the topic the producer requires.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>shared</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.batching-enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to automatically batch messages.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.cache.enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to enable caching in the PulsarProducerFactory.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.cache.expire-after-access</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time period to expire unused entries in the cache.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1m</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.cache.initial-capacity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial size of cache.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>50</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.cache.maximum-size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum size of cache (entries).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>1000</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.chunking-enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to split large-size messages into multiple chunks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.compression-type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message compression type.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.hashing-scheme</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message hashing scheme to choose the partition to which the message is published.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javastringhash</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.message-routing-mode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message routing mode for a partitioned producer.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>roundrobinpartition</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name for the producer. If not assigned, a unique name is generated.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.send-timeout</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time before a message has to be acknowledged by the broker.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>30s</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.producer.topic-name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Topic the producer will publish to.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.reader.name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reader name.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.reader.read-compacted</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to read messages from a compacted topic rather than a full message backlog of a topic.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.reader.subscription-name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subscription name.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.reader.subscription-role-prefix</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Prefix of subscription role.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.reader.topics</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Topics the reader subscribes to.</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.template.observations-enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to record observations for when the Observations API is available.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>spring.pulsar.transaction.enabled</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether transaction support is enabled.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>false</code></p></td>
+</tr>
+</tbody>
+</table>
+</article>  </div>
+</main>
+<div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true">
+            <main class="modal__content" id="modal-versions-content">
+              <button data-micromodal-close class="modal-versions-close">
+                <svg width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1h{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title/><g id="cross"><line class="cls-1h" x1="7" x2="25" y1="7" y2="25"/><line class="cls-1h" x1="7" x2="25" y1="25" y2="7"/></g></svg>
+              </button>
+              <div class="colset">
+                <div class="col-left">
+
+                  <ul class="nav-versions">
+                      <li class="component">
+                        <div>
+                          <a class="title" href="../index.html">Apache Pulsar support for Spring</a>
+                        </div>                        <div class="version-item">
+                          <div>
+                            <button class="version-toggle" type="button">
+                              <span></span>
+                              Snapshot
+                            </button>
+                          </div>
+                          <ul class="versions">
+  <li class="version">
+    <a href="../index.html">
+      3.0.0-M1-SNAPSHOT
+    </a>
+  </li>
+</ul>                        </div>
+                        
+                      </li>
+                  </ul>
+                </div>
+                <div class="col-right">
+                  <ul class="projects">
+  <li>
+    Related Documentation
+    <ul class="projects-list">
+      <li><a href="https://pulsar.apache.org/docs/">Apache Pulsar</a></li>
+      <li><a href="https://docs.spring.io/spring-framework/reference/">Spring Framework</a></li>
+      <li><a href="https://docs.spring.io/spring-boot/">Spring Boot</a></li>
+      <li><a href="https://docs.spring.io/spring-cloud-stream/reference/">Spring Cloud Stream</a></li>
+    </ul>
+  </li>
+</ul>
+                </div>
+              </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+</div>
+<footer class="footer pulsar-footer">
+  <div class="pulsar-footer-inner">
+    <div class="pulsar-footer-brand">
+      <img src="../_/img/pulsar-white.svg" alt="Apache Pulsar" width="127" />
+      <nav class="pulsar-footer-links">
+        <a href="https://pulsar.apache.org/">Apache Pulsar</a>
+        <a href="https://pulsar.apache.org/docs/">Pulsar Docs</a>
+        <a href="https://github.com/apache/pulsar-spring">GitHub</a>
+      </nav>
+    </div>
+    <div class="pulsar-footer-copyright">
+      <div class="pulsar-footer-asf">
+        <img src="../_/img/feather-logo-white.svg" alt="" width="20" />
+        <span>The Apache Software Foundation</span>
+      </div>
+      <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation. Spring is a trademark of Broadcom Inc. and/or its subsidiaries.</p>
+    </div>
+  </div>
+</footer>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/vendor/import.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+<script async src="../_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
+  </body>
+</html>

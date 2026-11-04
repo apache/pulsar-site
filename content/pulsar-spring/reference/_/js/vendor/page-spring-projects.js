@@ -1,0 +1,1 @@
+document.querySelectorAll(".anchor").forEach(t=>{const c=t.parentElement.querySelector("ul");t.addEventListener("click",function(e){t.classList.toggle("active"),c.classList.toggle("show")})});
