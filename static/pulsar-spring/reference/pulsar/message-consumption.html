@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Message Consumption :: Apache Pulsar support for Spring</title>
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <script>
+!function (theme, navWidth) {
+  if (theme === 'dark') document.documentElement.classList.add('dark-theme')
+  if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
+  localStorage && localStorage.getItem('nav-width'))
+    </script>
+    <link rel="stylesheet" href="../_/css/site.css">
+    <link rel="stylesheet" href="../_/css/vendor/search.css">
+    <link rel="stylesheet" href="../_/css/vendor/page-search.css">
+    <link rel="stylesheet" href="../_/css/vendor/asciidoctor-tabs.css">
+
+    <link rel="stylesheet" href="../_/css/pulsar.css">
+    <link rel="icon" href="../_/img/favicon.ico" type="image/vnd.microsoft.icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://pulsar.apache.org/">
+        <img id="pulsarlogo" class="block" src="../_/img/logo-black.svg" alt="Apache Pulsar" />
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://pulsar.apache.org/docs/">Pulsar Docs</a>
+        <a class="navbar-item" href="https://pulsar.apache.org/community/">Community</a>
+        <a class="navbar-item" href="https://github.com/apache/pulsar-spring">GitHub</a>
+        <a class="navbar-item pulsar-download" href="https://pulsar.apache.org/download/">Download</a>
+      </div>
+    </div>
+    <div class="pulsar-search">
+      <input id="search-input" type="search" placeholder="Search" aria-label="Search the documentation" autocomplete="off" />
+    </div>
+    <label class="theme-toggler">
+      <input type="checkbox" id="switch-theme-checkbox" name="switch-theme-checkbox" aria-label="Dark theme" />
+      <span class="icon">
+        <svg class="sun" aria-hidden="true" viewBox="0 0 16 16">
+          <circle cx="8" cy="8" r="3.5" fill="currentColor"></circle>
+          <path d="M8 0v2.5M8 13.5V16M0 8h2.5M13.5 8H16M2.3 2.3l1.8 1.8M11.9 11.9l1.8 1.8M2.3 13.7l1.8-1.8M11.9 4.1l1.8-1.8" stroke="currentColor" stroke-width="1.5"></path>
+        </svg>
+        <svg class="moon" aria-hidden="true" viewBox="0 0 16 16">
+          <path d="M13 11A6.5 6.5 0 0 1 5 3a6.5 6.5 0 1 0 8 8z" fill="currentColor"></path>
+        </svg>
+      </span>
+      <span class="text">Theme</span>
+    </label>
+  </nav>
+</header>
+<script>
+document.getElementById('switch-theme-checkbox').parentElement.classList.toggle('active', document.documentElement.classList.contains('dark-theme'))
+</script>
+<div class="body">
+<div class="nav-container" data-component="pulsar" data-version="3.0.0-M1">
+  <aside class="nav">
+    <div class="panels">
+      <div class="nav-panel-menu is-active" data-panel="menu">
+        <nav class="nav-menu">
+<div class="context">
+  <span class="title">Apache Pulsar support for Spring</span>
+  <span class="version">3.0.0-M1-SNAPSHOT</span>
+  <button class="browse-version" id="browse-version">
+    <svg
+      height="24px"
+      id="Layer_1"
+      style="enable-background:new 0 0 512 512;"
+      version="1.1"
+      viewBox="0 0 512 512"
+      width="24px"
+      xml:space="preserve"
+    ><g><path
+          d="M256,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S273.7,224,256,224L256,224z"
+        ></path><path
+          d="M128.4,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S146,224,128.4,224L128.4,224z"
+        ></path><path
+          d="M384,224c-17.7,0-32,14.3-32,32s14.3,32,32,32s32-14.3,32-32S401.7,224,384,224L384,224z"
+        ></path></g></svg>
+  </button>
+  </div><ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="../index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="../whats-new.html">What&#8217;s new?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="../migration.html">Migration from Spring&#8217;s Pulsar support</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link"  href="../intro.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../intro/system-requirements.html">System Requirements</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../intro/building.html">Building the Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../intro/getting-help.html">Getting Help</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link"  href="../pulsar.html">Using Apache Pulsar support for Spring</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="quick-tour.html">Quick Tour</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar-client.html">Pulsar Client</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="message-production.html">Message Production</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="3">
+    <a class="nav-link"  href="message-consumption.html">Message Consumption</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="publishing-consuming-partitioned-topics.html">Publishing and Consuming Partitioned Topics</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="transactions.html">Transactions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="../tombstones.html">Null Payloads and Log Compaction of 'Tombstone' Records</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../spring-boot.html">Spring Boot Auto-configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../topic-resolution.html">Topic Resolution</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../default-tenant-namespace.html">Default Tenant / Namespace</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../custom-object-mapper.html">Custom Object Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../pulsar-admin.html">Pulsar Administration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../pulsar-function.html">Pulsar Functions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../observability.html">Observability</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../cloud-stream-binder.html">Spring Cloud Stream Binder for Apache Pulsar</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="../other-resources.html">Other Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Appendices</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../appendix/configuration-properties.html">Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../appendix/snapshot-versions.html">Snapshot Versions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="../appendix/native-image.html">GraalVM Native Image Support</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+          <div class="toggle-sm">
+            <button id="nav-toggle-2" class="nav-toggle"></button>
+          </div>
+        </nav>
+      </div>
+      <div class="nav-collapse">
+        <button id="nav-collapse-toggle"><span></span></button>        
+      </div>
+    </div>
+    <div class="nav-resize"></div>
+  </aside>
+</div>
+<script>
+!function (sidebar) {
+  if (sidebar) {
+    document.body.classList.add('nav-sm')
+  }
+}(localStorage && localStorage.getItem('sidebar') === 'close')
+</script><main class="article">
+<div class="toolbar" role="navigation">
+  <button id="nav-toggle-1" class="nav-toggle"></button>
+</div>
+  <div class="content">
+<aside class="sidebar">
+  <div class="content">
+    <div
+      class="toc"
+      data-title="Message Consumption"
+      data-levels="2"
+    >
+      <div class="toc-menu"></div>
+    </div>
+    <div class="sidebar-links">
+        <a href="https://github.com/apache/pulsar-spring/edit/main/pulsar-spring-docs/src/main/antora/modules/ROOT/pages/pulsar/message-consumption.adoc">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          ><path
+              d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"
+            ></path></svg>
+          Edit this Page
+        </a>
+              <a href="https://github.com/apache/pulsar-spring" title="GitHub">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="512px"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 512 512"
+            width="512px"
+          ><style type="text/css"><![CDATA[
+              .st0{fill-rule:evenodd;clip-rule:evenodd;} ]]></style><g><path
+                class="st0"
+                d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"
+              ></path></g></svg>
+          GitHub Project
+        </a>
+    </div>
+  </div>
+</aside>
+<article class="doc">
+<div class="breadcrumbs-container">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+    <ul>
+      <li><a href="../index.html">Apache Pulsar support for Spring</a></li>
+      <li>Reference</li>
+      <li><a href="../pulsar.html">Using Apache Pulsar support for Spring</a></li>
+      <li><a href="message-consumption.html">Message Consumption</a></li>
+    </ul>
+  </nav>
+</div><h1 id="page-title" class="page">Message Consumption</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#pulsar-listener">1. Pulsar Listener</a>
+<ul class="sectlevel2">
+<li><a href="#listener-auto-consume">1.1. Generic records with AUTO_CONSUME</a></li>
+<li><a href="#_customizing_the_consumerbuilder">1.2. Customizing the ConsumerBuilder</a></li>
+</ul>
+</li>
+<li><a href="#schema-info-listener-imperative">2. Specifying Schema Information</a>
+<ul class="sectlevel2">
+<li><a href="#_custom_schema_mapping">2.1. Custom Schema Mapping</a>
+<ul class="sectlevel3">
+<li><a href="#_configuration_properties">2.1.1. Configuration properties</a></li>
+<li><a href="#_schema_resolver_customizer">2.1.2. Schema resolver customizer</a></li>
+<li><a href="#listener-default-schema-annotation">2.1.3. Type mapping annotation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_accessing_the_pulsar_consumer_object">3. Accessing the Pulsar Consumer Object</a></li>
+<li><a href="#pulsar-message-listener-container">4. Pulsar Message Listener Container</a>
+<ul class="sectlevel2">
+<li><a href="#_defaultpulsarmessagelistenercontainer">4.1. DefaultPulsarMessageListenerContainer</a></li>
+<li><a href="#_concurrentpulsarmessagelistenercontainer">4.2. ConcurrentPulsarMessageListenerContainer</a></li>
+<li><a href="#consuming-records">4.3. Consuming Records</a></li>
+</ul>
+</li>
+<li><a href="#pulsar-headers">5. Pulsar Headers</a>
+<ul class="sectlevel2">
+<li><a href="#_spring_headers">5.1. Spring Headers</a></li>
+<li><a href="#_accessing_in_single_record_based_consumer">5.2. Accessing in Single Record based Consumer</a></li>
+<li><a href="#_accessing_in_batch_record_based_consumer">5.3. Accessing in Batch Record based Consumer</a></li>
+<li><a href="#_message_header_mapping">5.4. Message Header Mapping</a>
+<ul class="sectlevel3">
+<li><a href="#_json_header_mapper">5.4.1. JSON Header Mapper</a>
+<ul class="sectlevel4">
+<li><a href="#_trusted_packages">Trusted Packages</a></li>
+<li><a href="#_tostring_classes">ToString Classes</a></li>
+<li><a href="#_custom_objectmapper">Custom ObjectMapper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_inboundoutbound_patterns">5.5. Inbound/Outbound Patterns</a></li>
+</ul>
+</li>
+<li><a href="#_message_acknowledgment">6. Message Acknowledgment</a>
+<ul class="sectlevel2">
+<li><a href="#message-ack-modes">6.1. Message ACK modes</a></li>
+<li><a href="#_automatic_message_ack_in_single_record_mode">6.2. Automatic Message Ack in Single Record Mode</a></li>
+<li><a href="#_manual_message_ack_in_single_record_mode">6.3. Manual Message Ack in Single Record Mode</a></li>
+<li><a href="#_automatic_message_ack_in_batch_consumption">6.4. Automatic Message Ack in Batch Consumption</a></li>
+<li><a href="#_manual_message_ack_in_batch_consumption">6.5. Manual Message Ack in Batch Consumption</a></li>
+</ul>
+</li>
+<li><a href="#_message_redelivery_and_error_handling">7. Message Redelivery and Error Handling</a>
+<ul class="sectlevel2">
+<li><a href="#_specifying_acknowledgment_timeout_for_message_redelivery">7.1. Specifying Acknowledgment Timeout for Message Redelivery</a></li>
+<li><a href="#_specifying_negative_acknowledgment_redelivery">7.2. Specifying Negative Acknowledgment Redelivery</a></li>
+<li><a href="#_using_dead_letter_topic_from_apache_pulsar_for_message_redelivery_and_error_handling">7.3. Using Dead Letter Topic from Apache Pulsar for Message Redelivery and Error Handling</a></li>
+<li><a href="#_native_error_handling_in_apache_pulsar_support_for_spring">7.4. Native Error Handling in Apache Pulsar support for Spring</a></li>
+<li><a href="#_batch_listener_with_pulsarconsumererrorhandler">7.5. Batch listener with PulsarConsumerErrorHandler</a></li>
+</ul>
+</li>
+<li><a href="#_consumer_customization_on_pulsarlistener">8. Consumer Customization on PulsarListener</a></li>
+<li><a href="#message-listener-lifecycle">9. Message Listener Container Lifecycle</a>
+<ul class="sectlevel2">
+<li><a href="#message-listener-pause-resume">9.1. Pausing and Resuming</a></li>
+<li><a href="#message-listener-startup-failure">9.2. Handling Startup Failures</a>
+<ul class="sectlevel3">
+<li><a href="#_configuration">9.2.1. Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#imperative-pulsar-reader">10. Pulsar Reader Support</a>
+<ul class="sectlevel2">
+<li><a href="#_pulsarreader_annotation">10.1. PulsarReader Annotation</a></li>
+<li><a href="#_customizing_the_readerbuilder">10.2. Customizing the ReaderBuilder</a></li>
+<li><a href="#message-reader-startup-failure">10.3. Handling Startup Failures</a>
+<ul class="sectlevel3">
+<li><a href="#_configuration_2">10.3.1. Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="sect1">
+<h2 id="pulsar-listener"><a class="anchor" href="#pulsar-listener"></a>1. Pulsar Listener</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When it comes to Pulsar consumers, we recommend that end-user applications use the <code>PulsarListener</code> annotation.
+To use <code>PulsarListener</code>, you need to use the <code>@EnablePulsar</code> annotation.
+When you use Spring Boot support, it automatically enables this annotation and configures all the components necessary for <code>PulsarListener</code>, such as the message listener infrastructure (which is responsible for creating the Pulsar consumer).
+<code>PulsarMessageListenerContainer</code> uses a <code>PulsarConsumerFactory</code> to create and manage the Pulsar consumer the underlying Pulsar consumer that it uses to consume messages.</p>
+</div>
+<div class="paragraph">
+<p>Spring Boot provides this consumer factory which you can further configure by specifying the <a href="../appendix/configuration-properties.html" class="xref page"><code>spring.pulsar.consumer.*</code></a> application properties.</p>
+</div>
+<div class="paragraph">
+<p>Let us revisit the <code>PulsarListener</code> code snippet we saw in the quick-tour section:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-pulsar-subscription", topics = "hello-pulsar")
+public void listen(String message) {
+    System.out.println("Message Received: " + message);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can further simplify this method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener
+public void listen(String message) {
+    System.out.println("Message Received: " + message);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this most basic form, when the <code>subscriptionName</code> is not provided on the <code>@PulsarListener</code> annotation an auto-generated subscription name will be used.
+Likewise, when the <code>topics</code> are not directly provided, a <a href="../topic-resolution.html" class="xref page">topic resolution process</a> is used to determine the destination topic.</p>
+</div>
+<div class="paragraph">
+<p>In the <code>PulsarListener</code> method shown earlier, we receive the data as <code>String</code>, but we do not specify any schema types.
+Internally, the framework relies on Pulsar&#8217;s schema mechanism to convert the data to the required type.
+The framework detects that you expect the <code>String</code> type and then infers the schema type based on that information and provides that schema to the consumer.
+The framework does this inference for all primitive types.
+For all non-primitive types the default schema is assumed to be JSON.
+If a complex type is using anything besides JSON (such as AVRO or KEY_VALUE) you must provide the schema type on the annotation using the <code>schemaType</code> property.</p>
+</div>
+<div class="paragraph">
+<p>The following example shows another <code>PulsarListener</code> method, which takes an <code>Integer</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "my-subscription-1", topics = "my-topic-1")
+public void listen(Integer message) {
+   System.out.println(message);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following <code>PulsarListener</code> method shows how we can consume complex types from a topic:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "my-subscription-2", topics = "my-topic-2", schemaType = SchemaType.JSON)
+public void listen(Foo message) {
+    System.out.println(message);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let us look at a few more ways.</p>
+</div>
+<div class="paragraph">
+<p>You can consume the Pulsar message directly:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "my-subscription", topics = "my-topic")
+public void listen(org.apache.pulsar.client.api.Message&lt;String&gt; message) {
+    System.out.println(message.getValue());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example consumes the record by using the Spring messaging envelope:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "my-subscription", topics = "my-topic")
+public void listen(org.springframework.messaging.Message&lt;String&gt; message) {
+    System.out.println(message.getPayload());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now let us see how we can consume records in batches.
+The following example uses <code>PulsarListener</code> to consume records in batches as POJOs:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-batch-subscription", topics = "hello-batch", schemaType = SchemaType.JSON, batch = true)
+public void listen(List&lt;Foo&gt; messages) {
+    System.out.println("records received :" + messages.size());
+    messages.forEach((message) -&gt; System.out.println("record : " + message));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that, in this example, we receive the records as a collection (<code>List</code>) of objects.
+In addition, to enable batch consumption at the <code>PulsarListener</code> level, you need to set the <code>batch</code> property on the annotation to <code>true</code>.</p>
+</div>
+<div class="paragraph">
+<p>Based on the actual type that the <code>List</code> holds, the framework tries to infer the schema to use.
+If the <code>List</code> contains a complex type besides JSON, you still need to provide the <code>schemaType</code> on <code>PulsarListener</code>.</p>
+</div>
+<div class="paragraph">
+<p>The following uses the <code>Message</code> envelope provided by the Pulsar Java client:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-batch-subscription", topics = "hello-batch", schemaType = SchemaType.JSON, batch = true)
+public void listen(List&lt;Message&lt;Foo&gt;&gt; messages) {
+    System.out.println("records received :" + messages.size());
+    messages.forEach((message) -&gt; System.out.println("record : " + message.getValue()));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following example consumes batch records with an envelope of the Spring messaging <code>Message</code> type:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-batch-subscription", topics = "hello-batch", schemaType = SchemaType.JSON, batch = true)
+public void listen(List&lt;org.springframework.messaging.Message&lt;Foo&gt;&gt; messages) {
+    System.out.println("records received :" + messages.size());
+    messages.forEach((message) -&gt; System.out.println("record : " + message.getPayload()));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, you can also use the <code>Messages</code> holder object from Pulsar for the batch listener:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-batch-subscription", topics = "hello-batch", schemaType = SchemaType.JSON, batch = true)
+public void listen(org.apache.pulsar.client.api.Messages&lt;Foo&gt;&gt; messages) {
+    System.out.println("records received :" + messages.size());
+    messages.forEach((message) -&gt; System.out.println("record : " + message.getValue()));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you use <code>PulsarListener</code>, you can provide Pulsar consumer properties directly on the annotation itself.
+This is convenient if you do not want to use the Boot configuration properties mentioned earlier or have multiple <code>PulsarListener</code> methods.</p>
+</div>
+<div class="paragraph">
+<p>The following example uses Pulsar consumer properties directly on <code>PulsarListener</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(properties = { "subscriptionName=subscription-1", "topicNames=foo-1", "receiverQueueSize=5000" })
+void listen(String message) {
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The properties used are direct Pulsar consumer properties, not the <code>spring.pulsar.consumer</code> application configuration properties
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="listener-auto-consume"><a class="anchor" href="#listener-auto-consume"></a>1.1. Generic records with AUTO_CONSUME</h3>
+<div class="paragraph">
+<p>If there is no chance to know the type of schema of a Pulsar topic in advance, you can use the <code>AUTO_CONSUME</code> schema type to consume generic records.
+In this case, the topic deserializes messages into <code>GenericRecord</code> objects using the schema info associated with the topic.</p>
+</div>
+<div class="paragraph">
+<p>To consume generic records set the <code>schemaType = SchemaType.AUTO_CONSUME</code> on your <code>@PulsarListener</code> and use a Pulsar message of type <code>GenericRecord</code> as the message parameter as shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(topics = "my-generic-topic", schemaType = SchemaType.AUTO_CONSUME)
+void listen(org.apache.pulsar.client.api.Message&lt;GenericRecord&gt; message) {
+    GenericRecord record = message.getValue();
+    record.getFields().forEach((f) -&gt;
+            System.out.printf("%s = %s%n", f.getName(), record.getField(f)));
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>GenericRecord</code> API allows access to the fields and their associated values
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_customizing_the_consumerbuilder"><a class="anchor" href="#_customizing_the_consumerbuilder"></a>1.2. Customizing the ConsumerBuilder</h3>
+<div class="paragraph">
+<p>You can customize any fields available through <code>ConsumerBuilder</code> using a <code>PulsarListenerConsumerBuilderCustomizer</code> by providing a <code>@Bean</code> of type <code>PulsarListenerConsumerBuilderCustomizer</code> and then making it available to the <code>PulsarListener</code> as shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(topics = "hello-topic", consumerCustomizer = "myCustomizer")
+public void listen(String message) {
+    System.out.println("Message Received: " + message);
+}
+
+@Bean
+PulsarListenerConsumerBuilderCustomizer&lt;String&gt; myCustomizer() {
+    return (builder) -&gt; builder.consumerName("myConsumer");
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If your application only has a single <code>@PulsarListener</code> and a single <code>PulsarListenerConsumerBuilderCustomizer</code> bean registered then the customizer will be automatically applied.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="schema-info-listener-imperative"><a class="anchor" href="#schema-info-listener-imperative"></a>2. Specifying Schema Information</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As indicated earlier, for Java primitives, Apache Pulsar support for Spring can infer the proper Schema to use on the <code>PulsarListener</code>.
+For non-primitive types, if the Schema is not explicitly specified on the annotation, Apache Pulsar support for Spring will try to build a <code>Schema.JSON</code> from the type.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Complex Schema types that are currently supported are JSON, AVRO, PROTOBUF, AUTO_CONSUME, KEY_VALUE w/ INLINE encoding.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_custom_schema_mapping"><a class="anchor" href="#_custom_schema_mapping"></a>2.1. Custom Schema Mapping</h3>
+<div class="paragraph">
+<p>As an alternative to specifying the schema on the <code>PulsarListener</code> for complex types, the schema resolver can be configured with mappings for the types.
+This removes the need to set the schema on the listener as the framework consults the resolver using the incoming message type.</p>
+</div>
+<div class="sect3">
+<h4 id="_configuration_properties"><a class="anchor" href="#_configuration_properties"></a>2.1.1. Configuration properties</h4>
+<div class="paragraph">
+<p>Schema mappings can be configured with the <code>spring.pulsar.defaults.type-mappings</code> property.
+The following example uses <code>application.yml</code> to add mappings for the <code>User</code> and <code>Address</code> complex objects using <code>AVRO</code> and <code>JSON</code> schemas, respectively:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">spring:
+  pulsar:
+    defaults:
+      type-mappings:
+        - message-type: com.acme.User
+          schema-info:
+            schema-type: AVRO
+        - message-type: com.acme.Address
+          schema-info:
+            schema-type: JSON</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>message-type</code> is the fully-qualified name of the message class.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_schema_resolver_customizer"><a class="anchor" href="#_schema_resolver_customizer"></a>2.1.2. Schema resolver customizer</h4>
+<div class="paragraph">
+<p>The preferred method of adding mappings is via the property mentioned above.
+However, if more control is needed you can provide a schema resolver customizer to add the mapping(s).</p>
+</div>
+<div class="paragraph">
+<p>The following example uses a schema resolver customizer to add mappings for the <code>User</code> and <code>Address</code> complex objects using <code>AVRO</code> and <code>JSON</code> schemas, respectively:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Bean
+public SchemaResolverCustomizer&lt;DefaultSchemaResolver&gt; schemaResolverCustomizer() {
+	return (schemaResolver) -&gt; {
+		schemaResolver.addCustomSchemaMapping(User.class, Schema.AVRO(User.class));
+		schemaResolver.addCustomSchemaMapping(Address.class, Schema.JSON(Address.class));
+	}
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="listener-default-schema-annotation"><a class="anchor" href="#listener-default-schema-annotation"></a>2.1.3. Type mapping annotation</h4>
+<div class="paragraph">
+<p>Another option for specifying default schema information to use for a particular message type is to mark the message class with the <code>@PulsarMessage</code> annotation.
+The schema info can be specified via the <code>schemaType</code> attribute on the annotation.</p>
+</div>
+<div class="paragraph">
+<p>The following example configures the system to use JSON as the default schema when producing or consuming messages of type <code>Foo</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarMessage(schemaType = SchemaType.JSON)
+record Foo(String value) {
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this configuration in place, there is no need to set the schema on the listener, for example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "user-sub", topics = "user-topic")
+public void listen(User user) {
+    System.out.println(user);
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_accessing_the_pulsar_consumer_object"><a class="anchor" href="#_accessing_the_pulsar_consumer_object"></a>3. Accessing the Pulsar Consumer Object</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Sometimes, you need direct access to the Pulsar Consumer object.
+The following example shows how to get it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-pulsar-subscription", topics = "hello-pulsar")
+public void listen(String message, org.apache.pulsar.client.api.Consumer&lt;String&gt; consumer) {
+    System.out.println("Message Received: " + message);
+    ConsumerStats stats = consumer.getStats();
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+When accessing the <code>Consumer</code> object this way, do NOT invoke any operations that would change the Consumer&#8217;s cursor position by invoking any receive methods.
+All such operations must be done by the container.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pulsar-message-listener-container"><a class="anchor" href="#pulsar-message-listener-container"></a>4. Pulsar Message Listener Container</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we saw the basic interactions on the consumer side through <code>PulsarListener</code>. Let us now dive into the inner workings of how <code>PulsarListener</code> interacts with the underlying Pulsar consumer.
+Keep in mind that, for end-user applications, in most scenarios, we recommend using the <code>PulsarListener</code> annotation directly for consuming from a Pulsar topic when using Apache Pulsar support for Spring, as that model covers a broad set of application use cases.
+However, it is important to understand how <code>PulsarListener</code> works internally. This section goes through those details.</p>
+</div>
+<div class="paragraph">
+<p>As briefly mentioned earlier, the message listener container is at the heart of message consumption when you use Apache Pulsar support for Spring.
+<code>PulsarListener</code> uses the message listener container infrastructure behind the scenes to create and manage the Pulsar consumer.
+Apache Pulsar support for Spring provides the contract for this message listener container through <code>PulsarMessageListenerContainer</code>.
+The default implementation for this message listener container is provided through <code>DefaultPulsarMessageListenerContainer</code>.
+As its name indicates, <code>PulsarMessageListenerContainer</code> contains the message listener.
+The container creates the Pulsar consumer and then runs a separate thread to receive and handle the data.
+The data is handled by the provided message listener implementation.</p>
+</div>
+<div class="paragraph">
+<p>The message listener container consumes the data in batch by using the consumer&#8217;s <code>batchReceive</code> method.
+Once data is received, it is handed over to the selected message listener implementation.</p>
+</div>
+<div class="paragraph">
+<p>The following message listener types are available when you use Apache Pulsar support for Spring.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring/src/main/java/org/apache/pulsar/spring/listener/PulsarRecordMessageListener.java">PulsarRecordMessageListener</a></p>
+</li>
+<li>
+<p><a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring/src/main/java/org/apache/pulsar/spring/listener/PulsarAcknowledgingMessageListener.java">PulsarAcknowledgingMessageListener</a></p>
+</li>
+<li>
+<p><a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring/src/main/java/org/apache/pulsar/spring/listener/PulsarBatchMessageListener.java">PulsarBatchMessageListener</a></p>
+</li>
+<li>
+<p><a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring/src/main/java/org/apache/pulsar/spring/listener/PulsarBatchAcknowledgingMessageListener.java">PulsarBatchAcknowledgingMessageListener</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We see the details about these various message listeners in the following sections.</p>
+</div>
+<div class="paragraph">
+<p>Before doing so, however, let us take a closer look at the container itself.</p>
+</div>
+<div class="sect2">
+<h3 id="_defaultpulsarmessagelistenercontainer"><a class="anchor" href="#_defaultpulsarmessagelistenercontainer"></a>4.1. DefaultPulsarMessageListenerContainer</h3>
+<div class="paragraph">
+<p>This is a single consumer-based message listener container.
+The following listing shows its constructor:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public DefaultPulsarMessageListenerContainer(PulsarConsumerFactory&lt;? super T&gt; pulsarConsumerFactory,
+			PulsarContainerProperties pulsarContainerProperties)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It receives a <code>PulsarConsumerFactory</code> (which it uses to create the consumer) and a <code>PulsarContainerProperties</code> object (which contains information about the container properties).
+<code>PulsarContainerProperties</code> has the following constructors:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public PulsarContainerProperties(String... topics)
+
+public PulsarContainerProperties(Pattern topicPattern)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can provide the topic information through <code>PulsarContainerProperties</code> or as a consumer property that is provided to the consumer factory.
+The following example uses the <code>DefaultPulsarMessageListenerContainer</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">Map&lt;String, Object&gt; config = new HashMap&lt;&gt;();
+config.put("topics", "my-topic");
+PulsarConsumerFactory&lt;String&gt; pulsarConsumerFactorY = DefaultPulsarConsumerFactory&lt;&gt;(pulsarClient, config);
+
+PulsarContainerProperties pulsarContainerProperties = new PulsarContainerProperties();
+
+pulsarContainerProperties.setMessageListener((PulsarRecordMessageListener&lt;?&gt;) (consumer, msg) -&gt; {
+		});
+
+DefaultPulsarMessageListenerContainer&lt;String&gt; pulsarListenerContainer = new DefaultPulsarMessageListenerContainer(pulsarConsumerFacotyr,
+        pulsarContainerProperties);
+
+return pulsarListenerContainer;</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If topic information is not specified when using the listener containers directly, the same
+<a href="../topic-resolution.html" class="xref page">topic resolution process</a> used by the <code>PulsarListener</code> is used with the one exception that the "Message type default" step is <strong>omitted</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>DefaultPulsarMessageListenerContainer</code> creates only a single consumer.
+If you want to have multiple consumers managed through multiple threads, you need to use <code>ConcurrentPulsarMessageListenerContainer</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_concurrentpulsarmessagelistenercontainer"><a class="anchor" href="#_concurrentpulsarmessagelistenercontainer"></a>4.2. ConcurrentPulsarMessageListenerContainer</h3>
+<div class="paragraph">
+<p><code>ConcurrentPulsarMessageListenerContainer</code> has the following constructor:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public ConcurrentPulsarMessageListenerContainer(PulsarConsumerFactory&lt;? super T&gt; pulsarConsumerFactory,
+    PulsarContainerProperties pulsarContainerProperties)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>ConcurrentPulsarMessageListenerContainer</code> lets you specify a <code>concurrency</code> property through a setter.
+Concurrency of more than <code>1</code> is allowed only on non-exclusive subscriptions (<code>failover</code>, <code>shared</code>, and <code>key-shared</code>).
+You can only have the default <code>1</code> for concurrency when you have an exclusive subscription mode.</p>
+</div>
+<div class="paragraph">
+<p>The following example enables <code>concurrency</code> through the <code>PulsarListener</code> annotation for a <code>failover</code> subscription.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(topics = "my-topic", subscriptionName = "subscription-1",
+				subscriptionType = SubscriptionType.Failover, concurrency = "3")
+void listen(String message, Consumer&lt;String&gt; consumer) {
+    ...
+    System.out.println("Current Thread: " + Thread.currentThread().getName());
+    System.out.println("Current Consumer: " + consumer.getConsumerName());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding listener, it is assumed that the topic <code>my-topic</code> has three partitions.
+If it is a non-partitioned topic, having concurrency set to <code>3</code> does nothing. You get two idle consumers in addition to the main active one.
+If the topic has more than three partitions, messages are load-balanced across the consumers that the container creates.
+If you run this <code>PulsarListener</code>, you see that messages from different partitions are consumed through different consumers, as implied by the thread name and consumer names printouts in the preceding example.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When you use the <code>Failover</code> subscription this way on partitioned topics, Pulsar guarantees message ordering.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following listing shows another example of <code>PulsarListener</code>, but with <code>Shared</code> subscription and <code>concurrency</code> enabled.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(topics = "my-topic", subscriptionName = "subscription-1",
+				subscriptionType = SubscriptionType.Shared, concurrency = "5")
+void listen(String message) {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, the <code>PulsarListener</code> creates five different consumers (this time, we assume that the topic has five partitions).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In this version, there is no message ordering, as <code>Shared</code> subscriptions do not guarantee any message ordering in Pulsar.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you need message ordering and still want a shared subscription types, you need to use the <code>Key_Shared</code> subscription type.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="consuming-records"><a class="anchor" href="#consuming-records"></a>4.3. Consuming Records</h3>
+<div class="paragraph">
+<p>Let us take a look at how the message listener container enables both single-record and batch-based message consumption.</p>
+</div>
+<h3 id="_single_record_consumption" class="discrete">Single Record Consumption</h3>
+<div class="paragraph">
+<p>Let us revisit our basic <code>PulsarListener</code> for the sake of this discussion:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-pulsar-subscription", topics = "hello-pulsar")
+public void listen(String message) {
+    System.out.println("Message Received: " + message);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this <code>PulsarListener</code> method, we essential ask Apache Pulsar support for Spring to invoke the listener method with a single record each time.
+We mentioned that the message listener container consumes the data in batches using the <code>batchReceive</code> method on the consumer.
+The framework detects that the <code>PulsarListener</code>, in this case, receives a single record. This means that, on each invocation of the method, it needs a singe record.
+Although the records are consumed by the message listener container in batches, it iterates through the received batch and invokes the listener method through an adapter for <code>PulsarRecordMessageListener</code>.
+As you can see in the previous section, <code>PulsarRecordMessageListener</code> extends from the <code>MessageListener</code> provided by the Pulsar Java client, and it supports the basic <code>received</code> method.</p>
+</div>
+<h3 id="_batch_consumption" class="discrete">Batch Consumption</h3>
+<div class="paragraph">
+<p>The following example shows the <code>PulsarListener</code> consuming records in batches:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-batch-subscription", topics = "hello-batch", schemaType = SchemaType.JSON, batch = true)
+public void listen4(List&lt;Foo&gt; messages) {
+    System.out.println("records received :" + messages.size());
+    messages.forEach((message) -&gt; System.out.println("record : " + message));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you use this type of <code>PulsarListener</code>, the framework detects that you are in batch mode.
+Since it already received the data in batches by using the Consumer&#8217;s <code>batchReceive</code> method, it hands off the entire batch to the listener method through an adapter for <code>PulsarBatchMessageListener</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pulsar-headers"><a class="anchor" href="#pulsar-headers"></a>5. Pulsar Headers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pulsar does not have a first-class &#8220;header&#8221; concept but instead provides a map for custom user properties as well as methods to access the message metadata typically stored in a message header (eg. <code>id</code> and <code>event-time</code>).
+As such, the terms &#8220;Pulsar message header&#8221; and &#8220;Pulsar message metadata&#8221; are used interchangeably.
+The list of available message metadata (headers) can be found in <a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring/src/main/java/org/apache/pulsar/spring/support/PulsarHeaders.java">PulsarHeaders.java</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_spring_headers"><a class="anchor" href="#_spring_headers"></a>5.1. Spring Headers</h3>
+<div class="paragraph">
+<p>Spring Messaging provides first-class &#8220;header&#8221; support via its <code>MessageHeaders</code> abstraction.</p>
+</div>
+<div class="paragraph">
+<p>The Pulsar message metadata can be consumed as Spring message headers.
+The list of available headers can be found in <a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring/src/main/java/org/apache/pulsar/spring/support/PulsarHeaders.java">PulsarHeaders.java</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_accessing_in_single_record_based_consumer"><a class="anchor" href="#_accessing_in_single_record_based_consumer"></a>5.2. Accessing in Single Record based Consumer</h3>
+<div class="paragraph">
+<p>The following example shows how you can access the various Pulsar Headers in an application that uses the single record mode of consuming:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(topics = "simpleListenerWithHeaders")
+void simpleListenerWithHeaders(String data, @Header(PulsarHeaders.MESSAGE_ID) MessageId messageId,
+                @Header(PulsarHeaders.RAW_DATA) byte[] rawData,
+                @Header("foo") String foo) {
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, we access the values for the <code>messageId</code> and <code>rawData</code> message metadata as well as a custom message property named <code>foo</code>.
+The Spring <code>@Header</code> annotation is used for each header field.</p>
+</div>
+<div class="paragraph">
+<p>You can also use Pulsar&#8217;s <code>Message</code> as the envelope to carry the payload.
+When doing so, the user can directly call the corresponding methods on the Pulsar message for retrieving the metadata.
+However, as a convenience, you can also retrieve it by using the <code>Header</code> annotation.
+Note that you can also use the Spring messaging <code>Message</code> envelope to carry the payload and then retrieve the Pulsar headers by using <code>@Header</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_accessing_in_batch_record_based_consumer"><a class="anchor" href="#_accessing_in_batch_record_based_consumer"></a>5.3. Accessing in Batch Record based Consumer</h3>
+<div class="paragraph">
+<p>In this section, we see how to access the various Pulsar Headers in an application that uses a batch consumer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(topics = "simpleBatchListenerWithHeaders", batch = true)
+void simpleBatchListenerWithHeaders(List&lt;String&gt; data,
+					@Header(PulsarHeaders.MESSAGE_ID) List&lt;MessageId&gt; messageIds,
+					@Header(PulsarHeaders.TOPIC_NAME) List&lt;String&gt; topicNames, @Header("foo") List&lt;String&gt; fooValues) {
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, we consume the data as a <code>List&lt;String&gt;</code>.
+When extracting the various headers, we do so as a <code>List&lt;&gt;</code> as well.
+Apache Pulsar support for Spring ensures that the headers list corresponds to the data list.</p>
+</div>
+<div class="paragraph">
+<p>You can also extract headers in the same manner when you use the batch listener and receive payloads as <code>List&lt;org.apache.pulsar.client.api.Message&lt;?&gt;</code>, <code>org.apache.pulsar.client.api.Messages&lt;?&gt;</code>, or <code>org.springframework.messaging.Messsge&lt;?&gt;</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_header_mapping"><a class="anchor" href="#_message_header_mapping"></a>5.4. Message Header Mapping</h3>
+<div class="paragraph">
+<p>The <code>PulsarHeaderMapper</code> strategy is provided to map headers to and from Pulsar user properties and Spring <code>MessageHeaders</code>.</p>
+</div>
+<div class="paragraph">
+<p>Its interface definition is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public interface PulsarHeaderMapper {
+
+	Map&lt;String, String&gt; toPulsarHeaders(MessageHeaders springHeaders);
+
+	MessageHeaders toSpringHeaders(Message&lt;?&gt; pulsarMessage);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The framework provides a couple of mapper implementations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>JsonPulsarHeaderMapper</code> maps headers as JSON in order to support rich header types and is the default when the Jackson JSON library is on the classpath.</p>
+</li>
+<li>
+<p>The <code>ToStringPulsarHeaderMapper</code> maps headers as strings using the <code>toString()</code> method on the header values and is the fallback mapper.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_json_header_mapper"><a class="anchor" href="#_json_header_mapper"></a>5.4.1. JSON Header Mapper</h4>
+<div class="paragraph">
+<p>The <code>JsonPulsarHeaderMapper</code> uses a &#8220;special&#8221; header (with a key of <code>spring_json_header_types</code>) that contains a JSON map of <code>&lt;key&gt;:&lt;type&gt;</code>.
+This header is used on the inbound side (Pulsar &#8594; Spring) to provide appropriate conversion of each header value to the original type.</p>
+</div>
+<div class="sect4">
+<h5 id="_trusted_packages"><a class="anchor" href="#_trusted_packages"></a>Trusted Packages</h5>
+<div class="paragraph">
+<p>By default, the JSON mapper deserializes header types whose package exactly matches one of the following safe defaults: <code>java.lang</code>, <code>java.net</code>, <code>java.util</code>, and <code>org.springframework.util</code>.
+A class whose package is not in the trusted list is returned to the application as a <code>NonTrustedHeaderType</code> wrapper rather than being deserialized.</p>
+</div>
+<div class="paragraph">
+<p>Trust is evaluated by exact package match.
+Sub-packages are not trusted transitively: trusting <code>java.util</code> does NOT automatically trust <code>java.util.concurrent</code> or <code>java.util.logging</code>.
+Each package you need must be listed explicitly.</p>
+</div>
+<div class="paragraph">
+<p>To extend the trusted set for annotation-driven listeners (<code>@PulsarListener</code> / <code>@PulsarReader</code>) without replacing the entire converter, register a <code>String[]</code> bean named <code>pulsarHeaderTrustedPackages</code> in your application context:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Bean(name = "pulsarHeaderTrustedPackages")
+String[] pulsarHeaderTrustedPackages() {
+    return new String[] { "com.example.events", "com.example.dto" };
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The framework picks up this bean automatically and applies it to every listener and reader endpoint, composing it with any custom <code>pulsarHeaderObjectMapper</code> bean you may also have defined.</p>
+</div>
+<div class="paragraph">
+<p>If you are constructing a <code>JsonPulsarHeaderMapper</code> directly via the builder, pass the packages there instead:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Bean
+JsonPulsarHeaderMapper headerMapper() {
+    return JsonPulsarHeaderMapper.builder()
+        .trustedPackages("com.example.events", "com.example.dto")
+        .build();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To trust all packages — for example, in a fully-controlled, internal messaging environment — pass <code>"*"</code> as the sole entry in either approach:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// via bean
+@Bean(name = "pulsarHeaderTrustedPackages")
+String[] pulsarHeaderTrustedPackages() {
+    return new String[] { "*" };
+}
+
+// via builder
+JsonPulsarHeaderMapper.builder().trustedPackages("*").build();</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Using <code>"*"</code> allows any class reachable on the classpath to be loaded and partially instantiated during deserialization of incoming message headers.
+Do not use it when consuming messages from untrusted or external sources.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_tostring_classes"><a class="anchor" href="#_tostring_classes"></a>ToString Classes</h5>
+<div class="paragraph">
+<p>Certain types are not suitable for JSON serialization, and a simple <code>toString()</code> serialization might be preferred for these types.
+The <code>JsonPulsarHeaderMapper</code> has a property called <code>addToStringClasses()</code> that lets you supply the names of classes that should be treated this way for outbound mapping.
+During inbound mapping, they are mapped as <code>String</code>.
+By default, only <code>org.springframework.util.MimeType</code> and <code>org.springframework.http.MediaType</code> are mapped this way.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_custom_objectmapper"><a class="anchor" href="#_custom_objectmapper"></a>Custom ObjectMapper</h5>
+<div class="paragraph">
+<p>The JSON mapper uses a reasonable configured Jackson 2 <code>ObjectMapper</code> to handle serialization of header values.
+However, to provide a custom object mapper one must simply provide an <code>ObjectMapper</code> bean with the name <code>pulsarHeaderObjectMapper</code>.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Configuration(proxyBeanMethods = false)
+static class PulsarHeadersCustomObjectMapperTestConfig {
+
+    @Bean(name = "pulsarHeaderObjectMapper")
+    ObjectMapper customObjectMapper() {
+        var objectMapper = new ObjectMapper();
+		// do things with your special header object mapper here
+        return objectMapper;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The object mapper in the example above should be an instance of <code>com.fasterxml.jackson.databind.ObjectMapper</code>, <strong>not</strong> the shaded <code>org.apache.pulsar.shade.com.fasterxml.jackson.databind.ObjectMapper</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <a href="../custom-object-mapper.html#jackson2vs3" class="xref page">same limitations</a> regarding Jackson 2 vs. Jackson 3 apply here }
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inboundoutbound_patterns"><a class="anchor" href="#_inboundoutbound_patterns"></a>5.5. Inbound/Outbound Patterns</h3>
+<div class="paragraph">
+<p>On  the inbound side, by default, all Pulsar headers (message metadata plus user properties) are mapped to <code>MessageHeaders</code>.
+On the outbound side, by default, all <code>MessageHeaders</code> are mapped, except <code>id</code>, <code>timestamp</code>, and the headers that represent the Pulsar message metadata (i.e. the headers that are prefixed with <code>pulsar_message_</code>).
+You can specify which headers are mapped for inbound and outbound messages by configuring the <code>inboundPatterns</code> and <code>outboundPatterns</code> on a mapper bean you provide.
+You can include Pulsar message metadata headers on the outbound messages by adding the exact header name to the <code>outboundPatterns</code> as patterns are not supported for metadata headers.
+Patterns are rather simple and can contain a leading wildcard (<code>*</code>), a trailing wildcard, or both (for example, <code>*.cat.*</code>).
+You can negate patterns with a leading <code>!</code>.
+The first pattern that matches   a header name (whether positive or negative) wins.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When you provide your own patterns, we recommend including <code>!id</code> and <code>!timestamp</code>, since these headers are read-only on the inbound side.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_message_acknowledgment"><a class="anchor" href="#_message_acknowledgment"></a>6. Message Acknowledgment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you use Apache Pulsar support for Spring, the message acknowledgment is handled by the framework, unless opted out by the application.
+In this section, we go through the details of how the framework takes care of message acknowledgment.</p>
+</div>
+<div class="sect2">
+<h3 id="message-ack-modes"><a class="anchor" href="#message-ack-modes"></a>6.1. Message ACK modes</h3>
+<div class="paragraph">
+<p>Apache Pulsar support for Spring provides the following modes for acknowledging messages:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>BATCH</code></p>
+</li>
+<li>
+<p><code>RECORD</code></p>
+</li>
+<li>
+<p><code>MANUAL</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><code>BATCH</code> acknowledgment mode is the default, but you can change it on the message listener container.
+In the following sections, we see how acknowledgment works when you use both single and batch versions of <code>PulsarListener</code> and how they translate to the backing message listener container (and, ultimately, to the Pulsar consumer).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_automatic_message_ack_in_single_record_mode"><a class="anchor" href="#_automatic_message_ack_in_single_record_mode"></a>6.2. Automatic Message Ack in Single Record Mode</h3>
+<div class="paragraph">
+<p>Let us revisit our basic single message based <code>PulsarListener</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-pulsar-subscription", topics = "hello-pulsar")
+public void listen(String message) {
+    System.out.println("Message Received: " + message);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It is natural to wonder, how acknowledgment works when you use <code>PulsarListener</code>, especially if you are familiar with using Pulsar consumer directly.
+The answer comes down to the message listener container, as that is the central place in Apache Pulsar support for Spring that coordinates all the consumer related activities.</p>
+</div>
+<div class="paragraph">
+<p>Assuming you are not overriding the default behavior, this is what happens behind the scenes when you use the preceding <code>PulsarListener</code>:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>First, the listener container receives messages as batches from the Pulsar consumer.</p>
+</li>
+<li>
+<p>The received messages are handed down to <code>PulsarListener</code> one message at a time.</p>
+</li>
+<li>
+<p>When all the records are handed down to the listener method and successfully processed, the container acknowledges all the messages from the original batch.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This is the normal flow. If any records from the original batch throw an exception, Apache Pulsar support for Spring tracks those records separately.
+When all the records from the batch are processed, Apache Pulsar support for Spring acknowledges all the successful messages and negatively acknowledges (nack) all the failed messages.
+In other words, when consuming single records by using <code>PulsarRecordMessageListener</code> and the default ack mode of <code>BATCH</code> is used, the framework waits for all the records received from the <code>batchReceive</code> call to process successfully and then calls the <code>acknowledge</code> method on the Pulsar consumer.
+If any particular record throws an exception when invoking the handler method, Apache Pulsar support for Spring tracks those records and separately calls <code>negativeAcknowledge</code> on those records after the entire batch is processed.</p>
+</div>
+<div class="paragraph">
+<p>If the application wants the acknowledgment or negative acknowledgment to occur per record, the <code>RECORD</code> ack mode can be enabled.
+In that case, after handling each record, the message is acknowledged if no error and negatively acknowledged if there was an error.
+The following example enables <code>RECORD</code> ack mode on the Pulsar listener:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-pulsar-subscription", topics = "hello-pulsar", ackMode = AckMode.RECORD)
+public void listen(String message) {
+    System.out.println("Message Received: " + message);
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manual_message_ack_in_single_record_mode"><a class="anchor" href="#_manual_message_ack_in_single_record_mode"></a>6.3. Manual Message Ack in Single Record Mode</h3>
+<div class="paragraph">
+<p>You might not always want the framework to send acknowledgments but, rather, do that directly from the application itself.
+Apache Pulsar support for Spring provides a couple of ways to enable manual message acknowledgments. The following example shows one of them:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-pulsar-subscription", topics = "hello-pulsar", ackMode = AckMode.MANUAL)
+public void listen(Message&lt;String&gt; message, Acknowledgment acknowledgment) {
+    System.out.println("Message Received: " + message.getValue());
+	acknowledgment.acknowledge();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A few things merit explanation here. First, we enablE manual ack mode by setting <code>ackMode</code> on <code>PulsarListener</code>.
+When enabling manual ack mode, Apache Pulsar support for Spring lets the application inject an <code>Acknowledgment</code> object.
+The framework achieves this by selecting a compatible message listener container: <code>PulsarAcknowledgingMessageListener</code> for single record based consumption, which gives you access to an <code>Acknowledgment</code> object.</p>
+</div>
+<div class="paragraph">
+<p>The <code>Acknowledgment</code> object provides the following API methods:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void acknowledge();
+
+void acknowledge(MessageId messageId);
+
+void acknowledge(List&lt;MessageId&gt; messageIds);
+
+void nack();
+
+void nack(MessageId messageId);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can inject this <code>Acknowledgment</code> object into your <code>PulsarListener</code> while using <code>MANUAL</code> ack mode and then call one of the corresponding methods.</p>
+</div>
+<div class="paragraph">
+<p>In the preceding <code>PulsarListener</code> example, we call a parameter-less <code>acknowledge</code> method.
+This is because the framework knows which <code>Message</code> it is currently operating under.
+When calling <code>acknowledge()</code>, you need not receive the payload with the <code>Message</code> enveloper` but, rather, use the target type&#8201;&#8212;&#8201;<code>String</code>, in this example.
+You can also call a different variant of <code>acknowledge</code> by providing the message ID: <code>acknowledge.acknowledge(message.getMessageId());</code>
+When you use <code>acknowledge(messageId)</code>, you must receive the payload by using the <code>Message&lt;?&gt;</code> envelope.</p>
+</div>
+<div class="paragraph">
+<p>Similar to what is possible for acknowledging, the <code>Acknowledgment</code> API also provides options for negatively acknowledging.
+See the nack methods shown earlier.</p>
+</div>
+<div class="paragraph">
+<p>You can also call <code>acknowledge</code> directly on the Pulsar consumer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-pulsar-subscription", topics = "hello-pulsar", ackMode = AckMode.MANUAL)
+public void listen(Message&lt;String&gt; message, Consumer&lt;String&gt; consumer) {
+    System.out.println("Message Received: " + message.getValue());
+	try {
+		consumer.acknowledge(message);
+	}
+	catch (Exception e) {
+		....
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When calling <code>acknowledge</code> directly on the underlying consumer, you need to do error handling by yourself.
+Using the <code>Acknowledgment</code> does not require that, as the framework can do that for you.
+Therefore, you should use the <code>Acknowledgment</code> object approach when using manual acknowledgment.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When using manual acknowledgment, it is important to understand that the framework completely stays from any acknowledgment at all.
+Hence, it is extremely important to think through the right acknowledgment strategies when designing applications.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_automatic_message_ack_in_batch_consumption"><a class="anchor" href="#_automatic_message_ack_in_batch_consumption"></a>6.4. Automatic Message Ack in Batch Consumption</h3>
+<div class="paragraph">
+<p>When you consume records in batches (see &#8220;<a href="#message-ack-modes">Message ACK modes</a>&#8221;) and you use the default ack mode of <code>BATCH</code> is used, when the entire batch is processed successfully, the entire batch is acknowledged.
+If any records throw an exception, the entire batch is negatively acknowledged.
+Note that this may not be the same batch that was batched on the producer side. Rather, this is the batch that returned from calling <code>batchReceive</code> on the consumer</p>
+</div>
+<div class="paragraph">
+<p>Consider the following batch listener:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-pulsar-subscription", topics = "hello-pulsar", batch = true)
+public void batchListen(List&lt;Foo&gt; messages) {
+    for (Foo foo : messages) {
+		...
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When all the messages in the incoming collection (<code>messages</code> in this example) are processed, the framework acknowledges all of them.</p>
+</div>
+<div class="paragraph">
+<p>When consuming in batch mode, <code>RECORD</code> is not an allowed ack mode.
+This might cause an issue, as an application may not want the entire batch to be re-delivered again.
+In such situations, you need to use the <code>MANUAL</code> acknowledgement mode.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manual_message_ack_in_batch_consumption"><a class="anchor" href="#_manual_message_ack_in_batch_consumption"></a>6.5. Manual Message Ack in Batch Consumption</h3>
+<div class="paragraph">
+<p>As seen in the previous section, when <code>MANUAL</code> ack mode is set on the message listener container, the framework does not do any acknowledgment, positive or negative.
+It is entirely up to the application to take care of such concerns.
+When <code>MANUAL</code> ack mode is set, Apache Pulsar support for Spring selects a compatible message listener container: <code>PulsarBatchAcknowledgingMessageListener</code> for batch consumption, which gives you access to an <code>Acknowledgment</code> object.
+The following are the methods available in the <code>Acknowledgment</code> API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">void acknowledge();
+
+void acknowledge(MessageId messageId);
+
+void acknowledge(List&lt;MessageId&gt; messageIds);
+
+void nack();
+
+void nack(MessageId messageId);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can inject this <code>Acknowledgment</code> object into your <code>PulsarListener</code> while using <code>MANUAL</code> ack mode.
+The following listing shows a basic example for a batch based listener:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "hello-pulsar-subscription", topics = "hello-pulsar")
+public void listen(List&lt;Message&lt;String&gt;&gt; messgaes, Acknowlegement acknowledgment) {
+    for (Message&lt;String&gt; message : messages) {
+		try {
+			...
+	        acknowledgment.acknowledge(message.getMessageId());
+		}
+		catch (Exception e) {
+			acknowledgment.nack(message.getMessageId());
+		}
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you use a batch listener, the message listener container cannot know which record it is currently operating upon.
+Therefore, to manually acknowledge, you need to use one of the overloaded <code>acknowledge</code> method that takes a <code>MessageId</code> or a <code>List&lt;MessageId&gt;</code>.
+You can also negatively acknowledge with the <code>MessageId</code> for the batch listener.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_message_redelivery_and_error_handling"><a class="anchor" href="#_message_redelivery_and_error_handling"></a>7. Message Redelivery and Error Handling</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we have seen both <code>PulsarListener</code> and the message listener container infrastructure and its various functions, let us now try to understand message redelivery and error handling.
+Apache Pulsar provides various native strategies for message redelivery and error handling. We take a look at them and see how we can use them through Apache Pulsar support for Spring.</p>
+</div>
+<div class="sect2">
+<h3 id="_specifying_acknowledgment_timeout_for_message_redelivery"><a class="anchor" href="#_specifying_acknowledgment_timeout_for_message_redelivery"></a>7.1. Specifying Acknowledgment Timeout for Message Redelivery</h3>
+<div class="paragraph">
+<p>By default, Pulsar consumers do not redeliver messages unless the consumer crashes, but you can change this behavior by setting an ack timeout on the Pulsar consumer.
+If the ack timeout property has a value above zero and if the Pulsar consumer does not acknowledge a message within that timeout period, the message is redelivered.</p>
+</div>
+<div class="paragraph">
+<p>When you use Apache Pulsar support for Spring, you can set this property via a <a href="#_consumer_customization_on_pulsarlistener">consumer customizer</a> or with the native Pulsar <code>ackTimeoutMillis</code> property in the <code>properties</code> attribute of <code>@PulsarListener</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "subscription-1", topics = "topic-1"
+                properties = {"ackTimeoutMillis=60000"})
+public void listen(String s) {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>When you specify the ack timeout, if the consumer does not send an acknowledgement within 60 seconds, the message is redelivered by Pulsar to the consumer.</p>
+</div>
+<div class="paragraph">
+<p>If you want to specify some advanced backoff options for ack timeout with different delays, you can do the following:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@EnablePulsar
+@Configuration
+class AckTimeoutRedeliveryConfig {
+
+    @PulsarListener(subscriptionName = "withAckTimeoutRedeliveryBackoffSubscription",
+            topics = "withAckTimeoutRedeliveryBackoff-test-topic",
+            ackTimeoutRedeliveryBackoff = "ackTimeoutRedeliveryBackoff",
+            properties = { "ackTimeoutMillis=60000" })
+    void listen(String msg) {
+        // some long-running process that may cause an ack timeout
+    }
+
+    @Bean
+    RedeliveryBackoff ackTimeoutRedeliveryBackoff() {
+        return MultiplierRedeliveryBackoff.builder().minDelayMs(1000).maxDelayMs(10 * 1000).multiplier(2)
+                .build();
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, we specify a bean for Pulsar&#8217;s <code>RedeliveryBackoff</code> with a minimum delay of 1 second, a maximum delay of 10 seconds, and a backoff multiplier of 2.
+After the initial ack timeout occurs, the message redeliveries are controlled through this backoff bean.
+We provide the backoff bean to the <code>PulsarListener</code> annotation by setting the <code>ackTimeoutRedeliveryBackoff</code> property to the actual bean name&#8201;&#8212;&#8201;<code>ackTimeoutRedeliveryBackoff</code>, in this case.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_specifying_negative_acknowledgment_redelivery"><a class="anchor" href="#_specifying_negative_acknowledgment_redelivery"></a>7.2. Specifying Negative Acknowledgment Redelivery</h3>
+<div class="paragraph">
+<p>When acknowledging negatively, Pulsar consumer lets you specify how the application wants the message to be re-delivered.
+The default is to redeliver the message in one minute, but you can change it via a <a href="#_consumer_customization_on_pulsarlistener">consumer customizer</a> or with the native Pulsar <code>negativeAckRedeliveryDelay</code> property in the <code>properties</code> attribute of <code>@PulsarListener</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "subscription-1", topics = "topic-1"
+                properties = {"negativeAckRedeliveryDelay=10ms"})
+public void listen(String s) {
+    ...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also specify different delays and backoff mechanisms with a multiplier by providing a <code>RedeliveryBackoff</code> bean and providing the bean name as the <code>negativeAckRedeliveryBackoff</code> property on the PulsarProducer, as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@EnablePulsar
+@Configuration
+class NegativeAckRedeliveryConfig {
+
+    @PulsarListener(subscriptionName = "withNegRedeliveryBackoffSubscription",
+            topics = "withNegRedeliveryBackoff-test-topic", negativeAckRedeliveryBackoff = "redeliveryBackoff",
+            subscriptionType = SubscriptionType.Shared)
+    void listen(String msg) {
+        throw new RuntimeException("fail " + msg);
+    }
+
+    @Bean
+    RedeliveryBackoff redeliveryBackoff() {
+        return MultiplierRedeliveryBackoff.builder().minDelayMs(1000).maxDelayMs(10 * 1000).multiplier(2)
+                .build();
+    }
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_using_dead_letter_topic_from_apache_pulsar_for_message_redelivery_and_error_handling"><a class="anchor" href="#_using_dead_letter_topic_from_apache_pulsar_for_message_redelivery_and_error_handling"></a>7.3. Using Dead Letter Topic from Apache Pulsar for Message Redelivery and Error Handling</h3>
+<div class="paragraph">
+<p>Apache Pulsar lets applications use a dead letter topic on consumers with a <code>Shared</code> subscription type.
+For the <code>Exclusive</code> and <code>Failover</code> subscription types, this feature is not available.
+The basic idea is that, if a message is retried a certain number of times (maybe due to an ack timeout or nack redelivery), once the number of retries are exhausted, the message can be sent to a special topic called the dead letter queue (DLQ).
+Let us see some details around this feature in action by inspecting some code snippets:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@EnablePulsar
+@Configuration
+class DeadLetterPolicyConfig {
+
+    @PulsarListener(id = "deadLetterPolicyListener", subscriptionName = "deadLetterPolicySubscription",
+            topics = "topic-with-dlp", deadLetterPolicy = "deadLetterPolicy",
+            subscriptionType = SubscriptionType.Shared, properties = { "ackTimeoutMillis=1000" })
+    void listen(String msg) {
+        throw new RuntimeException("fail " + msg);
+    }
+
+    @PulsarListener(id = "dlqListener", topics = "my-dlq-topic")
+    void listenDlq(String msg) {
+        System.out.println("From DLQ: " + msg);
+    }
+
+    @Bean
+    DeadLetterPolicy deadLetterPolicy() {
+        return DeadLetterPolicy.builder().maxRedeliverCount(10).deadLetterTopic("my-dlq-topic").build();
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>First, we have a special bean for <code>DeadLetterPolicy</code>, and it is named as <code>deadLetterPolicy</code> (it can be any name as you wish).
+This bean specifies a number of things, such as the max delivery (10, in this case) and the name of the dead letter topic&#8201;&#8212;&#8201;<code>my-dlq-topic</code>, in this case.
+If you do not specify a DLQ topic name, it defaults to <code>&lt;topicname&gt;-&lt;subscriptionname&gt;-DLQ</code> in Pulsar.
+Next, we provide this bean name to <code>PulsarListener</code> by setting the <code>deadLetterPolicy</code> property.
+Note that the <code>PulsarListener</code> has a subscription type of <code>Shared</code>, as the DLQ feature only works with shared subscriptions.
+This code is primarily for demonstration purposes, so we provide an <code>ackTimeoutMillis</code> value of 1000.
+The idea is that the code throws the exception and, if Pulsar does not receive an ack within 1 second, it does a retry.
+If that cycle continues ten times (as that is our max redelivery count in the <code>DeadLetterPolicy</code>), the Pulsar consumer publishes the messages to the DLQ topic.
+We have another <code>PulsarListener</code> that listens on the DLQ topic to receive data as it is published to the DLQ topic.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="title">Special note on DLQ topics when using partitioned topics</div>
+<div class="paragraph">
+<p>If the main topic is partitioned, behind the scenes, each partition is treated as a separate topic by Pulsar.
+Pulsar appends <code>partition-&lt;n&gt;</code>, where <code>n</code> stands for the partition number to the main topic name.
+The problem is that, if you do not specify a DLQ topic (as opposed to what we did above), Pulsar publishes to a default topic name that has this <code>`partition-&lt;n&gt;</code> info in it&#8201;&#8212;&#8201;for example: <code>topic-with-dlp-partition-0-deadLetterPolicySubscription-DLQ</code>.
+The easy way to solve this is to provide a DLQ topic name always.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_native_error_handling_in_apache_pulsar_support_for_spring"><a class="anchor" href="#_native_error_handling_in_apache_pulsar_support_for_spring"></a>7.4. Native Error Handling in Apache Pulsar support for Spring</h3>
+<div class="paragraph">
+<p>As we noted earlier, the DLQ feature in Apache Pulsar works only for shared subscriptions.
+What does an application do if it needs to use some similar feature for non-shared subscriptions?
+The main reason Pulsar does not support DLQ on exclusive and failover subscriptions is because those subscription types are order-guaranteed.
+Allowing redeliveries, DLQ, and so on effectively receives messages out of order.
+However, what if an application are okay with that but, more importantly, needs this DLQ feature for non-shared subscriptions?
+For that, Apache Pulsar support for Spring provides a <code>PulsarConsumerErrorHandler</code>, which you can use across any subscription types in Pulsar:  <code>Exclusive</code>, <code>Failover</code>, <code>Shared</code>, or <code>Key_Shared</code>.</p>
+</div>
+<div class="paragraph">
+<p>When you use <code>PulsarConsumerErrorHandler</code> from Apache Pulsar support for Spring, make sure not to set the ack timeout properties on the listener.</p>
+</div>
+<div class="paragraph">
+<p>Let us see some details by examining a few code snippets:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@EnablePulsar
+@Configuration
+class PulsarConsumerErrorHandlerConfig {
+
+    @Bean
+    PulsarConsumerErrorHandler&lt;String&gt; pulsarConsumerErrorHandler(
+            PulsarTemplate&lt;String&gt; pulsarTemplate) {
+        return new DefaultPulsarConsumerErrorHandler&lt;&gt;(
+                new PulsarDeadLetterPublishingRecoverer&lt;&gt;(pulsarTemplate, (c, m) -&gt; "my-foo-dlt"), new FixedBackOff(100, 10));
+    }
+
+    @PulsarListener(id = "pulsarConsumerErrorHandler-id", subscriptionName = "pulsatConsumerErrorHandler-subscription",
+                    topics = "pulsarConsumerErrorHandler-topic",
+					pulsarConsumerErrorHandler = "pulsarConsumerErrorHandler")
+    void listen(String msg) {
+        throw new RuntimeException("fail " + msg);
+    }
+
+    @PulsarListener(id = "pceh-dltListener", topics = "my-foo-dlt")
+    void listenDlt(String msg) {
+        System.out.println("From DLT: " + msg);
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the <code>pulsarConsumerErrorHandler</code> bean.
+This creates a bean of type <code>PulsarConsumerErrorHandler</code> and uses the default implementation provided out of the box by Apache Pulsar support for Spring: <code>DefaultPulsarConsumerErrorHandler</code>.
+<code>DefaultPulsarConsumerErrorHandler</code> has a constructor that takes a <code>PulsarMessageRecovererFactory</code> and a <code>org.springframework.util.backoff.Backoff</code>.
+<code>PulsarMessageRecovererFactory</code> is a functional interface with the following API:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@FunctionalInterface
+public interface PulsarMessageRecovererFactory&lt;T&gt; {
+
+	/**
+	 * Provides a message recoverer {@link PulsarMessageRecoverer}.
+	 * @param consumer Pulsar consumer
+	 * @return {@link PulsarMessageRecoverer}.
+	 */
+	PulsarMessageRecoverer&lt;T&gt; recovererForConsumer(Consumer&lt;T&gt; consumer);
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>recovererForConsumer</code> method takes a Pulsar consumer and returns a <code>PulsarMessageRecoverer</code>, which is another functional interface.
+Here is the API of <code>PulsarMessageRecoverer</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public interface PulsarMessageRecoverer&lt;T&gt; {
+
+	/**
+	 * Recover a failed message, for e.g. send the message to a DLT.
+	 * @param message Pulsar message
+	 * @param exception exception from failed message
+	 */
+	void recoverMessage(Message&lt;T&gt; message, Exception exception);
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Apache Pulsar support for Spring provides an implementation for <code>PulsarMessageRecovererFactory</code> called <code>PulsarDeadLetterPublishingRecoverer</code> that provides a default implementation that can recover the message by sending it to a Dead Letter Topic (DLT).
+We provide this implementation to the constructor for the preceding <code>DefaultPulsarConsumerErrorHandler</code>.
+As the second argument, we provide a <code>FixedBackOff</code>.
+You can also provide the <code>ExponentialBackoff</code> from Spring for advanced backoff features.
+Then we provide this bean name for the <code>PulsarConsumerErrorHandler</code> as a property to the <code>PulsarListener</code>.
+The property is called <code>pulsarConsumerErrorHandler</code>.
+Each time the <code>PulsarListener</code> method fails for a message, it gets retried.
+The number of retries are controlled by the <code>Backoff</code> provided implementation values. In our example, we do 10 retries (11 total tries&#8201;&#8212;&#8201;the first one and then the 10 retries).
+Once all the retries are exhausted, the message is sent to the DLT topic.</p>
+</div>
+<div class="paragraph">
+<p>The <code>PulsarDeadLetterPublishingRecoverer</code> implementation we provide uses a <code>PulsarTemplate</code> that is used for publishing the message to the DLT.
+In most cases, the same auto-configured <code>PulsarTemplate</code> from Spring Boot is sufficient with the caveat for partitioned topics.
+When using partitioned topics and using custom message routing for the main topic, you must use a different <code>PulsarTemplate</code> that does not take the auto-configured <code>PulsarProducerFactory</code> that is populated with a value of <code>custompartition</code> for <code>message-routing-mode</code>.
+You can use a <code>PulsarConsumerErrorHandler</code> with the following blueprint:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Bean
+PulsarConsumerErrorHandler&lt;Integer&gt; pulsarConsumerErrorHandler(PulsarClient pulsarClient) {
+    PulsarProducerFactory&lt;Integer&gt; pulsarProducerFactory = new DefaultPulsarProducerFactory&lt;&gt;(pulsarClient, Map.of());
+        PulsarTemplate&lt;Integer&gt; pulsarTemplate = new PulsarTemplate&lt;&gt;(pulsarProducerFactory);
+
+        BiFunction&lt;Consumer&lt;?&gt;, Message&lt;?&gt;, String&gt; destinationResolver =
+                (c, m) -&gt; "my-foo-dlt";
+
+        PulsarDeadLetterPublishingRecoverer&lt;Integer&gt; pulsarDeadLetterPublishingRecoverer =
+                new PulsarDeadLetterPublishingRecoverer&lt;&gt;(pulsarTemplate, destinationResolver);
+
+        return new DefaultPulsarConsumerErrorHandler&lt;&gt;(pulsarDeadLetterPublishingRecoverer,
+                new FixedBackOff(100, 5));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that we are provide a destination resolver to the <code>PulsarDeadLetterPublishingRecoverer</code> as the second constructor argument.
+If not provided, <code>PulsarDeadLetterPublishingRecoverer</code> uses <code>&lt;subscription-name&gt;-&lt;topic-name&gt;-DLT&gt;</code> as the DLT topic name.
+When using this feature, you should use a proper destination name by setting the destination resolver rather than using the default.</p>
+</div>
+<div class="paragraph">
+<p>When using a single record message listener, as we did with <code>PulsarConsumerErrorHnadler</code>, and if you use manual acknowledgement, make sure to not negatively acknowledge the message when an exception is thrown.
+Rather, re-throw the exception back to the container. Otherwise, the container thinks the message is handled separately, and the error handling is not triggered.</p>
+</div>
+<div class="paragraph">
+<p>Finally, we have a second <code>PulsarListener</code> that receives messages from the DLT topic.</p>
+</div>
+<div class="paragraph">
+<p>In the examples provided in this section so far, we only saw how to use <code>PulsarConsumerErrorHandler</code> with a single record message listener.
+Next, we look at how you can use this on batch listeners.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_batch_listener_with_pulsarconsumererrorhandler"><a class="anchor" href="#_batch_listener_with_pulsarconsumererrorhandler"></a>7.5. Batch listener with PulsarConsumerErrorHandler</h3>
+<div class="paragraph">
+<p>First, let us look at a batch <code>PulsarListener</code> method:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "batch-demo-5-sub", topics = "batch-demo-4", batch = true, concurrency = "3",
+            subscriptionType = SubscriptionType.Failover,
+            pulsarConsumerErrorHandler = "pulsarConsumerErrorHandler", ackMode = AckMode.MANUAL)
+void listen(List&lt;Message&lt;Integer&gt;&gt; data, Consumer&lt;Integer&gt; consumer, Acknowledgment acknowledgment) {
+    for (Message&lt;Integer&gt; datum : data) {
+        if (datum.getValue() == 5) {
+            throw new PulsarBatchListenerFailedException("failed", datum);
+        }
+        acknowledgement.acknowledge(datum.getMessageId());
+    }
+}
+
+@Bean
+PulsarConsumerErrorHandler&lt;String&gt; pulsarConsumerErrorHandler(
+        PulsarTemplate&lt;String&gt; pulsarTemplate) {
+    return new DefaultPulsarConsumerErrorHandler&lt;&gt;(
+            new PulsarDeadLetterPublishingRecoverer&lt;&gt;(pulsarTemplate, (c, m) -&gt; "my-foo-dlt"), new FixedBackOff(100, 10));
+}
+
+@PulsarListener(subscriptionName = "my-dlt-subscription", topics = "my-foo-dlt")
+void dltReceiver(Message&lt;Integer&gt; message) {
+    System.out.println("DLT - RECEIVED: " + message.getValue());
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once again, we provide the <code>pulsarConsumerErrorHandler</code> property with the <code>PulsarConsumerErrorHandler</code> bean name.
+When you use a batch listener (as shown in the preceding example) and want to use the <code>PulsarConsumerErrorHandler</code> from Apache Pulsar support for Spring, you need to use manual acknowledgment.
+This way, you can acknowledge all the successful individual messages.
+For the ones that fail, you must throw a <code>PulsarBatchListenerFailedException</code> with the message on which it fails.
+If you throw any other exception, the framework will nack the entire batch and log a warning, rather than applying the per-message retry and recovery logic provided by the error handler.
+On retry, the container sends a new batch of messages, starting with the failed message to the listener.
+If it fails again, it is retried, until the retries are exhausted, at which point the message is sent to the DLT.
+At that point, the message is acknowledged by the container, and the listener is handed over with the subsequent messages in the original batch.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_consumer_customization_on_pulsarlistener"><a class="anchor" href="#_consumer_customization_on_pulsarlistener"></a>8. Consumer Customization on PulsarListener</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache Pulsar support for Spring provides a convenient way to customize the consumer created by the container used by the <code>PulsarListener</code>.
+Applications can provide a bean for <code>PulsarListenerConsumerBuilderCustomizer</code>.
+Here is an example.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Bean
+public PulsarListenerConsumerBuilderCustomizer&lt;String&gt; myCustomizer() {
+    return cb -&gt; {
+        cb.subscriptionName("modified-subscription-name");
+    };
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then this customizer bean name can be provided as an attribute on the <code>PuslarListener</code> annotation as shown below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(subscriptionName = "my-subscription",
+        topics = "my-topic", consumerCustomizer = "myCustomizer")
+void listen(String message) {
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The framework detects the provided bean through the <code>PulsarListener</code> and applies this customizer on the Consumer builder before creating the Pulsar Consumer.</p>
+</div>
+<div class="paragraph">
+<p>If you have multiple <code>PulsarListener</code> methods, and each of them have different customization rules, you should create multiple customizer beans and attach the proper customizers on each <code>PulsarListener</code>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="message-listener-lifecycle"><a class="anchor" href="#message-listener-lifecycle"></a>9. Message Listener Container Lifecycle</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="message-listener-pause-resume"><a class="anchor" href="#message-listener-pause-resume"></a>9.1. Pausing and Resuming</h3>
+<div class="paragraph">
+<p>There are situations in which an application might want to pause message consumption temporarily and then resume later.
+Apache Pulsar support for Spring provides the ability to pause and resume the underlying message listener containers.
+When the Pulsar message listener container is paused, any polling done by the container to receive data from the Pulsar consumer will be paused.
+Similarly, when the container is resumed, the next poll starts returning data if the topic has any new records added while paused.</p>
+</div>
+<div class="paragraph">
+<p>To pause or resume a listener container, first obtain the container instance via the <code>PulsarListenerEndpointRegistry</code> bean and then invoke the pause/resume API on the container instance - as shown in the snippet below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Autowired
+private PulsarListenerEndpointRegistry registry;
+
+void someMethod() {
+  PulsarMessageListenerContainer container = registry.getListenerContainer("my-listener-id");
+  container.pause();
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The id parameter passed to <code>getListenerContainer</code> is the container id - which will be the value of the <code>@PulsarListener</code> id attribute when pausing/resuming a <code>@PulsarListener</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-listener-startup-failure"><a class="anchor" href="#message-listener-startup-failure"></a>9.2. Handling Startup Failures</h3>
+<div class="paragraph">
+<p>Message listener containers are started when the application context is refreshed.
+By default, any failures encountered during startup are re-thrown and the application will fail to start.
+You can adjust this behavior with the <code>StartupFailurePolicy</code> on the corresponding container properties.</p>
+</div>
+<div class="paragraph">
+<p>The available options are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Stop</code> (default) - log and re-throw the exception, effectively stopping the application</p>
+</li>
+<li>
+<p><code>Continue</code> - log the exception, leave the container in a non-running state, but do not stop the application</p>
+</li>
+<li>
+<p><code>Retry</code> - log the exception, retry to start the container asynchronously, but do not stop the application.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The default retry behavior is to retry 3 times with a 10-second delay between
+each attempt.
+However, a custom retry template can be specified on the corresponding container properties.
+If the container fails to restart after the retries are exhausted, it is left in a non-running state.</p>
+</div>
+<div class="sect3">
+<h4 id="_configuration"><a class="anchor" href="#_configuration"></a>9.2.1. Configuration</h4>
+<h5 id="_with_spring_boot" class="discrete">With Spring Boot</h5>
+<div class="paragraph">
+<p>When using Spring Boot you can register a <code>PulsarContainerFactoryCustomizer&lt;ConcurrentPulsarListenerContainerFactory&lt;?&gt;&gt;</code> bean that sets the container startup properties.</p>
+</div>
+<h5 id="_without_spring_boot" class="discrete">Without Spring Boot</h5>
+<div class="paragraph">
+<p>However, if you are instead manually configuring the components, you will have to update the container startup properties accordingly when constructing the message listener container factory.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="imperative-pulsar-reader"><a class="anchor" href="#imperative-pulsar-reader"></a>10. Pulsar Reader Support</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The framework provides support for using <a href="https://pulsar.apache.org/docs/4.2.x/concepts-clients/#reader-interface">Pulsar Reader</a> via the <code>PulsarReaderFactory</code>.</p>
+</div>
+<div class="paragraph">
+<p>Spring Boot provides this reader factory which you can further configure by specifying any of the <a href="../appendix/configuration-properties.html" class="xref page"><code>spring.pulsar.reader.*</code></a> application properties.</p>
+</div>
+<div class="sect2">
+<h3 id="_pulsarreader_annotation"><a class="anchor" href="#_pulsarreader_annotation"></a>10.1. PulsarReader Annotation</h3>
+<div class="paragraph">
+<p>While it is possible to use <code>PulsarReaderFactory</code> directly, Apache Pulsar support for Spring provides the <code>PulsarReader</code> annotation that you can use to quickly read from a topic without setting up any reader factories yourselves.
+This is similar to the same ideas behind <code>PulsarListener.</code>
+Here is a quick example.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarReader(id = "reader-demo-id", topics = "reader-demo-topic", startMessageId = "earliest")
+void read(String message) {
+    //...
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>id</code> attribute is optional, but it is a best practice to provide a value that is meaningful to your application.
+When not specified an auto-generated id will be used.
+On the other hand, the <code>topics</code> and <code>startMessageId</code> attributes are mandatory.
+The <code>topics</code> attribute can be a single topic or a comma-separated list of topics.
+The <code>startMessageId</code> attribute instructs the reader to start from a particular message in the topic.
+The valid values for <code>startMessageId</code> are <code>earliest</code> or <code>latest.</code>
+Suppose you want the reader to start reading messages arbitrarily from a topic other than the earliest or latest available messages. In that case, you need to use a <code>ReaderBuilderCustomizer</code> to customize the <code>ReaderBuilder</code> so it knows the right <code>MessageId</code> to start from.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_customizing_the_readerbuilder"><a class="anchor" href="#_customizing_the_readerbuilder"></a>10.2. Customizing the ReaderBuilder</h3>
+<div class="paragraph">
+<p>You can customize any fields available through <code>ReaderBuilder</code> using a <code>PulsarReaderReaderBuilderCustomizer</code> in Apache Pulsar support for Spring.
+You can provide a <code>@Bean</code> of type <code>PulsarReaderReaderBuilderCustomizer</code> and then make it available to the <code>PulsarReader</code> as below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarReader(id = "reader-customizer-demo-id", topics = "reader-customizer-demo-topic",
+    readerCustomizer = "myCustomizer")
+void read(String message) {
+    //...
+}
+
+@Bean
+public PulsarReaderReaderBuilderCustomizer&lt;String&gt; myCustomizer() {
+    return readerBuilder -&gt; {
+        readerBuilder.startMessageId(messageId); // the first message read is after this message id.
+        // Any other customizations on the readerBuilder
+    };
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If your application only has a single <code>@PulsarReader</code> and a single <code>PulsarReaderReaderBuilderCustomizer</code> bean registered then the customizer will be automatically applied.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="message-reader-startup-failure"><a class="anchor" href="#message-reader-startup-failure"></a>10.3. Handling Startup Failures</h3>
+<div class="paragraph">
+<p>Message listener containers are started when the application context is refreshed.
+By default, any failures encountered during startup are re-thrown and the application will fail to start.
+You can adjust this behavior with the <code>StartupFailurePolicy</code> on the corresponding container properties.</p>
+</div>
+<div class="paragraph">
+<p>The available options are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Stop</code> (default) - log and re-throw the exception, effectively stopping the application</p>
+</li>
+<li>
+<p><code>Continue</code> - log the exception, leave the container in a non-running state, but do not stop the application</p>
+</li>
+<li>
+<p><code>Retry</code> - log the exception, retry to start the container asynchronously, but do not stop the application.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The default retry behavior is to retry 3 times with a 10-second delay between
+each attempt.
+However, a custom retry template can be specified on the corresponding container properties.
+If the container fails to restart after the retries are exhausted, it is left in a non-running state.</p>
+</div>
+<div class="sect3">
+<h4 id="_configuration_2"><a class="anchor" href="#_configuration_2"></a>10.3.1. Configuration</h4>
+<h5 id="_with_spring_boot_2" class="discrete">With Spring Boot</h5>
+<div class="paragraph">
+<p>When using Spring Boot you can register a <code>PulsarContainerFactoryCustomizer&lt;DefaultPulsarReaderContainerFactory&lt;?&gt;&gt;</code> bean that sets the container startup properties.</p>
+</div>
+<h5 id="_without_spring_boot_2" class="discrete">Without Spring Boot</h5>
+<div class="paragraph">
+<p>However, if you are instead manually configuring the components, you will have to update the container startup properties accordingly when constructing the message listener container factory.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</article>  </div>
+</main>
+<div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true">
+            <main class="modal__content" id="modal-versions-content">
+              <button data-micromodal-close class="modal-versions-close">
+                <svg width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1h{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title/><g id="cross"><line class="cls-1h" x1="7" x2="25" y1="7" y2="25"/><line class="cls-1h" x1="7" x2="25" y1="25" y2="7"/></g></svg>
+              </button>
+              <div class="colset">
+                <div class="col-left">
+
+                  <ul class="nav-versions">
+                      <li class="component">
+                        <div>
+                          <a class="title" href="../index.html">Apache Pulsar support for Spring</a>
+                        </div>                        <div class="version-item">
+                          <div>
+                            <button class="version-toggle" type="button">
+                              <span></span>
+                              Snapshot
+                            </button>
+                          </div>
+                          <ul class="versions">
+  <li class="version">
+    <a href="../index.html">
+      3.0.0-M1-SNAPSHOT
+    </a>
+  </li>
+</ul>                        </div>
+                        
+                      </li>
+                  </ul>
+                </div>
+                <div class="col-right">
+                  <ul class="projects">
+  <li>
+    Related Documentation
+    <ul class="projects-list">
+      <li><a href="https://pulsar.apache.org/docs/">Apache Pulsar</a></li>
+      <li><a href="https://docs.spring.io/spring-framework/reference/">Spring Framework</a></li>
+      <li><a href="https://docs.spring.io/spring-boot/">Spring Boot</a></li>
+      <li><a href="https://docs.spring.io/spring-cloud-stream/reference/">Spring Cloud Stream</a></li>
+    </ul>
+  </li>
+</ul>
+                </div>
+              </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+</div>
+<footer class="footer pulsar-footer">
+  <div class="pulsar-footer-inner">
+    <div class="pulsar-footer-brand">
+      <img src="../_/img/pulsar-white.svg" alt="Apache Pulsar" width="127" />
+      <nav class="pulsar-footer-links">
+        <a href="https://pulsar.apache.org/">Apache Pulsar</a>
+        <a href="https://pulsar.apache.org/docs/">Pulsar Docs</a>
+        <a href="https://github.com/apache/pulsar-spring">GitHub</a>
+      </nav>
+    </div>
+    <div class="pulsar-footer-copyright">
+      <div class="pulsar-footer-asf">
+        <img src="../_/img/feather-logo-white.svg" alt="" width="20" />
+        <span>The Apache Software Foundation</span>
+      </div>
+      <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation. Spring is a trademark of Broadcom Inc. and/or its subsidiaries.</p>
+    </div>
+  </div>
+</footer>
+<script src="../_/js/vendor/lunr.js"></script>
+<script src="../_/js/search-ui.js" id="search-ui-script" data-site-root-path=".." data-snippet-length="100" data-stylesheet="../_/css/search.css"></script>
+<script async src="../search-index.js"></script>
+<script src="../_/js/vendor/import.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+<script async src="../_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
+  </body>
+</html>

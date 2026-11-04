@@ -1,0 +1,373 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/* Apache Pulsar look and feel, following pulsar-site, on top of the Spring Antora UI. */
+
+@font-face {
+  font-family: "Inter";
+  src: url("../font/inter.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Work Sans";
+  src: url("../font/work-sans.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+:root {
+  --pulsar-primary: #0071e3;
+  --pulsar-primary-hover: #0e65b6;
+  --pulsar-surface: #f6f6f6;
+  --pulsar-border: #ddd;
+  --pulsar-text: #282826;
+  --pulsar-footer-background: #0f0f0e;
+
+  --body-font-family: Inter, "Work Sans", -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-family: var(--body-font-family);
+  --font-family-special: "Work Sans", var(--body-font-family);
+  --body-font-color: var(--pulsar-text);
+  --body-font-light-color: #4e4d49;
+  --body-font-dark-color: var(--pulsar-text);
+  --link-font-color: var(--pulsar-primary);
+  --link_hover-font-color: var(--pulsar-primary-hover);
+  --color-accent-1: var(--pulsar-surface);
+  --color-accent-1-hover: #ebebea;
+  --color-accent-2: #ebebea;
+  --color-accent-3: var(--pulsar-primary);
+  --mark-background-color: #deefff;
+  --panel-background-color: var(--pulsar-surface);
+  --panel-border-color: var(--pulsar-border);
+  --nav-border-color: var(--pulsar-border);
+  --nav-panel-divider-color: var(--pulsar-border);
+  --selected-background-color: var(--pulsar-text);
+  --code-background: var(--pulsar-surface);
+  --tip-color: #12875d;
+  --note-color: #0067c7;
+  --warning-color: #bd8800;
+  --caution-color: #bd4400;
+}
+
+/* Code blocks use Dracula in both themes, as on pulsar.apache.org. */
+:root,
+html.dark-theme {
+  --pre-background: #282a36;
+  --pre-border-color: #282a36;
+  --pre-annotation-font-color: #b0afab;
+  --highlight-font-color: #f8f8f2;
+  --highlight-keyword-font-color: #ff79c6;
+  --highlight-comment-font-color: #8d99c9;
+  --highlight-string-font-color: #f1fa8c;
+  --highlight-meta-font-color: #8d99c9;
+  --highlight-constant-font-color: #bd93f9;
+  --highlight-variable-font-color: #f8f8f2;
+  --highlight-tag-font-color: #ff79c6;
+  --highlight-tag-attribute-font-color: #50fa7b;
+  --highlight-type-font-color: #8be9fd;
+  --highlight-link-font-color: #8be9fd;
+  --highlight-addition-font-color: #50fa7b;
+  --highlight-deletion-font-color: #ff5555;
+  --highlight-regex-font-color: #f1fa8c;
+}
+
+html.dark-theme {
+  --pulsar-primary: #2997ff;
+  --pulsar-primary-hover: #5aafff;
+  --pulsar-surface: #282826;
+  --pulsar-border: #4e4d49;
+  --pulsar-text: #ebebea;
+
+  --body-background-color: #0f0f0e;
+  --body-font-color: var(--pulsar-text);
+  --body-font-light-color: #c7c7c5;
+  --body-font-dark-color: #fff;
+  --color-accent-1-hover: #343432;
+  --color-accent-2: #343432;
+  --mark-background-color: #00529f;
+  --nav-panel-divider-color: var(--pulsar-border);
+  --selected-background-color: #ebebea;
+  --note-color: #00529f;
+  --tip-color: #0e6c4a;
+  --warning-color: #8d6600;
+  --caution-color: #8d3300;
+}
+
+/* Body and headings */
+body,
+.doc,
+.nav-menu,
+.toc {
+  font-family: var(--body-font-family);
+}
+
+.doc h1.page,
+.doc > h1.sect0 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 3.25rem;
+}
+
+.doc h2 {
+  font-weight: 600;
+}
+
+.doc a:hover {
+  color: var(--link_hover-font-color);
+}
+
+.doc .quoteblock,
+.doc .verseblock {
+  border-left-color: var(--pulsar-border);
+}
+
+body.status-404 h1.page {
+  color: var(--pulsar-primary);
+}
+
+/* Header */
+.navbar {
+  border-bottom-color: transparent;
+}
+
+#pulsarlogo {
+  display: block;
+  height: 30px;
+  width: auto;
+}
+
+html.dark-theme #pulsarlogo {
+  filter: brightness(0) invert(1);
+}
+
+.navbar-menu .navbar-end > a.navbar-item {
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+.navbar-menu a.navbar-item:hover {
+  color: var(--pulsar-primary);
+}
+
+.navbar-menu .navbar-end > a.pulsar-download {
+  background: #282826;
+  border-radius: 0.75rem;
+  color: #fff;
+  font-size: 1rem;
+  height: fit-content;
+  line-height: 1.25;
+  margin: auto 1.25rem auto 0.75rem;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-menu .navbar-end > a.pulsar-download:hover {
+  background: #4e4d49;
+  color: #fff;
+}
+
+html.dark-theme .navbar-menu .navbar-end > a.pulsar-download {
+  background: #fff;
+  color: #0f0f0e;
+}
+
+/* Search */
+.pulsar-search {
+  align-items: center;
+  align-self: center;
+  display: flex;
+  margin: 0 3.5rem 0 1rem;
+  position: relative;
+}
+
+.pulsar-search #search-input {
+  background: var(--body-background-color);
+  border: 1px solid var(--body-font-color);
+  border-radius: 0.75rem;
+  color: var(--body-font-color);
+  font-family: var(--body-font-family);
+  font-size: 1rem;
+  padding: 0.5rem 0.875rem;
+  width: 11rem;
+}
+
+.pulsar-search #search-input:focus {
+  border-color: var(--pulsar-primary);
+  outline: none;
+}
+
+html.dark-theme .search-result-dataset {
+  background: #282826;
+  border-color: #4e4d49;
+}
+
+html.dark-theme .search-result-component-header,
+html.dark-theme .search-result-document-title,
+html.dark-theme .search-result-section-title,
+html.dark-theme .search-result-document-hit,
+html.dark-theme .search-result-document-hit a {
+  color: #ebebea;
+}
+
+html.dark-theme .search-result-highlight {
+  background: #00529f;
+  color: #fff;
+}
+
+/* The header wraps below this width, with the sidebar toggle at the start of the second row */
+@media screen and (max-width: 1023.5px) {
+  .pulsar-search {
+    margin-left: 3.25rem;
+    margin-right: 0;
+  }
+}
+
+/* Sidebar navigation */
+.nav-panel-menu .context .version,
+.context .version,
+#modal-versions .current {
+  background-color: #ebebea;
+  color: #282826;
+  font-weight: 600;
+}
+
+.nav-menu .nav-link:hover,
+.nav-menu .nav-text:hover {
+  background: var(--pulsar-surface);
+  color: var(--pulsar-primary);
+}
+
+.nav-menu .is-current-page > .nav-link,
+.nav-menu .is-current-page > .nav-link:hover,
+.nav-menu .is-current-page > .nav-text,
+.nav-menu .is-current-page > .nav-text:hover,
+.nav-menu .is-current-page > .nav-item-toggle:hover + .nav-link {
+  background: var(--pulsar-surface);
+  color: var(--pulsar-primary);
+  font-weight: 400;
+}
+
+.nav-menu .is-current-page > .nav-item-toggle {
+  background-image: url("../img/chevron.svg");
+}
+
+html.dark-theme .nav-menu .is-current-page > .nav-item-toggle {
+  background-image: url("../img/chevron-white.svg");
+}
+
+/* Table of contents */
+.toc .toc-menu a.is-active {
+  background: var(--pulsar-surface);
+  color: var(--pulsar-primary);
+}
+
+/* Code blocks */
+.doc pre,
+.doc pre code,
+.doc pre.highlight code,
+.doc .listingblock pre {
+  color: var(--highlight-font-color);
+}
+
+.doc .listingblock pre {
+  border-radius: 0.5rem;
+}
+
+.doc .listingblock code[data-lang]::before,
+.doc .source-toolbox .source-lang {
+  color: var(--pre-annotation-font-color);
+}
+
+.doc .source-toolbox button {
+  filter: invert(1);
+}
+
+/* Tables */
+.doc table.tableblock code {
+  overflow-wrap: anywhere;
+}
+
+/* Footer */
+.footer.pulsar-footer {
+  background: var(--pulsar-footer-background);
+  border-top: 0;
+  color: #fff;
+  display: block;
+  padding: 3rem 2rem 2rem;
+}
+
+.pulsar-footer-inner {
+  margin: 0 auto;
+  max-width: 1280px;
+}
+
+.pulsar-footer-brand {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.pulsar-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer.pulsar-footer a {
+  color: #fff;
+}
+
+.footer.pulsar-footer a:hover {
+  color: #2997ff;
+}
+
+.pulsar-footer-copyright {
+  border-top: 1px solid #4e4d49;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding-top: 1rem;
+}
+
+.pulsar-footer-asf {
+  align-items: center;
+  color: #989792;
+  display: flex;
+  font-size: 1rem;
+  gap: 0.625rem;
+  height: fit-content;
+}
+
+.footer.pulsar-footer p {
+  color: #989792;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .pulsar-footer-copyright {
+    grid-template-columns: 1fr;
+  }
+}

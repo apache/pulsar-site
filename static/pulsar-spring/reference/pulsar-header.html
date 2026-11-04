@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Untitled :: Apache Pulsar support for Spring</title>
+    <meta name="generator" content="Antora 3.2.0-alpha.8">
+    <script>
+!function (theme, navWidth) {
+  if (theme === 'dark') document.documentElement.classList.add('dark-theme')
+  if (navWidth) document.documentElement.style.setProperty('--nav-width', `${navWidth}px`)
+}(localStorage && localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: dark)')?.matches && 'dark'),
+  localStorage && localStorage.getItem('nav-width'))
+    </script>
+    <link rel="stylesheet" href="./_/css/site.css">
+    <link rel="stylesheet" href="./_/css/vendor/search.css">
+    <link rel="stylesheet" href="./_/css/vendor/page-search.css">
+    <link rel="stylesheet" href="./_/css/vendor/asciidoctor-tabs.css">
+
+    <link rel="stylesheet" href="./_/css/pulsar.css">
+    <link rel="icon" href="./_/img/favicon.ico" type="image/vnd.microsoft.icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://pulsar.apache.org/">
+        <img id="pulsarlogo" class="block" src="./_/img/logo-black.svg" alt="Apache Pulsar" />
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://pulsar.apache.org/docs/">Pulsar Docs</a>
+        <a class="navbar-item" href="https://pulsar.apache.org/community/">Community</a>
+        <a class="navbar-item" href="https://github.com/apache/pulsar-spring">GitHub</a>
+        <a class="navbar-item pulsar-download" href="https://pulsar.apache.org/download/">Download</a>
+      </div>
+    </div>
+    <div class="pulsar-search">
+      <input id="search-input" type="search" placeholder="Search" aria-label="Search the documentation" autocomplete="off" />
+    </div>
+    <label class="theme-toggler">
+      <input type="checkbox" id="switch-theme-checkbox" name="switch-theme-checkbox" aria-label="Dark theme" />
+      <span class="icon">
+        <svg class="sun" aria-hidden="true" viewBox="0 0 16 16">
+          <circle cx="8" cy="8" r="3.5" fill="currentColor"></circle>
+          <path d="M8 0v2.5M8 13.5V16M0 8h2.5M13.5 8H16M2.3 2.3l1.8 1.8M11.9 11.9l1.8 1.8M2.3 13.7l1.8-1.8M11.9 4.1l1.8-1.8" stroke="currentColor" stroke-width="1.5"></path>
+        </svg>
+        <svg class="moon" aria-hidden="true" viewBox="0 0 16 16">
+          <path d="M13 11A6.5 6.5 0 0 1 5 3a6.5 6.5 0 1 0 8 8z" fill="currentColor"></path>
+        </svg>
+      </span>
+      <span class="text">Theme</span>
+    </label>
+  </nav>
+</header>
+<script>
+document.getElementById('switch-theme-checkbox').parentElement.classList.toggle('active', document.documentElement.classList.contains('dark-theme'))
+</script>
+<div class="body">
+<div class="nav-container" data-component="pulsar" data-version="3.0.0-M1">
+  <aside class="nav">
+    <div class="panels">
+      <div class="nav-panel-menu is-active" data-panel="menu">
+        <nav class="nav-menu">
+<div class="context">
+  <span class="title">Apache Pulsar support for Spring</span>
+  <span class="version">3.0.0-M1-SNAPSHOT</span>
+  <button class="browse-version" id="browse-version">
+    <svg
+      height="24px"
+      id="Layer_1"
+      style="enable-background:new 0 0 512 512;"
+      version="1.1"
+      viewBox="0 0 512 512"
+      width="24px"
+      xml:space="preserve"
+    ><g><path
+          d="M256,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S273.7,224,256,224L256,224z"
+        ></path><path
+          d="M128.4,224c-17.7,0-32,14.3-32,32s14.3,32,32,32c17.7,0,32-14.3,32-32S146,224,128.4,224L128.4,224z"
+        ></path><path
+          d="M384,224c-17.7,0-32,14.3-32,32s14.3,32,32,32s32-14.3,32-32S401.7,224,384,224L384,224z"
+        ></path></g></svg>
+  </button>
+  </div><ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="whats-new.html">What&#8217;s new?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="migration.html">Migration from Spring&#8217;s Pulsar support</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link"  href="intro.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="intro/system-requirements.html">System Requirements</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="intro/building.html">Building the Project</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="intro/getting-help.html">Getting Help</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link"  href="pulsar.html">Using Apache Pulsar support for Spring</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/quick-tour.html">Quick Tour</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/pulsar-client.html">Pulsar Client</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/message-production.html">Message Production</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/message-consumption.html">Message Consumption</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/publishing-consuming-partitioned-topics.html">Publishing and Consuming Partitioned Topics</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="pulsar/transactions.html">Transactions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link"  href="tombstones.html">Null Payloads and Log Compaction of 'Tombstone' Records</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="spring-boot.html">Spring Boot Auto-configuration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="topic-resolution.html">Topic Resolution</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="default-tenant-namespace.html">Default Tenant / Namespace</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="custom-object-mapper.html">Custom Object Mapper</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="pulsar-admin.html">Pulsar Administration</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="pulsar-function.html">Pulsar Functions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="observability.html">Observability</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="cloud-stream-binder.html">Spring Cloud Stream Binder for Apache Pulsar</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link"  href="other-resources.html">Other Resources</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Appendices</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/configuration-properties.html">Configuration Properties</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/snapshot-versions.html">Snapshot Versions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link"  href="appendix/native-image.html">GraalVM Native Image Support</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+          <div class="toggle-sm">
+            <button id="nav-toggle-2" class="nav-toggle"></button>
+          </div>
+        </nav>
+      </div>
+      <div class="nav-collapse">
+        <button id="nav-collapse-toggle"><span></span></button>        
+      </div>
+    </div>
+    <div class="nav-resize"></div>
+  </aside>
+</div>
+<script>
+!function (sidebar) {
+  if (sidebar) {
+    document.body.classList.add('nav-sm')
+  }
+}(localStorage && localStorage.getItem('sidebar') === 'close')
+</script><main class="article">
+<div class="toolbar" role="navigation">
+  <button id="nav-toggle-1" class="nav-toggle"></button>
+</div>
+  <div class="content">
+<aside class="sidebar">
+  <div class="content">
+    <div
+      class="toc"
+      data-title=""
+      data-levels="2"
+    >
+      <div class="toc-menu"></div>
+    </div>
+    <div class="sidebar-links">
+        <a href="https://github.com/apache/pulsar-spring/edit/main/pulsar-spring-docs/src/main/antora/modules/ROOT/pages/pulsar-header.adoc">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+          ><path
+              d="m16 2.012 3 3L16.713 7.3l-3-3zM4 14v3h3l8.299-8.287-3-3zm0 6h16v2H4z"
+            ></path></svg>
+          Edit this Page
+        </a>
+              <a href="https://github.com/apache/pulsar-spring" title="GitHub">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="512px"
+            id="Layer_1"
+            version="1.1"
+            viewBox="0 0 512 512"
+            width="512px"
+          ><style type="text/css"><![CDATA[
+              .st0{fill-rule:evenodd;clip-rule:evenodd;} ]]></style><g><path
+                class="st0"
+                d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"
+              ></path></g></svg>
+          GitHub Project
+        </a>
+    </div>
+  </div>
+</aside>
+<article class="doc">
+<div class="breadcrumbs-container">
+  <nav class="breadcrumbs" aria-label="breadcrumbs">
+  </nav>
+</div><div class="sect1">
+<h2 id="pulsar-headers"><a class="anchor" href="#pulsar-headers"></a>Pulsar Headers</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Pulsar does not have a first-class &#8220;header&#8221; concept but instead provides a map for custom user properties as well as methods to access the message metadata typically stored in a message header (eg. <code>id</code> and <code>event-time</code>).
+As such, the terms &#8220;Pulsar message header&#8221; and &#8220;Pulsar message metadata&#8221; are used interchangeably.
+The list of available message metadata (headers) can be found in <a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring/src/main/java/org/apache/pulsar/spring/support/PulsarHeaders.java">PulsarHeaders.java</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_spring_headers"><a class="anchor" href="#_spring_headers"></a>Spring Headers</h3>
+<div class="paragraph">
+<p>Spring Messaging provides first-class &#8220;header&#8221; support via its <code>MessageHeaders</code> abstraction.</p>
+</div>
+<div class="paragraph">
+<p>The Pulsar message metadata can be consumed as Spring message headers.
+The list of available headers can be found in <a href="https://github.com/apache/pulsar-spring/blob/main/pulsar-spring/src/main/java/org/apache/pulsar/spring/support/PulsarHeaders.java">PulsarHeaders.java</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_accessing_in_single_record_based_consumer"><a class="anchor" href="#_accessing_in_single_record_based_consumer"></a>Accessing in Single Record based Consumer</h3>
+<div class="paragraph">
+<p>The following example shows how you can access the various Pulsar Headers in an application that uses the single record mode of consuming:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(topics = "simpleListenerWithHeaders")
+void simpleListenerWithHeaders(String data, @Header(PulsarHeaders.MESSAGE_ID) MessageId messageId,
+                @Header(PulsarHeaders.RAW_DATA) byte[] rawData,
+                @Header("foo") String foo) {
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, we access the values for the <code>messageId</code> and <code>rawData</code> message metadata as well as a custom message property named <code>foo</code>.
+The Spring <code>@Header</code> annotation is used for each header field.</p>
+</div>
+<div class="paragraph">
+<p>You can also use Pulsar&#8217;s <code>Message</code> as the envelope to carry the payload.
+When doing so, the user can directly call the corresponding methods on the Pulsar message for retrieving the metadata.
+However, as a convenience, you can also retrieve it by using the <code>Header</code> annotation.
+Note that you can also use the Spring messaging <code>Message</code> envelope to carry the payload and then retrieve the Pulsar headers by using <code>@Header</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_accessing_in_batch_record_based_consumer"><a class="anchor" href="#_accessing_in_batch_record_based_consumer"></a>Accessing in Batch Record based Consumer</h3>
+<div class="paragraph">
+<p>In this section, we see how to access the various Pulsar Headers in an application that uses a batch consumer:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@PulsarListener(topics = "simpleBatchListenerWithHeaders", batch = true)
+void simpleBatchListenerWithHeaders(List&lt;String&gt; data,
+					@Header(PulsarHeaders.MESSAGE_ID) List&lt;MessageId&gt; messageIds,
+					@Header(PulsarHeaders.TOPIC_NAME) List&lt;String&gt; topicNames, @Header("foo") List&lt;String&gt; fooValues) {
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the preceding example, we consume the data as a <code>List&lt;String&gt;</code>.
+When extracting the various headers, we do so as a <code>List&lt;&gt;</code> as well.
+Apache Pulsar support for Spring ensures that the headers list corresponds to the data list.</p>
+</div>
+<div class="paragraph">
+<p>You can also extract headers in the same manner when you use the batch listener and receive payloads as <code>List&lt;org.apache.pulsar.client.api.Message&lt;?&gt;</code>, <code>org.apache.pulsar.client.api.Messages&lt;?&gt;</code>, or <code>org.springframework.messaging.Messsge&lt;?&gt;</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message_header_mapping"><a class="anchor" href="#_message_header_mapping"></a>Message Header Mapping</h3>
+<div class="paragraph">
+<p>The <code>PulsarHeaderMapper</code> strategy is provided to map headers to and from Pulsar user properties and Spring <code>MessageHeaders</code>.</p>
+</div>
+<div class="paragraph">
+<p>Its interface definition is as follows:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">public interface PulsarHeaderMapper {
+
+	Map&lt;String, String&gt; toPulsarHeaders(MessageHeaders springHeaders);
+
+	MessageHeaders toSpringHeaders(Message&lt;?&gt; pulsarMessage);
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The framework provides a couple of mapper implementations.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>JsonPulsarHeaderMapper</code> maps headers as JSON in order to support rich header types and is the default when the Jackson JSON library is on the classpath.</p>
+</li>
+<li>
+<p>The <code>ToStringPulsarHeaderMapper</code> maps headers as strings using the <code>toString()</code> method on the header values and is the fallback mapper.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_json_header_mapper"><a class="anchor" href="#_json_header_mapper"></a>JSON Header Mapper</h4>
+<div class="paragraph">
+<p>The <code>JsonPulsarHeaderMapper</code> uses a &#8220;special&#8221; header (with a key of <code>spring_json_header_types</code>) that contains a JSON map of <code>&lt;key&gt;:&lt;type&gt;</code>.
+This header is used on the inbound side (Pulsar &#8594; Spring) to provide appropriate conversion of each header value to the original type.</p>
+</div>
+<div class="sect4">
+<h5 id="_trusted_packages"><a class="anchor" href="#_trusted_packages"></a>Trusted Packages</h5>
+<div class="paragraph">
+<p>By default, the JSON mapper deserializes header types whose package exactly matches one of the following safe defaults: <code>java.lang</code>, <code>java.net</code>, <code>java.util</code>, and <code>org.springframework.util</code>.
+A class whose package is not in the trusted list is returned to the application as a <code>NonTrustedHeaderType</code> wrapper rather than being deserialized.</p>
+</div>
+<div class="paragraph">
+<p>Trust is evaluated by exact package match.
+Sub-packages are not trusted transitively: trusting <code>java.util</code> does NOT automatically trust <code>java.util.concurrent</code> or <code>java.util.logging</code>.
+Each package you need must be listed explicitly.</p>
+</div>
+<div class="paragraph">
+<p>To extend the trusted set for annotation-driven listeners (<code>@PulsarListener</code> / <code>@PulsarReader</code>) without replacing the entire converter, register a <code>String[]</code> bean named <code>pulsarHeaderTrustedPackages</code> in your application context:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Bean(name = "pulsarHeaderTrustedPackages")
+String[] pulsarHeaderTrustedPackages() {
+    return new String[] { "com.example.events", "com.example.dto" };
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The framework picks up this bean automatically and applies it to every listener and reader endpoint, composing it with any custom <code>pulsarHeaderObjectMapper</code> bean you may also have defined.</p>
+</div>
+<div class="paragraph">
+<p>If you are constructing a <code>JsonPulsarHeaderMapper</code> directly via the builder, pass the packages there instead:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Bean
+JsonPulsarHeaderMapper headerMapper() {
+    return JsonPulsarHeaderMapper.builder()
+        .trustedPackages("com.example.events", "com.example.dto")
+        .build();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To trust all packages — for example, in a fully-controlled, internal messaging environment — pass <code>"*"</code> as the sole entry in either approach:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// via bean
+@Bean(name = "pulsarHeaderTrustedPackages")
+String[] pulsarHeaderTrustedPackages() {
+    return new String[] { "*" };
+}
+
+// via builder
+JsonPulsarHeaderMapper.builder().trustedPackages("*").build();</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Using <code>"*"</code> allows any class reachable on the classpath to be loaded and partially instantiated during deserialization of incoming message headers.
+Do not use it when consuming messages from untrusted or external sources.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_tostring_classes"><a class="anchor" href="#_tostring_classes"></a>ToString Classes</h5>
+<div class="paragraph">
+<p>Certain types are not suitable for JSON serialization, and a simple <code>toString()</code> serialization might be preferred for these types.
+The <code>JsonPulsarHeaderMapper</code> has a property called <code>addToStringClasses()</code> that lets you supply the names of classes that should be treated this way for outbound mapping.
+During inbound mapping, they are mapped as <code>String</code>.
+By default, only <code>org.springframework.util.MimeType</code> and <code>org.springframework.http.MediaType</code> are mapped this way.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_custom_objectmapper"><a class="anchor" href="#_custom_objectmapper"></a>Custom ObjectMapper</h5>
+<div class="paragraph">
+<p>The JSON mapper uses a reasonable configured Jackson 2 <code>ObjectMapper</code> to handle serialization of header values.
+However, to provide a custom object mapper one must simply provide an <code>ObjectMapper</code> bean with the name <code>pulsarHeaderObjectMapper</code>.
+For example:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">@Configuration(proxyBeanMethods = false)
+static class PulsarHeadersCustomObjectMapperTestConfig {
+
+    @Bean(name = "pulsarHeaderObjectMapper")
+    ObjectMapper customObjectMapper() {
+        var objectMapper = new ObjectMapper();
+		// do things with your special header object mapper here
+        return objectMapper;
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The object mapper in the example above should be an instance of <code>com.fasterxml.jackson.databind.ObjectMapper</code>, <strong>not</strong> the shaded <code>org.apache.pulsar.shade.com.fasterxml.jackson.databind.ObjectMapper</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The <a href="custom-object-mapper.html#jackson2vs3" class="xref page">same limitations</a> regarding Jackson 2 vs. Jackson 3 apply here }
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_inboundoutbound_patterns"><a class="anchor" href="#_inboundoutbound_patterns"></a>Inbound/Outbound Patterns</h3>
+<div class="paragraph">
+<p>On  the inbound side, by default, all Pulsar headers (message metadata plus user properties) are mapped to <code>MessageHeaders</code>.
+On the outbound side, by default, all <code>MessageHeaders</code> are mapped, except <code>id</code>, <code>timestamp</code>, and the headers that represent the Pulsar message metadata (i.e. the headers that are prefixed with <code>pulsar_message_</code>).
+You can specify which headers are mapped for inbound and outbound messages by configuring the <code>inboundPatterns</code> and <code>outboundPatterns</code> on a mapper bean you provide.
+You can include Pulsar message metadata headers on the outbound messages by adding the exact header name to the <code>outboundPatterns</code> as patterns are not supported for metadata headers.
+Patterns are rather simple and can contain a leading wildcard (<code>*</code>), a trailing wildcard, or both (for example, <code>*.cat.*</code>).
+You can negate patterns with a leading <code>!</code>.
+The first pattern that matches   a header name (whether positive or negative) wins.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When you provide your own patterns, we recommend including <code>!id</code> and <code>!timestamp</code>, since these headers are read-only on the inbound side.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</article>  </div>
+</main>
+<div class="modal micromodal-slide" id="modal-versions" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true">
+            <main class="modal__content" id="modal-versions-content">
+              <button data-micromodal-close class="modal-versions-close">
+                <svg width="28px" height="28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1h{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title/><g id="cross"><line class="cls-1h" x1="7" x2="25" y1="7" y2="25"/><line class="cls-1h" x1="7" x2="25" y1="25" y2="7"/></g></svg>
+              </button>
+              <div class="colset">
+                <div class="col-left">
+
+                  <ul class="nav-versions">
+                      <li class="component">
+                        <div>
+                          <a class="title" href="index.html">Apache Pulsar support for Spring</a>
+                        </div>                        <div class="version-item">
+                          <div>
+                            <button class="version-toggle" type="button">
+                              <span></span>
+                              Snapshot
+                            </button>
+                          </div>
+                          <ul class="versions">
+  <li class="version">
+    <a href="index.html">
+      3.0.0-M1-SNAPSHOT
+    </a>
+  </li>
+</ul>                        </div>
+                        
+                      </li>
+                  </ul>
+                </div>
+                <div class="col-right">
+                  <ul class="projects">
+  <li>
+    Related Documentation
+    <ul class="projects-list">
+      <li><a href="https://pulsar.apache.org/docs/">Apache Pulsar</a></li>
+      <li><a href="https://docs.spring.io/spring-framework/reference/">Spring Framework</a></li>
+      <li><a href="https://docs.spring.io/spring-boot/">Spring Boot</a></li>
+      <li><a href="https://docs.spring.io/spring-cloud-stream/reference/">Spring Cloud Stream</a></li>
+    </ul>
+  </li>
+</ul>
+                </div>
+              </div>
+            </main>
+        </div>
+    </div>
+</div>
+
+</div>
+<footer class="footer pulsar-footer">
+  <div class="pulsar-footer-inner">
+    <div class="pulsar-footer-brand">
+      <img src="./_/img/pulsar-white.svg" alt="Apache Pulsar" width="127" />
+      <nav class="pulsar-footer-links">
+        <a href="https://pulsar.apache.org/">Apache Pulsar</a>
+        <a href="https://pulsar.apache.org/docs/">Pulsar Docs</a>
+        <a href="https://github.com/apache/pulsar-spring">GitHub</a>
+      </nav>
+    </div>
+    <div class="pulsar-footer-copyright">
+      <div class="pulsar-footer-asf">
+        <img src="./_/img/feather-logo-white.svg" alt="" width="20" />
+        <span>The Apache Software Foundation</span>
+      </div>
+      <p>Apache Pulsar is available under the Apache License, version 2.0. Apache Pulsar is an open-source, distributed messaging and streaming platform built for the cloud.</p>
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> The Apache Software Foundation. All Rights Reserved. Apache, Pulsar, Apache Pulsar, and the Apache feather logo are trademarks or registered trademarks of The Apache Software Foundation. Spring is a trademark of Broadcom Inc. and/or its subsidiaries.</p>
+    </div>
+  </div>
+</footer>
+<script src="./_/js/vendor/lunr.js"></script>
+<script src="./_/js/search-ui.js" id="search-ui-script" data-site-root-path="." data-snippet-length="100" data-stylesheet="./_/css/search.css"></script>
+<script async src="./search-index.js"></script>
+<script src="./_/js/vendor/import.js"></script>
+<script src="./_/js/site.js"></script>
+<script async src="./_/js/vendor/highlight.js"></script>
+<script async src="./_/js/vendor/asciidoctor-tabs.js" data-sync-storage-key="docs:preferred-tab"></script>
+  </body>
+</html>
