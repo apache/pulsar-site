@@ -186,7 +186,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     <a class="nav-link"  href="appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Set the Pulsar and Netty Versions in Spring Boot</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
@@ -273,9 +273,21 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     </ul>
   </nav>
 </div><h1 id="page-title" class="page">Overview</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#overview-features">1. What it provides</a></li>
+<li><a href="#overview-modules">2. Modules</a></li>
+</ul>
+</div>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>Soby Chacko; Chris Bono; Alexander Preuß; Jay Bryant; Christophe Bornet; Jonas Geiregat
-(v3.0.0-M1-SNAPSHOT)</p>
+<p>Apache Pulsar support for Spring makes it easier to build <a href="https://pulsar.apache.org/">Apache Pulsar</a> applications with Spring.
+It brings familiar Spring concepts to Pulsar, such as templates, annotated listener methods and auto-configuration, so that your application can focus on its messages rather than on managing clients, producers and consumers.</p>
+</div>
+<div class="paragraph">
+<p>This documentation is for version <code>3.0.0-M1-SNAPSHOT</code>.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -288,6 +300,89 @@ You are viewing documentation for a SNAPSHOT version (3.0.0-M1-SNAPSHOT). While 
 </td>
 </tr>
 </table>
+</div>
+<div class="paragraph">
+<p>To start using it, continue to the <a href="intro.html" class="xref page">Introduction</a>.
+If you are moving an application from Spring for Apache Pulsar, which this project succeeds, see <a href="migration.html" class="xref page">Migration from Spring&#8217;s Pulsar support</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview-features"><a class="anchor" href="#overview-features"></a>1. What it provides</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Publishing messages</strong>: <a href="pulsar/message-production.html" class="xref page"><code>PulsarTemplate</code></a> publishes messages to a topic.</p>
+</li>
+<li>
+<p><strong>Consuming messages</strong>: <a href="pulsar/message-consumption.html" class="xref page"><code>@PulsarListener</code> and <code>@PulsarReader</code></a> turn a method into a consumer or a reader of a topic.</p>
+</li>
+<li>
+<p><strong>Spring Boot</strong>: <a href="spring-boot.html" class="xref page">auto-configuration and starters</a> set up these components from configuration properties.</p>
+</li>
+<li>
+<p><strong>Spring Cloud Stream</strong>: a <a href="cloud-stream-binder.html" class="xref page">binder</a> connects event-driven applications to Pulsar.</p>
+</li>
+<li>
+<p><strong>Pulsar features</strong>: support for <a href="pulsar/transactions.html" class="xref page">transactions</a>, <a href="pulsar-admin.html" class="xref page">administration</a> and <a href="pulsar-function.html" class="xref page">Pulsar Functions</a>.</p>
+</li>
+<li>
+<p><strong>Production and testing</strong>: <a href="observability.html" class="xref page">observability</a> with Micrometer, and <a href="testing-applications.html" class="xref page">utilities for tests</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview-modules"><a class="anchor" href="#overview-modules"></a>2. Modules</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All artifacts use the <code>org.apache.pulsar</code> group ID.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Artifact</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pulsar-spring</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Core library</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pulsar-spring-boot-autoconfigure</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spring Boot auto-configuration</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pulsar-spring-boot-starter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Starter for Spring Boot applications</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pulsar-spring-boot-starter-test</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Starter for testing Spring Boot applications</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pulsar-spring-cloud-stream-binder</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Spring Cloud Stream binder</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pulsar-spring-test</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Test utilities</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>pulsar-spring-bom</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bill of materials</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </article>  </div>
 </main>

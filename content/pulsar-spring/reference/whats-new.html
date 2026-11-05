@@ -186,7 +186,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     <a class="nav-link"  href="appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Set the Pulsar and Netty Versions in Spring Boot</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
@@ -288,6 +288,46 @@ The version has been bumped to <code>3.0.0-M1</code> to indicate this.</p>
 <div class="paragraph">
 <p>The Maven coordinates and Java packages have changed.
 See <a href="migration.html" class="xref page">Migration from Spring&#8217;s Pulsar support</a> for the background and the changes to make in your application.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pulsar_5_and_unshaded_client_dependencies"><a class="anchor" href="#_pulsar_5_and_unshaded_client_dependencies"></a>Pulsar 5 and unshaded client dependencies</h3>
+<div class="paragraph">
+<p>This version requires the Pulsar <code>5.0.x</code> client, which is fully compatible with older Pulsar broker versions.
+The Pulsar client v5 functionality has no specific support in this release.</p>
+</div>
+<div class="paragraph">
+<p>It now uses the unshaded <code>pulsar-client-original</code> and <code>pulsar-client-admin-original</code> rather than <code>pulsar-client-all</code>, since <code>pulsar-client-all</code> relocates the implementation classes that it uses.
+Libraries such as Netty and Jackson are now regular dependencies of your application, and the classes in <code>org.apache.pulsar.shade</code> are no longer available.</p>
+</div>
+<div class="paragraph">
+<p>Applications that use Protobuf schemas add <code>protobuf-java</code> themselves, and can use Protobuf 3 or 4.</p>
+</div>
+<div class="paragraph">
+<p>Spring Boot applications must always set the <code>pulsar.version</code> property, and it&#8217;s recommended that they also set <code>netty.version</code> to the most recent 4.2.x release of Netty.
+See <a href="intro/system-requirements.html#pulsar-client-dependencies" class="xref page">Pulsar client</a> and <a href="appendix/override-boot-dependencies.html" class="xref page">Set the Pulsar and Netty Versions in Spring Boot</a> for more information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_native_image_support"><a class="anchor" href="#_native_image_support"></a>Native image support</h3>
+<div class="paragraph">
+<p>The runtime hints have been updated for the unshaded Pulsar 5 client.
+The new <code>sample-native-image</code> sample application, which comes from the Spring AOT smoke tests, tests them with ahead-of-time processing and as a native image.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_jackson_in_the_spring_cloud_stream_binder"><a class="anchor" href="#_jackson_in_the_spring_cloud_stream_binder"></a>Jackson in the Spring Cloud Stream binder</h3>
+<div class="paragraph">
+<p>The binder now depends on <code>spring-boot-starter-jackson</code>, so that applications have an auto-configured <code>ObjectMapper</code> bean.
+Spring Cloud Function uses this bean for JSON conversion, so that it now applies <code>spring.jackson.*</code> properties and Jackson customizers, rather than falling back to its default configuration.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_pulsartestimage"><a class="anchor" href="#_pulsartestimage"></a>PulsarTestImage</h3>
+<div class="paragraph">
+<p>The <code>pulsar-spring-test</code> module has a new <code>PulsarTestImage</code> class, which creates Pulsar Testcontainers that are configured for tests.
+The <code>pulsar.test.image</code> system property or the <code>PULSAR_TEST_IMAGE</code> environment variable sets its default image.
+See <a href="testing-applications.html#pulsar-test-image" class="xref page">PulsarTestImage</a> for more information.</p>
 </div>
 </div>
 </div>

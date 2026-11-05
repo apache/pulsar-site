@@ -186,7 +186,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     <a class="nav-link"  href="appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Set the Pulsar and Netty Versions in Spring Boot</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
@@ -277,7 +277,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Pulsar uses an internal shaded Jackson <code>ObjectMapper</code> when de/serializing JSON messages.
+<p>Pulsar uses its own internal Jackson <code>ObjectMapper</code> when de/serializing JSON messages.
 If you instead want to provide your own Jackson 2 object mapper instance, you can register a <code>SchemaResolverCustomizer</code> and set your mapper on the <code>DefaultSchemaResolver</code> as follows:</p>
 </div>
 <div class="listingblock">
@@ -298,7 +298,7 @@ SchemaResolverCustomizer&lt;DefaultSchemaResolver&gt; schemaResolverCustomizer()
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-The object mapper in the example above should be an instance of <code>com.fasterxml.jackson.databind.ObjectMapper</code>, <strong>not</strong> the shaded <code>org.apache.pulsar.shade.com.fasterxml.jackson.databind.ObjectMapper</code>.
+The object mapper in the example above should be an instance of <code>com.fasterxml.jackson.databind.ObjectMapper</code>.
 </td>
 </tr>
 </table>
@@ -362,8 +362,8 @@ A later version of the framework may instead provide a customizer that operates 
 <h2 id="jackson2vs3"><a class="anchor" href="#jackson2vs3"></a>Jackson 2 / Jackson 3</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In Spring Boot 4 the default version of <a href="https://docs.spring.io/spring-boot/4.0.8/reference/features/json.html#features.json.jackson">Jackson is 3</a> and is auto-configured via the spring-boot-starter-json module.
-However, Apache Pulsar support for Spring expects a <a href="https://docs.spring.io/spring-boot/4.0.8/reference/features/json.html#features.json.jackson2">Jackson 2</a> custom mapper.</p>
+<p>In Spring Boot 4 the default version of <a href="https://docs.spring.io/spring-boot/4.1.2/reference/features/json.html#features.json.jackson">Jackson is 3</a> and is auto-configured via the spring-boot-starter-json module.
+However, Apache Pulsar support for Spring expects a <a href="https://docs.spring.io/spring-boot/4.1.2/reference/features/json.html#features.json.jackson2">Jackson 2</a> custom mapper.</p>
 </div>
 <div class="paragraph">
 <p>If you are using Jackson 3 in your Spring Boot 4 application and want to use a custom mapper you will need to add Jackson 2 to the classpath.

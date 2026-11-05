@@ -186,7 +186,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     <a class="nav-link"  href="appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Set the Pulsar and Netty Versions in Spring Boot</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
@@ -366,6 +366,38 @@ class MyApplicationTests implements PulsarTestContainerSupport {
 	}
 }</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pulsar-test-image"><a class="anchor" href="#pulsar-test-image"></a>3. PulsarTestImage</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>org.apache.pulsar.spring.test.support.PulsarTestImage</code> class creates Pulsar Testcontainers, for tests that need their own container rather than the shared one in <code>PulsarTestContainerSupport</code>.
+The containers advertise <code>localhost</code>, and allow for a slow start with two startup attempts and a timeout of three minutes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-java hljs" data-lang="java">// The image of the Pulsar version that this project is built with
+PulsarContainer pulsar = PulsarTestImage.createContainer();
+
+// Another version of the apachepulsar/pulsar image
+PulsarContainer pulsar = PulsarTestImage.createContainer("5.0.1");
+
+// Another image, which must be declared compatible when it has another name
+PulsarContainer pulsar = PulsarTestImage.createContainer(DockerImageName.parse("registry.example.com/pulsar:5.0.1")
+		.asCompatibleSubstituteFor("apachepulsar/pulsar"));</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The containers are not started, and you can customize them further, for example with <code>withTransactions()</code>.</p>
+</div>
+<div class="paragraph">
+<p>To run tests with another image without changing them, set the <code>pulsar.test.image</code> system property or the <code>PULSAR_TEST_IMAGE</code> environment variable, for example to <code>registry.example.com/pulsar:5.0.1</code>.
+This changes the image of <code>createContainer()</code> and of the shared container in <code>PulsarTestContainerSupport</code>, and the system property takes precedence.</p>
+</div>
+<div class="paragraph">
+<p>Your project needs a dependency on <code>org.testcontainers:testcontainers-pulsar</code> to use this class.</p>
 </div>
 </div>
 </div>

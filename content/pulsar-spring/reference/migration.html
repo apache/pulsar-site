@@ -186,7 +186,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     <a class="nav-link"  href="appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Set the Pulsar and Netty Versions in Spring Boot</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
@@ -278,6 +278,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
 <ul class="sectlevel1">
 <li><a href="#migration-background">1. Background</a></li>
 <li><a href="#migration-updating">2. Updating your application</a></li>
+<li><a href="#_updating_your_tests">3. Updating your tests</a></li>
 </ul>
 </div>
 <div id="preamble">
@@ -300,7 +301,7 @@ This page describes where the project came from and what you need to change when
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/spring-projects/spring-pulsar">spring-projects/spring-pulsar</a>: the core library, cache providers and test utilities</p>
+<p><a href="https://github.com/spring-projects/spring-pulsar">spring-projects/spring-pulsar</a>: the core library and test utilities</p>
 </li>
 <li>
 <p><a href="https://github.com/spring-projects/spring-boot">spring-projects/spring-boot</a>: the <a href="spring-boot.html" class="xref page">Spring Boot auto-configuration</a> and starters</p>
@@ -342,14 +343,6 @@ This page describes where the project came from and what you need to change when
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.pulsar:pulsar-spring-bom</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.springframework.pulsar:spring-pulsar-cache-provider</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.pulsar:pulsar-spring-cache-provider</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.springframework.pulsar:spring-pulsar-cache-provider-caffeine</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.pulsar:pulsar-spring-cache-provider-caffeine</code></p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.springframework.pulsar:spring-pulsar-test</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.apache.pulsar:pulsar-spring-test</code></p></td>
 </tr>
@@ -388,10 +381,52 @@ This page describes where the project came from and what you need to change when
 </div>
 <div class="paragraph">
 <p>Spring Boot does not manage the version of these artifacts, so you need to declare it, either on each dependency or by importing <code>pulsar-spring-bom</code>.
-See <a href="appendix/override-boot-dependencies.html" class="xref page">Override Spring Boot Dependencies</a> for how to set the Pulsar client version.</p>
+Spring Boot applications must also always set the <code>pulsar.version</code> property, since Spring Boot manages an older version of Pulsar.
+It&#8217;s also recommended to set <code>netty.version</code> to the most recent 4.2.x release of Netty.
+See <a href="appendix/override-boot-dependencies.html" class="xref page">Set the Pulsar and Netty Versions in Spring Boot</a> for how to set them.</p>
+</div>
+<div class="paragraph">
+<p>This project requires the Pulsar <code>5.0.x</code> client, and has changed from <code>pulsar-client-all</code> to the unshaded artifacts, as described in <a href="intro/system-requirements.html#pulsar-client-dependencies" class="xref page">Pulsar client</a>.
+Exclude <code>pulsar-client-all</code> if another dependency brings it in, and don&#8217;t use classes from <code>org.apache.pulsar.shade</code>.</p>
 </div>
 <div class="paragraph">
 <p>The <code>spring.pulsar.*</code> and <code>spring.cloud.stream.pulsar.*</code> configuration properties have not changed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_updating_your_tests"><a class="anchor" href="#_updating_your_tests"></a>3. Updating your tests</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Spring Boot&#8217;s Pulsar tests create their containers with <code>TestImage.forContainer(PulsarContainer.class)</code>, but <code>TestImage</code> is internal to the Spring Boot build and is not published.
+If you have tests derived from them, use <code>org.apache.pulsar.spring.test.support.PulsarTestImage</code> from <code>pulsar-spring-test</code> instead:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Previous</th>
+<th class="tableblock halign-left valign-top">New</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TestImage.forContainer(PulsarContainer.class)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PulsarTestImage.createContainer()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>TestImage.PULSAR.toString()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PulsarTestImage.getDefaultImage().asCanonicalNameString()</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The container uses the same startup settings as <code>TestImage.PULSAR</code> and defaults to the image of the Pulsar version that this project is built with.
+You can select another version with <code>PulsarTestImage.createContainer(String)</code> or another image with <code>PulsarTestImage.createContainer(DockerImageName)</code>.
+See <a href="testing-applications.html#pulsar-test-image" class="xref page">PulsarTestImage</a> for more information.</p>
 </div>
 </div>
 </div>

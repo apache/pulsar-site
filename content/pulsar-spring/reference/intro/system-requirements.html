@@ -186,7 +186,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     <a class="nav-link"  href="../appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+    <a class="nav-link"  href="../appendix/override-boot-dependencies.html">Set the Pulsar and Netty Versions in Spring Boot</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
@@ -274,6 +274,8 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     </ul>
   </nav>
 </div><h1 id="page-title" class="page">System Requirements</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
 <p>Apache Pulsar support for Spring <code>3.0.0-M1-SNAPSHOT</code> requires the following:</p>
 </div>
@@ -283,15 +285,93 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
 <p><a href="https://www.java.com">Java 17</a> or above</p>
 </li>
 <li>
-<p><a href="https://spring.io/projects/spring-framework#learn">Spring Framework <code>7.0.10</code></a> or above</p>
+<p><a href="https://spring.io/projects/spring-framework#learn">Spring Framework <code>7.0.x</code></a></p>
 </li>
 <li>
-<p><a href="https://pulsar.apache.org/docs/4.2.x/client-libraries-java/">Apache Pulsar Java Client <code>4.2.5</code></a> or above</p>
+<p><a href="https://docs.spring.io/spring-boot/4.1.2">Spring Boot <code>4.1.x</code></a>, for Spring Boot applications</p>
+</li>
+<li>
+<p><a href="https://pulsar.apache.org/docs/5.0.x/client-libraries-java/">Apache Pulsar Java Client <code>5.0.x</code></a></p>
 </li>
 </ul>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Spring Boot <code>4.1.x</code> applications must set the <code>pulsar.version</code> property explicitly, since Spring Boot defaults to Pulsar <code>4.2.x</code>.
+See <a href="../appendix/override-boot-dependencies.html" class="xref page">Set the Pulsar and Netty Versions in Spring Boot</a> for how to set it.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>The version compatibility matrix (including Spring Boot) can be found in the <a href="../appendix/version-compatibility.html" class="xref page">appendix</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pulsar-client-dependencies"><a class="anchor" href="#pulsar-client-dependencies"></a>Pulsar client</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Apache Pulsar support for Spring requires the Pulsar <code>5.0.x</code> client.
+The Pulsar <code>5.0.x</code> client is fully compatible with older Pulsar broker versions, so you can use it with your existing clusters.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Although the client version is <code>5.0.x</code>, the Pulsar client v5 functionality has no specific support in this release.
+Apache Pulsar support for Spring uses the client API in <code>org.apache.pulsar.client.api</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>It uses the unshaded client artifacts <code>pulsar-client-original</code> and <code>pulsar-client-admin-original</code>, along with <code>pulsar-client-messagecrypto-bc</code> for message encryption.
+This means that the libraries of the client, such as Netty and Jackson, are regular dependencies of your application.
+It can&#8217;t be used with <code>pulsar-client-all</code>, since this relocates the implementation classes that it uses.</p>
+</div>
+<div class="paragraph">
+<p>Applications that use Protobuf schemas must add the <code>com.google.protobuf:protobuf-java</code> dependency themselves, as neither the Pulsar client nor this project brings it in.
+They can use Protobuf 3 or 4.</p>
+</div>
+<div class="paragraph">
+<p>Spring Boot applications should also set <code>netty.version</code> to the most recent 4.2.x release of Netty, as described in <a href="../appendix/override-boot-dependencies.html" class="xref page">Set the Pulsar and Netty Versions in Spring Boot</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="pulsar-jvm-options"><a class="anchor" href="#pulsar-jvm-options"></a>JVM options</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Pulsar client and Netty work best with the following JVM options, which also avoid warnings about restricted operations on recent Java versions.
+Use the options for your Java version when you run your application.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">--add-opens java.base/java.nio=ALL-UNNAMED
+--add-opens java.base/jdk.internal.misc=ALL-UNNAMED
+--add-opens java.base/java.util.zip=ALL-UNNAMED
+-Dio.netty.tryReflectionSetAccessible=true</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On Java 23 and later, also add <code>--sun-misc-unsafe-memory-access=allow</code>.
+On Java 24 and later, also add <code>--enable-native-access=ALL-UNNAMED</code>.
+Java versions before those don&#8217;t support or need these options respectively, and an unsupported option prevents the JVM from starting.</p>
+</div>
+<div class="paragraph">
+<p>The <code>java.nio</code> and <code>jdk.internal.misc</code> options, together with the system property, enable <a href="https://pulsar.apache.org/docs/client-libraries/java-setup/#enabling-optimized-netty-direct-memory-buffer-access">Netty&#8217;s optimized direct memory access</a>, which helps to avoid <code>OutOfMemoryError: Direct buffer memory</code> errors.
+The <code>java.util.zip</code> option enables the <a href="https://pulsar.apache.org/docs/client-libraries/java-setup/#enabling-optimized-checksum-calculation-when-native-library-loading-fails">optimized checksum calculation when the native library can&#8217;t be loaded</a>.</p>
+</div>
+</div>
 </div>
 </article>  </div>
 </main>
