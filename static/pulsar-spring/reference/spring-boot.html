@@ -186,7 +186,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     <a class="nav-link"  href="appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+    <a class="nav-link"  href="appendix/override-boot-dependencies.html">Set the Pulsar and Netty Versions in Spring Boot</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
@@ -306,13 +306,17 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
 <div class="paragraph">
 <p>There is the <code>pulsar-spring-boot-starter</code> starter for conveniently collecting the dependencies for use.</p>
 </div>
+<div class="paragraph">
+<p>Spring Boot manages an older version of Pulsar, so applications must always set the <code>pulsar.version</code> property, and it&#8217;s recommended that they also set <code>netty.version</code> to the most recent 4.2.x release of Netty.
+See <a href="appendix/override-boot-dependencies.html" class="xref page">Set the Pulsar and Netty Versions in Spring Boot</a> for how to set them.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="boot.connecting"><a class="anchor" href="#boot.connecting"></a>1. Connecting to Pulsar</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When you use the Pulsar starter, Spring Boot will auto-configure and register a <a href="https://pulsar.apache.org/api/client/4.2.x/org/apache/pulsar/client/api/PulsarClient.html" class="apiref"><code>PulsarClient</code></a> bean.</p>
+<p>When you use the Pulsar starter, Spring Boot will auto-configure and register a <a href="https://pulsar.apache.org/api/client/5.0.x/org/apache/pulsar/client/api/PulsarClient.html" class="apiref"><code>PulsarClient</code></a> bean.</p>
 </div>
 <div class="paragraph">
 <p>By default, the application tries to connect to a local Pulsar instance at <code>pulsar://localhost:6650</code>.

@@ -186,7 +186,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     <a class="nav-link"  href="../appendix/version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link"  href="../appendix/override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+    <a class="nav-link"  href="../appendix/override-boot-dependencies.html">Set the Pulsar and Netty Versions in Spring Boot</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="../appendix/getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
@@ -294,7 +294,10 @@ This is a complete application and does not require any additional configuration
 <h2 id="_dependencies"><a class="anchor" href="#_dependencies"></a>1. Dependencies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Spring Boot applications need only the <code>pulsar-spring-boot-starter</code> dependency. The following listings show how to define the dependency for Maven and Gradle, respectively:</p>
+<p>Spring Boot applications need the <code>pulsar-spring-boot-starter</code> dependency, and must set the <code>pulsar.version</code> property, since Spring Boot manages an older version of Pulsar.
+It&#8217;s also recommended to set <code>netty.version</code> to the most recent 4.2.x release of Netty.
+The following listings show how to do this for Maven and Gradle, respectively.
+See <a href="../appendix/override-boot-dependencies.html" class="xref page">Set the Pulsar and Netty Versions in Spring Boot</a> for more information.</p>
 </div>
 <div id="_tabs_1" class="openblock tabs is-sync is-loading">
 <div class="content">
@@ -311,7 +314,12 @@ This is a complete application and does not require any additional configuration
 <div id="_tabs_1_maven--panel" class="tabpanel" aria-labelledby="_tabs_1_maven">
 <div class="listingblock primary">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependencies&gt;
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;properties&gt;
+    &lt;pulsar.version&gt;5.0.1&lt;/pulsar.version&gt;
+    &lt;netty.version&gt;4.2.20.Final&lt;/netty.version&gt;
+&lt;/properties&gt;
+
+&lt;dependencies&gt;
     &lt;dependency&gt;
         &lt;groupId&gt;org.apache.pulsar&lt;/groupId&gt;
         &lt;artifactId&gt;pulsar-spring-boot-starter&lt;/artifactId&gt;
@@ -324,7 +332,10 @@ This is a complete application and does not require any additional configuration
 <div id="_tabs_1_gradle--panel" class="tabpanel" aria-labelledby="_tabs_1_gradle">
 <div class="listingblock secondary">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">dependencies {
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">ext['pulsar.version'] = '5.0.1'
+ext['netty.version'] = '4.2.20.Final'
+
+dependencies {
     implementation 'org.apache.pulsar:pulsar-spring-boot-starter:3.0.0-M1-SNAPSHOT'
 }</code></pre>
 </div>

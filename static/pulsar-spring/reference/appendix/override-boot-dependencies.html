@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Override Spring Boot Dependencies :: Apache Pulsar support for Spring</title>
+    <title>Set the Pulsar and Netty Versions in Spring Boot :: Apache Pulsar support for Spring</title>
     <meta name="generator" content="Antora 3.2.0-alpha.8">
     <script>
 !function (theme, navWidth) {
@@ -186,7 +186,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     <a class="nav-link"  href="version-compatibility.html">Pulsar Clients and Spring Boot Compatibility</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link"  href="override-boot-dependencies.html">Override Spring Boot Dependencies</a>
+    <a class="nav-link"  href="override-boot-dependencies.html">Set the Pulsar and Netty Versions in Spring Boot</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link"  href="getting-dependencies-without-boot.html">Getting Dependencies without Spring Boot</a>
@@ -229,7 +229,7 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
   <div class="content">
     <div
       class="toc"
-      data-title="Override Spring Boot Dependencies"
+      data-title="Set the Pulsar and Netty Versions in Spring Boot"
       data-levels="2"
     >
       <div class="toc-menu"></div>
@@ -270,36 +270,41 @@ document.getElementById('switch-theme-checkbox').parentElement.classList.toggle(
     <ul>
       <li><a href="../index.html">Apache Pulsar support for Spring</a></li>
       <li>Appendices</li>
-      <li><a href="override-boot-dependencies.html">Override Spring Boot Dependencies</a></li>
+      <li><a href="override-boot-dependencies.html">Set the Pulsar and Netty Versions in Spring Boot</a></li>
     </ul>
   </nav>
-</div><h1 id="page-title" class="page">Override Spring Boot Dependencies</h1>
+</div><h1 id="page-title" class="page">Set the Pulsar and Netty Versions in Spring Boot</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>When using Apache Pulsar support for Spring in a Spring Boot application, the Apache Pulsar dependency versions are determined by Spring Boot&#8217;s dependency management.
-If you wish to use a different version of <code>pulsar-client-all</code> you need to override the version used by Spring Boot dependency management; set the <code>pulsar.version</code> property.</p>
+<p>Spring Boot&#8217;s dependency management includes a version of the Pulsar dependencies that is older than the Pulsar <code>5.0.x</code> client that Apache Pulsar support for Spring requires.
+Spring Boot applications must therefore always set the <code>pulsar.version</code> property.
+It&#8217;s also recommended to set the <code>netty.version</code> property to the most recent 4.2.x release of Netty, which is <code>4.2.20.Final</code> at the time of this release.</p>
 </div>
 <div class="paragraph">
 <p>Spring Boot does not manage the version of Apache Pulsar support for Spring, so you always declare it on the <code>pulsar-spring-boot-starter</code> dependency.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="override-boot-deps-gradle"><a class="anchor" href="#override-boot-deps-gradle"></a>Gradle</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The following example sets the Pulsar client version:</p>
+<p>With the Spring Dependency Management plugin, set the properties in <code>gradle.properties</code>:</p>
 </div>
-<div id="_tabs_1" class="openblock tabs is-sync is-loading">
+<div class="listingblock">
 <div class="content">
-<div class="ulist tablist">
-<ul>
-<li id="_tabs_1_gradle" class="tab">
-<p>Gradle</p>
-</li>
-<li id="_tabs_1_maven" class="tab">
-<p>Maven</p>
-</li>
-</ul>
+<pre class="highlightjs highlight"><code class="language-properties hljs" data-lang="properties">pulsar.version=5.0.1
+netty.version=4.2.20.Final</code></pre>
 </div>
-<div id="_tabs_1_gradle--panel" class="tabpanel" aria-labelledby="_tabs_1_gradle">
-<div class="listingblock secondary">
+</div>
+<div class="paragraph">
+<p>Alternatively, set them in the build script:</p>
+</div>
+<div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">ext['pulsar.version'] = '4.2.5'
+<pre class="highlightjs highlight"><code class="language-groovy hljs" data-lang="groovy">ext['pulsar.version'] = '5.0.1'
+ext['netty.version'] = '4.2.20.Final'
 
 dependencies {
     implementation 'org.apache.pulsar:pulsar-spring-boot-starter:3.0.0-M1-SNAPSHOT'
@@ -307,11 +312,18 @@ dependencies {
 </div>
 </div>
 </div>
-<div id="_tabs_1_maven--panel" class="tabpanel" aria-labelledby="_tabs_1_maven">
-<div class="listingblock primary">
+</div>
+<div class="sect1">
+<h2 id="override-boot-deps-maven"><a class="anchor" href="#override-boot-deps-maven"></a>Maven</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With <code>spring-boot-starter-parent</code> as the parent, set the properties in the POM:</p>
+</div>
+<div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;properties&gt;
-    &lt;pulsar.version&gt;4.2.5&lt;/pulsar.version&gt;
+    &lt;pulsar.version&gt;5.0.1&lt;/pulsar.version&gt;
+    &lt;netty.version&gt;4.2.20.Final&lt;/netty.version&gt;
 &lt;/properties&gt;
 
 &lt;dependency&gt;
@@ -320,6 +332,47 @@ dependencies {
     &lt;version&gt;3.0.0-M1-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Alternatively, set them in the <code>.mvn/maven.config</code> file:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">-Dpulsar.version=5.0.1
+-Dnetty.version=4.2.20.Final</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The properties have no effect when you import <code>spring-boot-dependencies</code> rather than use the parent.
+In that case, import <code>pulsar-bom</code> and <code>netty-bom</code> before it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-xml hljs" data-lang="xml">&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.pulsar&lt;/groupId&gt;
+            &lt;artifactId&gt;pulsar-bom&lt;/artifactId&gt;
+            &lt;version&gt;5.0.1&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.netty&lt;/groupId&gt;
+            &lt;artifactId&gt;netty-bom&lt;/artifactId&gt;
+            &lt;version&gt;4.2.20.Final&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-dependencies&lt;/artifactId&gt;
+            &lt;version&gt;4.1.2&lt;/version&gt;
+            &lt;type&gt;pom&lt;/type&gt;
+            &lt;scope&gt;import&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;</code></pre>
 </div>
 </div>
 </div>
