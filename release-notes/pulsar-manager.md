@@ -11,7 +11,7 @@ sidebar_label: Pulsar Manager Release Notes
 * Update stale description of creating environment in README by @maxsxu in [PR-462](https://github.com/apache/pulsar-manager/pull/462)
 * feat:upgrade version to 0.3.0 by @urfreespace in [PR-458](https://github.com/apache/pulsar-manager/pull/458)
 * Move version to 0.3.0 by @urfreespace in [PR-455](https://github.com/apache/pulsar-manager/pull/455)
-* Align BouncyCastle transitive dependecies to 1.68 by @nicoloboschi in [PR-466](https://github.com/apache/pulsar-manager/pull/466)
+* Align BouncyCastle transitive dependencies to 1.68 by @nicoloboschi in [PR-466](https://github.com/apache/pulsar-manager/pull/466)
 * Fix URL for example in README.md by @corymacd in [PR-475](https://github.com/apache/pulsar-manager/pull/475)
 * Removing conflicting dependencies by @gurleen-gks in [PR-482](https://github.com/apache/pulsar-manager/pull/482)
 * Removing transitive dependencies for log4j by @gurleen-gks in [PR-488](https://github.com/apache/pulsar-manager/pull/488)
