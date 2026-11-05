@@ -74,6 +74,34 @@ An explicit value takes precedence, including `maxPendingMessages(0)`, which rem
 
 v4 producers fail sends when a queue is full by default; `blockIfQueueFull(true)` makes them wait for capacity. v5 producers use a client memory budget without these v4 pending-message settings; see [Bound pending sends](java-v5.md#bound-pending-sends).
 
+### Recommended JVM options {#java-client-jvm-options}
+
+The following JVM options let the Pulsar Java client and Netty use their optimized code paths. The client works without them, but falls back to slower implementations. The sections below explain what each option does.
+
+| JVM option | Java version | Why it's needed |
+|---|---|---|
+| `--add-opens java.base/java.nio=ALL-UNNAMED` | All | [Netty's optimized direct memory buffer access](#enabling-optimized-netty-direct-memory-buffer-access) |
+| `--add-opens java.base/jdk.internal.misc=ALL-UNNAMED` | All | [Netty's optimized direct memory buffer access](#enabling-optimized-netty-direct-memory-buffer-access) |
+| `-Dio.netty.tryReflectionSetAccessible=true` | All | [Netty's optimized direct memory buffer access](#enabling-optimized-netty-direct-memory-buffer-access) |
+| `--sun-misc-unsafe-memory-access=allow` | 23 and later | [Netty's use of `sun.misc.Unsafe`](#allowing-netty-to-use-sunmiscunsafe) |
+| `--add-opens java.base/java.util.zip=ALL-UNNAMED` | All | [Optimized checksum calculation](#enabling-optimized-checksum-calculation-when-native-library-loading-fails) when the native library isn't available |
+| `--enable-native-access=ALL-UNNAMED` | 24 and later | [Loading Netty's native libraries](#allowing-native-access) without warnings |
+
+The options with a minimum Java version must only be used on that version or later, as the JVM doesn't start with an option that it doesn't recognize. For example, on Java 25:
+
+```bash
+java \
+  --add-opens java.base/java.nio=ALL-UNNAMED \
+  --add-opens java.base/jdk.internal.misc=ALL-UNNAMED \
+  --add-opens java.base/java.util.zip=ALL-UNNAMED \
+  --sun-misc-unsafe-memory-access=allow \
+  --enable-native-access=ALL-UNNAMED \
+  -Dio.netty.tryReflectionSetAccessible=true \
+  -jar my-application.jar
+```
+
+Use `-Dorg.apache.pulsar.shade.io.netty.tryReflectionSetAccessible=true` instead of `-Dio.netty.tryReflectionSetAccessible=true` for the shaded client fallback, since Netty is relocated in it.
+
 ### Enabling optimized Netty direct memory buffer access
 
 The Pulsar Java client uses [Netty](https://netty.io/) under the hood and uses Netty direct buffers for data transport.
@@ -81,7 +109,7 @@ The Pulsar Java client uses [Netty](https://netty.io/) under the hood and uses N
 Netty has a feature that allows optimized direct memory buffer access. This feature enables Netty to use low level APIs such as `sun.misc.Unsafe` for direct memory operations, which provides faster allocation and deallocation of direct buffers.
 The faster deallocation can help avoid direct memory exhaustion and `java.lang.OutOfMemoryError: Direct buffer memory` errors. These errors can occur when the Netty memory pool and memory allocator cannot release memory back to the operating system quickly enough.
 
-To enable this feature in Java clients since Java 11, you need to add the following JVM options to the application that uses the Java client:
+To enable this feature, Netty needs reflective access to JDK internals, so you need to add the following JVM options to the application that uses the Java client:
 
 - `--add-opens java.base/java.nio=ALL-UNNAMED`
 - `--add-opens java.base/jdk.internal.misc=ALL-UNNAMED`
@@ -91,12 +119,26 @@ In addition, you need to add one of the following JVM options:
 - `-Dorg.apache.pulsar.shade.io.netty.tryReflectionSetAccessible=true` for the shaded client fallback
 - `-Dio.netty.tryReflectionSetAccessible=true` for the unshaded client
 
+### Allowing Netty to use `sun.misc.Unsafe` {#allowing-netty-to-use-sunmiscunsafe}
+
+The memory access methods of `sun.misc.Unsafe` are deprecated for removal, and the JDK is restricting them in stages. On Java 25 and later, Netty doesn't use `sun.misc.Unsafe` unless it's allowed, and the [optimized direct memory buffer access](#enabling-optimized-netty-direct-memory-buffer-access) isn't available even with the options above.
+
+Add `--sun-misc-unsafe-memory-access=allow` on Java 23 and later to keep it available, and to avoid the warnings that the JDK otherwise prints about these methods. Java versions before 23 don't have this option.
+
 ### Enabling optimized checksum calculation when native library loading fails
 
-The Pulsar Java client uses `com.scurrilous.circe.checksum.Crc32cIntChecksum` class from the BookKeeper client for checksum calculation. For optimized checksum calculation Pulsar attempts to load `libcirce-checksum` native library. When that isn't available, `com.scurrilous.circe.checksum.Java9IntHash` class is used.
-This only works when `--add-opens java.base/java.util.zip=ALL-UNNAMED` is passed in the JVM options.
-The error message will be `Unable to use reflected methods:
-java.lang.reflect.InaccessibleObjectException: Unable to make private static int java.util.zip.CRC32C.updateBytes(int,byte[],int,int) accessible: module java.base does not "opens java.util.zip" to unnamed module` when the required JVM option is missing
+The Pulsar Java client uses `com.scurrilous.circe.checksum.Crc32cIntChecksum` class from the BookKeeper client for checksum calculation. For optimized checksum calculation Pulsar attempts to load `libcirce-checksum` native library. When that isn't available, such as on platforms other than Linux x86_64, `com.scurrilous.circe.checksum.Java9IntHash` class is used, which calls the JDK's CRC32C implementation directly through a private method.
+
+Although it calls the method through a `MethodHandle`, it has to make the method accessible first, so this only works when `--add-opens java.base/java.util.zip=ALL-UNNAMED` is passed in the JVM options. Otherwise, the client falls back to the slower `com.scurrilous.circe.checksum.Java8IntHash` class, with the following error message:
+
+```
+Unable to use reflected methods:
+java.lang.reflect.InaccessibleObjectException: Unable to make private static int java.util.zip.CRC32C.updateBytes(int,byte[],int,int) accessible: module java.base does not "opens java.util.zip" to unnamed module
+```
+
+### Allowing native access {#allowing-native-access}
+
+Netty loads its native libraries, such as those for the epoll and io_uring transports, with `java.lang.System::loadLibrary`, which is a restricted method as of Java 24. Add `--enable-native-access=ALL-UNNAMED` on Java 24 and later to avoid the warnings that the JDK otherwise prints. The JDK will block restricted methods in a future release unless native access is enabled.
 
 ## GraalVM native images
 
