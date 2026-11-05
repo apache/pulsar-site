@@ -24,7 +24,7 @@ export const pulsarAdaptersVersion: string = releasePulsarAdapters[0];
 
 // Netty used by the current Pulsar docs. Keep in sync with `netty` in
 // apache/pulsar's gradle/libs.versions.toml when updating dependency guidance.
-export const nettyVersion: string = "4.2.18.Final";
+export const nettyVersion: string = "4.2.20.Final";
 
 const versions = versionsList as string[];
 
