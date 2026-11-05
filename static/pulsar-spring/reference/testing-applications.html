@@ -384,20 +384,60 @@ PulsarContainer pulsar = PulsarTestImage.createContainer();
 // Another version of the apachepulsar/pulsar image
 PulsarContainer pulsar = PulsarTestImage.createContainer("5.0.1");
 
-// Another image, which must be declared compatible when it has another name
-PulsarContainer pulsar = PulsarTestImage.createContainer(DockerImageName.parse("registry.example.com/pulsar:5.0.1")
-		.asCompatibleSubstituteFor("apachepulsar/pulsar"));</code></pre>
+// Another image, which is assumed to be compatible with apachepulsar/pulsar
+PulsarContainer pulsar = PulsarTestImage.createContainer(DockerImageName.parse("registry.example.com/pulsar:5.0.1"));</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The containers are not started, and you can customize them further, for example with <code>withTransactions()</code>.</p>
 </div>
 <div class="paragraph">
-<p>To run tests with another image without changing them, set the <code>pulsar.test.image</code> system property or the <code>PULSAR_TEST_IMAGE</code> environment variable, for example to <code>registry.example.com/pulsar:5.0.1</code>.
-This changes the image of <code>createContainer()</code> and of the shared container in <code>PulsarTestContainerSupport</code>, and the system property takes precedence.</p>
+<p>Your project needs a dependency on <code>org.testcontainers:testcontainers-pulsar</code> to use this class.</p>
+</div>
+<div class="sect2">
+<h3 id="pulsar-test-image-default"><a class="anchor" href="#pulsar-test-image-default"></a>3.1. Setting the default image</h3>
+<div class="paragraph">
+<p>By default, <code>PulsarTestImage</code> uses the <code>apachepulsar/pulsar</code> image of the Pulsar version that this project is built with.
+To run your tests with another image or version without changing them, set one of the following to the image name, including its version as the tag:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The <code>pulsar.test.image</code> system property, which takes precedence</p>
+</li>
+<li>
+<p>The <code>PULSAR_TEST_IMAGE</code> environment variable</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Your project needs a dependency on <code>org.testcontainers:testcontainers-pulsar</code> to use this class.</p>
+<p>For example, to run the tests with another Pulsar version or with an image from another registry:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">PULSAR_TEST_IMAGE=apachepulsar/pulsar:5.0.1 ./gradlew test
+PULSAR_TEST_IMAGE=registry.example.com/pulsar:5.0.1 ./gradlew test</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An image name without a tag uses the <code>latest</code> tag.</p>
+</div>
+<div class="paragraph">
+<p>This changes the image of <code>PulsarTestImage.createContainer()</code> and of the shared container in <code>PulsarTestContainerSupport</code>.
+It does not change <code>createContainer(String)</code> and <code>createContainer(DockerImageName)</code>, which use the version or the image that they are given.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Gradle does not pass its own system properties to the JVM that runs the tests, so with Gradle, use the environment variable or set the system property on the <code>Test</code> task.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
