@@ -65,6 +65,9 @@ RewriteRule "^docs/(.+/)?admin-api-tutorial/?$" "/docs/$1admin-api-get-started" 
 RewriteRule "^docs/(.+/)?admin-get-started/?$" "/docs/$1admin-api-get-started" [R=301,DPI,L]
 # The introductory CLI tutorial was renamed.
 RewriteRule "^docs/(.+/)?reference-cli-get-started/?$" "/docs/$1get-started-pulsar-admin" [R=301,DPI,L]
+# The legacy pulsar-admin CLI doc ID (used in 2.10.x and earlier) was replaced by get-started-pulsar-admin and /reference/.
+# Older versions that still ship docs/<version>/pulsar-admin/index.html are served by the "skip if file exists" rule above.
+RewriteRule "^docs/(.+/)?pulsar-admin/?$" "/docs/$1get-started-pulsar-admin" [R=301,DPI,L]
 RewriteRule "^docs/(.+/)?admin-api-use-cases/?$" "/docs/$1admin-api-features" [R=301,DPI,L]
 RewriteRule "^contribute/version-policy/?$" "/contribute/release-policy" [R=301,DPI,L]
 
