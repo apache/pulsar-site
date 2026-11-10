@@ -1,37 +1,56 @@
 import React, { useEffect, useState } from "react";
 import clsx from "clsx";
-import { useRecentBlogPosts } from "@site/src/components/RecentBlogPosts";
+import { usePluginData } from "@docusaurus/useGlobalData";
+import useBaseUrl from "@docusaurus/useBaseUrl";
 import { renderAnnouncementBar } from "@site/src/components/ui/renderAnnouncementBar";
-import announcementBarEntries from "@site/data/announcement-bar";
+import {
+  ANNOUNCEMENT_BAR_DATA_FILE,
+  type AnnouncementBarData,
+  type AnnouncementBarEntry,
+} from "../announcementBarData";
 import styles from "./styles.module.css";
 
 const ROTATION_INTERVAL_MS = 5000;
-const MAX_BLOG_POSTS = 3;
 
-type Entry = { html: string; link: string };
-
-function withoutTrailingSlash(link: string): string {
-  return link.replace(/\/+$/, "");
+function isEntries(value: unknown): value is AnnouncementBarEntry[] {
+  return (
+    Array.isArray(value) &&
+    value.every(
+      (entry) => entry && typeof entry.html === "string" && typeof entry.link === "string"
+    )
+  );
 }
 
-function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+// Fetched once per page load and shared by every render of the bar.
+let currentEntries: Promise<AnnouncementBarEntry[] | undefined> | undefined;
+
+function fetchCurrentEntries(url: string): Promise<AnnouncementBarEntry[] | undefined> {
+  currentEntries ??= fetch(url)
+    .then((response) => (response.ok ? response.json() : undefined))
+    .then((data) => (isEntries(data?.entries) && data.entries.length > 0 ? data.entries : undefined))
+    .catch(() => undefined);
+  return currentEntries;
 }
 
-// Rotates through the hand-written entries in `data/announcement-bar.js` and the latest blog posts,
-// instead of showing the single `themeConfig.announcementBar.content`.
+// Rotates through the entries of the `announcement-bar` plugin instead of showing the single
+// `themeConfig.announcementBar.content`. The page renders the entries of its own build, and then
+// switches to the current entries that the latest build published, so that pages that aren't
+// rebuilt, such as the docs of older versions, show the current announcements too.
 export default function AnnouncementBarContent(props: React.ComponentProps<"div">): JSX.Element {
-  const recentBlogPosts = useRecentBlogPosts();
-  const entries: Entry[] = [...(announcementBarEntries as Entry[])];
-  for (const post of recentBlogPosts.slice(0, MAX_BLOG_POSTS)) {
-    if (!entries.some((entry) => withoutTrailingSlash(entry.link) === withoutTrailingSlash(post.permalink))) {
-      entries.push({ html: `Blog: ${escapeHtml(post.title)}`, link: post.permalink });
-    }
-  }
+  const buildEntries = (usePluginData("announcement-bar") as AnnouncementBarData).entries;
+  const dataUrl = useBaseUrl(`/${ANNOUNCEMENT_BAR_DATA_FILE}`);
+  const [entries, setEntries] = useState(buildEntries);
+  useEffect(() => {
+    let active = true;
+    fetchCurrentEntries(dataUrl).then((current) => {
+      if (active && current && JSON.stringify(current) !== JSON.stringify(buildEntries)) {
+        setEntries(current);
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, [dataUrl, buildEntries]);
 
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);

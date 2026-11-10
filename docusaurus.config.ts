@@ -82,6 +82,7 @@ module.exports = async function createConfigAsync() {
   const pulsarVariablesPreprocessor = (await import("./src/server/markdownPreprocessors/pulsarVariables")).default;
   const recentBlogPostsPlugin = (await import("./src/server/plugins/recentBlogPosts")).default;
   const announcementBarDismissExpiryPlugin = (await import("./src/server/plugins/announcementBarDismissExpiry")).default;
+  const announcementBarPlugin = (await import("./src/server/plugins/announcementBar")).default;
   return {
     future: {
       faster: {
@@ -120,8 +121,9 @@ module.exports = async function createConfigAsync() {
         image: 'img/pulsar-social-media-card.png',
         announcementBar: {
           id: "summit",
-          // The entries are in data/announcement-bar.js. src/theme/AnnouncementBar/Content rotates
-          // through them and the latest blog posts; this is only the required static content.
+          // The entries are in data/announcement-bar.js. The announcement-bar plugin adds the latest
+          // blog posts, and src/theme/AnnouncementBar/Content rotates through them; this is only the
+          // required static content.
           content: renderAnnouncementBar(
             announcementBarEntries[0]?.html ?? "Read the latest news on the Apache Pulsar blog",
             announcementBarEntries[0]?.link ?? "/blog/"
@@ -429,6 +431,7 @@ module.exports = async function createConfigAsync() {
     ],
     plugins: [
       [recentBlogPostsPlugin, { months: 3 }],
+      [announcementBarPlugin, { entries: announcementBarEntries, maxBlogPosts: 3, months: 3 }],
       [announcementBarDismissExpiryPlugin, { dismissForMs: 60 * 60 * 1000 }],
       [
         '@docusaurus/plugin-client-redirects',
