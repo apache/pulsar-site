@@ -532,7 +532,10 @@ module.exports = async function createConfigAsync() {
       { src: "/js/sine-waves.min.js", async: true },
       "/js/matomo-agent.js",
     ],
-    clientModules: [require.resolve("./matomoClientModule.ts")],
+    clientModules: [
+      require.resolve("./matomoClientModule.ts"),
+      require.resolve("./src/clientModules/loadPagesOfOtherBuilds.ts"),
+    ],
     stylesheets: [
       {
         href: "/css/katex-0.13.24.min.css",
