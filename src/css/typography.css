@@ -1,47 +1,26 @@
+/* Both fonts are variable fonts that cover every weight. */
 @font-face {
   font-family: 'Work Sans';
   src: url('/fonts/work-sans/work-sans.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Work Sans';
-  src: url('/fonts/work-sans/work-sans.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Work Sans';
-  src: url('/fonts/work-sans/work-sans.woff2') format('woff2');
-  font-weight: 600;
+  font-weight: 100 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Inter';
   src: url('/fonts/inter/inter.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Work Sans';
-  src: url('/fonts/inter/inter.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Work Sans';
-  src: url('/fonts/inter/inter.woff2') format('woff2');
-  font-weight: 600;
+  font-weight: 100 900;
   font-style: normal;
 }
 
 :root {
-  font-family: "Work Sans", -apple-system, Frutiger, "Frutiger Linotype",
+  --pulsar-font-family-site: "Work Sans", -apple-system, Frutiger, "Frutiger Linotype",
     Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad,
     "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva,
     "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --pulsar-font-family-docs: Inter, var(--pulsar-font-family-site);
 
+  font-family: var(--pulsar-font-family-site);
   font-size: 16px;
   line-height: 1.5;
   font-weight: 400;
@@ -53,11 +32,17 @@
 }
 
 [class*="docs-doc-page"] {
-  /* The "Inter" font is more readable for docs that the "Work Sans" */
-  font-family: Inter, "Work Sans", -apple-system, Frutiger, "Frutiger Linotype",
-    Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad,
-    "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva,
-    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* The "Inter" font is more readable for docs than "Work Sans". */
+  font-family: var(--pulsar-font-family-docs);
+}
+
+/* Docusaurus sets the docs-doc-page class on <html>, so keep the site font in the navbar, the
+   announcement bar and the footer, so that they don't change between docs and other pages. */
+[class*="docs-doc-page"] .navbar,
+[class*="docs-doc-page"] .navbar-sidebar,
+[class*="docs-doc-page"] .theme-announcement-bar,
+[class*="docs-doc-page"] .footer {
+  font-family: var(--pulsar-font-family-site);
 }
 
 h1 {
