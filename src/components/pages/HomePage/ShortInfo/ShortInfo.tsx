@@ -3,6 +3,8 @@ import React from 'react';
 import Button from '@site/src/components/ui/Button/Button';
 import Parallax from './Parallax/Parallax';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Link from '@docusaurus/Link';
+import { useRecentBlogPosts } from '@site/src/components/RecentBlogPosts';
 
 import s from './ShortInfo.module.css';
 import ScreenTitle from '../ui/ScreenTitle/ScreenTitle';
@@ -12,6 +14,7 @@ const latestVersion = versions[0];
 
 const ShortInfo: React.FC = () => {
   const { siteConfig } = useDocusaurusContext();
+  const recentBlogPosts = useRecentBlogPosts();
 
   return (
     <section className={`${s.block}`}>
@@ -42,6 +45,13 @@ const ShortInfo: React.FC = () => {
               <br />
               <a href="/case-studies">See case studies</a>
             </p>
+
+            {recentBlogPosts.map((post) => (
+              <Link key={post.permalink} to={post.permalink} className={s.blog_post}>
+                <span className={s.blog_post_date}>Blog · {post.date}</span>
+                <span className={s.blog_post_title}>{post.title}</span>
+              </Link>
+            ))}
           </div>
         </Parallax>
       </div>

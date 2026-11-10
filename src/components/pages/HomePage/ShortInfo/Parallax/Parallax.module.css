@@ -4,13 +4,32 @@
   position: relative;
 }
 
+/* Vertically centers the content between the navbar and the bottom of the viewport. The auto
+   margins keep content that is taller than the space at the top instead of moving it under the
+   navbar. The box spans the whole space, so it lets clicks through outside of the content. */
 .component {
   position: fixed;
-  top: 35%;
+  top: calc(var(--docusaurus-announcement-bar-height) + var(--ifm-navbar-height));
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
+
+.component > * {
+  margin: auto 0;
+  padding: 1rem 0;
+  pointer-events: auto;
 }
 
 @media (max-width: 800px) {
   .component {
     top: calc(var(--ifm-navbar-height) + 3rem + 1rem);
+    bottom: auto;
+  }
+
+  .component > * {
+    margin: 0;
+    padding: 0;
   }
 }

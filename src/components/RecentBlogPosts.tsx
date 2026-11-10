@@ -1,12 +1,16 @@
 import React from "react";
 import Link from "@docusaurus/Link";
 import { usePluginData } from "@docusaurus/useGlobalData";
-import type { RecentBlogPostsData } from "@site/src/server/plugins/recentBlogPosts";
+import type { RecentBlogPost, RecentBlogPostsData } from "@site/src/server/plugins/recentBlogPosts";
 
-// List items for the blog posts of the last few months, published by the `recent-blog-posts`
-// plugin. Render them inside a `<ul>`.
+// The blog posts of the last few months, or the latest post, published by the `recent-blog-posts` plugin.
+export function useRecentBlogPosts(): RecentBlogPost[] {
+  return (usePluginData("recent-blog-posts") as RecentBlogPostsData).posts;
+}
+
+// List items for the recent blog posts. Render them inside a `<ul>`.
 export default function RecentBlogPosts(): JSX.Element {
-  const { posts } = usePluginData("recent-blog-posts") as RecentBlogPostsData;
+  const posts = useRecentBlogPosts();
   return <>
     {posts.map((post) => (
       <li key={post.permalink}>
