@@ -72,4 +72,17 @@ RewriteRule "^coding-guide/?$" "/contribute/develop-coding-conventions" [R=301,D
 RewriteRule "^contributing/?$" "/contribute" [R=301,DPI,L]
 RewriteRule "^pulsar-manager-release-notes/?$" "/release-notes" [R=301,DPI,L]
 
+# Caching. Without Cache-Control headers, browsers keep using a cached page for a while without
+# checking for a newer version, so after a site update a cached page loads the previous build's
+# scripts and a hard refresh is needed. Make browsers revalidate everything (an unchanged file is
+# answered with 304 Not Modified, using the ETag), except for the Docusaurus build output that has a
+# content hash in its file name and never changes. static/assets/ is also served from /assets/, so
+# only the directories that Docusaurus generates are cached for long.
+<IfModule mod_headers.c>
+  Header set Cache-Control "no-cache"
+  <If "%{REQUEST_URI} =~ m#^/assets/(js|css|images|files)/#">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </If>
+</IfModule>
+
 # DO NOT ADD any "Header set Content-Security-Policy" here. Read https://infra.apache.org/tools/csp.html and the beginning of this file
