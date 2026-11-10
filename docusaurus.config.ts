@@ -79,6 +79,7 @@ function docsEditUrl({ versionDocsDirPath, docPath }) {
 module.exports = async function createConfigAsync() {
   const injectPreprocessor = (await import("./src/server/markdownPreprocessors/inject")).default;
   const pulsarVariablesPreprocessor = (await import("./src/server/markdownPreprocessors/pulsarVariables")).default;
+  const recentBlogPostsPlugin = (await import("./src/server/plugins/recentBlogPosts")).default;
   return {
     future: {
       faster: {
@@ -423,6 +424,7 @@ module.exports = async function createConfigAsync() {
       ],
     ],
     plugins: [
+      [recentBlogPostsPlugin, { months: 3 }],
       [
         '@docusaurus/plugin-client-redirects',
         {
