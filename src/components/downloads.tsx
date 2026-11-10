@@ -7,6 +7,7 @@ import nodeReleases from '@site/data/release-node'
 import pythonReleases from '@site/data/release-python'
 import pulsarManagerReleases from '@site/data/release-pulsar-manager'
 import pulsarAdaptersReleases from '@site/data/release-pulsar-adapters'
+import pulsarSpringReleases from '@site/data/release-pulsar-spring'
 import ReleaseTable from "@site/src/components/ReleaseTable";
 import ConnectorTable from "@site/src/components/ConnectorTable";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -48,6 +49,10 @@ export function CurrentPulsarManagerVersion(): JSX.Element {
 
 export function CurrentPulsarAdaptersVersion(): JSX.Element {
     return <>{pulsarAdaptersReleases[0]}</>
+}
+
+export function CurrentPulsarSpringVersion(): JSX.Element {
+    return <>{pulsarSpringReleases[0]}</>
 }
 
 export function CurrentPulsarDownloadTable({ version }: VersionProps = {}): JSX.Element {
@@ -379,6 +384,45 @@ export function ArchivedPulsarAdaptersDownloadTable(): JSX.Element {
     </div>
 }
 
+export function CurrentPulsarSpringDownloadTable(): JSX.Element {
+    const latestPulsarSpringVersion = pulsarSpringReleases[0]
+    const pulsarSpringLatestSrcArchiveUrl = pulsarSpringDistUrl(latestPulsarSpringVersion)
+    const data = [
+        {
+            release: "Source",
+            link: getLatestPulsarSpringMirrorUrl(latestPulsarSpringVersion),
+            linkText: `apache-pulsar-spring-${latestPulsarSpringVersion}-src.tar.gz`,
+            asc: `${pulsarSpringLatestSrcArchiveUrl}.asc`,
+            sha512: `${pulsarSpringLatestSrcArchiveUrl}.sha512`,
+        },
+    ]
+    return <div className="tailwind">
+        <ReleaseTable data={data}></ReleaseTable>
+    </div>
+}
+
+export function ArchivedPulsarSpringDownloadTable(): JSX.Element {
+    const latestPulsarSpringVersion = pulsarSpringReleases[0]
+    const data = pulsarSpringReleases
+        .filter((version) => version !== latestPulsarSpringVersion)
+        .map((version) => {
+            const srcArchiveUrl = pulsarSpringArchiveUrl(version)
+            return {
+                release: version,
+                link: srcArchiveUrl,
+                linkText: `apache-pulsar-spring-${version}-src.tar.gz`,
+                asc: `${srcArchiveUrl}.asc`,
+                sha512: `${srcArchiveUrl}.sha512`,
+            }
+        })
+    if (data.length === 0) {
+        return <p>There are no older releases.</p>
+    }
+    return <div className="tailwind">
+        <ReleaseTable data={data}></ReleaseTable>
+    </div>
+}
+
 export function CurrentPulsarManagerDownloadTable(): JSX.Element {
     const latestPulsarManagerVersion = pulsarManagerReleases[0]
     const latestPulsarManagerArchiveMirrorUrl = getLatestPulsarManagerArchiveMirrorUrl(latestPulsarManagerVersion, "bin")
@@ -498,4 +542,16 @@ function getLatestPulsarManagerArchiveMirrorUrl(version, type) {
 
 function pulsarManagerDistUrl(version, type) {
     return `https://downloads.apache.org/pulsar/pulsar-manager/pulsar-manager-${version}/apache-pulsar-manager-${version}-${type}.tar.gz`;
+}
+
+function getLatestPulsarSpringMirrorUrl(version) {
+    return `https://www.apache.org/dyn/closer.lua/pulsar/pulsar-spring-${version}/apache-pulsar-spring-${version}-src.tar.gz?action=download`;
+}
+
+function pulsarSpringDistUrl(version) {
+    return `https://downloads.apache.org/pulsar/pulsar-spring-${version}/apache-pulsar-spring-${version}-src.tar.gz`;
+}
+
+function pulsarSpringArchiveUrl(version) {
+    return `https://archive.apache.org/dist/pulsar/pulsar-spring-${version}/apache-pulsar-spring-${version}-src.tar.gz`;
 }
