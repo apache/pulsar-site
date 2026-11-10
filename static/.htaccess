@@ -76,12 +76,13 @@ RewriteRule "^pulsar-manager-release-notes/?$" "/release-notes" [R=301,DPI,L]
 # checking for a newer version, so after a site update a cached page loads the previous build's
 # scripts and a hard refresh is needed. Make browsers revalidate everything (an unchanged file is
 # answered with 304 Not Modified, using the ETag), while letting shared caches such as the CDN keep
-# a copy for a minute (s-maxage). The Docusaurus build output that has a content hash in its file
-# name never changes, so it is cached for long. static/assets/ is also served from /assets/, so only
-# the directories that Docusaurus generates are cached for long.
+# a copy for a minute (s-maxage). The Docusaurus build output has a content hash in its file name
+# ([name].[contenthash:8].js/.css and [name]-[contenthash].[ext] for images and files), so a changed
+# file gets a new URL and it can be cached for long. Files from static/ keep their URL, so they
+# aren't, even under /assets/.
 <IfModule mod_headers.c>
   Header set Cache-Control "public, max-age=0, must-revalidate, s-maxage=60"
-  <If "%{REQUEST_URI} =~ m#^/assets/(js|css|images|files)/#">
+  <If "%{REQUEST_URI} =~ m#^/assets/(js|css)/[^/]+\.[0-9a-f]{8}\.(js|css)$# || %{REQUEST_URI} =~ m#^/assets/(images|files)/[^/]+-[0-9a-f]{16,}\.[^/.]+$#">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </If>
 </IfModule>
