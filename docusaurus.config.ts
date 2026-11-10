@@ -81,6 +81,7 @@ module.exports = async function createConfigAsync() {
   const injectPreprocessor = (await import("./src/server/markdownPreprocessors/inject")).default;
   const pulsarVariablesPreprocessor = (await import("./src/server/markdownPreprocessors/pulsarVariables")).default;
   const recentBlogPostsPlugin = (await import("./src/server/plugins/recentBlogPosts")).default;
+  const announcementBarDismissExpiryPlugin = (await import("./src/server/plugins/announcementBarDismissExpiry")).default;
   return {
     future: {
       faster: {
@@ -127,7 +128,7 @@ module.exports = async function createConfigAsync() {
           ),
           backgroundColor: "#282826",
           textColor: "#fff",
-          isCloseable: false,
+          isCloseable: true,
         },
         colorMode: {
           disableSwitch: true,
@@ -428,6 +429,7 @@ module.exports = async function createConfigAsync() {
     ],
     plugins: [
       [recentBlogPostsPlugin, { months: 3 }],
+      [announcementBarDismissExpiryPlugin, { dismissForMs: 60 * 60 * 1000 }],
       [
         '@docusaurus/plugin-client-redirects',
         {
