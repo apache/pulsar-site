@@ -18,12 +18,22 @@ type Options = {
 };
 
 // Publishes the blog posts of the last few months, or the latest post if there are none, as global
-// data for pages outside of the blog such as the download page. Use the `useRecentBlogPosts` hook in `src/components/RecentBlogPosts`.
+// data for pages outside of the blog such as the download page. Use the `useRecentBlogPosts` hook
+// in `src/components/RecentBlogPosts`.
 export default function recentBlogPostsPlugin(
-  _context: LoadContext,
+  context: LoadContext,
   options: Options
 ): Plugin {
   const months = options.months ?? 3;
+  // Docusaurus' <Link> applies the `trailingSlash` setting, but the announcement bar renders plain
+  // links, so publish the canonical URLs.
+  const { trailingSlash } = context.siteConfig;
+  const canonicalPermalink = (permalink: string) =>
+    trailingSlash === true && !permalink.endsWith("/")
+      ? `${permalink}/`
+      : trailingSlash === false && permalink.length > 1 && permalink.endsWith("/")
+        ? permalink.slice(0, -1)
+        : permalink;
   return {
     name: "recent-blog-posts",
     async allContentLoaded({ allContent, actions }) {
@@ -41,7 +51,7 @@ export default function recentBlogPostsPlugin(
       const posts = (recent.length > 0 ? recent : listed.slice(0, 1))
         .map((metadata) => ({
           title: metadata.title,
-          permalink: metadata.permalink,
+          permalink: canonicalPermalink(metadata.permalink),
           date: new Date(metadata.date).toISOString().slice(0, 10),
         }));
       actions.setGlobalData({ posts } satisfies RecentBlogPostsData);

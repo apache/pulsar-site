@@ -23,6 +23,7 @@ div[class*="announcementBar"][role="banner"] div[class*="announcementBarContent"
   height: 100%;
   padding: 0;
   display: flex;
+  min-width: 0;
 }
 
 div[class*="announcementBar"][role="banner"] .announcement-bar {
@@ -32,10 +33,24 @@ div[class*="announcementBar"][role="banner"] .announcement-bar {
   align-items: center;
   justify-content: center;
   padding: 0 1rem;
+  min-width: 0;
+}
+
+/* Keep long blog post titles on one line. */
+div[class*="announcementBar"][role="banner"] .announcement-bar__content > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+div[class*="announcementBar"][role="banner"] .announcement-bar__icon {
+  flex-shrink: 0;
 }
 
 div[class*="announcementBar"][role="banner"] .announcement-bar__content {
   display: inline-flex;
+  min-width: 0;
   justify-content: flex-start;
   align-items: center;
   height: 2.4rem;

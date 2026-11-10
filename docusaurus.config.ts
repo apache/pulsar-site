@@ -4,6 +4,7 @@ const _ = require("lodash");
 const fs = require("fs");
 const path = require("path");
 const { renderAnnouncementBar } = require("./src/components/ui/renderAnnouncementBar");
+const announcementBarEntries = require("./data/announcement-bar");
 const versions = require("./versions.json");
 const latestVersion = versions[0];
 const versionsMap = {
@@ -118,9 +119,11 @@ module.exports = async function createConfigAsync() {
         image: 'img/pulsar-social-media-card.png',
         announcementBar: {
           id: "summit",
+          // The entries are in data/announcement-bar.js. src/theme/AnnouncementBar/Content rotates
+          // through them and the latest blog posts; this is only the required static content.
           content: renderAnnouncementBar(
-            "✨ Apache Pulsar 5.0 is here! ✨",
-            "/blog/2026/10/05/announcing-apache-pulsar-5-0/"
+            announcementBarEntries[0]?.html ?? "Read the latest news on the Apache Pulsar blog",
+            announcementBarEntries[0]?.link ?? "/blog/"
           ),
           backgroundColor: "#282826",
           textColor: "#fff",
