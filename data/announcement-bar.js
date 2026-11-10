@@ -4,6 +4,10 @@
 // `html` is rendered as HTML, so escape any `<`, `>` and `&` in plain text.
 module.exports = [
   {
+    html: "Spring Pulsar has a new home! 🏡",
+    link: "/blog/2026/11/10/apache-pulsar-support-for-spring/",
+  },
+  {
     html: "✨ Apache Pulsar 5.0 is here! ✨",
     link: "/blog/2026/10/05/announcing-apache-pulsar-5-0/",
   },
