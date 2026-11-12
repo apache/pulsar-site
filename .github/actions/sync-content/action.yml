@@ -20,19 +20,19 @@ description: Synchronize website content from the main repo
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         repository: apache/pulsar
         path: tmp/pulsar
     - name: Install poetry
       run: pipx install poetry
       shell: bash
-    - uses: actions/setup-python@v6
+    - uses: actions/setup-python@v7
       with:
         python-version: '3.12'
         cache: 'poetry'
     - name: Set up JDK 21
-      uses: actions/setup-java@v5
+      uses: actions/setup-java@v6
       with:
         distribution: corretto
         java-version: 21
