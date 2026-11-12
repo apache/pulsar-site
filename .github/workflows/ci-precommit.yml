@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Check license header
         env:
           IMAGE: ghcr.io/korandoru/hawkeye-native:v2
@@ -47,7 +47,7 @@ jobs:
         env:
           PR_COMMITS: ${{ github.event.pull_request.commits }}
         run: echo "depth=$((PR_COMMITS + 2))" >> "$GITHUB_OUTPUT"
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           # Fetch the whole PR commit range (plus the merge commit) so that
           # BUILD_ALL_VERSION / BUILD_VERSIONS directives in any PR commit are
@@ -55,7 +55,7 @@ jobs:
           # parent), which only needs depth 2, but the directive scan walks the
           # full range.
           fetch-depth: ${{ steps.pr-fetch-depth.outputs.depth }}
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: 'asf-site-next'
           path: tmp/asf-site-next
