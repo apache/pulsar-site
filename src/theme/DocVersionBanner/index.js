@@ -17,8 +17,11 @@ import BrowserOnly from "@docusaurus/BrowserOnly";
 import { getSupportedVersions } from '../../utils/supportedVersions';
 let versions = require("../../../versions.json");
 const _latestVersion = versions[0];
-const _ltsVersion = '4.0.x';
 const _maintainedVersions = getSupportedVersions();
+// The newest maintained major release is the LTS branch (release-policy.md:
+// LTS every 18 months). Deriving it keeps the banner correct when a new major
+// line ships instead of pinning a version string that goes stale.
+const _ltsVersion = _maintainedVersions.find((v) => /^\d+\.0\.x$/.test(v)) || _latestVersion;
 function UnreleasedVersionLabel({siteTitle, versionMetadata}) {
   return (
     <Translate
