@@ -10,6 +10,7 @@ import DropdownNavbarItem from "@theme/NavbarItem/DropdownNavbarItem";
 import { useActiveDocContext, useLatestVersion, } from "@docusaurus/plugin-content-docs/client";
 import { useDocsPreferredVersion } from "@docusaurus/theme-common";
 import { translate } from "@docusaurus/Translate";
+import { isLtsVersion } from "../utils/supportedVersions";
 
 const versions = [
   {
@@ -28,12 +29,12 @@ const versions = [
     path: `/docs/4.2.x`,
   },
   {
-    label: '4.0.x LTS',
+    label: '4.0.x',
     name: '4.0.x',
     path: `/docs/4.0.x`,
   },
   {
-    label: '3.0.x LTS',
+    label: '3.0.x',
     name: '3.0.x',
     path: `/docs/3.0.x`,
   },
@@ -43,6 +44,13 @@ const versions = [
     path: "/versions",
   }
 ];
+
+// Mark LTS release lines (e.g. "5.0.x LTS") instead of hard-coding the suffix per entry.
+for (const version of versions) {
+  if (isLtsVersion(version.name)) {
+    version.label = `${version.name} LTS`;
+  }
+}
 
 const getVersionMainDoc = (version) =>
   version.docs.find((doc) => doc.id === version.mainDocId);

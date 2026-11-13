@@ -48,4 +48,15 @@ function getSupportedVersions() {
   return getSupportedVersionBranches(releases);
 }
 
-module.exports = { getSupportedVersions };
+// LTS release lines are the x.0 lines from 3.0 onwards (see contribute/release-policy.md).
+function isLtsVersion(branch) {
+  const match = /^(\d+)\.0\.x$/.exec(branch);
+  return match !== null && Number(match[1]) >= 3;
+}
+
+// The newest maintained LTS release line (e.g. "5.0.x"), or undefined if none is maintained.
+function getLtsVersion() {
+  return getSupportedVersions().filter(isLtsVersion).pop();
+}
+
+module.exports = { getSupportedVersions, isLtsVersion, getLtsVersion };

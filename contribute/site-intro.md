@@ -104,7 +104,7 @@ The `<X>` segment is looked up in `versions.json` / the REST API version map. `.
 | `@pulsar:version_origin@`    | The origin version key (e.g. `4.2.x` for released docs, full resolved version for current docs).                                                          |
 | `@pulsar:version_reference@` | The folder name in `static/reference/` — `next` for `docs/`, latest release's `<major>.<minor>.x` for `client-libraries/`, `<major>.<minor>.x` otherwise. |
 | `@pulsar:version:latest@`    | Latest version across all releases (context-independent).                                                                                                 |
-| `@pulsar:version:lts@`       | Current LTS version. Kept in sync with `ltsMajorRelease` in `pulsarVariables.ts`.                                                                         |
+| `@pulsar:version:lts@`       | Newest release of the newest maintained LTS line, derived from the release data.                                                                          |
 | `@pulsar:version:adapters@`  | Latest `pulsar-adapters` release, sourced from `data/release-pulsar-adapters.js`.                                                                         |
 | `@pulsar:version:python@`    | Version of the Python client that matches the current context.                                                                                            |
 | `@pulsar:version:netty@` | Netty version used by current Pulsar documentation (context-independent). Update `nettyVersion` in `src/config/pulsarVariables.ts` from the Pulsar source `gradle/libs.versions.toml` when it changes. |
