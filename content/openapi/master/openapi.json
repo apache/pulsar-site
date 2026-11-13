@@ -3047,6 +3047,54 @@
                 },
                 "type": "object"
             },
+            "PendingLayoutTransition": {
+                "properties": {
+                    "baseEpoch": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "baseNextSegmentId": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "incarnationId": {
+                        "type": "string"
+                    },
+                    "nextSegmentId": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "operation": {
+                        "type": "string"
+                    },
+                    "replacements": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/SegmentInfo"
+                        },
+                        "type": "object"
+                    },
+                    "sealing": {
+                        "type": "boolean"
+                    },
+                    "sources": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/SegmentInfo"
+                        },
+                        "type": "object"
+                    },
+                    "startedAtMs": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "trigger": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "PersistencePolicies": {
                 "properties": {
                     "bookkeeperAckQuorum": {
@@ -4054,9 +4102,15 @@
                         "format": "int64",
                         "type": "integer"
                     },
+                    "incarnationId": {
+                        "type": "string"
+                    },
                     "nextSegmentId": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "pendingLayoutTransition": {
+                        "$ref": "#/components/schemas/PendingLayoutTransition"
                     },
                     "properties": {
                         "additionalProperties": {
@@ -4965,6 +5019,272 @@
                     }
                 },
                 "summary": "Broker availability report",
+                "tags": [
+                    "broker-stats"
+                ]
+            }
+        },
+        "/admin/v2/broker-stats/brokers/{brokerId}/allocator-stats/{allocator}": {
+            "get": {
+                "description": "Redirects to the given broker when it is not the one serving the request",
+                "operationId": "getAllocatorStats_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "brokerId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "allocator",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AllocatorStats"
+                                }
+                            }
+                        },
+                        "description": "Get stats for a registered Netty allocator of the given broker"
+                    },
+                    "307": {
+                        "description": "Redirect to the given broker"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Broker not found"
+                    }
+                },
+                "summary": "Get stats for a registered Netty allocator of the given broker",
+                "tags": [
+                    "broker-stats"
+                ]
+            }
+        },
+        "/admin/v2/broker-stats/brokers/{brokerId}/bookieops": {
+            "get": {
+                "description": "Redirects to the given broker when it is not the one serving the request",
+                "operationId": "getPendingBookieOpsStats_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "brokerId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "additionalProperties": {
+                                        "additionalProperties": {
+                                            "$ref": "#/components/schemas/PendingBookieOpsStats"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Get pending bookie client op stats by namespace of the given broker"
+                    },
+                    "307": {
+                        "description": "Redirect to the given broker"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Broker not found"
+                    }
+                },
+                "summary": "Get pending bookie client op stats by namespace of the given broker",
+                "tags": [
+                    "broker-stats"
+                ]
+            }
+        },
+        "/admin/v2/broker-stats/brokers/{brokerId}/load-report": {
+            "get": {
+                "description": "Redirects to the given broker when it is not the one serving the request",
+                "operationId": "getLoadReport_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "brokerId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoadReport"
+                                }
+                            }
+                        },
+                        "description": "Get Load of the given broker"
+                    },
+                    "307": {
+                        "description": "Redirect to the given broker"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Broker not found"
+                    }
+                },
+                "summary": "Get Load of the given broker",
+                "tags": [
+                    "broker-stats"
+                ]
+            }
+        },
+        "/admin/v2/broker-stats/brokers/{brokerId}/mbeans": {
+            "get": {
+                "description": "Redirects to the given broker when it is not the one serving the request",
+                "operationId": "getMBeans_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "brokerId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Metrics"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Get all the mbean details of the broker JVM of the given broker"
+                    },
+                    "307": {
+                        "description": "Redirect to the given broker"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Broker not found"
+                    }
+                },
+                "summary": "Get all the mbean details of the broker JVM of the given broker",
+                "tags": [
+                    "broker-stats"
+                ]
+            }
+        },
+        "/admin/v2/broker-stats/brokers/{brokerId}/metrics": {
+            "get": {
+                "description": "Redirects to the given broker when it is not the one serving the request",
+                "operationId": "getMetrics_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "brokerId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Metrics"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "Gets the metrics for Monitoring of the given broker"
+                    },
+                    "307": {
+                        "description": "Redirect to the given broker"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Broker not found"
+                    }
+                },
+                "summary": "Gets the metrics for Monitoring of the given broker",
+                "tags": [
+                    "broker-stats"
+                ]
+            }
+        },
+        "/admin/v2/broker-stats/brokers/{brokerId}/topics": {
+            "get": {
+                "description": "Redirects to the given broker when it is not the one serving the request",
+                "operationId": "getTopics2_1",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "brokerId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "description": "Nested JSON object: namespace -> bundle range -> persistent/non-persistent -> topic -> stats",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "description": "Get all the topic stats by namespace of the given broker"
+                    },
+                    "307": {
+                        "description": "Redirect to the given broker"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Broker not found"
+                    }
+                },
+                "summary": "Get all the topic stats by namespace of the given broker",
                 "tags": [
                     "broker-stats"
                 ]
@@ -37710,6 +38030,9 @@
                     "404": {
                         "description": "Scalable topic doesn't exist"
                     },
+                    "409": {
+                        "description": "A migration to the scalable topic or a creation of it is in progress"
+                    },
                     "500": {
                         "description": "Internal server error"
                     }
@@ -37847,7 +38170,7 @@
                         "description": "Scalable topic already exists, or is being created or migrated to"
                     },
                     "412": {
-                        "description": "Invalid configuration"
+                        "description": "Invalid configuration, or a topic name ending with -partition-<index>"
                     },
                     "500": {
                         "description": "Internal server error"
@@ -39057,7 +39380,7 @@
                         "description": "Current broker doesn't serve the namespace of this topic"
                     },
                     "401": {
-                        "description": "Client is not authorized or Don't have admin permission"
+                        "description": "Client lacks permission to produce or consume on this topic"
                     },
                     "403": {
                         "description": "Client is not authenticated"
@@ -40486,6 +40809,1349 @@
                 ]
             }
         },
+        "/admin/v2/topic/{tenant}/{namespace}/{topic}/delayedDelivery": {
+            "delete": {
+                "operationId": "deleteDelayedDeliveryPolicies_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    }
+                },
+                "summary": "Remove delayed delivery messages config on a topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "get": {
+                "operationId": "getDelayedDeliveryPolicies_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "applied",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DelayedDeliveryPolicies"
+                                }
+                            }
+                        },
+                        "description": "Get delayed delivery messages config on a topic."
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Get delayed delivery messages config on a topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "post": {
+                "operationId": "setDelayedDeliveryPolicies_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DelayedDeliveryPolicies"
+                            }
+                        }
+                    },
+                    "description": "Delayed delivery policies for the specified topic"
+                },
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    }
+                },
+                "summary": "Set delayed delivery messages config on a topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            }
+        },
+        "/admin/v2/topic/{tenant}/{namespace}/{topic}/maxMessageSize": {
+            "delete": {
+                "operationId": "removeMaxMessageSize_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Remove maxMessageSize config for specified topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "get": {
+                "operationId": "getMaxMessageSize_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "format": "int32",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "description": "Get maxMessageSize config for specified topic."
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Get maxMessageSize config for specified topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "post": {
+                "operationId": "setMaxMessageSize_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "format": "int32",
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "description": "The max message size of the topic"
+                },
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "412": {
+                        "description": "Invalid value of maxMessageSize"
+                    }
+                },
+                "summary": "Set maxMessageSize config for specified topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            }
+        },
+        "/admin/v2/topic/{tenant}/{namespace}/{topic}/messageTTL": {
+            "delete": {
+                "operationId": "removeMessageTTL_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Not authenticate to perform the request or policy is read only"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    },
+                    "412": {
+                        "description": "Invalid message TTL value"
+                    }
+                },
+                "summary": "Remove message TTL in seconds for a topic",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "get": {
+                "operationId": "getMessageTTL_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "applied",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "format": "int32",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "description": "Get message TTL in seconds for a topic"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    }
+                },
+                "summary": "Get message TTL in seconds for a topic",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "post": {
+                "operationId": "setMessageTTL_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "TTL in seconds for the specified topic",
+                        "in": "query",
+                        "name": "messageTTL",
+                        "required": true,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Not authenticate to perform the request or policy is read only"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, enable the topic level policy and retry"
+                    },
+                    "412": {
+                        "description": "Invalid message TTL value"
+                    }
+                },
+                "summary": "Set message TTL in seconds for a topic",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            }
+        },
+        "/admin/v2/topic/{tenant}/{namespace}/{topic}/offloadPolicies": {
+            "delete": {
+                "operationId": "removeOffloadPolicies_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    }
+                },
+                "summary": "Delete offload policies on a topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "get": {
+                "operationId": "getOffloadPolicies_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "applied",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/OffloadPoliciesImpl"
+                                }
+                            }
+                        },
+                        "description": "Get offload policies on a topic."
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                },
+                "summary": "Get offload policies on a topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "post": {
+                "operationId": "setOffloadPolicies_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OffloadPoliciesImpl"
+                            }
+                        }
+                    },
+                    "description": "Offload policies for the specified topic"
+                },
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Tenant or cluster or namespace or topic doesn't exist"
+                    }
+                },
+                "summary": "Set offload policies on a topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            }
+        },
+        "/admin/v2/topic/{tenant}/{namespace}/{topic}/persistence": {
+            "delete": {
+                "operationId": "removePersistence_2",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Remove configuration of persistence policies for specified topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "get": {
+                "operationId": "getPersistence_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "applied",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PersistencePolicies"
+                                }
+                            }
+                        },
+                        "description": "Get configuration of persistence policies for specified topic."
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Get configuration of persistence policies for specified topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "post": {
+                "operationId": "setPersistence_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PersistencePolicies"
+                            }
+                        }
+                    },
+                    "description": "Bookkeeper persistence policies for specified topic"
+                },
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "400": {
+                        "description": "Invalid persistence policies"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Set configuration of persistence policies for specified topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            }
+        },
+        "/admin/v2/topic/{tenant}/{namespace}/{topic}/retention": {
+            "delete": {
+                "operationId": "removeRetention_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "412": {
+                        "description": "Retention Quota must exceed backlog quota"
+                    }
+                },
+                "summary": "Remove retention configuration for specified topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "get": {
+                "operationId": "getRetention_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "applied",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RetentionPolicies"
+                                }
+                            }
+                        },
+                        "description": "Get retention configuration for specified topic."
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    }
+                },
+                "summary": "Get retention configuration for specified topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            },
+            "post": {
+                "description": "On a scalable topic, retentionSizeInMB applies to each segment, so the total retained size can reach N times the value for a topic with N segments. The retention time also drives the garbage collection of sealed segments.",
+                "operationId": "setRetention_3",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "tenant",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "namespace",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "topic",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "Whether leader broker redirected this call to this broker. For internal use.",
+                        "in": "query",
+                        "name": "authoritative",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "isGlobal",
+                        "schema": {
+                            "default": false,
+                            "type": "boolean"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RetentionPolicies"
+                            }
+                        }
+                    },
+                    "description": "Retention policies for the specified topic"
+                },
+                "responses": {
+                    "204": {
+                        "description": "Operation successful"
+                    },
+                    "403": {
+                        "description": "Don't have admin permission"
+                    },
+                    "404": {
+                        "description": "Namespace or topic doesn't exist"
+                    },
+                    "405": {
+                        "description": "Topic level policy is disabled, to enable the topic level policy and retry"
+                    },
+                    "409": {
+                        "description": "Concurrent modification"
+                    },
+                    "412": {
+                        "description": "Retention Quota must exceed backlog quota"
+                    }
+                },
+                "summary": "Set retention configuration for specified topic.",
+                "tags": [
+                    "scalable topic policies"
+                ]
+            }
+        },
         "/admin/v2/worker-stats/functionsmetrics": {
             "get": {
                 "description": "The request should be executed by a Monitoring agent on each worker to fetch the metrics",
@@ -40520,7 +42186,7 @@
         "/admin/v2/worker-stats/metrics": {
             "get": {
                 "description": "The request should be executed by a Monitoring agent on each worker to fetch the worker-metrics",
-                "operationId": "getMetrics_1",
+                "operationId": "getMetrics_2",
                 "responses": {
                     "200": {
                         "content": {
@@ -40892,6 +42558,10 @@
         {
             "description": "Quota admin APIs",
             "name": "resource-quotas"
+        },
+        {
+            "description": "Topic-level policies of scalable topics",
+            "name": "scalable topic policies"
         },
         {
             "description": "Scalable topic admin APIs",

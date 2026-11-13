@@ -23,6 +23,7 @@ $ pulsar-admin broker-stats monitoring-metrics options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-b, --broker-id]` | Broker id (from `brokers list`) to get the stats of; defaults to the connected broker|null|
 | `[-i, --indent]` | Indent JSON output|false|
 | `[-h, --help]` | Show this help message and exit.|false|
 | `[-v, --version]` | Print version information and exit.|false|
@@ -42,6 +43,7 @@ $ pulsar-admin broker-stats mbeans options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-b, --broker-id]` | Broker id (from `brokers list`) to get the stats of; defaults to the connected broker|null|
 | `[-i, --indent]` | Indent JSON output|false|
 | `[-h, --help]` | Show this help message and exit.|false|
 | `[-v, --version]` | Print version information and exit.|false|
@@ -61,6 +63,7 @@ $ pulsar-admin broker-stats topics options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-b, --broker-id]` | Broker id (from `brokers list`) to get the stats of; defaults to the connected broker|null|
 | `[-i, --indent]` | Indent JSON output|false|
 | `[-h, --help]` | Show this help message and exit.|false|
 | `[-v, --version]` | Print version information and exit.|false|
@@ -80,6 +83,7 @@ $ pulsar-admin broker-stats destinations options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-b, --broker-id]` | Broker id (from `brokers list`) to get the stats of; defaults to the connected broker|null|
 | `[-i, --indent]` | Indent JSON output|false|
 | `[-h, --help]` | Show this help message and exit.|false|
 | `[-v, --version]` | Print version information and exit.|false|
@@ -99,6 +103,7 @@ $ pulsar-admin broker-stats allocator-stats options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-b, --broker-id]` | Broker id (from `brokers list`) to get the stats of; defaults to the connected broker|null|
 | `[-h, --help]` | Show this help message and exit.|false|
 | `[-v, --version]` | Print version information and exit.|false|
 
@@ -117,6 +122,7 @@ $ pulsar-admin broker-stats load-report options
 
 |Flag|Description|Default|
 |---|---|---|
+| `[-b, --broker-id]` | Broker id (from `brokers list`) to get the stats of; defaults to the connected broker|null|
 | `[-h, --help]` | Show this help message and exit.|false|
 | `[-v, --version]` | Print version information and exit.|false|
 

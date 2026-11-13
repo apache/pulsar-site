@@ -2871,17 +2871,6 @@ Max capacity of the topic name cache. -1 means unlimited cache; 0 means broker w
 
 **Category**: Policies
 
-### topicPublisherThrottlingTickTimeMillis
-Tick time to schedule task that checks topic publish rate limiting across all topics  Reducing to lower value can give more accuracy while throttling publish but it uses more CPU to perform frequent check. (Disable publish throttling with value 0)
-
-**Type**: `int`
-
-**Default**: `10`
-
-**Dynamic**: `true`
-
-**Category**: Policies
-
 ### ttlDurationDefaultInSeconds
 Default ttl for namespaces if ttl is not already configured at namespace policies. (disable default-ttl with value 0)
 
@@ -3339,17 +3328,6 @@ Max Rate(in 1 seconds) of Message allowed to publish for a broker when broker pu
 
 **Category**: Server
 
-### brokerPublisherThrottlingTickTimeMillis
-Tick time to schedule task that checks broker publish rate limiting across all topics  Reducing to lower value can give more accuracy while throttling publish but it uses more CPU to perform frequent check. (Disable publish throttling with value 0)
-
-**Type**: `int`
-
-**Default**: `50`
-
-**Dynamic**: `true`
-
-**Category**: Server
-
 ### brokerServiceCompactionMonitorIntervalInSeconds
 Interval between checks to see if topics with compaction policies need to be compacted
 
@@ -3505,6 +3483,17 @@ Timeout for connection liveness check used to check liveness of possible consume
 
 **Category**: Server
 
+### delayedDeliveryAssumeOrderedDeliveryTimes
+Allow the in-memory delayed delivery tracker to pause cursor reads after detecting ordered delivery times in a lookahead window. Default is false. Enable only when applications guarantee non-decreasing delivery times for all messages on the broker, including future publications. An immediate message must not follow a message scheduled in the future. The broker cannot verify the delivery times of unread messages. When disabled, the broker scans and tracks the delayed backlog, which can increase memory and read I/O. Enabling this option restores the legacy fixed-delay read-pause behavior. Requires a broker restart.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### delayedDeliveryEnabled
 Whether to enable the delayed delivery for messages.
 
@@ -3517,7 +3506,7 @@ Whether to enable the delayed delivery for messages.
 **Category**: Server
 
 ### delayedDeliveryFixedDelayDetectionLookahead
-Size of the lookahead window to use when detecting if all the messages in the topic have a fixed delay for InMemoryDelayedDeliveryTracker (the default DelayedDeliverTracker). Default is 50,000. Setting the lookahead window to 0 will disable the logic to handle fixed delays in messages in a different way.
+Size of the lookahead window to use when detecting if all the messages in the topic have a fixed delay for InMemoryDelayedDeliveryTracker (the default DelayedDeliverTracker). Default is 50,000. Setting the lookahead window to 0 will disable the logic to handle fixed delays in messages in a different way. A positive value only enables read pauses when delayedDeliveryAssumeOrderedDeliveryTimes is true.
 
 **Type**: `long`
 
@@ -3751,17 +3740,6 @@ The read failure backoff max time in milliseconds. By default it is 60s.
 
 ### enableBusyWait
 Option to enable busy-wait settings. Default is false. WARNING: This option will enable spin-waiting on executors and IO threads in order to reduce latency during context switches. The spinning will consume 100% CPU even when the broker is not doing any work. It is recommended to reduce the number of IO threads and BK client threads to only have few CPU cores busy.
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
-### enableNamespaceIsolationUpdateOnTime
-This config never takes effect and will be removed in the next release
 
 **Type**: `boolean`
 
@@ -4316,7 +4294,7 @@ Maximum delay to impose on batching grouping
 **Category**: Server
 
 ### metadataStoreBatchingMaxOperations
-Maximum number of operations to include in a singular batch
+Maximum number of operations to include in a singular batch. With ZooKeeper 3.9.7 or later, a read batch larger than the multiRead.maxOps setting of the ZooKeeper server, which is 1000 by default, is rejected, and the broker splits and retries it. To avoid these extra requests, raise that setting first when raising this value.
 
 **Type**: `int`
 
@@ -4425,17 +4403,6 @@ Number of threads to use for Netty Acceptor. Default is set to `1`
 **Type**: `int`
 
 **Default**: `1`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
-### numCacheExecutorThreadPoolSize
-Number of thread pool size to use for pulsar zookeeper callback service.The cache executor thread pool is used for restarting global zookeeper session. Default is 10
-
-**Type**: `int`
-
-**Default**: `10`
 
 **Dynamic**: `false`
 
@@ -4597,35 +4564,6 @@ Path for the file used to determine the rotation status for the broker when resp
 
 ### strictBookieAffinityEnabled
 Enable or disable strict bookie affinity.
-
-**Type**: `boolean`
-
-**Default**: `false`
-
-**Dynamic**: `false`
-
-**Category**: Server
-
-### strictTopicNameEnabled
-# Enable strict topic name check. Which includes two parts as follows:
-# 1. Mark `-partition-` as a keyword.
-# E.g.
-    Create a non-partitioned topic.
-      No corresponding partitioned topic
-       - persistent://public/default/local-name (passed)
-       - persistent://public/default/local-name-partition-z (rejected by keyword)
-       - persistent://public/default/local-name-partition-0 (rejected by keyword)
-      Has corresponding partitioned topic, partitions=2 and topic partition name is persistent://public/default/local-name
-       - persistent://public/default/local-name-partition-0 (passed, Because it is the partition topic's sub-partition)
-       - persistent://public/default/local-name-partition-z (rejected by keyword)
-       - persistent://public/default/local-name-partition-4 (rejected, Because it exceeds the number of maximum partitions)
-    Create a partitioned topic(topic metadata)
-       - persistent://public/default/local-name (passed)
-       - persistent://public/default/local-name-partition-z (rejected by keyword)
-       - persistent://public/default/local-name-partition-0 (rejected by keyword)
-# 2. Allowed alphanumeric (a-zA-Z_0-9) and these special chars -=:. for topic name.
-# NOTE: This flag will be removed in some major releases in the future.
-
 
 **Type**: `boolean`
 
@@ -6462,6 +6400,21 @@ Example:- [TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256]
 
 **Category**: TLS
 
+### tlsClientAuthMode
+Whether the TLS listeners ask connecting clients for a certificate (TLS client authentication): NONE does not request one, OPTIONAL requests one and accepts a connection without it (a presented certificate must be trusted), REQUIRE requires a trusted certificate.
+
+When unset, it is REQUIRE if the deprecated tlsRequireTrustedClientCertOnConnect is true, OPTIONAL if authentication is enabled with AuthenticationProviderTls among the authenticationProviders, and NONE otherwise. A custom authentication provider that reads the client certificate needs OPTIONAL or REQUIRE. Setting NONE while AuthenticationProviderTls is enabled is a configuration error.
+
+Requesting a certificate sends every client the names of all CAs in tlsTrustCertsFilePath or tlsTrustStore, or of the JVM default trust store when neither is set. With a large trust store, the TLS 1.3 handshake then spans several TLS records, which some clients fail to handle, so the trust store should hold only the CAs that issue client certificates.
+
+**Type**: `org.apache.pulsar.common.tls.TlsClientAuthMode`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### tlsEnabled
 Enable TLS
 
@@ -6525,18 +6478,6 @@ Example:- [TLSv1.3, TLSv1.2]
 **Type**: `java.util.Set`
 
 **Default**: `[]`
-
-**Dynamic**: `false`
-
-**Category**: TLS
-
-### tlsRequireTrustedClientCertOnConnect
-Specify whether Client certificates are required for TLS Reject.
-the Connection if the Client Certificate is not trusted
-
-**Type**: `boolean`
-
-**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -6922,8 +6863,7 @@ load placement strategy[weightedRandomSelection/leastLoadedServer] (only used by
 **Category**: Load Balancer
 
 ### brokerServicePurgeInactiveFrequencyInSeconds
-How often broker checks for inactive topics to be deleted (topics with no subscriptions and no one connected) Deprecated in favor of using `brokerDeleteInactiveTopicsFrequencySeconds`
-@deprecated - unused.
+Deprecated. This setting has no effect and is retained for compatibility. Use brokerDeleteInactiveTopicsFrequencySeconds instead.
 
 **Type**: `int`
 
@@ -6933,8 +6873,19 @@ How often broker checks for inactive topics to be deleted (topics with no subscr
 
 **Category**: Policies
 
+### topicPublisherThrottlingTickTimeMillis
+Deprecated. Topic publish rate limiting no longer uses a periodic check. This setting has no effect and is retained for compatibility.
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `true`
+
+**Category**: Policies
+
 ### replicationTlsEnabled
-@deprecated - Use brokerClientTlsEnabled instead.
+Deprecated. This setting has no effect and is retained for compatibility. Use brokerClientTlsEnabled instead.
 
 **Type**: `boolean`
 
@@ -6944,12 +6895,34 @@ How often broker checks for inactive topics to be deleted (topics with no subscr
 
 **Category**: Replication
 
+### brokerPublisherThrottlingTickTimeMillis
+Deprecated. Broker publish rate limiting no longer uses a periodic check. This setting has no effect and is retained for compatibility.
+
+**Type**: `int`
+
+**Default**: `50`
+
+**Dynamic**: `true`
+
+**Category**: Server
+
 ### configurationStoreServers
 Configuration store connection string (as a comma-separated list). Deprecated in favor of `configurationMetadataStoreUrl`
 
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### enableNamespaceIsolationUpdateOnTime
+Deprecated. This setting has no effect and is retained for compatibility.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -6966,6 +6939,17 @@ Global Zookeeper quorum connection string (as a comma-separated list). Deprecate
 
 **Category**: Server
 
+### numCacheExecutorThreadPoolSize
+Deprecated. This setting has no effect and is retained for compatibility.
+
+**Type**: `int`
+
+**Default**: `10`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
 ### numWorkerThreadsForNonPersistentTopic
 Number of worker threads to serve non-persistent topic.
 @deprecated - use topicOrderedExecutorThreadNum instead.
@@ -6973,6 +6957,17 @@ Number of worker threads to serve non-persistent topic.
 **Type**: `int`
 
 **Default**: `-1`
+
+**Dynamic**: `false`
+
+**Category**: Server
+
+### strictTopicNameEnabled
+Deprecated. This setting has no effect on topic name validation and is retained for compatibility.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -7046,5 +7041,16 @@ If number of unack message range is higher than this limit then broker will pers
 **Dynamic**: `false`
 
 **Category**: Storage (Managed Ledger)
+
+### tlsRequireTrustedClientCertOnConnect
+Deprecated: use tlsClientAuthMode=REQUIRE instead. Whether a trusted client certificate is required; the connection is rejected if the client certificate is missing or not trusted. Setting it to true together with tlsClientAuthMode=NONE or OPTIONAL is a configuration error.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: TLS
 
 

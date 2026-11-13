@@ -431,6 +431,21 @@ Path for the TLS certificate file
 
 **Category**: 
 
+### tlsClientAuthMode
+Whether the TLS listeners ask connecting clients for a certificate (TLS client authentication): NONE does not request one, OPTIONAL requests one and accepts a connection without it (a presented certificate must be trusted), REQUIRE requires a trusted certificate.
+
+When unset, it is REQUIRE if the deprecated tlsRequireTrustedClientCertOnConnect is true, OPTIONAL if authentication is enabled with AuthenticationProviderTls among the authenticationProviders, and NONE otherwise. A custom authentication provider that reads the client certificate needs OPTIONAL or REQUIRE. Setting NONE while AuthenticationProviderTls is enabled is a configuration error.
+
+Requesting a certificate sends every client the names of all CAs in tlsTrustCertsFilePath or tlsTrustStore, or of the JVM default trust store when neither is set. With a large trust store, the TLS 1.3 handshake then spans several TLS records, which some clients fail to handle, so the trust store should hold only the CAs that issue client certificates.
+
+**Type**: `org.apache.pulsar.common.tls.TlsClientAuthMode`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: 
+
 ### tlsEnabledWithKeyStore
 Enable TLS with KeyStore type configuration for WebSocket
 
@@ -530,17 +545,6 @@ load; pinning it explicitly there does fail.
 **Type**: `java.lang.String`
 
 **Default**: `null`
-
-**Dynamic**: `false`
-
-**Category**: 
-
-### tlsRequireTrustedClientCertOnConnect
-Specify whether client certificates are required for TLS rejecting the connection if the client certificate is not trusted
-
-**Type**: `boolean`
-
-**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -768,6 +772,17 @@ Configuration Store connection string
 **Type**: `java.lang.String`
 
 **Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: 
+
+### tlsRequireTrustedClientCertOnConnect
+Deprecated: use tlsClientAuthMode=REQUIRE instead. Whether a trusted client certificate is required; the connection is rejected if the client certificate is missing or not trusted. Setting it to true together with tlsClientAuthMode=NONE or OPTIONAL is a configuration error.
+
+**Type**: `boolean`
+
+**Default**: `false`
 
 **Dynamic**: `false`
 
