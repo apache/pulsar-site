@@ -1275,6 +1275,21 @@ Examples:- [TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256]
 
 **Category**: TLS
 
+### tlsClientAuthMode
+Whether the TLS listeners ask connecting clients for a certificate (TLS client authentication): NONE does not request one, OPTIONAL requests one and accepts a connection without it (a presented certificate must be trusted), REQUIRE requires a trusted certificate.
+
+When unset, it is REQUIRE if the deprecated tlsRequireTrustedClientCertOnConnect is true, OPTIONAL if authentication is enabled with AuthenticationProviderTls among the authenticationProviders, and NONE otherwise. A custom authentication provider that reads the client certificate needs OPTIONAL or REQUIRE. Setting NONE while AuthenticationProviderTls is enabled is a configuration error.
+
+Requesting a certificate sends every client the names of all CAs in tlsTrustCertsFilePath or tlsTrustStore, or of the JVM default trust store when neither is set. With a large trust store, the TLS 1.3 handshake then spans several TLS records, which some clients fail to handle, so the trust store should hold only the CAs that issue client certificates.
+
+**Type**: `org.apache.pulsar.common.tls.TlsClientAuthMode`
+
+**Default**: `null`
+
+**Dynamic**: `false`
+
+**Category**: TLS
+
 ### tlsFactoryClassName
 PIP-478 TLS factory (PulsarTlsFactory) class name for the proxy's server-side TLS (binary front-end and web server; purposes PROXY/WEB). An empty value or the literal 'default' selects the built-in default factory composed from these tls* settings, otherwise the named class is instantiated via its public no-arg constructor. This is the only server TLS path; the removed PIP-337 sslFactoryPlugin keys are rejected at startup when set to a non-default value.
 
@@ -1327,19 +1342,6 @@ Examples:- [TLSv1.3, TLSv1.2]
 **Type**: `java.util.Set`
 
 **Default**: `[]`
-
-**Dynamic**: `false`
-
-**Category**: TLS
-
-### tlsRequireTrustedClientCertOnConnect
-Whether client certificates are required for TLS.
-
- Connections are rejected if the client certificate isn't trusted
-
-**Type**: `boolean`
-
-**Default**: `false`
 
 **Dynamic**: `false`
 
@@ -1571,5 +1573,16 @@ Is zooKeeper allow read-only operations.
 **Dynamic**: `false`
 
 **Category**: Server
+
+### tlsRequireTrustedClientCertOnConnect
+Deprecated: use tlsClientAuthMode=REQUIRE instead. Whether a trusted client certificate is required; the connection is rejected if the client certificate is missing or not trusted. Setting it to true together with tlsClientAuthMode=NONE or OPTIONAL is a configuration error.
+
+**Type**: `boolean`
+
+**Default**: `false`
+
+**Dynamic**: `false`
+
+**Category**: TLS
 
 
