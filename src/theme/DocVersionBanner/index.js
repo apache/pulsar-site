@@ -14,11 +14,11 @@ import {
   useDocsVersion,
 } from '@docusaurus/plugin-content-docs/client';
 import BrowserOnly from "@docusaurus/BrowserOnly";
-import { getSupportedVersions } from '../../utils/supportedVersions';
+import { getSupportedVersions, getLtsVersion } from '../../utils/supportedVersions';
 let versions = require("../../../versions.json");
 const _latestVersion = versions[0];
-const _ltsVersion = '4.0.x';
 const _maintainedVersions = getSupportedVersions();
+const _ltsVersion = getLtsVersion() || _latestVersion;
 function UnreleasedVersionLabel({siteTitle, versionMetadata}) {
   return (
     <Translate

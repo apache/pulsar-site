@@ -18,6 +18,8 @@ const releaseCpp: ClientRelease[] = require("../../data/release-cpp");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const releasePython: ClientRelease[] = require("../../data/release-python");
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const {getLtsVersion}: {getLtsVersion: () => string | undefined} = require("../utils/supportedVersions");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const releasePulsarAdapters: string[] = require("../../data/release-pulsar-adapters");
 
 export const pulsarAdaptersVersion: string = releasePulsarAdapters[0];
@@ -30,8 +32,9 @@ const versions = versionsList as string[];
 
 export const latestMajorRelease: string = versions[0];
 
-// LTS major version. Kept in sync with `_ltsVersion` in src/theme/DocVersionBanner/index.js.
-export const ltsMajorRelease: string = "4.0.x";
+// Newest maintained LTS release line, derived from the release data (same as the docs
+// version banner). Falls back to the latest release line if no LTS line is maintained.
+export const ltsMajorRelease: string = getLtsVersion() ?? latestMajorRelease;
 
 // Every published Pulsar release (newest first), including milestone (-M*) releases.
 const releases = releasesList as string[];
