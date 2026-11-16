@@ -527,7 +527,7 @@ The invariant **E ≥ Qw ≥ Qa** must hold; otherwise ledger creation will fail
 
 The `conf/pulsar_env.sh` file controls JVM parameters for the Broker process:
 
-- `PULSAR_MEM`: Defaults to `-Xms2g -Xmx2g -XX:MaxDirectMemorySize=4g`. Adjust based on your machine's available memory. Insufficient heap memory leads to frequent GC, and GC pauses increase message publish and consume latency — in severe cases, Full GC can make the Broker temporarily unavailable. Direct memory is critical for the Broker's message caching and Netty I/O operations.
+- `PULSAR_MEM`: Defaults to `-Xms2g -Xmx2g -XX:MaxDirectMemorySize=4g`. Adjust based on your machine's available memory. Insufficient heap memory leads to frequent GC, and GC pauses increase message publish and consume latency — in severe cases, Full GC can make the Broker temporarily unavailable. Direct memory is critical for the Broker's message caching and Netty I/O operations. The BookKeeper launcher reads `BOOKIE_MEM`, which falls back to `PULSAR_MEM` when `BOOKIE_MEM` is unset, so a value set here also applies to bookies unless you override it in `conf/bkenv.sh`.
 
   ```bash
   # Example: increase heap and direct memory for production workloads
@@ -549,6 +549,26 @@ The `conf/pulsar_env.sh` file controls JVM parameters for the Broker process:
   # if your messages are large, to avoid Netty bypassing the memory pool for allocation)
   PULSAR_EXTRA_OPTS="-Dio.netty.allocator.maxOrder=13 -Dio.netty.allocator.numDirectArenas=8 -Dio.netty.allocator.maxCachedBufferCapacity=1048576"
   ```
+
+The launcher (`bin/pulsar`) and `bin/pulsar-daemon` also read the following variables. Configure them the same way, in the environment or in `conf/pulsar_env.sh`; a value that is already set in the environment takes precedence over the default in `pulsar_env.sh`, which is how Docker and Kubernetes deployments inject memory settings.
+
+| Variable | Description | Default |
+| :------- | :---------- | :------ |
+| `JAVA_HOME` | Java installation used by the launcher. | unset (uses `java` from `PATH`) |
+| `PULSAR_GC` | Garbage collector options appended to the JVM command line. | `-XX:+UseZGC -XX:+PerfDisableSharedMem -XX:+AlwaysPreTouch`; `-XX:+ZGenerational` is added on Java 21 and 22 |
+| `PULSAR_GC_LOG` | GC log options. | GC log in `PULSAR_GC_LOG_DIR` (`pulsar_gc_%p.log`), rotated at 10 files of 20 MB, with async logging on Java 17 and later |
+| `PULSAR_GC_LOG_DIR` | Directory for GC logs. | `PULSAR_LOG_DIR` |
+| `PULSAR_EXTRA_CLASSPATH` | Additional entries appended to the Pulsar classpath. | unset |
+| `PULSAR_LOG_CONF` | Log4j2 configuration file. | `conf/log4j2.yaml` |
+| `PULSAR_LOG_DIR` | Directory for logs and GC logs. | `<pulsar-home>/logs` |
+| `PULSAR_BROKER_CONF` | Broker configuration file. | `conf/broker.conf` |
+| `PULSAR_BOOKKEEPER_CONF` | BookKeeper configuration file. | `conf/bookkeeper.conf` |
+| `PULSAR_ZK_CONF` | ZooKeeper configuration file. | `conf/zookeeper.conf` |
+| `PULSAR_GLOBAL_ZK_CONF` | Configuration store (global ZooKeeper) configuration file. | `conf/global_zookeeper.conf` |
+| `PULSAR_PID_DIR` | Directory where `bin/pulsar-daemon` writes the server PID file. | `<pulsar-home>/bin` |
+| `PULSAR_STOP_TIMEOUT` | Seconds to wait for a server to stop before it is forcefully killed. | `30` |
+
+For bookies, `conf/bkenv.sh` provides the equivalent `BOOKIE_MEM`, `BOOKIE_GC`, `BOOKIE_GC_LOG`, `BOOKIE_GC_LOG_DIR`, `BOOKIE_LOG_DIR`, `BOOKIE_EXTRA_OPTS`, `BOOKIE_EXTRA_CLASSPATH`, `BOOKIE_PID_DIR`, and `BOOKIE_STOP_TIMEOUT` variables.
 
 :::tip
 
