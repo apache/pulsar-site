@@ -18,6 +18,14 @@ To preview the changes, run the following command ([prerequisites](https://pulsa
 
 This command starts a local web server on port 3000 and opens a browser window pointing to the website.
 
+The `CI - Check docs links` workflow builds the current documentation and reports internal links
+under `/docs/` that do not resolve. Run the same check locally with:
+
+```shell
+yarn build
+yarn check-links
+```
+
 ### Updating versioned docs
 
 When your documentation changes apply to existing [supported versions](https://pulsar.apache.org/contribute/release-policy/#supported-versions), you should update both the versioned documentation in the `versioned_docs` directory and the documentation in the `docs` directory.
