@@ -64,7 +64,7 @@ A message ID consists of the following fields:
 
 Because this combination of fields identifies a single message, message IDs are unique within a topic. The Java client returns message IDs as `MessageId` objects: serialize them with `MessageId.toByteArray` and order them with `MessageId.compareTo`. To read the individual fields, cast a message ID to `MessageIdAdv`, which exposes `getLedgerId`, `getEntryId`, `getPartitionIndex`, and `getBatchIndex`.
 
-The `pulsar-admin topics` commands that locate a message by ID use these fields. For example, `pulsar-admin topics get-message-by-id -l <ledgerId> -e <entryId> <topic>` fetches the entry that stores the message, and `pulsar-admin topics get-message-id` and `pulsar-admin topics last-message-id` print message IDs in the form `ledgerId:entryId:partitionIndex`, followed by the batch index for batched messages.
+The `pulsar-admin topics` commands that locate a message by ID use these fields. For example, `pulsar-admin topics get-message-by-id -l <ledgerId> -e <entryId> <topic>` fetches the entry that stores the message; `pulsar-admin topics get-message-id -d <datetime> <topic>` and `pulsar-admin topics last-message-id <topic>` print message IDs in the form `ledgerId:entryId:partitionIndex`, followed by the batch index for batched messages.
 
 ### Acknowledgment
 
