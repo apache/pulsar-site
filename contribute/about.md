@@ -52,7 +52,7 @@ On any change which is either significant (e.g., new features), or changes any p
 
 ### Online discussions
 
-Pulsar users and developers use the [Apache Pulsar Slack channel](https://apache-pulsar.slack.com/) for online discussions. You can invite yourself by accessing [this link](https://communityinviter.com/apps/apache-pulsar/apache-pulsar).
+Pulsar users and developers use the [Apache Pulsar Slack channel](https://apache-pulsar.slack.com/) for online discussions. You can invite yourself by accessing [this link](https://pulsar.apache.org/slack-invite).
 Please join the #dev channel to interact with other Pulsar committers and contributors.
 
 Slack channels are great for quick questions or discussions on specialized topics. Remember that it is strongly encouraged to communicate via the mailing lists, and you should prefer to discuss more complex subjects by email.

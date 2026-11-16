@@ -50,6 +50,6 @@ For more information, see this [list of companies using or contributing to Pulsa
 
 Backed by a diverse community of contributors, we believe that each and every pull request counts and would like to see more contributors join the journey. To start making your contribution to the project, see the [Apache Pulsar Contribution Guide](pathname:///contribute/).
 
-To stay up to date with community news and discuss hot topics with other members, you can subscribe to the Pulsar mailing lists for [users](mailto:users-subscribe@pulsar.apache.org) and [developers](mailto:dev-subscribe@pulsar.apache.org), follow us on [Twitter](https://twitter.com/apache_pulsar), and join the [Pulsar Slack workspace](https://communityinviter.com/apps/apache-pulsar/apache-pulsar).
+To stay up to date with community news and discuss hot topics with other members, you can subscribe to the Pulsar mailing lists for [users](mailto:users-subscribe@pulsar.apache.org) and [developers](mailto:dev-subscribe@pulsar.apache.org), follow us on [Twitter](https://twitter.com/apache_pulsar), and join the [Pulsar Slack workspace](https://pulsar.apache.org/slack-invite).
 
 The Pulsar community hosts events, meetups, and webinars for Pulsar users of all experience levels. You can check out the [Events](pathname:///events/) page and join different user groups to stay tuned.

@@ -334,7 +334,7 @@ module.exports = async function createConfigAsync() {
                 <div class="social-icons">
                   <a
                     target="_blank"
-                    href="https://communityinviter.com/apps/apache-pulsar/apache-pulsar"
+                    href="https://pulsar.apache.org/slack-invite"
                     aria-label="Join the Apache Pulsar Slack workspace"
                   >
                     <img alt="Slack logo" src="/img/slack-white.svg" width="26">

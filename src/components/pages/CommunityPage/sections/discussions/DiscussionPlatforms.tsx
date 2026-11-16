@@ -85,7 +85,7 @@ const DiscussionPlatforms: React.FC = () => {
         {
           id: "join-slack",
           text: "Join Slack",
-          href: "https://communityinviter.com/apps/apache-pulsar/apache-pulsar",
+          href: "https://pulsar.apache.org/slack-invite",
           type: "primary",
           isExternal: true,
         },
