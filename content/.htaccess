@@ -7,6 +7,12 @@ RewriteEngine On
 # Apache Pulsar support for Spring only has a reference site for now
 RewriteRule "^pulsar-spring/?$" "/pulsar-spring/reference/" [R=301,DPI,L]
 
+# Slack invite link. Slack's shared invite links expire after 30 days, so the site links to
+# /slack-invite and this rule redirects to the current invite link. To renew it, create a new
+# invite link in the apache-pulsar Slack workspace (with "never expires" if available) and
+# replace the URL below. Use a temporary redirect (302) so that browsers don't cache the target.
+RewriteRule "^slack-invite/?$" "https://join.slack.com/t/apache-pulsar/shared_invite/zt-4gz3rd4bl-R6zZ1OMByUDUAVYUMOqmgQ" [R=302,L]
+
 RewriteRule "^en/(.+)$" "/$1" [R=301,DPI,L]
 RewriteRule "^docs/en/(.+)$" "/docs/$1" [R=301,DPI,L]
 RewriteRule "^docs/(zh-CN|zh-TW|ja|ko|fr)/(.+)$" "/$1/docs/$2" [R=301,DPI,L]

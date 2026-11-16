@@ -48,35 +48,7 @@
             },
             "AuthPolicies": {
                 "properties": {
-                    "namespaceAuthentication": {
-                        "additionalProperties": {
-                            "items": {
-                                "enum": [
-                                    "produce",
-                                    "consume",
-                                    "functions",
-                                    "sources",
-                                    "sinks",
-                                    "packages"
-                                ],
-                                "type": "string"
-                            },
-                            "type": "array",
-                            "uniqueItems": true
-                        },
-                        "type": "object"
-                    },
-                    "subscriptionAuthentication": {
-                        "additionalProperties": {
-                            "items": {
-                                "type": "string"
-                            },
-                            "type": "array",
-                            "uniqueItems": true
-                        },
-                        "type": "object"
-                    },
-                    "topicAuthentication": {
+                    "destination_auth": {
                         "additionalProperties": {
                             "additionalProperties": {
                                 "items": {
@@ -94,6 +66,34 @@
                                 "uniqueItems": true
                             },
                             "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "namespace_auth": {
+                        "additionalProperties": {
+                            "items": {
+                                "enum": [
+                                    "produce",
+                                    "consume",
+                                    "functions",
+                                    "sources",
+                                    "sinks",
+                                    "packages"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "uniqueItems": true
+                        },
+                        "type": "object"
+                    },
+                    "subscription_auth_roles": {
+                        "additionalProperties": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "uniqueItems": true
                         },
                         "type": "object"
                     }

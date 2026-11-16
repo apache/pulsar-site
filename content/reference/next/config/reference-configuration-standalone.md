@@ -5400,6 +5400,17 @@ Maximum number of thread pool threads for offloaded ledger reading
 
 **Category**: Storage (Ledger Offloading)
 
+### managedLedgerOffloadStorageCheckTimeoutSeconds
+Timeout in seconds for the asynchronous offload storage check at broker startup. Supported drivers check access by writing and deleting a temporary object. Failures are logged without failing startup. Set to 0 to disable the check.
+
+**Type**: `int`
+
+**Default**: `30`
+
+**Dynamic**: `false`
+
+**Category**: Storage (Ledger Offloading)
+
 ### managedLedgerOffloadThresholdInSeconds
 The threshold to triggering automatic offload to long term storage
 
