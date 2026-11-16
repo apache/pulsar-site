@@ -139,6 +139,24 @@ For the latest and complete information about `pulsar-perf`, including commands,
 
 This section shows how Pulsar Perf runs transactions. For more information, see [Pulsar transactions](txn-why.md).
 
+### Prepare the consumer topics
+
+A transaction run reads messages from the topics passed to `--topics-c`, acknowledges them inside the transaction, and produces messages to the topics passed to `--topics-p`. The tool does not create test data, so fill each consumer topic before you run it.
+
+In every transaction, the tool consumes `--numMessage-perTransaction-consume` (`-nmc`) messages from each subscription of each consumer topic. A run of `--number-txn` (`-ntxn`) transactions therefore needs at least `number-txn` * `numMessage-perTransaction-consume` messages on each consumer topic:
+
+```text
+messages required = number-txn * numMessage-perTransaction-consume
+```
+
+For example, 50 transactions that consume one message each need 50 messages. The following command prepares the consumer topic of the examples in this section:
+
+```shell
+bin/pulsar-perf produce -m 50 myConsumerTopic
+```
+
+Each subscription has its own cursor over the retained messages and starts from the earliest position by default, so creating more subscriptions does not change the number of messages that the topic must retain. Set `--num-subscriptions` (`-ns`) to the number of subscription names passed to `--subscriptions` (`-ss`), for example `-ns 2 -ss sub1,sub2`.
+
 ### Use transaction
 
 This example executes 50 transactions. Each transaction sends and receives 1 message (default).
