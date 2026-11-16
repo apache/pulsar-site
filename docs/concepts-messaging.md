@@ -32,7 +32,7 @@ Messages are the basic "unit" of Pulsar. They're what producers publish to topic
 | Topic name           | The name of the topic that the message is published to.                                                                                                                                                                                                                                                                                                                                                                    |
 | Schema version       | The version number of the schema that the message is produced with.                                                                                                                                                                                                                                                                                                                                                        |
 | Sequence ID          | Each Pulsar message belongs to an ordered sequence on its topic. The sequence ID of a message is initially assigned by its producer, indicating its order in that sequence, and can also be customized.<br />Sequence ID can be used for message deduplication. If `brokerDeduplicationEnabled` is set to `true`, the sequence ID of each message is unique within a producer of a topic (non-partitioned) or a partition. |
-| Message ID           | The message ID of a message is assigned by bookies as soon as the message is persistently stored. Message ID indicates a message's specific position in a ledger and is unique within a Pulsar cluster.                                                                                                                                                                                                                    |
+| Message ID           | The message ID identifies the storage position of a message in a topic and is unique within the topic. It is assigned when the message is persistently stored, and it consists of the ledger ID and entry ID of the entry that contains the message, the partition index for a partitioned topic, and the batch index when the message is stored in a batch. See [Message ID](#message-id). |
 | Publish time         | The timestamp of when the message is published. The timestamp is automatically applied by the producer.                                                                                                                                                                                                                                                                                                                    |
 | Event time           | An optional timestamp attached to a message by applications. For example, applications attach a timestamp on when the message is processed. If nothing is set to event time, the value is `0`.                                                                                                                                                                                                                             |
 
@@ -53,6 +53,18 @@ The default max size of a message is 5 MB. You can configure the max size of a m
   ```
 
 > For more information on Pulsar messages, see Pulsar [binary protocol](developing-binary-protocol.md).
+
+### Message ID
+
+A message ID consists of the following fields:
+
+* **Ledger ID** and **entry ID**: the position of the message in the topic. When batching is enabled, one entry can store several messages.
+* **Partition index**: the index of the partition that stores the message. It is `-1` for a non-partitioned topic.
+* **Batch index**: the index of the message inside a batched entry. It is `-1` when the message is not stored in a batch.
+
+Because this combination of fields identifies a single message, message IDs are unique within a topic. The Java client returns message IDs as `MessageId` objects: serialize them with `MessageId.toByteArray` and order them with `MessageId.compareTo`. To read the individual fields, cast a message ID to `MessageIdAdv`, which exposes `getLedgerId`, `getEntryId`, `getPartitionIndex`, and `getBatchIndex`.
+
+The `pulsar-admin topics` commands that locate a message by ID use these fields. For example, `pulsar-admin topics get-message-by-id -l <ledgerId> -e <entryId> <topic>` fetches the entry that stores the message; `pulsar-admin topics get-message-id -d <datetime> <topic>` and `pulsar-admin topics last-message-id <topic>` print message IDs in the form `ledgerId:entryId:partitionIndex`, followed by the batch index for batched messages.
 
 ### Acknowledgment
 
