@@ -56,6 +56,45 @@ Here's an example that begins reading from the earliest available message on a t
 </Tabs>
 ````
 
+### Process messages with a listener
+
+Instead of polling with `readNext()`, you can register a `ReaderListener` and receive messages as soon as they are available. When a reader is created with a listener, messages are delivered to the listener and `readNext()` is not allowed on that reader.
+
+````mdx-code-block
+<Tabs groupId="lang-choice"
+  defaultValue="Java"
+  values={[{"label":"Java","value":"Java"}]}>
+<TabItem value="Java">
+
+   ```java
+   import org.apache.pulsar.client.api.Message;
+   import org.apache.pulsar.client.api.MessageId;
+   import org.apache.pulsar.client.api.Reader;
+   import org.apache.pulsar.client.api.ReaderListener;
+
+   Reader<byte[]> reader = pulsarClient.newReader()
+       .topic("reader-api-test")
+       .startMessageId(MessageId.earliest)
+       .readerListener(new ReaderListener<byte[]>() {
+           @Override
+           public void received(Reader<byte[]> reader, Message<byte[]> message) {
+               // Process the message
+           }
+
+           @Override
+           public void reachedEndOfTopic(Reader<byte[]> reader) {
+               // The reader has read all the messages in the topic
+           }
+       })
+       .create();
+   ```
+
+  </TabItem>
+</Tabs>
+````
+
+The `received` method is called once for each message, in order. The `reachedEndOfTopic` method is called when the reader reaches the end of the topic; it does nothing by default, so you can omit it if you don't need the notification.
+
 ### Read `next` message
 
 To create a reader that reads from the latest available message:
@@ -316,44 +355,5 @@ pulsarClient.newReader()
   </TabItem>
 </Tabs>
 ````
-
-### Process messages with a listener
-
-Instead of polling with `readNext()`, you can register a `ReaderListener` and receive messages as soon as they are available. When a reader is created with a listener, messages are delivered to the listener and `readNext()` is not allowed on that reader.
-
-````mdx-code-block
-<Tabs groupId="lang-choice"
-  defaultValue="Java"
-  values={[{"label":"Java","value":"Java"}]}>
-<TabItem value="Java">
-
-   ```java
-   import org.apache.pulsar.client.api.Message;
-   import org.apache.pulsar.client.api.MessageId;
-   import org.apache.pulsar.client.api.Reader;
-   import org.apache.pulsar.client.api.ReaderListener;
-
-   Reader<byte[]> reader = pulsarClient.newReader()
-       .topic("reader-api-test")
-       .startMessageId(MessageId.earliest)
-       .readerListener(new ReaderListener<byte[]>() {
-           @Override
-           public void received(Reader<byte[]> reader, Message<byte[]> message) {
-               // Process the message
-           }
-
-           @Override
-           public void reachedEndOfTopic(Reader<byte[]> reader) {
-               // The reader has read all the messages in the topic
-           }
-       })
-       .create();
-   ```
-
-  </TabItem>
-</Tabs>
-````
-
-The `received` method is called once for each message, in order. The `reachedEndOfTopic` method is called when the reader reaches the end of the topic; it does nothing by default, so you can omit it if you don't need the notification.
 
 The total hash range size is 65536, so the max end of the range should be less than or equal to 65535.
