@@ -58,7 +58,7 @@ The default max size of a message is 5 MB. You can configure the max size of a m
 
 A message ID consists of the following fields:
 
-* **Ledger ID** and **entry ID**: the position of the entry that stores the message in the topic's managed ledger. When batching is enabled, one entry can store several messages.
+* **Ledger ID** and **entry ID**: the position of the message in the topic. When batching is enabled, one entry can store several messages.
 * **Partition index**: the index of the partition that stores the message. It is `-1` for a non-partitioned topic.
 * **Batch index**: the index of the message inside a batched entry. It is `-1` when the message is not stored in a batch.
 
