@@ -377,8 +377,23 @@
                 },
                 "type": "object"
             },
+            "FunctionInstanceStats": {
+                "properties": {
+                    "instanceId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "metrics": {
+                        "$ref": "#/components/schemas/FunctionInstanceStatsData"
+                    }
+                },
+                "type": "object"
+            },
             "FunctionInstanceStatsData": {
                 "properties": {
+                    "1min": {
+                        "$ref": "#/components/schemas/FunctionInstanceStatsDataBase"
+                    },
                     "avgProcessLatency": {
                         "format": "double",
                         "type": "number"
@@ -386,9 +401,6 @@
                     "lastInvocation": {
                         "format": "int64",
                         "type": "integer"
-                    },
-                    "oneMin": {
-                        "$ref": "#/components/schemas/FunctionInstanceStatsDataBase"
                     },
                     "processedSuccessfullyTotal": {
                         "format": "int64",
@@ -437,82 +449,6 @@
                     "userExceptionsTotal": {
                         "format": "int64",
                         "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "FunctionInstanceStatsDataBaseImpl": {
-                "properties": {
-                    "avgProcessLatency": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "processedSuccessfullyTotal": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "receivedTotal": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "systemExceptionsTotal": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "userExceptionsTotal": {
-                        "format": "int64",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "FunctionInstanceStatsDataImpl": {
-                "properties": {
-                    "1min": {
-                        "$ref": "#/components/schemas/FunctionInstanceStatsDataBaseImpl"
-                    },
-                    "avgProcessLatency": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "lastInvocation": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "processedSuccessfullyTotal": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "receivedTotal": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "systemExceptionsTotal": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "userExceptionsTotal": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "userMetrics": {
-                        "additionalProperties": {
-                            "format": "double",
-                            "type": "number"
-                        },
-                        "type": "object"
-                    }
-                },
-                "type": "object"
-            },
-            "FunctionInstanceStatsImpl": {
-                "properties": {
-                    "instanceId": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "metrics": {
-                        "$ref": "#/components/schemas/FunctionInstanceStatsData"
                     }
                 },
                 "type": "object"
@@ -606,10 +542,10 @@
                 },
                 "type": "object"
             },
-            "FunctionStatsImpl": {
+            "FunctionStats": {
                 "properties": {
                     "1min": {
-                        "$ref": "#/components/schemas/FunctionInstanceStatsDataBaseImpl"
+                        "$ref": "#/components/schemas/FunctionInstanceStatsDataBase"
                     },
                     "avgProcessLatency": {
                         "format": "double",
@@ -617,7 +553,7 @@
                     },
                     "instances": {
                         "items": {
-                            "$ref": "#/components/schemas/FunctionInstanceStatsImpl"
+                            "$ref": "#/components/schemas/FunctionInstanceStats"
                         },
                         "type": "array"
                     },
@@ -1489,7 +1425,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/FunctionStatsImpl"
+                                    "$ref": "#/components/schemas/FunctionStats"
                                 }
                             }
                         },
@@ -1884,7 +1820,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/FunctionInstanceStatsDataImpl"
+                                    "$ref": "#/components/schemas/FunctionInstanceStatsData"
                                 }
                             }
                         },
