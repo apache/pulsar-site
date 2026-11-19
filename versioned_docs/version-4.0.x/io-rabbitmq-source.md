@@ -35,6 +35,7 @@ The configuration of the RabbitMQ source connector has the following properties.
 | `prefetchCount`       | int     | false    | 0              | The maximum number of messages that the server delivers.<br/> 0 means unlimited.       |
 | `prefetchGlobal`      | boolean | false    | false          | Whether the setting should be applied to the entire channel rather than each consumer. |
 | `passive`             | boolean | false    | false          | Whether the rabbitmq consumer should create its own queue or bind to an existing one.  |
+| `messageKeyRules`     | List    | false    | (empty list)   | Ordered `regex` and `replacement` rules for the Pulsar message key.                    |
 
 ### Example
 
@@ -84,6 +85,23 @@ Before using the RabbitMQ source connector, you need to create a configuration f
       prefetchGlobal: "false"
       passive: "false"
   ```
+
+### Message keys
+
+By default, the RabbitMQ routing key becomes the Pulsar message key. To map routing keys, add `messageKeyRules` to `configs`:
+
+```yaml
+configs:
+  messageKeyRules:
+    - regex: 'status\..*'
+      replacement: 'status'
+    - regex: 'item\.([0-9]+)\.(?:created|updated)'
+      replacement: 'item:$1'
+```
+
+For example, `status.ready` maps to `status`, and `item.123.updated` maps to `item:123`. The first rule whose regex matches the entire routing key wins. Replacements use Java regex group references such as `$1`. If no rule matches, the routing key remains the message key. If a matching rule produces an empty string, that empty string is used as the Pulsar message key.
+
+The connector also adds the original RabbitMQ routing key to the `__rabbitmq_routing_key` message property for both matched and unmatched keys.
 
 ## Usage
 
