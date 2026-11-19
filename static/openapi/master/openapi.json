@@ -861,6 +861,18 @@
                 },
                 "type": "object"
             },
+            "Failure": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
             "FailureDomain": {
                 "description": "The data of a failure domain configuration in a cluster",
                 "properties": {
@@ -2061,6 +2073,18 @@
                     "inboundConnection": {
                         "type": "string"
                     },
+                    "lastCursorReadStartedAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastReplicationSucceededAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastSendStartedAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
                     "msgDropCount": {
                         "format": "int64",
                         "type": "integer"
@@ -2107,6 +2131,9 @@
                     "outboundConnection": {
                         "type": "string"
                     },
+                    "producerState": {
+                        "type": "string"
+                    },
                     "replicationBacklog": {
                         "format": "int64",
                         "type": "integer"
@@ -2114,6 +2141,12 @@
                     "replicationDelayInSeconds": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "replicatorHealth": {
+                        "$ref": "#/components/schemas/ReplicatorHealth"
+                    },
+                    "replicatorState": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -3087,6 +3120,12 @@
                         },
                         "type": "object"
                     },
+                    "replicators": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/ReplicatorInternalStats"
+                        },
+                        "type": "object"
+                    },
                     "schemaLedgers": {
                         "items": {
                             "$ref": "#/components/schemas/LedgerInfo"
@@ -3643,6 +3682,21 @@
                 },
                 "type": "object"
             },
+            "ProducerRetry": {
+                "properties": {
+                    "reason": {
+                        "type": "string"
+                    },
+                    "sourcePosition": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
             "PublishRate": {
                 "properties": {
                     "publishThrottlingRateInByte": {
@@ -3719,6 +3773,77 @@
                 },
                 "type": "object"
             },
+            "ReadTask": {
+                "properties": {
+                    "completedEntries": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "entries": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "readException": {
+                        "type": "string"
+                    },
+                    "readPos": {
+                        "type": "string"
+                    },
+                    "readingEntries": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "skipReadResultDueToCursorRewind": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "ReplicatorHealth": {
+                "properties": {
+                    "healthy": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ReplicatorInternalStats": {
+                "properties": {
+                    "inFlightTasks": {
+                        "items": {
+                            "$ref": "#/components/schemas/ReadTask"
+                        },
+                        "type": "array"
+                    },
+                    "lastProducerRetry": {
+                        "$ref": "#/components/schemas/ProducerRetry"
+                    },
+                    "lastProducerStartFailure": {
+                        "$ref": "#/components/schemas/Failure"
+                    },
+                    "lastPublishFailure": {
+                        "$ref": "#/components/schemas/Failure"
+                    },
+                    "lastReadFailure": {
+                        "$ref": "#/components/schemas/Failure"
+                    },
+                    "producerQueueMaxSize": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "producerQueueSize": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "sendingMessageSchemaCompatible": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "ReplicatorStats": {
                 "properties": {
                     "bytesInCount": {
@@ -3737,6 +3862,18 @@
                     },
                     "inboundConnection": {
                         "type": "string"
+                    },
+                    "lastCursorReadStartedAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastReplicationSucceededAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastSendStartedAt": {
+                        "format": "int64",
+                        "type": "integer"
                     },
                     "msgExpiredCount": {
                         "format": "int64",
@@ -3776,6 +3913,9 @@
                     "outboundConnection": {
                         "type": "string"
                     },
+                    "producerState": {
+                        "type": "string"
+                    },
                     "replicationBacklog": {
                         "format": "int64",
                         "type": "integer"
@@ -3783,6 +3923,12 @@
                     "replicationDelayInSeconds": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "replicatorHealth": {
+                        "$ref": "#/components/schemas/ReplicatorHealth"
+                    },
+                    "replicatorState": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
