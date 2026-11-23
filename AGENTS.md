@@ -63,6 +63,9 @@ List them with:
 - Preview with `./preview.sh [--clean] [version ...]` (needs Node 24 and `corepack enable`). It starts
   a long-running dev server at <http://localhost:3000> for the `docs/` ("next") version plus the given
   versions, for example `./preview.sh 5.0.x`; run it in the background.
+- When adding or changing Python, TOML or YAML files, run
+  `hawkeye format --config tools/ci/licenserc.toml` to add or fix their license headers (see
+  [the license header check](contribute/site-intro.md#license-header-check)).
 - For `src/` changes, run `yarn typecheck`. `yarn build` builds the versions listed in
   `.build-versions.json` (written by `preview.sh`) and needs a lot of memory; prefer `./preview.sh`
   with only the versions you changed.

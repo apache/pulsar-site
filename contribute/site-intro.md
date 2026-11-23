@@ -70,6 +70,31 @@ The site repo has a set of Python scripts for generating content and syncing/upd
 
 You can read the [README](https://github.com/apache/pulsar-site/tree/main/tools/pytools/README.md) file of pytools for details.
 
+### License header check
+
+Python, TOML and YAML files in the site repo must start with the Apache License header. The precommit CI workflow checks the headers with [HawkEye](https://github.com/fast/hawkeye), using the configuration in [tools/ci/licenserc.toml](https://github.com/apache/pulsar-site/blob/main/tools/ci/licenserc.toml).
+
+Install HawkEye 7 with Homebrew or Cargo:
+
+```shell
+brew install hawkeye
+# or download a prebuilt binary with cargo-binstall
+cargo binstall hawkeye
+# or build it from source
+cargo install hawkeye --locked
+```
+
+Then run it from the root of the repo:
+
+```shell
+# check the license headers
+hawkeye check --config tools/ci/licenserc.toml
+# add missing headers and fix malformed ones
+hawkeye format --config tools/ci/licenserc.toml
+```
+
+The header must match the format HawkEye writes: for example, a script's shebang line is followed directly by the header, without a blank line. Run `hawkeye format` to fix the format instead of editing headers by hand.
+
 ## Pulsar variables (`@pulsar:...@` tokens)
 
 The markdown files under `docs/`, `versioned_docs/version-*/`, `client-libraries/`, and `static/reference/` can contain variables of the form `@pulsar:<name>@`. They are expanded to version-aware values at build time:

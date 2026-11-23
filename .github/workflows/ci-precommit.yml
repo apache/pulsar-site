@@ -31,11 +31,11 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: hawkeye@7.3.0
       - name: Check license header
-        env:
-          IMAGE: ghcr.io/korandoru/hawkeye-native:v2
-          CONFIG: tools/ci/licenserc.toml
-        run: docker run --rm -v $(pwd):/github/workspace ${IMAGE} check --config ${CONFIG}
+        run: hawkeye check --config tools/ci/licenserc.toml
 
   build-without-push:
     name: Check build site
