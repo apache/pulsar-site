@@ -101,7 +101,7 @@
                 "type": "object"
             },
             "AutoFailoverPolicyData": {
-                "description": "The data of auto-failover policy configuration",
+                "description": "The auto failover policy configuration data",
                 "example": {
                     "parameters": {
                         "": ""
@@ -111,12 +111,21 @@
                 "properties": {
                     "parameters": {
                         "additionalProperties": {
+                            "description": "The parameters applied to the auto failover policy specified by `policy_type`.\nThe parameters for 'min_available' are:\n  - 'min_limit': the limit of minimal number of available brokers in primary group before auto failover\n  - 'usage_threshold': the resource usage threshold. If the usage of a broker is beyond this value, it would be marked as unavailable\n",
+                            "example": "{\"min_limit\":3,\"usage_threshold\":80}",
                             "type": "string"
+                        },
+                        "description": "The parameters applied to the auto failover policy specified by `policy_type`.\nThe parameters for 'min_available' are:\n  - 'min_limit': the limit of minimal number of available brokers in primary group before auto failover\n  - 'usage_threshold': the resource usage threshold. If the usage of a broker is beyond this value, it would be marked as unavailable\n",
+                        "example": {
+                            "min_limit": 3,
+                            "usage_threshold": 80
                         },
                         "type": "object"
                     },
-                    "policyType": {
+                    "policy_type": {
+                        "description": "The auto failover policy type",
                         "enum": [
+                            "min_available",
                             "min_available"
                         ],
                         "type": "string"
@@ -224,30 +233,7 @@
                 },
                 "type": "object"
             },
-            "AutoSubscriptionCreationOverrideImpl": {
-                "properties": {
-                    "allowAutoSubscriptionCreation": {
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
             "AutoTopicCreationOverride": {
-                "properties": {
-                    "allowAutoTopicCreation": {
-                        "type": "boolean"
-                    },
-                    "defaultNumPartitions": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "topicType": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "AutoTopicCreationOverrideImpl": {
                 "properties": {
                     "allowAutoTopicCreation": {
                         "type": "boolean"
@@ -287,43 +273,7 @@
                 },
                 "type": "object"
             },
-            "BacklogQuotaImpl": {
-                "properties": {
-                    "limit": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "limitSize": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "limitTime": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "policy": {
-                        "enum": [
-                            "producer_request_hold",
-                            "producer_exception",
-                            "consumer_backlog_eviction"
-                        ],
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
             "BookieAffinityGroupData": {
-                "properties": {
-                    "bookkeeperAffinityGroupPrimary": {
-                        "type": "string"
-                    },
-                    "bookkeeperAffinityGroupSecondary": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "BookieAffinityGroupDataImpl": {
                 "properties": {
                     "bookkeeperAffinityGroupPrimary": {
                         "type": "string"
@@ -403,21 +353,6 @@
                 "type": "object"
             },
             "BundlesData": {
-                "properties": {
-                    "boundaries": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "numBundles": {
-                        "format": "int32",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
-            "BundlesDataImpl": {
                 "properties": {
                     "boundaries": {
                         "items": {
@@ -599,27 +534,6 @@
                 },
                 "type": "object"
             },
-            "CompactionStatsImpl": {
-                "properties": {
-                    "lastCompactionDurationTimeInMills": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "lastCompactionFailedTimestamp": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "lastCompactionRemovedEventCount": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "lastCompactionSucceedTimestamp": {
-                        "format": "int64",
-                        "type": "integer"
-                    }
-                },
-                "type": "object"
-            },
             "ConnectorDefinition": {
                 "properties": {
                     "description": {
@@ -648,19 +562,30 @@
                     "address": {
                         "type": "string"
                     },
+                    "appId": {
+                        "type": "string"
+                    },
                     "availablePermits": {
                         "format": "int32",
                         "type": "integer"
                     },
-                    "byteRateOut": {
+                    "avgMessagesPerEntry": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "blockedConsumerOnUnackedMsgs": {
+                        "type": "boolean"
+                    },
+                    "bytesOutCounter": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "chunkedMessageRate": {
                         "format": "double",
                         "type": "number"
                     },
                     "clientVersion": {
                         "type": "string"
-                    },
-                    "connected": {
-                        "type": "boolean"
                     },
                     "connectedSince": {
                         "type": "string"
@@ -668,19 +593,88 @@
                     "consumerName": {
                         "type": "string"
                     },
+                    "drainingHashes": {
+                        "items": {
+                            "$ref": "#/components/schemas/DrainingHash"
+                        },
+                        "type": "array"
+                    },
+                    "drainingHashesClearedTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "drainingHashesCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "drainingHashesUnackedMessages": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "firstConsumedFlowTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "firstMessagesSentTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "keyHashRangeArrays": {
+                        "items": {
+                            "items": {
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "type": "array"
+                        },
+                        "type": "array"
+                    },
+                    "lastAckedTime": {
+                        "type": "string"
+                    },
+                    "lastAckedTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastConsumedFlowTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastConsumedTime": {
+                        "type": "string"
+                    },
+                    "lastConsumedTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "messageAckRate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "metadata": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "msgOutCounter": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
                     "msgRateOut": {
                         "format": "double",
                         "type": "number"
                     },
-                    "segmentIds": {
-                        "items": {
-                            "format": "int64",
-                            "type": "integer"
-                        },
-                        "type": "array"
+                    "msgRateRedeliver": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgThroughputOut": {
+                        "format": "double",
+                        "type": "number"
                     },
                     "unackedMessages": {
-                        "format": "int64",
+                        "format": "int32",
                         "type": "integer"
                     }
                 },
@@ -842,26 +836,6 @@
                 },
                 "type": "object"
             },
-            "DispatchRateImpl": {
-                "properties": {
-                    "dispatchThrottlingRateInByte": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "dispatchThrottlingRateInMsg": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "ratePeriodInSecond": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "relativeToPublishRate": {
-                        "type": "boolean"
-                    }
-                },
-                "type": "object"
-            },
             "DrainingHash": {
                 "properties": {
                     "blockedAttempts": {
@@ -887,6 +861,18 @@
                 },
                 "type": "object"
             },
+            "Failure": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "timestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
             "FailureDomain": {
                 "description": "The data of a failure domain configuration in a cluster",
                 "properties": {
@@ -906,6 +892,9 @@
             },
             "FunctionInstanceStatsData": {
                 "properties": {
+                    "1min": {
+                        "$ref": "#/components/schemas/FunctionInstanceStatsDataBase"
+                    },
                     "avgProcessLatency": {
                         "format": "double",
                         "type": "number"
@@ -913,9 +902,6 @@
                     "lastInvocation": {
                         "format": "int64",
                         "type": "integer"
-                    },
-                    "oneMin": {
-                        "$ref": "#/components/schemas/FunctionInstanceStatsDataBase"
                     },
                     "processedSuccessfullyTotal": {
                         "format": "int64",
@@ -1830,7 +1816,7 @@
                 },
                 "type": "object"
             },
-            "NonPersistentPartitionedTopicStatsImpl": {
+            "NonPersistentPartitionedTopicStats": {
                 "properties": {
                     "abortedTxnCount": {
                         "format": "int64",
@@ -1869,7 +1855,7 @@
                         "type": "integer"
                     },
                     "compaction": {
-                        "$ref": "#/components/schemas/CompactionStatsImpl"
+                        "$ref": "#/components/schemas/CompactionStats"
                     },
                     "deduplicationStatus": {
                         "type": "string"
@@ -1960,7 +1946,7 @@
                     },
                     "partitions": {
                         "additionalProperties": {
-                            "$ref": "#/components/schemas/NonPersistentTopicStatsImpl"
+                            "$ref": "#/components/schemas/NonPersistentTopicStats"
                         },
                         "type": "object"
                     },
@@ -2087,6 +2073,18 @@
                     "inboundConnection": {
                         "type": "string"
                     },
+                    "lastCursorReadStartedAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastReplicationSucceededAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastSendStartedAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
                     "msgDropCount": {
                         "format": "int64",
                         "type": "integer"
@@ -2133,6 +2131,9 @@
                     "outboundConnection": {
                         "type": "string"
                     },
+                    "producerState": {
+                        "type": "string"
+                    },
                     "replicationBacklog": {
                         "format": "int64",
                         "type": "integer"
@@ -2140,6 +2141,12 @@
                     "replicationDelayInSeconds": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "replicatorHealth": {
+                        "$ref": "#/components/schemas/ReplicatorHealth"
+                    },
+                    "replicatorState": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -2236,6 +2243,12 @@
                         "format": "int64",
                         "type": "integer"
                     },
+                    "isDurable": {
+                        "type": "boolean"
+                    },
+                    "isReplicated": {
+                        "type": "boolean"
+                    },
                     "keySharedMode": {
                         "type": "string"
                     },
@@ -2278,6 +2291,10 @@
                     "msgDropRate": {
                         "format": "double",
                         "type": "number"
+                    },
+                    "msgExpired": {
+                        "format": "int64",
+                        "type": "integer"
                     },
                     "msgInReplay": {
                         "format": "int64",
@@ -2338,7 +2355,7 @@
                 },
                 "type": "object"
             },
-            "NonPersistentTopicStatsImpl": {
+            "NonPersistentTopicStats": {
                 "properties": {
                     "abortedTxnCount": {
                         "format": "int64",
@@ -2377,7 +2394,7 @@
                         "type": "integer"
                     },
                     "compaction": {
-                        "$ref": "#/components/schemas/CompactionStatsImpl"
+                        "$ref": "#/components/schemas/CompactionStats"
                     },
                     "deduplicationStatus": {
                         "type": "string"
@@ -2509,113 +2526,6 @@
                 "type": "object"
             },
             "OffloadPolicies": {
-                "properties": {
-                    "fileSystemProfilePath": {
-                        "type": "string"
-                    },
-                    "fileSystemURI": {
-                        "type": "string"
-                    },
-                    "gcsManagedLedgerOffloadBucket": {
-                        "type": "string"
-                    },
-                    "gcsManagedLedgerOffloadMaxBlockSizeInBytes": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "gcsManagedLedgerOffloadReadBufferSizeInBytes": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "gcsManagedLedgerOffloadRegion": {
-                        "type": "string"
-                    },
-                    "gcsManagedLedgerOffloadServiceAccountKeyFile": {
-                        "type": "string"
-                    },
-                    "managedLedgerOffloadBucket": {
-                        "type": "string"
-                    },
-                    "managedLedgerOffloadDeletionLagInMillis": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "managedLedgerOffloadDriver": {
-                        "type": "string"
-                    },
-                    "managedLedgerOffloadMaxBlockSizeInBytes": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "managedLedgerOffloadMaxThreads": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "managedLedgerOffloadPrefetchRounds": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "managedLedgerOffloadReadBufferSizeInBytes": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "managedLedgerOffloadRegion": {
-                        "type": "string"
-                    },
-                    "managedLedgerOffloadServiceEndpoint": {
-                        "type": "string"
-                    },
-                    "managedLedgerOffloadThresholdInBytes": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "managedLedgerOffloadThresholdInSeconds": {
-                        "format": "int64",
-                        "type": "integer"
-                    },
-                    "managedLedgerOffloadedReadPriority": {
-                        "enum": [
-                            "bookkeeper-first",
-                            "tiered-storage-first"
-                        ],
-                        "type": "string"
-                    },
-                    "offloadersDirectory": {
-                        "type": "string"
-                    },
-                    "s3ManagedLedgerOffloadBucket": {
-                        "type": "string"
-                    },
-                    "s3ManagedLedgerOffloadCredentialId": {
-                        "type": "string"
-                    },
-                    "s3ManagedLedgerOffloadCredentialSecret": {
-                        "type": "string"
-                    },
-                    "s3ManagedLedgerOffloadMaxBlockSizeInBytes": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "s3ManagedLedgerOffloadReadBufferSizeInBytes": {
-                        "format": "int32",
-                        "type": "integer"
-                    },
-                    "s3ManagedLedgerOffloadRegion": {
-                        "type": "string"
-                    },
-                    "s3ManagedLedgerOffloadRole": {
-                        "type": "string"
-                    },
-                    "s3ManagedLedgerOffloadRoleSessionName": {
-                        "type": "string"
-                    },
-                    "s3ManagedLedgerOffloadServiceEndpoint": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "OffloadPoliciesImpl": {
                 "properties": {
                     "fileSystemDriver": {
                         "type": "boolean"
@@ -2835,7 +2745,7 @@
                 },
                 "type": "object"
             },
-            "PartitionedTopicStatsImpl": {
+            "PartitionedTopicStats": {
                 "properties": {
                     "abortedTxnCount": {
                         "format": "int64",
@@ -2874,7 +2784,7 @@
                         "type": "integer"
                     },
                     "compaction": {
-                        "$ref": "#/components/schemas/CompactionStatsImpl"
+                        "$ref": "#/components/schemas/CompactionStats"
                     },
                     "deduplicationStatus": {
                         "type": "string"
@@ -3210,6 +3120,12 @@
                         },
                         "type": "object"
                     },
+                    "replicators": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/ReplicatorInternalStats"
+                        },
+                        "type": "object"
+                    },
                     "schemaLedgers": {
                         "items": {
                             "$ref": "#/components/schemas/LedgerInfo"
@@ -3396,7 +3312,7 @@
                     },
                     "clusterDispatchRate": {
                         "additionalProperties": {
-                            "$ref": "#/components/schemas/DispatchRateImpl"
+                            "$ref": "#/components/schemas/DispatchRate"
                         },
                         "type": "object"
                     },
@@ -3522,7 +3438,7 @@
                     },
                     "replicatorDispatchRate": {
                         "additionalProperties": {
-                            "$ref": "#/components/schemas/DispatchRateImpl"
+                            "$ref": "#/components/schemas/DispatchRate"
                         },
                         "type": "object"
                     },
@@ -3567,7 +3483,7 @@
                     },
                     "subscriptionDispatchRate": {
                         "additionalProperties": {
-                            "$ref": "#/components/schemas/DispatchRateImpl"
+                            "$ref": "#/components/schemas/DispatchRate"
                         },
                         "type": "object"
                     },
@@ -3591,7 +3507,7 @@
                     },
                     "topicDispatchRate": {
                         "additionalProperties": {
-                            "$ref": "#/components/schemas/DispatchRateImpl"
+                            "$ref": "#/components/schemas/DispatchRate"
                         },
                         "type": "object"
                     }
@@ -3766,40 +3682,17 @@
                 },
                 "type": "object"
             },
-            "ProducerStats": {
+            "ProducerRetry": {
                 "properties": {
-                    "accessMode": {
-                        "enum": [
-                            "Shared",
-                            "Exclusive",
-                            "ExclusiveWithFencing",
-                            "WaitForExclusive"
-                        ],
+                    "reason": {
                         "type": "string"
                     },
-                    "address": {
+                    "sourcePosition": {
                         "type": "string"
                     },
-                    "averageMsgSize": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "byteRateIn": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "clientVersion": {
-                        "type": "string"
-                    },
-                    "connectedSince": {
-                        "type": "string"
-                    },
-                    "msgRateIn": {
-                        "format": "double",
-                        "type": "number"
-                    },
-                    "producerName": {
-                        "type": "string"
+                    "timestamp": {
+                        "format": "int64",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -3880,6 +3773,77 @@
                 },
                 "type": "object"
             },
+            "ReadTask": {
+                "properties": {
+                    "completedEntries": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "entries": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "readException": {
+                        "type": "string"
+                    },
+                    "readPos": {
+                        "type": "string"
+                    },
+                    "readingEntries": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "skipReadResultDueToCursorRewind": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "ReplicatorHealth": {
+                "properties": {
+                    "healthy": {
+                        "type": "boolean"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "ReplicatorInternalStats": {
+                "properties": {
+                    "inFlightTasks": {
+                        "items": {
+                            "$ref": "#/components/schemas/ReadTask"
+                        },
+                        "type": "array"
+                    },
+                    "lastProducerRetry": {
+                        "$ref": "#/components/schemas/ProducerRetry"
+                    },
+                    "lastProducerStartFailure": {
+                        "$ref": "#/components/schemas/Failure"
+                    },
+                    "lastPublishFailure": {
+                        "$ref": "#/components/schemas/Failure"
+                    },
+                    "lastReadFailure": {
+                        "$ref": "#/components/schemas/Failure"
+                    },
+                    "producerQueueMaxSize": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "producerQueueSize": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "sendingMessageSchemaCompatible": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "ReplicatorStats": {
                 "properties": {
                     "bytesInCount": {
@@ -3898,6 +3862,18 @@
                     },
                     "inboundConnection": {
                         "type": "string"
+                    },
+                    "lastCursorReadStartedAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastReplicationSucceededAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastSendStartedAt": {
+                        "format": "int64",
+                        "type": "integer"
                     },
                     "msgExpiredCount": {
                         "format": "int64",
@@ -3937,6 +3913,9 @@
                     "outboundConnection": {
                         "type": "string"
                     },
+                    "producerState": {
+                        "type": "string"
+                    },
                     "replicationBacklog": {
                         "format": "int64",
                         "type": "integer"
@@ -3944,6 +3923,12 @@
                     "replicationDelayInSeconds": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "replicatorHealth": {
+                        "$ref": "#/components/schemas/ReplicatorHealth"
+                    },
+                    "replicatorState": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -4090,6 +4075,49 @@
                 },
                 "type": "object"
             },
+            "ScalableTopicConsumerStats": {
+                "properties": {
+                    "address": {
+                        "type": "string"
+                    },
+                    "availablePermits": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "byteRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "clientVersion": {
+                        "type": "string"
+                    },
+                    "connected": {
+                        "type": "boolean"
+                    },
+                    "connectedSince": {
+                        "type": "string"
+                    },
+                    "consumerName": {
+                        "type": "string"
+                    },
+                    "msgRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "segmentIds": {
+                        "items": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "type": "array"
+                    },
+                    "unackedMessages": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
             "ScalableTopicMetadata": {
                 "properties": {
                     "autoScalePolicy": {
@@ -4123,6 +4151,44 @@
                             "$ref": "#/components/schemas/SegmentInfo"
                         },
                         "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "ScalableTopicProducerStats": {
+                "properties": {
+                    "accessMode": {
+                        "enum": [
+                            "Shared",
+                            "Exclusive",
+                            "ExclusiveWithFencing",
+                            "WaitForExclusive"
+                        ],
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "averageMsgSize": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "byteRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "clientVersion": {
+                        "type": "string"
+                    },
+                    "connectedSince": {
+                        "type": "string"
+                    },
+                    "msgRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "producerName": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -4164,7 +4230,7 @@
                     },
                     "producers": {
                         "items": {
-                            "$ref": "#/components/schemas/ProducerStats"
+                            "$ref": "#/components/schemas/ScalableTopicProducerStats"
                         },
                         "type": "array"
                     },
@@ -4174,9 +4240,68 @@
                     },
                     "subscriptions": {
                         "additionalProperties": {
-                            "$ref": "#/components/schemas/SubscriptionStats"
+                            "$ref": "#/components/schemas/ScalableTopicSubscriptionStats"
                         },
                         "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "ScalableTopicSubscriptionStats": {
+                "properties": {
+                    "backlogSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "byteRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "consumers": {
+                        "items": {
+                            "$ref": "#/components/schemas/ScalableTopicConsumerStats"
+                        },
+                        "type": "array"
+                    },
+                    "messageAckRate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgBacklog": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "msgRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgRateRedeliver": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "segments": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/SegmentSubscriptionStats"
+                        },
+                        "type": "object"
+                    },
+                    "type": {
+                        "enum": [
+                            "STREAM",
+                            "QUEUE"
+                        ],
+                        "type": "string"
+                    },
+                    "unackedMessages": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "uncoveredSegmentIds": {
+                        "items": {
+                            "format": "int64",
+                            "type": "integer"
+                        },
+                        "type": "array"
                     }
                 },
                 "type": "object"
@@ -4319,6 +4444,94 @@
                 },
                 "type": "object"
             },
+            "SegmentTopicConsumerStats": {
+                "properties": {
+                    "address": {
+                        "type": "string"
+                    },
+                    "availablePermits": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "blockedConsumerOnUnackedMsgs": {
+                        "type": "boolean"
+                    },
+                    "byteRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "clientVersion": {
+                        "type": "string"
+                    },
+                    "connectedSince": {
+                        "type": "string"
+                    },
+                    "consumerName": {
+                        "type": "string"
+                    },
+                    "lastAckedTime": {
+                        "type": "string"
+                    },
+                    "lastConsumedTime": {
+                        "type": "string"
+                    },
+                    "messageAckRate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgRateRedeliver": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "unackedMessages": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SegmentTopicProducerStats": {
+                "properties": {
+                    "accessMode": {
+                        "enum": [
+                            "Shared",
+                            "Exclusive",
+                            "ExclusiveWithFencing",
+                            "WaitForExclusive"
+                        ],
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "averageMsgSize": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "byteRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "clientVersion": {
+                        "type": "string"
+                    },
+                    "connectedSince": {
+                        "type": "string"
+                    },
+                    "msgRateIn": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "producerName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "SegmentTopicStats": {
                 "properties": {
                     "averageMsgSize": {
@@ -4358,7 +4571,7 @@
                     },
                     "producers": {
                         "items": {
-                            "$ref": "#/components/schemas/ProducerStats"
+                            "$ref": "#/components/schemas/SegmentTopicProducerStats"
                         },
                         "type": "array"
                     },
@@ -4368,7 +4581,7 @@
                     },
                     "subscriptions": {
                         "additionalProperties": {
-                            "$ref": "#/components/schemas/SubscriptionStats"
+                            "$ref": "#/components/schemas/SegmentTopicSubscriptionStats"
                         },
                         "type": "object"
                     },
@@ -4380,6 +4593,65 @@
                     },
                     "waitingPublishers": {
                         "format": "int32",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "SegmentTopicSubscriptionStats": {
+                "properties": {
+                    "backlogSize": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "blockedSubscriptionOnUnackedMsgs": {
+                        "type": "boolean"
+                    },
+                    "byteRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "consumers": {
+                        "items": {
+                            "$ref": "#/components/schemas/SegmentTopicConsumerStats"
+                        },
+                        "type": "array"
+                    },
+                    "drainingBuckets": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "lastAckedTime": {
+                        "type": "string"
+                    },
+                    "lastConsumedTime": {
+                        "type": "string"
+                    },
+                    "messageAckRate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgBacklog": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "msgRateOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "msgRateRedeliver": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "oldestBacklogMessageAgeSeconds": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "unackedMessages": {
+                        "format": "int64",
                         "type": "integer"
                     }
                 },
@@ -4451,11 +4723,24 @@
             },
             "SubscriptionStats": {
                 "properties": {
+                    "activeConsumerName": {
+                        "type": "string"
+                    },
+                    "allowOutOfOrderDelivery": {
+                        "type": "boolean"
+                    },
                     "backlogSize": {
                         "format": "int64",
                         "type": "integer"
                     },
-                    "byteRateOut": {
+                    "blockedSubscriptionOnUnackedMsgs": {
+                        "type": "boolean"
+                    },
+                    "bytesOutCounter": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "chunkedMessageRate": {
                         "format": "double",
                         "type": "number"
                     },
@@ -4465,6 +4750,98 @@
                         },
                         "type": "array"
                     },
+                    "delayedMessageIndexSizeInBytes": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "dispatchThrottledBytesEventsByBrokerLimit": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "dispatchThrottledBytesEventsBySubscriptionLimit": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "dispatchThrottledBytesEventsByTopicLimit": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "dispatchThrottledMsgEventsByBrokerLimit": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "dispatchThrottledMsgEventsBySubscriptionLimit": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "dispatchThrottledMsgEventsByTopicLimit": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "drainingHashesClearedTotal": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "drainingHashesCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "drainingHashesUnackedMessages": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "durable": {
+                        "type": "boolean"
+                    },
+                    "earliestMsgPublishTimeInBacklog": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "filterAcceptedMsgCount": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "filterProcessedMsgCount": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "filterRejectedMsgCount": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "filterRescheduledMsgCount": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "isDurable": {
+                        "type": "boolean"
+                    },
+                    "isReplicated": {
+                        "type": "boolean"
+                    },
+                    "keySharedMode": {
+                        "type": "string"
+                    },
+                    "lastAckedTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastConsumedFlowTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastConsumedTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastExpireTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastMarkDeleteAdvancedTimestamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
                     "messageAckRate": {
                         "format": "double",
                         "type": "number"
@@ -4472,6 +4849,30 @@
                     "msgBacklog": {
                         "format": "int64",
                         "type": "integer"
+                    },
+                    "msgBacklogNoDelayed": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "msgDelayed": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "msgExpired": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "msgInReplay": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "msgOutCounter": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "msgRateExpired": {
+                        "format": "double",
+                        "type": "number"
                     },
                     "msgRateOut": {
                         "format": "double",
@@ -4481,29 +4882,41 @@
                         "format": "double",
                         "type": "number"
                     },
-                    "segments": {
+                    "msgThroughputOut": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "nonContiguousDeletedMessagesRanges": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "nonContiguousDeletedMessagesRangesSerializedSize": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "oldestBacklogMessageAgeSeconds": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "replicated": {
+                        "type": "boolean"
+                    },
+                    "subscriptionProperties": {
                         "additionalProperties": {
-                            "$ref": "#/components/schemas/SegmentSubscriptionStats"
+                            "type": "string"
                         },
                         "type": "object"
                     },
+                    "totalMsgExpired": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
                     "type": {
-                        "enum": [
-                            "STREAM",
-                            "QUEUE"
-                        ],
                         "type": "string"
                     },
                     "unackedMessages": {
                         "format": "int64",
                         "type": "integer"
-                    },
-                    "uncoveredSegmentIds": {
-                        "items": {
-                            "format": "int64",
-                            "type": "integer"
-                        },
-                        "type": "array"
                     }
                 },
                 "type": "object"
@@ -4572,6 +4985,10 @@
             },
             "TopicStats": {
                 "properties": {
+                    "abortedTxnCount": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
                     "averageMsgSize": {
                         "format": "double",
                         "type": "number"
@@ -4596,6 +5013,14 @@
                         "format": "int64",
                         "type": "integer"
                     },
+                    "bytesOutInternalCounter": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "committedTxnCount": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
                     "compaction": {
                         "$ref": "#/components/schemas/CompactionStats"
                     },
@@ -4607,6 +5032,18 @@
                         "type": "integer"
                     },
                     "earliestMsgPublishTimeInBacklogs": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastOffloadFailureTimeStamp": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastOffloadLedgerId": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "lastOffloadSuccessTimeStamp": {
                         "format": "int64",
                         "type": "integer"
                     },
@@ -4660,8 +5097,16 @@
                     "oldestBacklogMessageSubscriptionName": {
                         "type": "string"
                     },
+                    "ongoingTxnCount": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
                     "ownerBroker": {
                         "type": "string"
+                    },
+                    "publishRateLimitedTimes": {
+                        "format": "int64",
+                        "type": "integer"
                     },
                     "publishers": {
                         "items": {
@@ -4684,6 +5129,10 @@
                             "$ref": "#/components/schemas/SubscriptionStats"
                         },
                         "type": "object"
+                    },
+                    "systemTopicBytesInCounter": {
+                        "format": "int64",
+                        "type": "integer"
                     },
                     "topicCreationTimeStamp": {
                         "format": "int64",
@@ -7638,7 +8087,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AutoSubscriptionCreationOverrideImpl"
+                                    "$ref": "#/components/schemas/AutoSubscriptionCreationOverride"
                                 }
                             }
                         },
@@ -7768,7 +8217,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AutoTopicCreationOverrideImpl"
+                                    "$ref": "#/components/schemas/AutoTopicCreationOverride"
                                 }
                             }
                         },
@@ -7982,7 +8431,7 @@
                             "application/json": {
                                 "schema": {
                                     "additionalProperties": {
-                                        "$ref": "#/components/schemas/BacklogQuotaImpl"
+                                        "$ref": "#/components/schemas/BacklogQuota"
                                     },
                                     "type": "object"
                                 }
@@ -8029,7 +8478,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BundlesDataImpl"
+                                    "$ref": "#/components/schemas/BundlesData"
                                 }
                             }
                         },
@@ -8746,7 +9195,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -10663,7 +11112,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/OffloadPoliciesImpl"
+                                "$ref": "#/components/schemas/OffloadPolicies"
                             }
                         }
                     },
@@ -11332,7 +11781,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/BookieAffinityGroupDataImpl"
+                                    "$ref": "#/components/schemas/BookieAffinityGroupData"
                                 }
                             }
                         },
@@ -11912,7 +12361,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/DispatchRateImpl"
+                                    "$ref": "#/components/schemas/DispatchRate"
                                 }
                             }
                         },
@@ -11954,7 +12403,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -13103,7 +13552,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -14648,7 +15097,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AutoSubscriptionCreationOverrideImpl"
+                                    "$ref": "#/components/schemas/AutoSubscriptionCreationOverride"
                                 }
                             }
                         },
@@ -14720,7 +15169,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/AutoSubscriptionCreationOverrideImpl"
+                                "$ref": "#/components/schemas/AutoSubscriptionCreationOverride"
                             }
                         }
                     },
@@ -14956,7 +15405,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/BacklogQuotaImpl"
+                                "$ref": "#/components/schemas/BacklogQuota"
                             }
                         }
                     },
@@ -16378,7 +16827,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/DispatchRateImpl"
+                                    "$ref": "#/components/schemas/DispatchRate"
                                 }
                             }
                         },
@@ -16451,7 +16900,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -19766,7 +20215,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/OffloadPoliciesImpl"
+                                    "$ref": "#/components/schemas/OffloadPolicies"
                                 }
                             }
                         },
@@ -19836,7 +20285,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/OffloadPoliciesImpl"
+                                "$ref": "#/components/schemas/OffloadPolicies"
                             }
                         }
                     },
@@ -20039,7 +20488,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PartitionedTopicStatsImpl"
+                                    "$ref": "#/components/schemas/PartitionedTopicStats"
                                 }
                             }
                         },
@@ -21877,7 +22326,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -24622,7 +25071,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -25804,7 +26253,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -26363,7 +26812,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AutoSubscriptionCreationOverrideImpl"
+                                    "$ref": "#/components/schemas/AutoSubscriptionCreationOverride"
                                 }
                             }
                         },
@@ -26435,7 +26884,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/AutoSubscriptionCreationOverrideImpl"
+                                "$ref": "#/components/schemas/AutoSubscriptionCreationOverride"
                             }
                         }
                     },
@@ -26671,7 +27120,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/BacklogQuotaImpl"
+                                "$ref": "#/components/schemas/BacklogQuota"
                             }
                         }
                     },
@@ -28093,7 +28542,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/DispatchRateImpl"
+                                    "$ref": "#/components/schemas/DispatchRate"
                                 }
                             }
                         },
@@ -28166,7 +28615,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -31481,7 +31930,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/OffloadPoliciesImpl"
+                                    "$ref": "#/components/schemas/OffloadPolicies"
                                 }
                             }
                         },
@@ -31551,7 +32000,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/OffloadPoliciesImpl"
+                                "$ref": "#/components/schemas/OffloadPolicies"
                             }
                         }
                     },
@@ -31754,7 +32203,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PartitionedTopicStatsImpl"
+                                    "$ref": "#/components/schemas/PartitionedTopicStats"
                                 }
                             }
                         },
@@ -33589,7 +34038,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -36334,7 +36783,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -37510,7 +37959,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/DispatchRateImpl"
+                                "$ref": "#/components/schemas/DispatchRate"
                             }
                         }
                     },
@@ -41593,7 +42042,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/OffloadPoliciesImpl"
+                                    "$ref": "#/components/schemas/OffloadPolicies"
                                 }
                             }
                         },
@@ -41663,7 +42112,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/OffloadPoliciesImpl"
+                                "$ref": "#/components/schemas/OffloadPolicies"
                             }
                         }
                     },
