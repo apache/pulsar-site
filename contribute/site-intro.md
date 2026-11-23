@@ -76,7 +76,8 @@ The markdown files under `docs/`, `versioned_docs/version-*/`, `client-libraries
 
 - For `docs/` and `client-libraries/` (current docs), and for `versioned_docs/version-*/` (released docs), expansion runs inside the Docusaurus markdown preprocessor — see [src/server/markdownPreprocessors/pulsarVariables.ts](https://github.com/apache/pulsar-site/blob/main/src/server/markdownPreprocessors/pulsarVariables.ts). Replacements are visible during both `yarn start` and `yarn build`.
 - For `static/reference/` (Docsify site), the same resolver is applied by the `yarn process-reference-markdown` post-build step (see the section above). Replacements are visible only after `yarn build`.
-- Blog posts, `src/pages/*.mdx`, and the `contribute/` / `release-notes/` / `security/` trees are **not** in scope, so `@pulsar:...@` strings in those places are left as-is.
+- For `contribute/`, only the context-independent `@pulsar:version:sdkman-*@` tokens are expanded; other `@pulsar:...@` strings are left as-is, so this guide can document them literally.
+- Blog posts, `src/pages/*.mdx`, and the `release-notes/` / `security/` trees are **not** in scope, so `@pulsar:...@` strings in those places are left as-is.
 
 The resolver lives in [src/config/pulsarVariables.ts](https://github.com/apache/pulsar-site/blob/main/src/config/pulsarVariables.ts) and is the single source of truth. Unknown tokens pass through untouched and emit a `[pulsarVariables] unknown token` warning in the build log.
 
@@ -109,6 +110,7 @@ The `<X>` segment is looked up in `versions.json` / the REST API version map. `.
 | `@pulsar:version:python@`    | Version of the Python client that matches the current context.                                                                                            |
 | `@pulsar:version:netty@` | Netty version used by current Pulsar documentation (context-independent). Update `nettyVersion` in `src/config/pulsarVariables.ts` from the Pulsar source `gradle/libs.versions.toml` when it changes. |
 | `@pulsar:version:connectors@` | Latest published stable 4.2.x connector release for current docs, selected from `releases.json`; historical docs use their own Pulsar release. Used with `@pulsar:connector_release_url@`. |
+| `@pulsar:version:sdkman-java<N>@` | Latest Amazon Corretto JDK identifier in SDKMAN for Java major version `<N>` (`17`, `21` or `25`), e.g. `25.0.5.1.2-amzn` (context-independent, also expanded in `contribute/`). The values live in `data/sdkman-java-amzn-versions.json`; refresh them with `node scripts/update-sdkman-java-versions.js`. |
 
 #### Release download URLs
 

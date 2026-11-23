@@ -4,6 +4,7 @@ import * as compareVersions from "compare-versions";
 import versionsList from "../../versions.json";
 import releasesList from "../../releases.json";
 import restApiVersions from "../../static/swagger/restApiVersions.json";
+import sdkmanJavaAmznVersions from "../../data/sdkman-java-amzn-versions.json";
 
 // CommonJS modules without type declarations — typed inline below.
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -27,6 +28,14 @@ export const pulsarAdaptersVersion: string = releasePulsarAdapters[0];
 // Netty used by the current Pulsar docs. Keep in sync with `netty` in
 // apache/pulsar's gradle/libs.versions.toml when updating dependency guidance.
 export const nettyVersion: string = "4.2.20.Final";
+
+// Latest Amazon Corretto JDK identifiers in SDKMAN (`sdk l java | grep amzn`), keyed by
+// Java major version. Exposed as `@pulsar:version:sdkman-java<N>@` tokens for the
+// SDKMAN commands in the contributor guide. Update with
+// `node scripts/update-sdkman-java-versions.js`.
+export const sdkmanJavaTokens: [string, string][] = Object.entries(
+  sdkmanJavaAmznVersions as Record<string, string>
+).map(([major, identifier]) => [`version:sdkman-java${major}`, identifier]);
 
 const versions = versionsList as string[];
 
@@ -299,5 +308,6 @@ export function resolveTokens(versionKey: string, referenceLatest = false): Map<
     ["version:python", clientPythonVersion(pythonArg)],
     ["version:netty", nettyVersion],
     ["version", resolvedVersion],
+    ...sdkmanJavaTokens,
   ]);
 }

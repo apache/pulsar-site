@@ -11,7 +11,7 @@ The instructions below cover installing and managing JDK versions with [SDKMAN](
 
 :::note
 
-Maintenance branches (`branch-4.2` and earlier) continue to use the Maven build. When releasing those versions, follow the [Maven release prerequisites](release-process-maven.md#prerequisites). Install additional JDK versions with SDKMAN as needed (for example, `sdk i java 17.0.19-amzn` for branches that build with JDK 17). The main branch uses Gradle and the current [release process](release-process.md).
+Maintenance branches (`branch-4.2` and earlier) continue to use the Maven build. When releasing those versions, follow the [Maven release prerequisites](release-process-maven.md#prerequisites). Install additional JDK versions with SDKMAN as needed (for example, `sdk i java @pulsar:version:sdkman-java17@` for branches that build with JDK 17). The main branch uses Gradle and the current [release process](release-process.md).
 
 :::
 
@@ -35,16 +35,16 @@ In Pulsar development, we use [Amazon Corretto OpenJDK](https://docs.aws.amazon.
 # find out most recent Amazon Corretto release
 sdk l java |grep amzn
 # install Java 21
-sdk i java 21.0.11-amzn
+sdk i java @pulsar:version:sdkman-java21@
 # install Java 25
-sdk i java 25.0.3-amzn
+sdk i java @pulsar:version:sdkman-java25@
 # install Java 17, optional step, not needed for master branch development
-sdk i java 17.0.19-amzn
+sdk i java @pulsar:version:sdkman-java17@
 # adding / updating aliases
 cd ~/.sdkman/candidates/java
-rm -f 17 && ln -s 17.0.19-amzn 17 # optional step, not needed for master branch development
-rm -f 21 && ln -s 21.0.11-amzn 21
-rm -f 25 && ln -s 25.0.3-amzn 25
+rm -f 17 && ln -s @pulsar:version:sdkman-java17@ 17 # optional step, not needed for master branch development
+rm -f 21 && ln -s @pulsar:version:sdkman-java21@ 21
+rm -f 25 && ln -s @pulsar:version:sdkman-java25@ 25
 # switching between versions using aliases
 sdk u java 17
 sdk u java 21
