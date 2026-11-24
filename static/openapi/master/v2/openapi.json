@@ -40712,6 +40712,19 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "additionalProperties": {
+                                    "type": "string"
+                                },
+                                "type": "object"
+                            }
+                        }
+                    },
+                    "description": "Properties of a subscription that doesn't exist yet; an existing subscription keeps its own"
+                },
                 "responses": {
                     "204": {
                         "description": "Subscription cursor created (or already existed)"
@@ -40726,7 +40739,7 @@
                         "description": "Internal server error"
                     }
                 },
-                "summary": "Create a subscription cursor on the segment topic at the earliest position. Super-user only.",
+                "summary": "Create a subscription cursor on the segment topic at the earliest position, with the given subscription properties. Super-user only.",
                 "tags": [
                     "segments"
                 ]
