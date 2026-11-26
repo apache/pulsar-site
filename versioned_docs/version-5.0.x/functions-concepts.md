@@ -219,3 +219,5 @@ The sliding window method defines a fixed window length by setting the eviction 
 As illustrated in the following example, the window length is 2 seconds, which means that any data older than 2 seconds will be evicted and not used in the computation. The sliding interval is configured to be 1 second, which means that function is executed every second to process the data within the entire window length.
 
 ![Sliding window with an overlap](/assets/function-sliding-window.svg)
+
+To write and submit a window function, see [Use window functions for Java](functions-develop-api.md#use-window-functions-for-java).
