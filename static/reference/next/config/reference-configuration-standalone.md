@@ -4530,7 +4530,7 @@ The position that replication task start at, it can be set to earliest or latest
 **Category**: Server
 
 ### retentionCheckIntervalInSeconds
-Check between intervals to see if consumed ledgers need to be trimmed
+Minimum time in seconds between round starts for consumed ledger trimming and cursor ledger rollover checks. The broker submits checks for at most one persistent topic every 20 ms, so a round can take longer than this interval. Set to 0 or a negative value to disable periodic checks.
 
 **Type**: `int`
 
