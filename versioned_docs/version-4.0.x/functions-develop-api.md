@@ -17,6 +17,7 @@ The following table outlines the APIs that you can use to develop Pulsar Functio
 | [Language-native interface for Java/Python](#use-language-native-interface-for-javapython) | No Pulsar-specific libraries or special dependencies required (only core libraries). | Functions that do not require access to the [context](functions-concepts.md#context).|
 | [Pulsar Functions SDK for Java/Python/Go](#use-sdk-for-javapythongo) | Pulsar-specific libraries that provide a range of functionality not available in the language-native interfaces,  such as state management or user configuration. | Functions that require access to the [context](functions-concepts.md#context).|
 | [Extended Pulsar Functions SDK for Java](#use-extended-sdk-for-java) | An extension to Pulsar-specific libraries, providing the initialization and close interfaces in Java. | Functions that require initializing and releasing external resources.|
+| [Window function for Java](#use-window-functions-for-java) | Processes a collection of records each time a window is triggered, instead of one record per invocation. | Java functions that aggregate or batch events over count-based or time-based windows.|
 
 
 ## Use language-native interface for Java/Python
@@ -229,3 +230,50 @@ public class InitializableFunction implements Function<String, String> {
 </TabItem>
 </Tabs>
 ````
+
+## Use window functions for Java
+
+A window function processes a collection of records each time a window is triggered, instead of processing one record per invocation. Windowing is only available in Java, and window functions do not support `MANUAL` or effectively-once processing guarantees. For the window concepts (tumbling and sliding windows, eviction and trigger policies), see [Window function](functions-concepts.md#window-function).
+
+When a window configuration is present, the function class must implement one of these interfaces:
+
+* `org.apache.pulsar.functions.api.WindowFunction<T, R>`: the `process` method receives `Collection<Record<T>>` and a `WindowContext`, so it can read the value and metadata of each record.
+* `java.util.function.Function<Collection<T>, R>`: the `apply` method receives a collection of values only.
+
+The function worker rejects a class that implements neither interface, or a `java.util.function.Function` whose input is not a collection, when the function instance initializes.
+
+The following example sums the integers it receives in each window.
+
+```java
+import java.util.Collection;
+import org.apache.pulsar.functions.api.Record;
+import org.apache.pulsar.functions.api.WindowContext;
+import org.apache.pulsar.functions.api.WindowFunction;
+
+public class SumWindowFunction implements WindowFunction<Integer, Integer> {
+    @Override
+    public Integer process(Collection<Record<Integer>> input, WindowContext context) {
+        int total = 0;
+        for (Record<Integer> record : input) {
+            total += record.getValue();
+        }
+        return total;
+    }
+}
+```
+
+Submit the function with a window configuration. Set exactly one window length: a message count with `--window-length-count` or a duration in milliseconds with `--window-length-duration-ms`. To make the window slide instead of tumbling, also set `--sliding-interval-count` or `--sliding-interval-duration-ms`; when you omit the sliding interval, it defaults to the window length.
+
+```bash
+bin/pulsar-admin functions create \
+  --jar target/sum-window-function.jar \
+  --classname com.example.SumWindowFunction \
+  --tenant public \
+  --namespace default \
+  --name sum-window \
+  --inputs persistent://public/default/numbers \
+  --output persistent://public/default/totals \
+  --window-length-count 10
+```
+
+`WindowContext` extends the [context](functions-concepts.md#context), so a window function can publish with `context.publish(...)`, read user configuration with `context.getUserConfigMap()`, and update counters. Watermark-based event-time processing is configured through the `windowConfig` object of the function configuration, which is available in the [admin REST API](admin-api-functions.md); its `timestampExtractorClassName`, `maxLagMs`, `watermarkEmitIntervalMs`, and `lateDataTopic` fields have no `pulsar-admin` CLI flags.
